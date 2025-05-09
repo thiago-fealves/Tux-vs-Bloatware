@@ -3,71 +3,21 @@
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_ttf.h>
 #include <math.h>
-
 #include <iostream>
 #include <sstream>
+#include "movement.hpp"
+#include "bootstrap.hpp"
+
+const ALLEGRO_COLOR BACKGROUND_COLOR = al_map_rgb(0, 0, 0);  // Background color (black)
 
 using namespace std;
 
-// Constants for game configuration
-const float FPS = 30;                                        // Frames per second
-const int SCREEN_W = 800;                                    // Screen width in pixels
-const int SCREEN_H = 600;                                    // Screen height in pixels
-const ALLEGRO_COLOR BACKGROUND_COLOR = al_map_rgb(0, 0, 0);  // Background color (black)
-const string FONT_FILEPATH = "assets/arial.ttf";             // Path to the font file
-
 int main(int argc, char **argv) {
     // Pointers for Allegro components
-    ALLEGRO_DISPLAY *display = NULL;
-    ALLEGRO_EVENT_QUEUE *event_queue = NULL;
-    ALLEGRO_TIMER *timer = NULL;
-
-    // Initialize Allegro library
-    if (!al_init()) {
-        cout << "ERROR:" << "failed to initialize allegro" << endl;
-        return -1;
-    }
-
-    // Initialize Allegro primitives addon
-    if (!al_init_primitives_addon()) {
-        cout << "ERROR:" << "failed to initialize allegro primitives" << endl;
-        return -1;
-    }
-
-    // Initialize Allegro font and TTF addons
-    if (!al_init_font_addon() || !al_init_ttf_addon()) {
-        cout << "ERROR:" << "failed to initialize fonts" << endl;
-        al_destroy_timer(timer);
-        return -1;
-    }
-
-    // Create an event queue to handle events
-    event_queue = al_create_event_queue();
-    if (!event_queue) {
-        cout << "ERROR:" << "failed to create event_queue" << endl;
-        return -1;
-    }
-
-    // Install keyboard input support
-    if (!al_install_keyboard()) {
-        cout << "ERROR:" << "failed to initialize keyboard" << endl;
-        return -1;
-    }
-
-    // Create the display window
-    display = al_create_display(SCREEN_W, SCREEN_H);
-    if (!display) {
-        cout << "ERROR:" << "failed to create display" << endl;
-        return -1;
-    }
-
-    // Create a timer to control the game loop
-    timer = al_create_timer(1.0 / FPS);
-    if (!timer) {
-        cout << "ERROR:" << "failed to initialize timer" << endl;
-        al_destroy_display(display);
-        return -1;
-    }
+    ALLEGRO_DISPLAY *display = nullptr;
+    ALLEGRO_EVENT_QUEUE *event_queue = nullptr;
+    ALLEGRO_TIMER *timer = nullptr;
+    if (!bootstrap_allegro(display, event_queue, timer)) return 1;
 
     // Register event sources for the event queue
     al_register_event_source(event_queue, al_get_display_event_source(display));
