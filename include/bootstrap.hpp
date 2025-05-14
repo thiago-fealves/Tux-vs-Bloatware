@@ -1,5 +1,6 @@
-#ifndef BOOTSTRAP
-#define BOOTSTRAP
+#ifndef BOOTSTRAP_HPP
+#define BOOTSTRAP_HPP
+
 constexpr float FPS = 30;                                        // Frames per second
 constexpr int SCREEN_W = 800;                                    // Screen width in pixels
 constexpr int SCREEN_H = 600;                                    // Screen height in pixels
