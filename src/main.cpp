@@ -13,16 +13,14 @@ const ALLEGRO_COLOR BACKGROUND_COLOR = al_map_rgb(0, 0, 0);  // Background color
 using namespace std;
 
 int main(int argc, char **argv) {
+
     // Pointers for Allegro components
     ALLEGRO_DISPLAY *display = nullptr;
     ALLEGRO_EVENT_QUEUE *event_queue = nullptr;
     ALLEGRO_TIMER *timer = nullptr;
-    if (!bootstrap_allegro(display, event_queue, timer)) return 1;
 
-    // Register event sources for the event queue
-    al_register_event_source(event_queue, al_get_display_event_source(display));
-    al_register_event_source(event_queue, al_get_timer_event_source(timer));
-    al_register_event_source(event_queue, al_get_keyboard_event_source());
+    if (!bootstrap_allegro(display, event_queue, timer)) return 1;
+    register_allegro_events(display, event_queue, timer);
 
     // Start the timer to control game speed
     al_start_timer(timer);
@@ -31,7 +29,7 @@ int main(int argc, char **argv) {
     bool playing = true;
     while (playing) {
         ALLEGRO_EVENT ev;
-        al_wait_for_event(event_queue, &ev);  // Wait for an event to occur
+    al_wait_for_event(event_queue, &ev);  // Wait for an event to occur
 
         if (ev.type == ALLEGRO_EVENT_TIMER) {
             // Timer event: update and redraw the game state
