@@ -10,6 +10,7 @@ class Music {
 private:
     std::string address;
     ALLEGRO_AUDIO_STREAM *stream;
+    float gain;
 
 public:
     Music(std::string sound_address, size_t fragments=4, unsigned int samples=2048);
@@ -17,7 +18,8 @@ public:
 
     void play();
     void pause();
-    
+    void resume();
+    void speed(float speed=1.0);
 };
 
 #endif

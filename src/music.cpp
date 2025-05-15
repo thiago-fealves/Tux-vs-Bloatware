@@ -32,7 +32,13 @@ void Music::play() {
 }
 
 void Music::pause() {
-    if(stream) {
-        al_set_audio_stream_gain(stream, 0.0);
-    }
+    if(stream) al_set_audio_stream_gain(stream, 0.0);
+}
+
+void Music::resume() {
+    if(stream) al_set_audio_stream_gain(stream, 1.0);  
+}
+
+void Music::speed(float speed) {
+    if (stream) al_set_audio_stream_speed(stream, speed);
 }

@@ -27,6 +27,7 @@ int main(int argc, char **argv) {
 
     // Start the music
     string sound_path = "../sounds/musica.ogg";
+    bool music_playing = true;
     Music sound(sound_path);
     sound.play();
 
@@ -55,6 +56,14 @@ int main(int argc, char **argv) {
         else if (event.type == ALLEGRO_EVENT_KEY_DOWN) {
             switch (event.keyboard.keycode) {
                 case ALLEGRO_KEY_SPACE:
+                    if(music_playing) {
+                        sound.pause();
+                        music_playing = false;
+                    } else {
+                        sound.resume();
+                        music_playing = true;
+                    }
+                    
                     cout << "space key was pressed" << endl;
                     break;
 
