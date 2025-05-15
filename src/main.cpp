@@ -28,10 +28,11 @@ int main(int argc, char **argv) {
     bool playing = true;
     while (playing) {
 
-        ALLEGRO_EVENT ev;
-        al_wait_for_event(event_queue, &ev);  // Wait for an event to occur
+        // Initializing events logic
+        ALLEGRO_EVENT event;
+        al_wait_for_event(event_queue, &event);  
 
-        if (ev.type == ALLEGRO_EVENT_TIMER) {
+        if (event.type == ALLEGRO_EVENT_TIMER) {
             // Timer event: update and redraw the game state
             al_clear_to_color(al_map_rgba_f(1, 1, 1, 1));  // Clear the screen with white color
 
@@ -45,8 +46,8 @@ int main(int argc, char **argv) {
         }
 
         // Handle key press events
-        else if (ev.type == ALLEGRO_EVENT_KEY_DOWN) {
-            switch (ev.keyboard.keycode) {
+        else if (event.type == ALLEGRO_EVENT_KEY_DOWN) {
+            switch (event.keyboard.keycode) {
                 case ALLEGRO_KEY_SPACE:
                     cout << "space key was pressed" << endl;
                     break;
@@ -58,8 +59,8 @@ int main(int argc, char **argv) {
         }
 
         // Handle key release events
-        else if (ev.type == ALLEGRO_EVENT_KEY_UP) {
-            switch (ev.keyboard.keycode) {
+        else if (event.type == ALLEGRO_EVENT_KEY_UP) {
+            switch (event.keyboard.keycode) {
                 case ALLEGRO_KEY_SPACE:
                     cout << "space key was released" << endl;
                     break;
@@ -67,7 +68,7 @@ int main(int argc, char **argv) {
         }
 
         // Handle window close event
-        else if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+        else if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
             playing = false;  // Exit the game when the window is closed
         }
     }

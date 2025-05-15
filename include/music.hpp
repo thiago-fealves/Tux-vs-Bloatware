@@ -12,15 +12,12 @@ private:
     ALLEGRO_AUDIO_STREAM *stream;
 
 public:
-    Music(std::string sound_address);
+    Music(std::string sound_address, size_t fragments=4, unsigned int samples=2048);
+    ~Music();
+
+    void play();
+    void pause();
     
-
-    bool start();
-    bool stop();
-    bool pause();
-    bool play();
-
 };
-
 
 #endif
