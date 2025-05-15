@@ -7,6 +7,7 @@
 #include <sstream>
 #include "movement.hpp"
 #include "bootstrap.hpp"
+#include "music.hpp"
 
 using namespace std;
 
@@ -23,6 +24,11 @@ int main(int argc, char **argv) {
 
     // Start the timer to control game speed
     al_start_timer(timer);
+
+    // Start the music
+    string sound_path = "../sounds/musica.ogg";
+    Music sound(sound_path);
+    sound.play();
 
     // Main game loop
     bool playing = true;
