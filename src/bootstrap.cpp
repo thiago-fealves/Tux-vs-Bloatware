@@ -5,6 +5,8 @@
 #include <iostream>
 #include "bootstrap.hpp"
 
+const ALLEGRO_COLOR BACKGROUND_COLOR = al_map_rgb(0, 0, 0);
+
 using namespace std;
 
 bool bootstrap_allegro(ALLEGRO_DISPLAY* &display, ALLEGRO_EVENT_QUEUE* &event_queue, ALLEGRO_TIMER* &timer){
@@ -61,4 +63,10 @@ void register_allegro_events(ALLEGRO_DISPLAY* &display, ALLEGRO_EVENT_QUEUE* &ev
     al_register_event_source(event_queue, al_get_display_event_source(display));
     al_register_event_source(event_queue, al_get_timer_event_source(timer));
     al_register_event_source(event_queue, al_get_keyboard_event_source()); 
+}
+
+void cleanup_allegro(ALLEGRO_DISPLAY* &display, ALLEGRO_EVENT_QUEUE* &event_queue, ALLEGRO_TIMER* &timer){
+    al_destroy_timer(timer);
+    al_destroy_display(display);
+    al_destroy_event_queue(event_queue);
 }

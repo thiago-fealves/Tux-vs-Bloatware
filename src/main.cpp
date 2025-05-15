@@ -8,8 +8,6 @@
 #include "movement.hpp"
 #include "bootstrap.hpp"
 
-const ALLEGRO_COLOR BACKGROUND_COLOR = al_map_rgb(0, 0, 0);  // Background color (black)
-
 using namespace std;
 
 int main(int argc, char **argv) {
@@ -18,7 +16,8 @@ int main(int argc, char **argv) {
     ALLEGRO_DISPLAY *display = nullptr;
     ALLEGRO_EVENT_QUEUE *event_queue = nullptr;
     ALLEGRO_TIMER *timer = nullptr;
-
+    
+    // Initialize Allegro
     if (!bootstrap_allegro(display, event_queue, timer)) return 1;
     register_allegro_events(display, event_queue, timer);
 
@@ -28,8 +27,9 @@ int main(int argc, char **argv) {
     // Main game loop
     bool playing = true;
     while (playing) {
+
         ALLEGRO_EVENT ev;
-    al_wait_for_event(event_queue, &ev);  // Wait for an event to occur
+        al_wait_for_event(event_queue, &ev);  // Wait for an event to occur
 
         if (ev.type == ALLEGRO_EVENT_TIMER) {
             // Timer event: update and redraw the game state
@@ -43,6 +43,7 @@ int main(int argc, char **argv) {
 
             al_flip_display();  // Update the display with the new frame
         }
+
         // Handle key press events
         else if (ev.type == ALLEGRO_EVENT_KEY_DOWN) {
             switch (ev.keyboard.keycode) {
@@ -55,6 +56,7 @@ int main(int argc, char **argv) {
                     break;
             }
         }
+
         // Handle key release events
         else if (ev.type == ALLEGRO_EVENT_KEY_UP) {
             switch (ev.keyboard.keycode) {
@@ -63,15 +65,14 @@ int main(int argc, char **argv) {
                     break;
             }
         }
+
         // Handle window close event
         else if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
             playing = false;  // Exit the game when the window is closed
         }
     }
 
-    // Cleanup resources
-    al_destroy_timer(timer);
-    al_destroy_display(display);
-    al_destroy_event_queue(event_queue);
+    // Cleanup and exit
+    cleanup_allegro(display, event_queue, timer);
     return 0;
 }
