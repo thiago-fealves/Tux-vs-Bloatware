@@ -25,16 +25,17 @@ int main(int argc, char **argv) {
     Music sound(sound_path);
     sound.play();
 
+    ALLEGRO_EVENT event;
+
     // Main game loop
     bool playing = true;
     while (playing) {
 
-        // Initializing events logic
-        ALLEGRO_EVENT event;
+        // Getting new event 
         al_wait_for_event(event_queue, &event);  
 
         if (event.type == ALLEGRO_EVENT_TIMER) {
-            // Timer event: update and redraw the game state
+            // Update and redraw the game state
             al_clear_to_color(al_map_rgba_f(1, 1, 1, 1));  // Clear the screen with white color
 
             // Log elapsed time to the console every second
@@ -43,7 +44,7 @@ int main(int argc, char **argv) {
             }
 
 
-            al_flip_display();  // Update the display with the new frame
+            al_flip_display();  // Update the display
         }
 
         // Handle key press events
@@ -62,7 +63,7 @@ int main(int argc, char **argv) {
                     break;
 
                 case ALLEGRO_KEY_ESCAPE:
-                    playing = false;  // Exit the game when escape is pressed
+                    playing = false;
                     break;
             }
         }
