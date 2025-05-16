@@ -2,6 +2,7 @@
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_ttf.h>
+#include <allegro5/mouse.h>
 #include <iostream>
 #include "bootstrap.hpp"
 #include "allegro5/timer.h"
@@ -44,6 +45,12 @@ bool Bootstrap::init_allegro_libs(ALLEGRO_DISPLAY* &display, ALLEGRO_EVENT_QUEUE
         return false;
     }
 
+    // Install mouse input support
+    if(!al_install_mouse()) {
+        cout<< "ERROR:" << "failed to initialize mouse" << endl;
+        return false;
+    }
+
     // Install keyboard input support
     if (!al_install_keyboard()) {
         cout << "ERROR:" << "failed to initialize keyboard" << endl;
@@ -71,6 +78,7 @@ void Bootstrap::register_allegro_events(ALLEGRO_DISPLAY* &display, ALLEGRO_EVENT
     al_register_event_source(event_queue, al_get_display_event_source(display));
     al_register_event_source(event_queue, al_get_timer_event_source(timer));
     al_register_event_source(event_queue, al_get_keyboard_event_source()); 
+    al_register_event_source(event_queue, al_get_mouse_event_source());
 }
 
 void Bootstrap::cleanup_allegro(ALLEGRO_DISPLAY* &display, ALLEGRO_EVENT_QUEUE* &event_queue, ALLEGRO_TIMER* &timer){

@@ -1,3 +1,5 @@
+#include <allegro5/color.h>
+#include <allegro5/events.h>
 #include <math.h>
 #include <iostream>
 #include <allegro5/allegro.h>
@@ -7,6 +9,7 @@
 #include "movement.hpp"
 #include "bootstrap.hpp"
 #include "music.hpp"
+#include "interface.hpp"
 
 using namespace std;
 
@@ -18,12 +21,19 @@ ALLEGRO_TIMER *timer = nullptr;
 int main(int argc, char **argv) {
 
     Bootstrap::initialize_allegro(display, event_queue, timer);
+    
+    // Setting up the font
+    ALLEGRO_FONT* font = al_load_font("./assets/arial.ttf", 20, 0);
 
     // Start the music
     string sound_path = "./sounds/musica.ogg";
     bool music_playing = true;
     Music sound(sound_path);
     sound.play();
+
+
+    // Create placeholder button
+    Button button(300, 300, 200, 150, al_map_rgb(255, 100, 100), "PLACEHOLDER", font );
 
     ALLEGRO_EVENT event;
 
@@ -43,8 +53,17 @@ int main(int argc, char **argv) {
                 cout << al_get_timer_count(timer) / FPS << " second..." << endl;
             }
 
+            // Draws the button
+            button.drawButton();
+
 
             al_flip_display();  // Update the display
+        }
+
+        // Handle mouse clicks
+        else if (event.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
+            if(button.gotClicked(event.mouse.x, event.mouse.y))
+                cout << "Clicked!" << endl;
         }
 
         // Handle key press events
