@@ -26,7 +26,7 @@ int main(int argc, char **argv) {
     al_start_timer(timer);
 
     // Start the music
-    string sound_path = "../sounds/musica.ogg";
+    string sound_path = "./sounds/musica.ogg";
     bool music_playing = true;
     Music sound(sound_path);
     sound.play();
