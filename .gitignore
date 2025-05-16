@@ -34,3 +34,4 @@
 # Extras
 .cache
 compile_commands.json
+generate_compile_commands.py

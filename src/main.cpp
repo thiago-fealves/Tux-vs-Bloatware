@@ -1,29 +1,23 @@
+#include <math.h>
+#include <iostream>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_ttf.h>
-#include <math.h>
-#include <iostream>
-#include <sstream>
 #include "movement.hpp"
 #include "bootstrap.hpp"
 #include "music.hpp"
 
 using namespace std;
 
+// Const pointers for Allegro components
+ALLEGRO_DISPLAY *display = nullptr;
+ALLEGRO_EVENT_QUEUE *event_queue = nullptr;
+ALLEGRO_TIMER *timer = nullptr;
+
 int main(int argc, char **argv) {
 
-    // Pointers for Allegro components
-    ALLEGRO_DISPLAY *display = nullptr;
-    ALLEGRO_EVENT_QUEUE *event_queue = nullptr;
-    ALLEGRO_TIMER *timer = nullptr;
-    
-    // Initialize Allegro
-    if (!bootstrap_allegro(display, event_queue, timer)) return 1;
-    register_allegro_events(display, event_queue, timer);
-
-    // Start the timer to control game speed
-    al_start_timer(timer);
+    Bootstrap::initialize_allegro(display, event_queue, timer);
 
     // Start the music
     string sound_path = "./sounds/musica.ogg";
@@ -89,6 +83,6 @@ int main(int argc, char **argv) {
     }
 
     // Cleanup and exit
-    cleanup_allegro(display, event_queue, timer);
+    Bootstrap::cleanup_allegro(display, event_queue, timer);
     return 0;
 }

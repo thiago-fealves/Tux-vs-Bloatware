@@ -4,12 +4,20 @@
 #include <allegro5/allegro_ttf.h>
 #include <iostream>
 #include "bootstrap.hpp"
+#include "allegro5/timer.h"
 
 const ALLEGRO_COLOR BACKGROUND_COLOR = al_map_rgb(0, 0, 0);
 
 using namespace std;
 
-bool bootstrap_allegro(ALLEGRO_DISPLAY* &display, ALLEGRO_EVENT_QUEUE* &event_queue, ALLEGRO_TIMER* &timer){
+bool Bootstrap::initialize_allegro(ALLEGRO_DISPLAY* &display, ALLEGRO_EVENT_QUEUE* &event_queue, ALLEGRO_TIMER* &timer){
+    if (!Bootstrap::init_allegro_libs(display, event_queue, timer)) return false;
+    Bootstrap::register_allegro_events(display, event_queue, timer);
+    al_start_timer(timer);
+    return true;
+} 
+
+bool Bootstrap::init_allegro_libs(ALLEGRO_DISPLAY* &display, ALLEGRO_EVENT_QUEUE* &event_queue, ALLEGRO_TIMER* &timer){
     // Initialize Allegro library
     if (!al_init()) {
         cout << "ERROR:" << "failed to initialize allegro" << endl;
@@ -58,14 +66,14 @@ bool bootstrap_allegro(ALLEGRO_DISPLAY* &display, ALLEGRO_EVENT_QUEUE* &event_qu
     }
     return true;
 }
-void register_allegro_events(ALLEGRO_DISPLAY* &display, ALLEGRO_EVENT_QUEUE* &event_queue, ALLEGRO_TIMER* &timer){
+void Bootstrap::register_allegro_events(ALLEGRO_DISPLAY* &display, ALLEGRO_EVENT_QUEUE* &event_queue, ALLEGRO_TIMER* &timer){
     // Register event sources for the event queue
     al_register_event_source(event_queue, al_get_display_event_source(display));
     al_register_event_source(event_queue, al_get_timer_event_source(timer));
     al_register_event_source(event_queue, al_get_keyboard_event_source()); 
 }
 
-void cleanup_allegro(ALLEGRO_DISPLAY* &display, ALLEGRO_EVENT_QUEUE* &event_queue, ALLEGRO_TIMER* &timer){
+void Bootstrap::cleanup_allegro(ALLEGRO_DISPLAY* &display, ALLEGRO_EVENT_QUEUE* &event_queue, ALLEGRO_TIMER* &timer){
     al_destroy_timer(timer);
     al_destroy_display(display);
     al_destroy_event_queue(event_queue);
