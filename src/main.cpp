@@ -7,7 +7,7 @@
 #include "movement.hpp"
 #include "bootstrap.hpp"
 #include "music.hpp"
-
+#include "game_object.hpp"
 using namespace std;
 
 // Const pointers for Allegro components
@@ -30,10 +30,13 @@ int main(int argc, char **argv) {
     // Main game loop
     bool playing = true;
     while (playing) {
-
+        BrokenShip player;
+        Vector pos(50,50);
+        player.set_position(pos);
+        player.draw();
         // Getting new event 
         al_wait_for_event(event_queue, &event);  
-
+        
         if (event.type == ALLEGRO_EVENT_TIMER) {
             // Update and redraw the game state
             al_clear_to_color(al_map_rgba_f(1, 1, 1, 1));  // Clear the screen with white color
