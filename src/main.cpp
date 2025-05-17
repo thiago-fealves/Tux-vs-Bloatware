@@ -26,14 +26,10 @@ int main(int argc, char **argv) {
     sound.play();
 
     ALLEGRO_EVENT event;
-
+    BrokenShip player;
     // Main game loop
     bool playing = true;
     while (playing) {
-        BrokenShip player;
-        Vector pos(50,50);
-        player.set_position(pos);
-        player.draw();
         // Getting new event 
         al_wait_for_event(event_queue, &event);  
         
@@ -45,8 +41,8 @@ int main(int argc, char **argv) {
             if (al_get_timer_count(timer) % (int)FPS == 0) {
                 cout << al_get_timer_count(timer) / FPS << " second..." << endl;
             }
-
-
+            player.apply_gravity();
+            player.draw();
             al_flip_display();  // Update the display
         }
 

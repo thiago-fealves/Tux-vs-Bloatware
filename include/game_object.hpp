@@ -10,11 +10,20 @@ class GameObject{
     Vector _position; 
   public:
     Vector get_position();
-    void set_position(Vector &position);
+    void set_position(const Vector &position);
 };
 
-class BrokenShip : public GameObject, public Flappy_movement {
+class Flappy_movement : public GameObject {
+  private:
+    static Vector gravity;
+    static Vector move_force;
 
+  public:
+    void apply_gravity();
+    void move_flappy();
+};
+
+class BrokenShip : public Flappy_movement {
   private:
     const ALLEGRO_COLOR OBJ_COLOR = al_map_rgb(10, 200, 20);
   public:
