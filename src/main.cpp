@@ -4,6 +4,7 @@
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_ttf.h>
+#include "allegro5/keycodes.h"
 #include "movement.hpp"
 #include "bootstrap.hpp"
 #include "music.hpp"
@@ -60,10 +61,12 @@ int main(int argc, char **argv) {
                     
                     cout << "space key was pressed" << endl;
                     break;
-
                 case ALLEGRO_KEY_ESCAPE:
                     playing = false;
                     break;
+                case ALLEGRO_KEY_D:
+                case ALLEGRO_KEY_RIGHT:
+                    player.move_flappy();
             }
         }
 

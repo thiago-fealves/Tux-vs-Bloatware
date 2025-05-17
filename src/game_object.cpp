@@ -9,17 +9,15 @@ void GameObject::set_position(const Vector &position){
 }
 
 Vector Flappy_movement::gravity = Vector(10, 0);
-Vector Flappy_movement::move_force = Vector(15, 0);
-
+Vector Flappy_movement::move_force = Vector(100, 0);
 void Flappy_movement::apply_gravity(){
-  if (this->get_position()._x > 50 ){
+  if (this->get_position()._x > 50 ){ // valor temporário, trocar depois quando fizer o sprite
     set_position(this->get_position() - gravity);
   }
 }
 void Flappy_movement::move_flappy(){
   set_position(this->get_position() + move_force); 
 }
-
 
 void BrokenShip::draw(){
   Vector pos = GameObject::get_position();
