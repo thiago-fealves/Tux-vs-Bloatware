@@ -45,6 +45,9 @@ int main(int argc, char **argv) {
         al_wait_for_event(event_queue, &event);  
 
         if (event.type == ALLEGRO_EVENT_TIMER) {
+            // Update the music
+            sound.music_update();
+
             // Update and redraw the game state
             al_clear_to_color(al_map_rgba_f(1, 1, 1, 1));  // Clear the screen with white color
 
