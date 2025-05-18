@@ -1,7 +1,8 @@
 #include "movement.hpp"
-// Vectors contructor and arithmetic
+
 Vector::Vector(float x, float y) : _x(x), _y(y) {}
 
+// Vector arithmetic
 Vector Vector::operator+(const Vector &other) const{
   return Vector(this->_x + other._x, this->_y + other._y);
 }

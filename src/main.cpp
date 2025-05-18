@@ -19,6 +19,8 @@ ALLEGRO_TIMER *timer = nullptr;
 int main(int argc, char **argv) {
 
     Bootstrap::initialize_allegro(display, event_queue, timer);
+    ALLEGRO_EVENT event;
+    BrokenShip player;
 
     // Start the music
     string sound_path = "./sounds/musica.ogg";
@@ -26,8 +28,6 @@ int main(int argc, char **argv) {
     Music sound(sound_path);
     sound.play();
 
-    ALLEGRO_EVENT event;
-    BrokenShip player;
     // Main game loop
     bool playing = true;
     while (playing) {
@@ -42,8 +42,7 @@ int main(int argc, char **argv) {
             if (al_get_timer_count(timer) % (int)FPS == 0) {
                 cout << al_get_timer_count(timer) / FPS << " second..." << endl;
             }
-            player.apply_gravity();
-            player.draw();
+            player.update();
             al_flip_display();  // Update the display
         }
 

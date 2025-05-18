@@ -17,10 +17,10 @@ class Flappy_movement : public GameObject {
   private:
     static Vector gravity;
     static Vector move_force;
-
   public:
     void apply_gravity();
     void move_flappy();
+    
 };
 
 class BrokenShip : public Flappy_movement {
@@ -28,6 +28,8 @@ class BrokenShip : public Flappy_movement {
     const ALLEGRO_COLOR OBJ_COLOR = al_map_rgb(10, 200, 20);
   public:
     BrokenShip();
+    BrokenShip(const Vector &pos);
+    void update();
     void draw();
 };
 #endif
