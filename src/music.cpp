@@ -38,7 +38,7 @@ Music::~Music() {
 void Music::play() {
     if(!music_exist) return; 
 
-    // Define the gain
+    // Define the start gain
     al_set_audio_stream_gain(stream, current_gain);
 
     // Starts the music
