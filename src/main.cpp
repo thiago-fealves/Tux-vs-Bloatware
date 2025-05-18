@@ -30,8 +30,8 @@ int main(int argc, char **argv) {
     // Start the music
     string sound_path = "./sounds/musica.ogg";
     bool music_playing = true;
-    Music sound(sound_path);
-    sound.play();
+    Music* sound = Music::music_initialze(sound_path);
+    sound->play();
 
     // Create placeholder button
     Button button(300, 300, 200, 150, al_map_rgb(255, 100, 100), "PLACEHOLDER", font );
@@ -44,7 +44,7 @@ int main(int argc, char **argv) {
         
         if (event.type == ALLEGRO_EVENT_TIMER) {
             // Update the music
-            sound.music_update();
+            sound->music_update();
 
             // Update and redraw the game state
             al_clear_to_color(al_map_rgba_f(1, 1, 1, 1));  // Clear the screen with white color
@@ -71,10 +71,10 @@ int main(int argc, char **argv) {
             switch (event.keyboard.keycode) {
                 case ALLEGRO_KEY_SPACE:
                     if(music_playing) {
-                        sound.pause();
+                        sound->pause();
                         music_playing = false;
                     } else {
-                        sound.resume();
+                        sound->resume();
                         music_playing = true;
                     }
                     
@@ -105,6 +105,6 @@ int main(int argc, char **argv) {
     }
 
     // Cleanup and exit
-    Bootstrap::cleanup_allegro(display, event_queue, timer);
+    Bootstrap::cleanup_allegro(display, event_queue, timer, sound);
     return 0;
 }

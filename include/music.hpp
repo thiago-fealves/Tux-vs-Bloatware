@@ -15,13 +15,17 @@ private:
     float gain;
     float current_gain;
 
+    Music(std::string sound_address, float gain=4.0);
+
     bool music_exist;
 
     void fade_in(float rate);
     void fade_out(float rate);
 
 public:
-    Music(std::string sound_address, float gain=4.0, size_t fragments=4, unsigned int samples=2048);
+
+    static Music* music_initialze(std::string sound_address);
+
     ~Music();
 
     void play();
