@@ -3,10 +3,10 @@
 
 Music::Music(std::string sound_address, float gain_param) : standart_gain(gain_param), gain(gain_param), current_gain(0.0) {
 
-    //Initialize the "music_exist" with false
+    // Initialize the "music_exist" with false
     music_exist=false;
 
-    //Inicializa o ALLEGRO_AUDIO_STREAM
+    // Inicializa o ALLEGRO_AUDIO_STREAM
     stream = al_load_audio_stream(sound_address.c_str(), 4, 2048);
 
     if(!stream) std::cout << "Falha na inicializacao do ALLEGRO_AUDIO_STREAM" << std::endl;
@@ -18,10 +18,10 @@ Music::Music(std::string sound_address, float gain_param) : standart_gain(gain_p
 
 Music* Music::music_initialze(std::string sound_address) {
 
-    //Inicia e verifica os sistemas de audio do allegro E reserva um canal de audio 
+    // Inicia e verifica os sistemas de audio do allegro E reserva um canal de audio 
     if(!al_install_audio() || !al_init_acodec_addon() || !al_reserve_samples(1)) return nullptr;
     
-    //Colocar a inicialização do "stream" aqui, 
+    // Colocar a inicialização do "stream" aqui, 
     // resolver a questao dele nao ser um membro estatico.
 
     return new Music(sound_address);  
