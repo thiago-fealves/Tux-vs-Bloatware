@@ -70,6 +70,7 @@ int main(int argc, char **argv) {
         else if (event.type == ALLEGRO_EVENT_KEY_DOWN) {
             switch (event.keyboard.keycode) {
                 case ALLEGRO_KEY_SPACE:
+                    //Teste de musica
                     if(music_playing) {
                         sound->pause();
                         music_playing = false;
