@@ -6,11 +6,11 @@
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_ttf.h>
-#include "movement.hpp"
+#include "allegro5/keycodes.h"
 #include "bootstrap.hpp"
 #include "music.hpp"
 #include "interface.hpp"
-
+#include "game_object.hpp"
 using namespace std;
 
 // Const pointers for Allegro components
@@ -24,6 +24,8 @@ int main(int argc, char **argv) {
     
     // Setting up the font
     ALLEGRO_FONT* font = al_load_font("./assets/arial.ttf", 20, 0);
+    ALLEGRO_EVENT event;
+    BrokenShip player;
 
     // Start the music
     string sound_path = "./sounds/musica.ogg";
@@ -31,19 +33,15 @@ int main(int argc, char **argv) {
     Music sound(sound_path);
     sound.play();
 
-
     // Create placeholder button
     Button button(300, 300, 200, 150, al_map_rgb(255, 100, 100), "PLACEHOLDER", font );
-
-    ALLEGRO_EVENT event;
 
     // Main game loop
     bool playing = true;
     while (playing) {
-
         // Getting new event 
         al_wait_for_event(event_queue, &event);  
-
+        
         if (event.type == ALLEGRO_EVENT_TIMER) {
             // Update the music
             sound.music_update();
@@ -58,8 +56,7 @@ int main(int argc, char **argv) {
 
             // Draws the button
             button.drawButton();
-
-
+            player.update();
             al_flip_display();  // Update the display
         }
 
@@ -83,10 +80,12 @@ int main(int argc, char **argv) {
                     
                     cout << "space key was pressed" << endl;
                     break;
-
                 case ALLEGRO_KEY_ESCAPE:
                     playing = false;
                     break;
+                case ALLEGRO_KEY_D:
+                case ALLEGRO_KEY_RIGHT:
+                    player.move_flappy();
             }
         }
 
