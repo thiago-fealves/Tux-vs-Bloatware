@@ -80,7 +80,13 @@ int main(int argc, char **argv) {
                 else if(interface.playButton.gotClicked(event.mouse.x, event.mouse.y)) {
                     displayInterface = !displayInterface;
                 }
+                else if(interface.exitGameButton.gotClicked(event.mouse.x, event.mouse.y)) {
+                    displayInterface=0;
+                    playing=0;
+                }
+
         }
+
     }
 
     while (playing) {

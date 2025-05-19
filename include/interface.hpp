@@ -28,6 +28,7 @@ class Interface {
     Button playButton;
     Button stopSongButton;
     Button returnToMenuButton;
+    Button exitGameButton;
     
     Interface(ALLEGRO_FONT* font);
 
