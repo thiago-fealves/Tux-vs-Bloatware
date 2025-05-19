@@ -81,9 +81,8 @@ void Bootstrap::register_allegro_events(ALLEGRO_DISPLAY* &display, ALLEGRO_EVENT
     al_register_event_source(event_queue, al_get_mouse_event_source());
 }
 
-void Bootstrap::cleanup_allegro(ALLEGRO_DISPLAY* &display, ALLEGRO_EVENT_QUEUE* &event_queue, ALLEGRO_TIMER* &timer, Music* &sound){
+void Bootstrap::cleanup_allegro(ALLEGRO_DISPLAY* &display, ALLEGRO_EVENT_QUEUE* &event_queue, ALLEGRO_TIMER* &timer){
     al_destroy_timer(timer);
     al_destroy_display(display);
     al_destroy_event_queue(event_queue);
-    delete sound;
 }
