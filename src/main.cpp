@@ -61,9 +61,9 @@ int main(int argc, char **argv) {
             }
             else {
                 interface.drawIngameInterface();
+                player.update();
             }
 
-            player.update();
             al_flip_display();  // Update the display
         }
 
