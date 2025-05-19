@@ -7,15 +7,33 @@
 
 
 class Button {
-    public:
     double _x, _y, _width, _heigth;
     ALLEGRO_COLOR _color;
     std::string _text;
     ALLEGRO_FONT* _font;
+    
+    public:
 
         Button(double x, double y, double width, double heigth,
                 ALLEGRO_COLOR color, std::string text, ALLEGRO_FONT* font); 
     void drawButton();
     bool gotClicked(int mx, int my);
+
+};
+
+class Interface {
+    
+    ALLEGRO_FONT* _font;
+    public:
+    Button playButton;
+    Button stopSongButton;
+    Button returnToMenuButton;
+    
+    Interface(ALLEGRO_FONT* font);
+
+    void drawOffGameInterface();
+    void drawIngameInterface();
+
+
 
 };

@@ -23,7 +23,7 @@ int main(int argc, char **argv) {
     Bootstrap::initialize_allegro(display, event_queue, timer);
     
     // Setting up the font
-    ALLEGRO_FONT* font = al_load_font("./assets/arial.ttf", 20, 0);
+    ALLEGRO_FONT* font = al_load_font("./assets/fira.ttf", 20, 0);
     ALLEGRO_EVENT event;
     BrokenShip player;
 
@@ -33,11 +33,12 @@ int main(int argc, char **argv) {
     Music* sound = Music::music_initialze(sound_path);
     sound->play();
 
-    // Create placeholder button
-    Button button(300, 300, 200, 150, al_map_rgb(255, 100, 100), "PLACEHOLDER", font );
+    // Instantiates interface 
+    Interface interface(font);
 
     // Main game loop
     bool playing = true;
+    bool displayInterface = true;
     while (playing) {
         // Getting new event 
         al_wait_for_event(event_queue, &event);  
@@ -55,29 +56,53 @@ int main(int argc, char **argv) {
             }
 
             // Draws the button
-            button.drawButton();
+            if(displayInterface) {
+                interface.drawOffGameInterface();
+            }
+            else {
+                interface.drawIngameInterface();
+            }
+
             player.update();
             al_flip_display();  // Update the display
         }
 
         // Handle mouse clicks
+
         else if (event.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
-            if(button.gotClicked(event.mouse.x, event.mouse.y))
-                cout << "Clicked!" << endl;
+                if(interface.stopSongButton.gotClicked(event.mouse.x, event.mouse.y)) {
+                        if(music_playing) {
+                            sound->pause();
+                            music_playing= !music_playing;
+                            cout << "Music paused" << endl;
+                        }
+                        else {
+                            sound->resume();
+                            music_playing= !music_playing;
+                            cout << "Music is now playing !" << endl;
+                        }
+                    }
+                else if(interface.returnToMenuButton.gotClicked(event.mouse.x, event.mouse.y)) {
+                    displayInterface = !displayInterface;
+                }
+                else if(interface.playButton.gotClicked(event.mouse.x, event.mouse.y)) {
+                    displayInterface = !displayInterface;
+                }
         }
+            
 
         // Handle key press events
         else if (event.type == ALLEGRO_EVENT_KEY_DOWN) {
             switch (event.keyboard.keycode) {
                 case ALLEGRO_KEY_SPACE:
                     //Teste de musica
-                    if(music_playing) {
-                        sound->pause();
-                        music_playing = false;
-                    } else {
-                        sound->resume();
-                        music_playing = true;
-                    }
+                    //if(music_playing) {
+                    //    sound->pause();
+                    //    music_playing = false;
+                    //} else {
+                    //    sound->resume();
+                    //    music_playing = true;
+                    //}
                     
                     cout << "space key was pressed" << endl;
                     break;

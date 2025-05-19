@@ -19,3 +19,16 @@ bool Button::gotClicked(int mx, int my) {
 
 }
 
+
+Interface::Interface(ALLEGRO_FONT* font) : playButton(300, 300, 200, 100, al_map_rgb(50, 50, 50), "PLAY", font), stopSongButton(740, 10, 50, 50, al_map_rgb(50, 50, 50), "󰕾", font ), returnToMenuButton(10, 10, 50, 50, al_map_rgb(50, 50, 50), "󰌑", font )
+{}
+
+void Interface::drawOffGameInterface() {
+    playButton.drawButton();
+    stopSongButton.drawButton();
+}
+
+void Interface::drawIngameInterface() {
+    returnToMenuButton.drawButton();
+}
+
