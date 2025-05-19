@@ -31,5 +31,6 @@ class BrokenShip : public Flappy_movement {
     BrokenShip(const Vector &pos);
     void update();
     void draw();
+    void restart();
 };
 #endif
