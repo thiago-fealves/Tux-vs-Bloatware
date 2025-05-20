@@ -1,5 +1,5 @@
-#ifndef GAME_OBJECT
-#define GAME_OBJECT
+#ifndef GAME_OBJECT_HPP
+#define GAME_OBJECT_HPP
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
@@ -26,9 +26,12 @@ class Flappy_movement : public GameObject {
 class BrokenShip : public Flappy_movement {
   private:
     const ALLEGRO_COLOR OBJ_COLOR = al_map_rgb(10, 200, 20);
+    float _radius = 50;
   public:
     BrokenShip();
     BrokenShip(const Vector &pos);
+    float get_radius() const;
+    void set_radius(float r);
     void update();
     void draw();
 };
