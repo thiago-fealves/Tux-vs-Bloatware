@@ -1,41 +1,33 @@
-#ifndef SOM_HPP
-#define SOM_HPP
+#ifndef MUSIC_HPP
+#define MUSIC_HPP
 
+#include <list>
 #include <string>
+#include "sound.hpp"
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
 
-class Sound {
-protected:
-    ALLEGRO_AUDIO_STREAM *stream;
-    static bool audio_sys_has_been_initialized;
-
-public:
-    Sound(std::string sound_address, float gain=4.0);
-    ~Sound();
-
-    static bool initialize_sys_sound();
-    void play();
-};
 
 class Music : public Sound {
 private:
+    ALLEGRO_AUDIO_STREAM *stream;
+
     float gain;
     float standart_gain;
     float current_gain;
+    float rate;
 
-    void fade_in(float rate);
-    void fade_out(float rate);
+    static std::list <Music*> music_address;
 
 public:
-    Music(std::string sound_address, float gain=4.0);
+    Music(std::string sound_address, float rate=0.5);
     ~Music();
+    
 
+    static void music_update();
+    void play(float gain=4.0) override;
     void pause();
-    void resume();
-    void set_gain(float gain);
-    void music_update();
 };
 
 #endif

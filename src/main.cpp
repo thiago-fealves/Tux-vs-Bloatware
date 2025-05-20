@@ -9,6 +9,7 @@
 #include "allegro5/keycodes.h"
 #include "bootstrap.hpp"
 #include "music.hpp"
+#include "sound.hpp"
 #include "interface.hpp"
 #include "game_object.hpp"
 using namespace std;
@@ -28,12 +29,28 @@ int main(int argc, char **argv) {
     BrokenShip player;
 
     // Start the music
-    string sound_path = "./sounds/musica.ogg";
+    if(!Sound::initialize_sys_sound()) cout<<"Erro na inicialização do sis. geral do som" <<  endl;
+
+    string path = "./sounds/sound_gun2.ogg";
+    Sound som(path);
+    som.play();
+
     
-    if(!Sound::initialize_sys_sound()) cout<<"Erro na inicialização do sis. geral" <<  endl;
-    Music sound(sound_path); 
-    sound.play();
+    string musica_path = "./sounds/music1.ogg";
+    Music musica_1(musica_path); 
+    musica_1.play();
+
+    string musica_path_2 = "./sounds/music2.ogg";
+    Music musica_2(musica_path_2); 
+    musica_2.play();
+    musica_2.pause();
+
     bool music_playing = true;
+    
+    
+
+
+
 
     // Create placeholder button
     Button button(300, 300, 200, 150, al_map_rgb(255, 100, 100), "PLACEHOLDER", font );
@@ -46,7 +63,7 @@ int main(int argc, char **argv) {
         
         if (event.type == ALLEGRO_EVENT_TIMER) {
             // Update the music
-            sound.music_update();
+            Music::music_update();
 
             // Update and redraw the game state
             al_clear_to_color(al_map_rgba_f(1, 1, 1, 1));  // Clear the screen with white color
@@ -73,11 +90,15 @@ int main(int argc, char **argv) {
             switch (event.keyboard.keycode) {
                 case ALLEGRO_KEY_SPACE:
                     //Teste de musica
+                    som.play();
+                    
                     if(music_playing) {
-                        sound.pause();
+                        musica_1.pause();
+                        musica_2.play();
                         music_playing = false;
                     } else {
-                        sound.resume();
+                        musica_2.pause();
+                        musica_1.play();
                         music_playing = true;
                     }
                     
@@ -88,6 +109,7 @@ int main(int argc, char **argv) {
                     break;
                 case ALLEGRO_KEY_D:
                 case ALLEGRO_KEY_RIGHT:
+                    Sound::clean_sounds();
                     player.move_flappy();
             }
         }
@@ -106,8 +128,11 @@ int main(int argc, char **argv) {
             playing = false;  // Exit the game when the window is closed
         }
     }
+    
 
+    
     // Cleanup and exit
+    Sound::clean_sounds(true);
     Bootstrap::cleanup_allegro(display, event_queue, timer);
     return 0;
 }
