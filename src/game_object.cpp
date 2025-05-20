@@ -39,3 +39,13 @@ void BrokenShip::update(){
   this->apply_gravity();
   this->draw();
 }
+
+float BrokenShip::get_radius() const {
+    return _radius;
+}
+
+void BrokenShip::set_radius(float r) {
+    _radius = r;
+}
+
+

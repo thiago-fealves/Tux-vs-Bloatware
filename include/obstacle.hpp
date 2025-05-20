@@ -2,17 +2,32 @@
 #define OBSTACLE_HPP
 
 #include "game_object.hpp"
-#include <allegro5/allegro_primitives.h>
+#include <vector>
 
-class Obstacle : public GameObject {
+class Obstacle : public GameObject{
   private:
     ALLEGRO_COLOR _color;
+    float _radius = 50;
+    float _speed_y; 
 
   public:
-    Obstacle(const Vector &pos, float radius, ALLEGRO_COLOR color = al_map_rgb(200, 50, 50));
-
-    void draw() const;
+    Obstacle(const Vector &pos, float radius, ALLEGRO_COLOR color, float speed);
+    float get_radius() const;
+    void draw();
     void update(); 
+    
+};
+
+class ObstaclesList{
+
+  private:
+    std::vector<Obstacle> obstaclesList;
+
+  public:
+    void setList();
+    std::vector<Obstacle> getList();
+
+
 };
 
 #endif

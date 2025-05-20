@@ -11,6 +11,8 @@
 #include "music.hpp"
 #include "interface.hpp"
 #include "game_object.hpp"
+#include "collision.hpp"
+#include "obstacle.hpp"
 using namespace std;
 
 // Const pointers for Allegro components
@@ -21,6 +23,7 @@ ALLEGRO_TIMER *timer = nullptr;
 int main(int argc, char **argv) {
 
     Bootstrap::initialize_allegro(display, event_queue, timer);
+
     
     // Setting up the font
     ALLEGRO_FONT* font = al_load_font("./assets/arial.ttf", 20, 0);
@@ -36,12 +39,18 @@ int main(int argc, char **argv) {
     // Create placeholder button
     Button button(300, 300, 200, 150, al_map_rgb(255, 100, 100), "PLACEHOLDER", font );
 
+    srand(time(NULL)); 
+
+    ObstaclesList obstaclesList;
+    obstaclesList.setList();
+    vector<Obstacle> obstacles = obstaclesList.getList();
+
     // Main game loop
     bool playing = true;
     while (playing) {
         // Getting new event 
         al_wait_for_event(event_queue, &event);  
-        
+
         if (event.type == ALLEGRO_EVENT_TIMER) {
             // Update the music
             sound->music_update();
@@ -57,6 +66,20 @@ int main(int argc, char **argv) {
             // Draws the button
             button.drawButton();
             player.update();
+
+            for (auto& o : obstacles) {
+                o.update();
+                o.draw();
+            }
+
+            for (auto& obs : obstacles) {
+                if (check_collision(player, player.get_radius(), obs, obs.get_radius())) {
+                    std::cout << "Colidiu\n";
+                    playing = false; 
+                    obstacles.clear();
+                }
+            } 
+
             al_flip_display();  // Update the display
         }
 
@@ -103,6 +126,8 @@ int main(int argc, char **argv) {
         else if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
             playing = false;  // Exit the game when the window is closed
         }
+
+        
     }
 
     // Cleanup and exit
