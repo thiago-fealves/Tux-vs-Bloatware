@@ -27,7 +27,7 @@ int main(int argc, char **argv) {
 
     
     // Setting up the font
-    ALLEGRO_FONT* font = al_load_font("./assets/arial.ttf", 20, 0);
+    ALLEGRO_FONT* font = al_load_font("./assets/fira.ttf", 20, 0);
     ALLEGRO_EVENT event;
     BrokenShip player;
 
@@ -49,14 +49,9 @@ int main(int argc, char **argv) {
     musica_2.pause();
 
     bool music_playing = true;
-    
-    
 
-
-
-
-    // Create placeholder button
-    Button button(300, 300, 200, 150, al_map_rgb(255, 100, 100), "PLACEHOLDER", font );
+    // Instantiates interface 
+    Interface interface(font);
 
     srand(time(NULL)); 
 
@@ -66,6 +61,57 @@ int main(int argc, char **argv) {
 
     // Main game loop
     bool playing = true;
+    bool displayInterface = true;
+
+    while(displayInterface) {
+        al_wait_for_event(event_queue, &event);
+
+        if(event.type == ALLEGRO_EVENT_TIMER) {
+            
+            // Update and redraw the game state
+            al_clear_to_color(al_map_rgba_f(1, 1, 1, 1));  // Clear the screen with white color
+                                                           
+            if (al_get_timer_count(timer) % (int)FPS == 0) {
+                cout << al_get_timer_count(timer) / FPS << " seconds in interface..." << endl;
+            }
+
+            // Updates music
+            Music::music_update();
+            
+            // Draws interface
+            interface.drawOffGameInterface();
+           
+            al_flip_display();  // Update the display
+        }
+        else if (event.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
+                if(interface.stopSongButton.gotClicked(event.mouse.x, event.mouse.y)) {
+                        if(music_playing) {
+                            musica_1.pause();
+                            music_playing= !music_playing;
+                            cout << "Music paused" << endl;
+                        }
+                        else {
+                            musica_1.play();
+                            music_playing= !music_playing;
+                            cout << "Music is now playing !" << endl;
+                        }
+                    }
+                //else if(interface.returnToMenuButton.gotClicked(event.mouse.x, event.mouse.y)) {
+                //    displayInterface = !displayInterface;
+                //}
+
+                else if(interface.playButton.gotClicked(event.mouse.x, event.mouse.y)) {
+                    displayInterface = !displayInterface;
+                }
+                else if(interface.exitGameButton.gotClicked(event.mouse.x, event.mouse.y)) {
+                    displayInterface=0;
+                    playing=0;
+                }
+
+        }
+
+    }
+
     while (playing) {
         // Getting new event 
         al_wait_for_event(event_queue, &event);  
@@ -82,8 +128,6 @@ int main(int argc, char **argv) {
                 cout << al_get_timer_count(timer) / FPS << " second..." << endl;
             }
 
-            // Draws the button
-            button.drawButton();
             player.update();
 
             for (auto& o : obstacles) {
@@ -102,11 +146,7 @@ int main(int argc, char **argv) {
             al_flip_display();  // Update the display
         }
 
-        // Handle mouse clicks
-        else if (event.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
-            if(button.gotClicked(event.mouse.x, event.mouse.y))
-                cout << "Clicked!" << endl;
-        }
+            
 
         // Handle key press events
         else if (event.type == ALLEGRO_EVENT_KEY_DOWN) {

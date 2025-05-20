@@ -34,5 +34,6 @@ class BrokenShip : public Flappy_movement {
     void set_radius(float r);
     void update();
     void draw();
+    void restart();
 };
 #endif

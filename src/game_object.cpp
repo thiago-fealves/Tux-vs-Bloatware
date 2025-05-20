@@ -24,7 +24,7 @@ void Flappy_movement::move_flappy(){
 
 
 // Broken Ship
-BrokenShip::BrokenShip() : BrokenShip(Vector(200,200)) {}
+BrokenShip::BrokenShip() : BrokenShip(Vector(375,300)) {}
 
 BrokenShip::BrokenShip(const Vector &pos){
   this->set_position(pos);
@@ -49,3 +49,7 @@ void BrokenShip::set_radius(float r) {
 }
 
 
+void BrokenShip::restart() {
+    this->set_position(Vector(375, 300));
+
+}
