@@ -32,21 +32,12 @@ int main(int argc, char **argv) {
     BrokenShip player;
 
     // Start the music
-    if(!Sound::initialize_sys_sound()) cout<<"Erro na inicialização do sis. geral do som" <<  endl;
-
-    string path = "./sounds/sound_gun2.ogg";
-    Sound som(path);
-    som.play();
-
+    Sound som("./sounds/sound_gun2.ogg");
     
-    string musica_path = "./sounds/music1.ogg";
-    Music musica_1(musica_path); 
+    Music musica_1("./sounds/music1.ogg"); 
     musica_1.play();
 
-    string musica_path_2 = "./sounds/music2.ogg";
-    Music musica_2(musica_path_2); 
-    musica_2.play();
-    musica_2.pause();
+    Music musica_2("./sounds/music2.ogg"); 
 
     bool music_playing = true;
 
@@ -76,7 +67,7 @@ int main(int argc, char **argv) {
             }
 
             // Updates music
-            Music::music_update();
+            Music::update_fade_in_fade_out();
             
             // Draws interface
             interface.drawOffGameInterface();
@@ -118,7 +109,7 @@ int main(int argc, char **argv) {
 
         if (event.type == ALLEGRO_EVENT_TIMER) {
             // Update the music
-            Music::music_update();
+            Music::update_fade_in_fade_out();
 
             // Update and redraw the game state
             al_clear_to_color(al_map_rgba_f(1, 1, 1, 1));  // Clear the screen with white color
@@ -172,7 +163,6 @@ int main(int argc, char **argv) {
                     break;
                 case ALLEGRO_KEY_D:
                 case ALLEGRO_KEY_RIGHT:
-                    Sound::clean_sounds();
                     player.move_flappy();
             }
         }
@@ -197,7 +187,6 @@ int main(int argc, char **argv) {
 
     
     // Cleanup and exit
-    Sound::clean_sounds(true);
     Bootstrap::cleanup_allegro(display, event_queue, timer);
     return 0;
 }
