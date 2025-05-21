@@ -1,31 +1,31 @@
 #ifndef SOUND_HPP
 #define SOUND_HPP
 
-#include <string>
-#include <list>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
 
+/** 
+ * @class Sound
+ * @brief class that represents a simple sound, with a musical object, ALLEGRO_SAMPLE,
+ * and a play method.
+ * 
+*/
+
 class Sound {
 private:
-    std::string sound_address;
-
-    static bool file_exists(const std::string& caminho);
-
-    static std::list<ALLEGRO_AUDIO_STREAM*> active_sounds;
+    static bool file_exists(const char* path);
+    static bool initialize_sys_sound();         // Initialize audio systems
 
 protected:
-    static bool audio_sys_has_been_initialized;
-    
+    ALLEGRO_SAMPLE* sound_sample;               // Simple music object
+    static bool audio_sys_has_been_initialized; // Stores information whether the sys has been booted
+
 public:
-    Sound(std::string sound_address_param);
-    
-    static bool initialize_sys_sound();
-    static void clean_sounds(bool cleanup_all=false);
+    Sound(const char* sound_address);           // Build the sound
+    virtual ~Sound();                           // Destroy the sound
 
-    virtual void play(float gain=4.0);
-
+    void play(float gain=4.0);                  // Play the sound
 };
 
 
