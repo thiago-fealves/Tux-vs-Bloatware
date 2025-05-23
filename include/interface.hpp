@@ -16,14 +16,14 @@ struct Coordinates {
 };
 
 class Button {
-    Coordinates coords;
+    Coordinates _coords;
     ALLEGRO_COLOR _color;
     std::string _text;
     ALLEGRO_FONT* _font;
     
     public:
 
-        Button(double x, double y, double width, double heigth, ALLEGRO_COLOR color, std::string text, ALLEGRO_FONT* font); 
+        Button(Coordinates coords, ALLEGRO_COLOR color, std::string text, ALLEGRO_FONT* font); 
         void drawButton();
         bool gotClicked(int mx, int my);
 
