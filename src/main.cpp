@@ -32,12 +32,12 @@ int main(int argc, char **argv) {
     BrokenShip player;
 
     // Start the music
-    Sound som("./sounds/sound_gun2.ogg");
+    Sound som_de_movimento("./sounds/sound_gun1.ogg");
     
-    Music musica_1("./sounds/music1.ogg"); 
-    musica_1.play();
+    Music musica_do_menu("./sounds/music3.ogg"); 
+    musica_do_menu.play();
 
-    Music musica_2("./sounds/music2.ogg"); 
+    Music musica_do_jogo("./sounds/music7.ogg"); 
 
     bool music_playing = true;
 
@@ -74,15 +74,16 @@ int main(int argc, char **argv) {
            
             al_flip_display();  // Update the display
         }
+
         else if (event.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
                 if(interface.stopSongButton.gotClicked(event.mouse.x, event.mouse.y)) {
                         if(music_playing) {
-                            musica_1.pause();
+                            musica_do_menu.pause();
                             music_playing= !music_playing;
                             cout << "Music paused" << endl;
                         }
                         else {
-                            musica_1.play();
+                            musica_do_menu.play();
                             music_playing= !music_playing;
                             cout << "Music is now playing !" << endl;
                         }
@@ -102,7 +103,8 @@ int main(int argc, char **argv) {
         }
 
     }
-
+    musica_do_menu.pause();
+    musica_do_jogo.play();
     while (playing) {
         // Getting new event 
         al_wait_for_event(event_queue, &event);  
@@ -142,20 +144,7 @@ int main(int argc, char **argv) {
         // Handle key press events
         else if (event.type == ALLEGRO_EVENT_KEY_DOWN) {
             switch (event.keyboard.keycode) {
-                case ALLEGRO_KEY_SPACE:
-                    //Teste de musica
-                    som.play();
-                    
-                    if(music_playing) {
-                        musica_1.pause();
-                        musica_2.play();
-                        music_playing = false;
-                    } else {
-                        musica_2.pause();
-                        musica_1.play();
-                        music_playing = true;
-                    }
-                    
+                case ALLEGRO_KEY_SPACE:                    
                     cout << "space key was pressed" << endl;
                     break;
                 case ALLEGRO_KEY_ESCAPE:
