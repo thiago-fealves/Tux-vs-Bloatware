@@ -1,4 +1,4 @@
-#include "../include/collision.hpp"
+#include "collision.hpp"
 #include <cmath>
 
 bool check_collision(GameObject& a, float radius_a, GameObject& b, float radius_b) {

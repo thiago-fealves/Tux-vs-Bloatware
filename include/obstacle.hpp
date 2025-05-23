@@ -8,10 +8,10 @@ class Obstacle : public GameObject{
   private:
     ALLEGRO_COLOR _color;
     float _radius = 50;
-    float _speed_y; 
+    Vector _speed; 
 
   public:
-    Obstacle(const Vector &pos, float radius, ALLEGRO_COLOR color, float speed);
+    Obstacle(const Vector &pos, float radius, ALLEGRO_COLOR color, Vector& speed);
     float get_radius() const;
     void draw();
     void update(); 
