@@ -18,7 +18,7 @@ std::list<Music*> Music::music_address; // Initialize the music list
  * @param fade_speed_parameter Initializes the fade_speed of the object.
  */
 Music::Music(const char* sound_address, float volume_parameter, float fade_speed_parameter) : Sound(sound_address), 
-        ballast_volume(volume_parameter) {
+        ballast_volume(volume_parameter), fade_speed(fade_speed_parameter) {
     
     // Check if sound_sample, of Sound, has been started
     if(sound_sample == nullptr) {
@@ -39,8 +39,6 @@ Music::Music(const char* sound_address, float volume_parameter, float fade_speed
     al_set_sample_instance_playmode(music_sample, ALLEGRO_PLAYMODE_LOOP);       // Set the play mode to loop
     al_attach_sample_instance_to_mixer(music_sample, al_get_default_mixer());   // Couples music_sample to an automatic mixer
     al_set_sample_instance_playing(music_sample, false);                        // Stops the music, because the mixer plays music
-
-    fade_speed = fade_speed_parameter/30.0; //COMENTARAAAAAA
 
     //Add the song to the end of the music list
     Music::music_address.push_back(this); 
