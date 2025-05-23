@@ -34,10 +34,10 @@ int main(int argc, char **argv) {
     // Start the music
     Sound som_de_movimento("./sounds/sound_gun1.ogg");
     
-    Music musica_do_menu("./sounds/music3.ogg", 4, 1); 
+    Music musica_do_menu("./sounds/music3.ogg", 0.5, 1); 
     musica_do_menu.play();
 
-    Music musica_do_jogo("./sounds/music7.ogg"); 
+    Music musica_do_jogo("./sounds/music7.ogg", 0.5, 1); 
 
     bool music_playing = true;
 
