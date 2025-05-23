@@ -17,8 +17,8 @@ std::list<Music*> Music::music_address; // Initialize the music list
  * @param ballast_volume_parameter Initializes the ballast_volume of the object.
  * @param fade_speed_parameter Initializes the fade_speed of the object.
  */
-Music::Music(const char* sound_address, float ballast_volume_parameter, float fade_speed_parameter) : Sound(sound_address), music_sample(nullptr), 
-        ballast_volume(ballast_volume_parameter), volume(0.0), current_volume(0.0), current_music_position(0), fade_speed(fade_speed_parameter) {
+Music::Music(const char* sound_address, float volume_parameter, float fade_speed_parameter) : Sound(sound_address), 
+        ballast_volume(volume_parameter) {
     
     // Check if sound_sample, of Sound, has been started
     if(sound_sample == nullptr) {
@@ -36,11 +36,13 @@ Music::Music(const char* sound_address, float ballast_volume_parameter, float fa
     }
 
     al_set_sample_instance_gain(music_sample, 0.0);                             // Set the volume to 0.0
-    al_set_sample_instance_playmode(music_sample, ALLEGRO_PLAYMODE_LOOP);       // Set the play mode to lool
+    al_set_sample_instance_playmode(music_sample, ALLEGRO_PLAYMODE_LOOP);       // Set the play mode to loop
     al_attach_sample_instance_to_mixer(music_sample, al_get_default_mixer());   // Couples music_sample to an automatic mixer
     al_set_sample_instance_playing(music_sample, false);                        // Stops the music, because the mixer plays music
 
-    //Add the song to the end of the song list
+    fade_speed = fade_speed_parameter/30.0; //COMENTARAAAAAA
+
+    //Add the song to the end of the music list
     Music::music_address.push_back(this); 
 }
 
@@ -67,8 +69,8 @@ Music::~Music() {
  */
 void Music::pause() {
 
-    // Check if the music exists and if the music is playing
-    if(music_sample == nullptr && al_get_sample_instance_playing(music_sample) == false) return;
+    // Check if the music does not exists or is not playing
+    if(music_sample == nullptr || al_get_sample_instance_playing(music_sample) == false) return;
 
     volume = 0.0;
 }
@@ -87,31 +89,28 @@ void Music::play() {
  */
 void Music::update_fade_in_fade_out() {
     // Enter each active song
-    for(auto it : Music::music_address) {
+    for(auto &it : Music::music_address) {
         // Check if the music is nullptr OR already has a stable volume
         if (it==nullptr || it->volume == it->current_volume) continue; 
 
         // Check if it is a case of a fade-in
         if(it->volume > it->current_volume) {
-            it->current_volume += it->fade_speed;                                   // Increases the current_volume by one unit of fade_speed
 
-            // Checks whether the current volume has already reached the ballast volume
-            if(it->current_volume>=it->volume) {
-                it->current_volume = it->volume; // Set the current volume to the ballast volume, as the current volume may be larger
-            }
-
-        
-        }
+            // Current volume will be the smallest value between [current_volume + fade_speed (increment to fade in)] 
+            // and [volume (maximum value of current volume)],so it is guaranteed that the largest value is the volume.
+            it->current_volume = std::min(it->current_volume + it->fade_speed, it->volume);    
+        }   
         // Check if it is a case of a fade-out
          else if (it->volume == 0.0) { 
-            it->current_volume -= it->fade_speed;  // Decrease the current_volume by one unit of fade_speed
+
+            // Current volume will be the largest value between [current volume minus speed (Decremented to perform fade-out)] 
+            // and [zero(deifined by float(0) to be a float)], so the smallest value is guaranteed to be zero.  
+            it->current_volume = std::max(it->current_volume - it->fade_speed, float(0));
 
             // Checks whether the current volume has already reached the ballast volume(zero in this case)
-            if(it->current_volume<=0) {
-                al_set_sample_instance_gain(it->music_sample, 0.0);                             // Set the music volume to zero
+            if(it->current_volume==0) {                            
                 it->current_music_position = al_get_sample_instance_position(it->music_sample); // Saves the current position of the song
                 al_set_sample_instance_playing(it->music_sample, false);                        // Makes the music stop playing
-                it->current_volume = 0.0;                                                       // Set the current volume to the zero, as the current volume may be smaller
             }
         }
 

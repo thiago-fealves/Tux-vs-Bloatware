@@ -34,7 +34,7 @@ int main(int argc, char **argv) {
     // Start the music
     Sound som_de_movimento("./sounds/sound_gun1.ogg");
     
-    Music musica_do_menu("./sounds/music3.ogg"); 
+    Music musica_do_menu("./sounds/music3.ogg", 4, 3); 
     musica_do_menu.play();
 
     Music musica_do_jogo("./sounds/music7.ogg"); 

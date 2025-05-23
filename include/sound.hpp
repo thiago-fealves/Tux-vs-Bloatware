@@ -18,7 +18,7 @@ private:
     static bool initialize_sys_sound();         // Initialize audio systems
 
 protected:
-    ALLEGRO_SAMPLE* sound_sample;               // Simple music object
+    ALLEGRO_SAMPLE* sound_sample = nullptr;     // Simple music object
     static bool audio_sys_has_been_initialized; // Stores information whether the sys has been booted
 
 public:

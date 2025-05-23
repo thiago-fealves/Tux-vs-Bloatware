@@ -49,7 +49,7 @@ bool Sound::initialize_sys_sound() {
  * 
  * @param sound_address The address of the sound.
 */
-Sound::Sound(const char* sound_address) : sound_sample(nullptr) {
+Sound::Sound(const char* sound_address) {
 
     // Check if the audio system has been started
     if(Sound::audio_sys_has_been_initialized == false) { // If it wasn't, then it is initialized
