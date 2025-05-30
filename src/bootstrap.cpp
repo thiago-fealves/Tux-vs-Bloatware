@@ -5,20 +5,23 @@
 #include <allegro5/mouse.h>
 #include <iostream>
 #include "bootstrap.hpp"
+#include "allegro5/events.h"
 #include "allegro5/timer.h"
 
 const ALLEGRO_COLOR BACKGROUND_COLOR = al_map_rgb(0, 0, 0);
-
+ALLEGRO_DISPLAY* display = nullptr;
+ALLEGRO_EVENT_QUEUE* event_queue = nullptr;
+ALLEGRO_TIMER* timer = nullptr;
 using namespace std;
 
-bool Bootstrap::initialize_allegro(ALLEGRO_DISPLAY* &display, ALLEGRO_EVENT_QUEUE* &event_queue, ALLEGRO_TIMER* &timer){
-    if (!Bootstrap::init_allegro_libs(display, event_queue, timer)) return false;
-    Bootstrap::register_allegro_events(display, event_queue, timer);
+bool Bootstrap::initialize_allegro(){
+    if (!Bootstrap::init_allegro_libs()) return false;
+    Bootstrap::register_allegro_events();
     al_start_timer(timer);
     return true;
 } 
 
-bool Bootstrap::init_allegro_libs(ALLEGRO_DISPLAY* &display, ALLEGRO_EVENT_QUEUE* &event_queue, ALLEGRO_TIMER* &timer){
+bool Bootstrap::init_allegro_libs(){
     // Initialize Allegro library
     if (!al_init()) {
         cout << "ERROR:" << "failed to initialize allegro" << endl;
@@ -41,7 +44,7 @@ bool Bootstrap::init_allegro_libs(ALLEGRO_DISPLAY* &display, ALLEGRO_EVENT_QUEUE
     // Create an event queue to handle events
     event_queue = al_create_event_queue();
     if (!event_queue) {
-        cout << "ERROR:" << "failed to create event_queue" << endl;
+        cout << "ERROR:" << "failed to create _event_queue" << endl;
         return false;
     }
 
@@ -73,7 +76,7 @@ bool Bootstrap::init_allegro_libs(ALLEGRO_DISPLAY* &display, ALLEGRO_EVENT_QUEUE
     }
     return true;
 }
-void Bootstrap::register_allegro_events(ALLEGRO_DISPLAY* &display, ALLEGRO_EVENT_QUEUE* &event_queue, ALLEGRO_TIMER* &timer){
+void Bootstrap::register_allegro_events(){
     // Register event sources for the event queue
     al_register_event_source(event_queue, al_get_display_event_source(display));
     al_register_event_source(event_queue, al_get_timer_event_source(timer));
@@ -81,8 +84,9 @@ void Bootstrap::register_allegro_events(ALLEGRO_DISPLAY* &display, ALLEGRO_EVENT
     al_register_event_source(event_queue, al_get_mouse_event_source());
 }
 
-void Bootstrap::cleanup_allegro(ALLEGRO_DISPLAY* &display, ALLEGRO_EVENT_QUEUE* &event_queue, ALLEGRO_TIMER* &timer){
+void Bootstrap::cleanup_allegro(){
     al_destroy_timer(timer);
     al_destroy_display(display);
     al_destroy_event_queue(event_queue);
 }
+

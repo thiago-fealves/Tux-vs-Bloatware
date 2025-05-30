@@ -14,16 +14,13 @@
 #include "game_object.hpp"
 #include "collision.hpp"
 #include "obstacle.hpp"
+#include "levels.hpp"
 using namespace std;
 
 // Const pointers for Allegro components
-ALLEGRO_DISPLAY *display = nullptr;
-ALLEGRO_EVENT_QUEUE *event_queue = nullptr;
-ALLEGRO_TIMER *timer = nullptr;
-
 int main(int argc, char **argv) {
 
-    Bootstrap::initialize_allegro(display, event_queue, timer);
+    Bootstrap::initialize_allegro();
 
     
     // Setting up the font
@@ -46,9 +43,7 @@ int main(int argc, char **argv) {
 
     srand(time(NULL)); 
 
-    ObstaclesList obstaclesList;
-    obstaclesList.setList();
-    vector<Obstacle> obstacles = obstaclesList.getList();
+
 
     // Main game loop
     bool playing = true;
@@ -104,78 +99,8 @@ int main(int argc, char **argv) {
 
     }
     musica_do_menu.pause();
-    musica_do_jogo.play();
-    while (playing) {
-        // Getting new event 
-        al_wait_for_event(event_queue, &event);  
-
-        if (event.type == ALLEGRO_EVENT_TIMER) {
-            // Update the music
-            Music::update_fade_in_fade_out();
-
-            // Update and redraw the game state
-            al_clear_to_color(al_map_rgba_f(1, 1, 1, 1));  // Clear the screen with white color
-
-            // Log elapsed time to the console every second
-            if (al_get_timer_count(timer) % (int)FPS == 0) {
-                cout << al_get_timer_count(timer) / FPS << " second..." << endl;
-            }
-
-            player.update();
-
-            for (auto& o : obstacles) {
-                o.update();
-                o.draw();
-            }
-
-            for (auto& obs : obstacles) {
-                if (check_collision(player, player.get_radius(), obs, obs.get_radius())) {
-                    std::cout << "Colidiu\n";
-                    playing = false; 
-                    obstacles.clear();
-                }
-            } 
-
-            al_flip_display();  // Update the display
-        }
-
-            
-
-        // Handle key press events
-        else if (event.type == ALLEGRO_EVENT_KEY_DOWN) {
-            switch (event.keyboard.keycode) {
-                case ALLEGRO_KEY_SPACE:                    
-                    cout << "space key was pressed" << endl;
-                    break;
-                case ALLEGRO_KEY_ESCAPE:
-                    playing = false;
-                    break;
-                case ALLEGRO_KEY_D:
-                case ALLEGRO_KEY_RIGHT:
-                    player.move_flappy();
-            }
-        }
-
-        // Handle key release events
-        else if (event.type == ALLEGRO_EVENT_KEY_UP) {
-            switch (event.keyboard.keycode) {
-                case ALLEGRO_KEY_SPACE:
-                    cout << "space key was released" << endl;
-                    break;
-            }
-        }
-
-        // Handle window close event
-        else if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
-            playing = false;  // Exit the game when the window is closed
-        }
-
-        
-    }
-    
-
-    
+    LevelTwo::mainLoop(playing);
     // Cleanup and exit
-    Bootstrap::cleanup_allegro(display, event_queue, timer);
+    Bootstrap::cleanup_allegro();
     return 0;
 }

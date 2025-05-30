@@ -11,6 +11,7 @@ class GameObject{
   public:
     Vector get_position();
     void set_position(const Vector &position);
+    virtual ~GameObject() = 0;
 };
 
 class Flappy_movement : public GameObject {

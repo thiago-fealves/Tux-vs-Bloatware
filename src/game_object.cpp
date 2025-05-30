@@ -2,6 +2,9 @@
 #include "bootstrap.hpp"
 
 // Game Object
+GameObject::~GameObject() {
+    // Pode ser vazio, só precisa existir
+}
 Vector GameObject::get_position(){
   return this->_position;
 }

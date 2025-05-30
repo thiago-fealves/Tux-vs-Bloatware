@@ -18,7 +18,7 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(BUILD_DIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-all: $(BUILD_DIR)/$(TARGET)
+all: $(TARGET)
 
 clean:
 	rm -rf $(BUILD_DIR)
