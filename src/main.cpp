@@ -22,11 +22,10 @@ int main(int argc, char **argv) {
 
     Bootstrap::initialize_allegro();
 
+   
     
     // Setting up the font
     ALLEGRO_FONT* font = al_load_font("./assets/fira.ttf", 20, 0);
-    ALLEGRO_EVENT event;
-    BrokenShip player;
 
     // Start the music
     Sound som_de_movimento("./sounds/sound_gun1.ogg");
@@ -34,7 +33,6 @@ int main(int argc, char **argv) {
     Music musica_do_menu("./sounds/music3.ogg", 0.5, 1); 
     musica_do_menu.play();
 
-    Music musica_do_jogo("./sounds/music7.ogg", 0.5, 1); 
 
     bool music_playing = true;
 
@@ -44,11 +42,10 @@ int main(int argc, char **argv) {
     srand(time(NULL)); 
 
 
-
     // Main game loop
     bool playing = true;
     bool displayInterface = true;
-
+    ALLEGRO_EVENT event;
     while(displayInterface) {
         al_wait_for_event(event_queue, &event);
 
@@ -99,7 +96,9 @@ int main(int argc, char **argv) {
 
     }
     musica_do_menu.pause();
+
     LevelTwo::mainLoop(playing);
+
     // Cleanup and exit
     Bootstrap::cleanup_allegro();
     return 0;
