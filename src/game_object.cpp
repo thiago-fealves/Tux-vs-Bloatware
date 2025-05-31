@@ -1,5 +1,8 @@
 #include "game_object.hpp"
 #include "bootstrap.hpp"
+#include <allegro5/bitmap_draw.h>
+#include <allegro5/bitmap_io.h>
+#include <string>
 
 // Game Object
 GameObject::~GameObject() {
@@ -31,11 +34,13 @@ BrokenShip::BrokenShip() : BrokenShip(Vector(375,300)) {}
 
 BrokenShip::BrokenShip(const Vector &pos){
   this->set_position(pos);
+  this->set_bitmap("./assets/tux.png");
+  this->set_radius(50);
 }
 
 void BrokenShip::draw(){
   Vector pos = GameObject::get_position();
-  al_draw_filled_circle(pos._x, pos._y, 50, this->OBJ_COLOR); // Valor temporário trocar depois quando fizer o sprite
+  al_draw_bitmap(TuxSprite, pos._x, pos._y, 0);
 }
 
 void BrokenShip::update(){
@@ -49,6 +54,10 @@ float BrokenShip::get_radius() const {
 
 void BrokenShip::set_radius(float r) {
     _radius = r;
+}
+
+void BrokenShip::set_bitmap(const char *path) {
+    TuxSprite = al_load_bitmap(path);
 }
 
 
