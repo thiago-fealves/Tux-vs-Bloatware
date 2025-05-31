@@ -5,6 +5,7 @@
 Obstacle::Obstacle(const Vector &pos, float radius, ALLEGRO_COLOR color, Vector& speed)
     : _color(color), _radius(radius), _speed(speed){
     this->set_position(pos);
+    this->set_bitmap("./assets/asteroid.png");
 }
 
 float Obstacle::get_radius() const {
@@ -13,7 +14,23 @@ float Obstacle::get_radius() const {
 
 void Obstacle::draw() {
     Vector pos = get_position();;
-    al_draw_filled_circle(pos._x, pos._y, _radius, _color);
+
+    float spriteDrawWidth = _radius* 2.0f;
+    float spriteDrawHeigth = _radius* 2.0f;
+    // Coordinates of the left upper corner
+    float spriteDrawX = pos._x - (spriteDrawWidth/2.0f);
+    float spriteDrawY = pos._y - (spriteDrawHeigth/2.0f);
+
+    al_draw_scaled_bitmap(objectSprite,
+            0, 0,
+            al_get_bitmap_width(objectSprite),
+            al_get_bitmap_height(objectSprite),
+            spriteDrawX, spriteDrawY,
+            spriteDrawWidth, spriteDrawHeigth,
+            0);
+
+
+
 }
 
 void Obstacle::update() {

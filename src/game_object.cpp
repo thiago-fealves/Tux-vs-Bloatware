@@ -1,5 +1,6 @@
 #include "game_object.hpp"
 #include "bootstrap.hpp"
+#include <allegro5/bitmap.h>
 #include <allegro5/bitmap_draw.h>
 #include <allegro5/bitmap_io.h>
 #include <string>
@@ -10,6 +11,10 @@ GameObject::~GameObject() {
 }
 Vector GameObject::get_position(){
   return this->_position;
+}
+
+void GameObject::set_bitmap(const char *path) {
+    objectSprite = al_load_bitmap(path);
 }
 
 void GameObject::set_position(const Vector &position){
@@ -40,7 +45,24 @@ BrokenShip::BrokenShip(const Vector &pos){
 
 void BrokenShip::draw(){
   Vector pos = GameObject::get_position();
-  al_draw_bitmap(TuxSprite, pos._x, pos._y, 0);
+  // The total sprite region is a square of _radius*2 x _radius*2
+  float spriteDrawWidth = _radius* 2.0f;
+  float spriteDrawHeigth = _radius* 2.0f;
+  // Coordinates of the left upper corner
+  float spriteDrawX = pos._x - (spriteDrawWidth/2.0f);
+  float spriteDrawY = pos._y - (spriteDrawHeigth/2.0f);
+
+  al_draw_scaled_bitmap(objectSprite,
+          0, 0,
+          al_get_bitmap_width(objectSprite),
+          al_get_bitmap_height(objectSprite),
+          spriteDrawX, spriteDrawY,
+          spriteDrawWidth, spriteDrawHeigth,
+          0);
+
+
+
+
 }
 
 void BrokenShip::update(){
@@ -56,9 +78,6 @@ void BrokenShip::set_radius(float r) {
     _radius = r;
 }
 
-void BrokenShip::set_bitmap(const char *path) {
-    TuxSprite = al_load_bitmap(path);
-}
 
 
 void BrokenShip::restart() {
