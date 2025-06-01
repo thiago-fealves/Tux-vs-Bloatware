@@ -31,15 +31,15 @@ void StartMenu::handleTimerEvents() {
     al_flip_display();  // Update the display
 }
 
-void StartMenu::handleMouseEvents(bool &playing, bool &displayInterface) {
+void StartMenu::handleMouseEvents(bool &playing, bool &displayInterface, Music* &menu_music) {
     static bool musicIsPlaying = true;
     if(interface->stopSongButton.gotClicked(event.mouse.x, event.mouse.y)) {
         if(musicIsPlaying) { 
-            menu_music->pause();
+            Music::muteMusic();
             musicIsPlaying = false;
             std::cout<<"Music is now paused!" << std::endl;
         } else {
-            menu_music->play();
+            Music::unmuteMusic(menu_music);
             musicIsPlaying = true;
             std::cout << "Music is now playing!" << std::endl;
         }
@@ -72,7 +72,7 @@ void StartMenu::mainLoopMenu(bool &playing, Music* &menu_music) {
 
         if(event.type == ALLEGRO_EVENT_TIMER) handleTimerEvents();
 
-        if (event.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) handleMouseEvents(playing, displayInterface);
+        if (event.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) handleMouseEvents(playing, displayInterface, menu_music);
 
     }
 

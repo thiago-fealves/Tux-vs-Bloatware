@@ -1,6 +1,8 @@
 #include "sound.hpp"
 #include <iostream>
 
+bool Sound::isSoundMuted = false;
+
 /** 
  * @class Sound
  * @brief class that represents a simple sound, with a musical object, ALLEGRO_SAMPLE,
@@ -54,6 +56,16 @@ void Sound::play(float volume) {
         return;
     }
 
+    if(Sound::isSoundMuted==true) return;
+
     // Create and play a new sound
     al_play_sample(sound_sample, volume, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, nullptr);
+}
+
+void Sound::muteSound() {
+    Sound::isSoundMuted = true;
+}
+
+void Sound::unmuteSound() {
+    Sound::isSoundMuted = false;
 }

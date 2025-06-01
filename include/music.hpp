@@ -29,6 +29,8 @@ private:
 
     static std::list <Music*> music_address;    // Music addresses to have their volumes updated, with fade-in and fade-out
 
+    static bool isMusicMuted;
+
 public:
     Music(const char* sound_address, float volume_parameter=4.0, float fade_speed_parameter=3.0);        
     ~Music() override;                          // If the destroyer of music is called, the destroyer of sound will not be called
@@ -37,6 +39,10 @@ public:
     void pause();                               // Method to pause music
 
     static void update_fade_in_fade_out();      // Method to do fade-in and fade-out
+
+    static void muteMusic();
+    
+    static void unmuteMusic(Music* &music);
 };
 
 #endif

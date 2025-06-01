@@ -9,6 +9,7 @@
  */
 
 std::list<Music*> Music::music_address; // Initialize the music list
+bool Music::isMusicMuted = false;
 
 /**
  * @brief Construct a music.
@@ -76,6 +77,7 @@ void Music::pause() {
  * @brief Play the music, starting where it left off.
  */
 void Music::play() {
+    if(Music::isMusicMuted == true) return;
     volume = ballast_volume;                                                // Return the volume to the original value  
     al_set_sample_instance_position(music_sample, current_music_position);  // Put the music back on the instant it stopped
     al_set_sample_instance_playing(music_sample, true);                     // Play the music
@@ -114,4 +116,19 @@ void Music::update_fade_in_fade_out() {
         al_set_sample_instance_gain(it->music_sample, it->current_volume); // Set the music volume to the current volume (increased or decrease)
 
     }
+}
+
+void Music::muteMusic() {
+    Music::isMusicMuted = true;
+
+    for(auto &it : Music::music_address) {
+        it->pause();
+    }
+}
+
+void Music::unmuteMusic(Music* &music) {
+    // é preciso este parametro, pois quando se desmuta as musicas
+    // nao tem como saber a musica que estaria tocando no momento.
+    Music::isMusicMuted = false;
+    music->play();
 }

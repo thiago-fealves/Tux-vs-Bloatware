@@ -25,7 +25,7 @@ int main(int argc, char **argv) {
     
     srand(time(NULL)); 
     
-    bool playing = true;
+    bool playing = true; 
 
     StartMenu::mainLoopMenu(playing, menu_music);
     
