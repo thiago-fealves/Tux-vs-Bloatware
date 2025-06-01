@@ -7,12 +7,6 @@
 #include "bootstrap.hpp"
 #include "allegro5/events.h"
 #include "allegro5/timer.h"
-#include "sound.hpp"
-#include "music.hpp"
-
-#include <allegro5/allegro.h>
-#include <allegro5/allegro_audio.h>
-#include <allegro5/allegro_acodec.h>
 
 const ALLEGRO_COLOR BACKGROUND_COLOR = al_map_rgb(0, 0, 0);
 ALLEGRO_DISPLAY* display = nullptr;
@@ -56,6 +50,16 @@ bool Bootstrap::init_allegro_libs(){
     if (!al_init_font_addon() || !al_init_ttf_addon()) {
         cout << "ERROR:" << "failed to initialize fonts" << endl;
         al_destroy_timer(timer);
+        return false;
+    }
+
+    if(!al_init_image_addon()) {
+        cout<< "ERROR:" << "failed to initialize images" << endl;
+        return false;
+    }
+
+    if(!al_init_image_addon()) {
+        cout<< "ERROR:" << "failed to initialize images" << endl;
         return false;
     }
 
