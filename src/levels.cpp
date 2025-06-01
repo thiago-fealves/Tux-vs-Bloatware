@@ -1,5 +1,5 @@
 #include "levels.hpp"
-
+#include "bootstrap.hpp"
 using namespace std;
 
 /* Static variables */
@@ -23,7 +23,7 @@ BrokenShip* LevelTwo::setLevelTwo(){
     BrokenShip* Player = dynamic_cast<BrokenShip*>(Level::_player);
     
     // Setting Music
-    setMusic(new Music("./sounds/music7.ogg", 0.5, 1));
+    setMusic(level_two_music); //AQUI--------------
     
     // Setting Obstacles 
     _obstaclesList.setList();
@@ -32,7 +32,6 @@ BrokenShip* LevelTwo::setLevelTwo(){
 }
 
 void Level::cleanLevel(){
-    delete _music;
     delete _player;
     _music = nullptr;
     _player = nullptr;

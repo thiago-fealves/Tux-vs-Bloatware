@@ -7,19 +7,37 @@
 #include "bootstrap.hpp"
 #include "allegro5/events.h"
 #include "allegro5/timer.h"
+#include "sound.hpp"
+#include "music.hpp"
+
+#include <allegro5/allegro.h>
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
 
 const ALLEGRO_COLOR BACKGROUND_COLOR = al_map_rgb(0, 0, 0);
 ALLEGRO_DISPLAY* display = nullptr;
 ALLEGRO_EVENT_QUEUE* event_queue = nullptr;
 ALLEGRO_TIMER* timer = nullptr;
+
+Sound* death_sound = nullptr;
+Sound* gunshot_sound1 = nullptr;
+Sound* gunshot_sound2 = nullptr;
+Sound* gunshot_sound3 = nullptr;
+Sound* gunshot_sound4 = nullptr;
+
+Music* menu_music = nullptr;
+Music* pause_game_music = nullptr;
+Music* level_one_music = nullptr;
+Music* level_two_music = nullptr;
+Music* level_three_music = nullptr;
+Music* defeat_music = nullptr;
+Music* victory_music = nullptr;
+
 using namespace std;
 
-bool Bootstrap::initialize_allegro(){
-    if (!Bootstrap::init_allegro_libs()) return false;
-    Bootstrap::register_allegro_events();
-    al_start_timer(timer);
-    return true;
-} 
+bool Bootstrap::file_exists(const char* path) {
+    return (access(path, F_OK) == 0);
+}
 
 bool Bootstrap::init_allegro_libs(){
     // Initialize Allegro library
@@ -76,6 +94,69 @@ bool Bootstrap::init_allegro_libs(){
     }
     return true;
 }
+
+/**
+ * @brief Starts and checks the allegro audio systems and reserves an audio channel.
+ * 
+ * @return Returns whether the initializations were successful.
+ */
+bool Bootstrap::initialize_sys_sound() {
+
+    // Install and check the allegro audio system
+    if(al_install_audio() == false) {
+        std::cout << "The Allegro audio system could not be installed\n";
+        return false;
+    }
+
+    // Loads and checks, the audio file handlers (e.g.: .ogg)
+    if(al_init_acodec_addon() == false) {
+        std::cout << "Unable to load audio handlers\n";
+        return false;
+    }
+
+    // Reserves and checks 32 audio channels for ALLEGRO
+    if(al_reserve_samples(32) == false) {
+        std::cout << "Unable to reserve audio channels\n";
+        return false;
+    }
+
+    // If everything goes well
+    return true;
+}
+
+bool Bootstrap::initialize_sounds() {
+    if(Bootstrap::initialize_sys_sound()==false) {
+        std::cout << "Error initializing audio system\n";
+        return false;
+    }
+
+    // INICIALIZAR TODAS AS MUSICAS E SONS AQUI!
+    // Check if the audio file exists
+
+    // Musics
+    if(file_exists("sounds/music8.ogg")) menu_music = new Music("sounds/music8.ogg");  
+    if(file_exists("sounds/music3.ogg")) pause_game_music = new Music("sounds/music3.ogg");  
+
+    if(file_exists("sounds/music7.ogg")) level_one_music = new Music("sounds/music7.ogg", 4.0, 1.0);
+    if(file_exists("sounds/music5.ogg")) level_two_music = new Music("sounds/music5.ogg");
+    if(file_exists("sounds/music4.ogg")) level_three_music = new Music("sounds/music4.ogg");
+
+    if(file_exists("sounds/music9.ogg")) defeat_music = new Music("sounds/music9.ogg");
+    if(file_exists("sounds/music6.ogg")) victory_music = new Music("sounds/music6.ogg");
+
+    // Sounds
+    if(file_exists("sounds/sound_gun4.ogg")) death_sound = new Sound("sounds/sound_gun4.ogg");
+
+    if(file_exists("sounds/sound_gun9.ogg")) gunshot_sound1 = new Sound("sounds/sound_gun9.ogg");
+    if(file_exists("sounds/sound_gun8.ogg")) gunshot_sound2 = new Sound("sounds/sound_gun8.ogg");
+    if(file_exists("sounds/sound_gun6.ogg")) gunshot_sound3 = new Sound("sounds/sound_gun6.ogg");
+    if(file_exists("sounds/sound_gun4.ogg")) gunshot_sound4 = new Sound("sounds/sound_gun4.ogg");
+
+
+
+    return true;
+}
+
 void Bootstrap::register_allegro_events(){
     // Register event sources for the event queue
     al_register_event_source(event_queue, al_get_display_event_source(display));
@@ -84,9 +165,31 @@ void Bootstrap::register_allegro_events(){
     al_register_event_source(event_queue, al_get_mouse_event_source());
 }
 
+bool Bootstrap::initialize_allegro(){
+    if (!Bootstrap::init_allegro_libs()) return false;
+    if (!Bootstrap::initialize_sounds()) return false;
+    Bootstrap::register_allegro_events();
+    al_start_timer(timer);
+    return true;
+} 
+
 void Bootstrap::cleanup_allegro(){
     al_destroy_timer(timer);
     al_destroy_display(display);
     al_destroy_event_queue(event_queue);
+    
+    // criar uma função para limpar isso tudo?
+    delete death_sound;
+    delete gunshot_sound1;
+    delete gunshot_sound2;
+    delete gunshot_sound3;
+    delete gunshot_sound4;
+    
+    delete menu_music;
+    delete pause_game_music;
+    delete level_one_music;
+    delete level_two_music;
+    delete level_three_music;
+    delete defeat_music;
+    delete victory_music;
 }
-

@@ -44,7 +44,6 @@ Music::Music(const char* sound_address, float volume_parameter, float fade_speed
     Music::music_address.push_back(this); 
 }
 
-
 /**
  * @brief Destroy the music. (If the destroyer of music is called, the destroyer of sound will not be called,
  * because ALLEGRO SAMPLE INSTANCE is just a more robust ALLEGRO SAMPLE, when we destroy ALLEGRO SAMPLE INSTANCE

@@ -8,41 +8,12 @@
  * 
 */
 
-bool Sound::audio_sys_has_been_initialized = false;
-
-bool Sound::file_exists(const char* path) {
-    return (access(path, F_OK) == 0);
-}
-
 /**
  * @brief Starts and checks the allegro audio systems and reserves an audio channel.
  * 
  * @return Returns whether the initializations were successful.
  */
-bool Sound::initialize_sys_sound() {
-
-    // Install and check the allegro audio system
-    if(al_install_audio() == false) {
-        std::cout << "The Allegro audio system could not be installed\n";
-        return false;
-    }
-
-    // Loads and checks, the audio file handlers (e. g., .ogg)
-    if(al_init_acodec_addon() == false) {
-        std::cout << "Unable to load audio handlers\n";
-        return false;
-    }
-
-    // Reserves and checks 32 audio channels for ALLEGRO
-    if(al_reserve_samples(32) == false) {
-        std::cout << "Unable to reserve audio channels\n";
-        return false;
-    }
-
-    // If everything goes well
-    Sound::audio_sys_has_been_initialized = true;
-    return true;
-}
+//era aqui o 
 
 /**
  * @brief Construct a sound.
@@ -50,22 +21,6 @@ bool Sound::initialize_sys_sound() {
  * @param sound_address The address of the sound.
 */
 Sound::Sound(const char* sound_address) {
-
-    // Check if the audio system has been started
-    if(Sound::audio_sys_has_been_initialized == false) { // If it wasn't, then it is initialized
-        if(Sound::initialize_sys_sound() == true) { 
-            Sound::audio_sys_has_been_initialized = true;
-        } else {
-            std::cout << "The audio sys could not be initialized\n"; 
-            return;
-        }
-    }
-
-    // Check if the audio file exists
-    if(Sound::file_exists(sound_address) == false) {
-        std::cout << "This file do not exist, " << sound_address << std::endl;
-        return;
-    } 
 
     // Creates an ALLEGRO_SAMPLE and inserts it into sound_sample
     sound_sample = al_load_sample(sound_address);
