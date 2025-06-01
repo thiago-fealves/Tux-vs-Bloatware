@@ -32,8 +32,18 @@ void StartMenu::handleTimerEvents() {
 }
 
 void StartMenu::handleMouseEvents(bool &playing, bool &displayInterface) {
+    static bool musicIsPlaying = true;
     if(interface->stopSongButton.gotClicked(event.mouse.x, event.mouse.y)) {
-        std::cout<<"Doesn't work yet\n";
+        if(musicIsPlaying) { 
+            menu_music->pause();
+            musicIsPlaying = false;
+            std::cout<<"Music is now paused!" << std::endl;
+        } else {
+            menu_music->play();
+            musicIsPlaying = true;
+            std::cout << "Music is now playing!" << std::endl;
+        }
+
     }
     else if(interface->playButton.gotClicked(event.mouse.x, event.mouse.y)) {
         displayInterface = !displayInterface;
