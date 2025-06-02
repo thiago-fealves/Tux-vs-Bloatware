@@ -13,7 +13,7 @@ float Obstacle::get_radius() const {
 }
 
 void Obstacle::draw() {
-    Vector pos = get_position();;
+    Vector pos = get_position();
 
     float spriteDrawWidth = _radius* 2.0f;
     float spriteDrawHeigth = _radius* 2.0f;
@@ -21,17 +21,27 @@ void Obstacle::draw() {
     float spriteDrawX = pos._x - (spriteDrawWidth/2.0f);
     float spriteDrawY = pos._y - (spriteDrawHeigth/2.0f);
 
-    al_draw_scaled_bitmap(objectSprite,
-            0, 0,
-            al_get_bitmap_width(objectSprite),
-            al_get_bitmap_height(objectSprite),
-            spriteDrawX, spriteDrawY,
-            spriteDrawWidth, spriteDrawHeigth,
-            0);
-
-
+    al_draw_scaled_bitmap(objectSprite,0, 0,
+    al_get_bitmap_width(objectSprite),
+    al_get_bitmap_height(objectSprite),
+    spriteDrawX, spriteDrawY,spriteDrawWidth, spriteDrawHeigth,0);
 
 }
+
+bool PolygonObstacle::checkCollisionCircleAndObstacle(BrokenShip& player){
+
+    // Testa contra todas as arestas
+    for (size_t i = 0; i < vertices.size(); ++i) {
+        Vector a = vertices[i] + this->get_position();
+        //é preciso dois pontos para formar um segmento, então pegamos o próximo, 
+        //sabendo que o vetor está na ordem correta, o módulo fecha o polígono
+        Vector b = vertices[(i + 1) % vertices.size()] + this->get_position();
+        if (Vector::shortestDistancePointToSegment(player.get_position(), a, b) <= player.get_radius() * player.get_radius())
+        return true;
+    }
+    return false;
+}
+
 
 void Obstacle::update() {
 
@@ -45,6 +55,7 @@ void Obstacle::update() {
 
     set_position(pos);
 }
+
 
 void ObstaclesList::setList(){
 

@@ -59,10 +59,6 @@ void BrokenShip::draw(){
           spriteDrawX, spriteDrawY,
           spriteDrawWidth, spriteDrawHeigth,
           0);
-
-
-
-
 }
 
 void BrokenShip::update(){
@@ -78,9 +74,6 @@ void BrokenShip::set_radius(float r) {
     _radius = r;
 }
 
-
-
 void BrokenShip::restart() {
     this->set_position(Vector(375, 300));
-
 }

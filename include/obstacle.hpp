@@ -2,32 +2,55 @@
 #define OBSTACLE_HPP
 
 #include "game_object.hpp"
+#include "movement.hpp"
 #include <vector>
 
-class Obstacle : public GameObject{
-  private:
-    ALLEGRO_COLOR _color;
-    float _radius = 50;
-    Vector _speed; 
+class Obstacle : public GameObject
+{
+private:
+  ALLEGRO_COLOR _color;
+  float _radius = 0;
+  Vector _speed;
 
-  public:
-    Obstacle(const Vector &pos, float radius, ALLEGRO_COLOR color, Vector& speed);
-    float get_radius() const;
-    void draw();
-    void update(); 
-    
+public:
+  Obstacle(const Vector &pos, float radius, ALLEGRO_COLOR color, Vector &speed);
+  float get_radius() const;
+  void draw();
+  void update();
 };
 
-class ObstaclesList{
+class PolygonObstacle : public GameObject
+{
+private:
+  std::vector<Vector> vertices;
+  Vector _speed;
+  float scale = 0.3f;
 
-  private:
-    std::vector<Obstacle> obstaclesList;
+public:
+  PolygonObstacle(){
+    vertices = {
+        {33.071f, -151}, {72.071f, -160}, {78.071f, -154}, {100.071f, -153}, {107.071f, -156}, {111.071f, -128}, {141.071f, -102}, {165.071f, -71}, {160.071f, -50}, {149.071f, -32}, {149.071f, -20}, {140.071f, -10}, {137.071f, 3}, {142.071f, 19}, {143.071f, 42}, {130.071f, 64}, {130.071f, 70}, {117.071f, 85}, {94.071f, 95}, {80.071f, 112}, {68.071f, 118}, {59.071f, 129}, {51.071f, 148}, {22.071f, 149}, {7.071f, 160}, {-8.929f, 162}, {-23.929f, 158}, {-32.929f, 164}, {-45.929f, 166}, {-71.929f, 158}, {-80.929f, 140}, {-96.929f, 134}, {-129.929f, 109}, {-136.929f, 85}, {-154.929f, 65}, {-165.929f, 26}, {-171.929f, 14}, {-178.929f, 9}, {-181.929f, -1}, {-179.929f, -35}, {-162.929f, -59}, {-136.929f, -76}, {-125.929f, -105}, {-99.929f, -129}, {-67.929f, -139}, {-47.929f, -137}, {-37.929f, -144}, {-20.929f, -148}, {-0.929f, -145}, {7.071f, -151}};
 
-  public:
-    void setList();
-    std::vector<Obstacle> getList();
+    for (auto &v : vertices)
+    {
+      v = v * scale;
+    }
+  }
 
+  bool checkCollisionCircleAndObstacle(BrokenShip &player);
+  void draw();
+  void update();
+};
 
+class ObstaclesList
+{
+
+private:
+  std::vector<Obstacle> obstaclesList;
+
+public:
+  void setList();
+  std::vector<Obstacle> getList();
 };
 
 #endif
