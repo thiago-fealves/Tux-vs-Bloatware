@@ -40,7 +40,7 @@ BrokenShip::BrokenShip() : BrokenShip(Vector(375,300)) {}
 BrokenShip::BrokenShip(const Vector &pos){
   this->set_position(pos);
   this->set_bitmap("./assets/tux.png");
-  this->set_radius(50);
+  this->set_radius(45);
 }
 
 void BrokenShip::draw(){
@@ -59,6 +59,11 @@ void BrokenShip::draw(){
           spriteDrawX, spriteDrawY,
           spriteDrawWidth, spriteDrawHeigth,
           0);
+
+    
+Vector playerPos = this->get_position();
+float playerRadius = this->get_radius();
+al_draw_circle(playerPos._x, playerPos._y, playerRadius, al_map_rgb(0, 0, 255), 1); // Círculo azul para o jogador
 }
 
 void BrokenShip::update(){

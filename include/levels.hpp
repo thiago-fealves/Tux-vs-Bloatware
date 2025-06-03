@@ -29,7 +29,7 @@ class LevelTwo : public Level{
   public:
     static BrokenShip* setLevelTwo();
     static void mainLoop(bool &playing);
-    static void handleTimerEvents(bool &playing, BrokenShip* player, std::vector<Obstacle> &obstacles);
+    static void handleTimerEvents(bool &playing, BrokenShip* player, std::vector<PolygonObstacle> &obstacles);
     static void handleKeyPressEvents(bool &playing, BrokenShip* player);
     static void handleKeyReleaseEvents(bool &playing);
 };
