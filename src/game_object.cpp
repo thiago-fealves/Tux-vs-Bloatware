@@ -44,7 +44,7 @@ BrokenShip::BrokenShip() : BrokenShip(Vector(375,300)) {}
 BrokenShip::BrokenShip(const Vector &pos){
   this->set_position(pos);
   this->set_bitmap("./assets/tux.png");
-  this->set_radius(45);
+  this->set_radius(50);
 }
 
 void BrokenShip::draw(){
