@@ -33,6 +33,10 @@ void Flappy_movement::move_flappy(){
   set_position(this->get_position() + move_force); 
 }
 
+Vector Flappy_movement::getMoveForce(){
+  return Flappy_movement::move_force;
+}
+
 
 // Broken Ship
 BrokenShip::BrokenShip() : BrokenShip(Vector(375,300)) {}

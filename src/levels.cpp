@@ -50,7 +50,13 @@ void LevelTwo::handleKeyPressEvents(bool &playing, BrokenShip* player){
             break;
         case ALLEGRO_KEY_D:
         case ALLEGRO_KEY_RIGHT:
-            player->move_flappy();
+
+        Vector new_position = player->get_position() + player->getMoveForce();
+        if(isCollidingEdge(new_position, player)){
+            newPositionAfterCollisionEdge(new_position, player);
+        }
+        player->set_position(new_position);
+
     }
 }
 

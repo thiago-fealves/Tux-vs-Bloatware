@@ -24,7 +24,7 @@ class Flappy_movement : public GameObject {
   public:
     void apply_gravity();
     void move_flappy();
-    
+    Vector getMoveForce();
 };
 
 class BrokenShip : public Flappy_movement {
