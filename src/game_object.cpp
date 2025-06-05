@@ -7,9 +7,7 @@
 #include <string>
 
 // Game Object
-GameObject::~GameObject() {
-    // Pode ser vazio, só precisa existir
-}
+GameObject::~GameObject() {}
 Vector GameObject::get_position(){
   return this->_position;
 }
@@ -23,14 +21,14 @@ void GameObject::set_position(const Vector &position){
 }
 
 // Flappy Movement
-Vector Flappy_movement::gravity = Vector(10, 0);
-Vector Flappy_movement::move_force = Vector(100, 0);
+Vector FlappyMovement::gravity = Vector(10, 0);
+Vector FlappyMovement::move_force = Vector(100, 0);
 
-void Flappy_movement::apply_gravity(){
+void FlappyMovement::apply_gravity(){
   if (this->get_position()._x > 50) set_position(this->get_position() - gravity); // Valor temporário trocar quando fizer o sprite
 }
 
-void Flappy_movement::move_flappy(){
+void FlappyMovement::move_flappy(){
   set_position(this->get_position() + move_force); 
 }
 
@@ -60,10 +58,6 @@ void BrokenShip::draw(){
           spriteDrawX, spriteDrawY,
           spriteDrawWidth, spriteDrawHeigth,
           0);
-
-
-
-
 }
 
 void BrokenShip::update(){
@@ -78,8 +72,6 @@ float BrokenShip::get_radius() const {
 void BrokenShip::set_radius(float r) {
     _radius = r;
 }
-
-
 
 void BrokenShip::restart() {
     this->set_position(Vector(375, 300));

@@ -17,7 +17,7 @@ class GameObject{
     void set_bitmap(const char *path);
 };
 
-class Flappy_movement : public GameObject {
+class FlappyMovement : public GameObject {
   private:
     static Vector gravity;
     static Vector move_force;
@@ -27,7 +27,14 @@ class Flappy_movement : public GameObject {
     
 };
 
-class BrokenShip : public Flappy_movement {
+class ShipMovement : public GameObject{
+  private:
+    static Vector move_force;
+  public:
+    void moveShip();
+};
+
+class BrokenShip : public FlappyMovement {
   private:
     const ALLEGRO_COLOR OBJ_COLOR = al_map_rgb(10, 200, 20);
     float _radius = 12;
@@ -40,4 +47,5 @@ class BrokenShip : public Flappy_movement {
     void draw();
     void restart();
 };
+
 #endif

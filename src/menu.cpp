@@ -26,7 +26,7 @@ void StartMenu::handleTimerEvents() {
     Music::update_fade_in_fade_out();
                 
     // Draws interface
-    interface->drawOffGameInterface();
+   interface->drawOffGameInterface();
                
     al_flip_display();  // Update the display
 }
