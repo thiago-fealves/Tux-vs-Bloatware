@@ -27,11 +27,17 @@ class FlappyMovement : public GameObject {
     
 };
 
-class ShipMovement : public GameObject{
+class FixedShip : public GameObject{
   private:
-    static Vector move_force;
+    static float move_force;
+    static float _radius;
   public:
-    void moveShip();
+    FixedShip();
+    FixedShip(const Vector &pos);
+    float get_radius() const;
+    void set_radius(float r);
+    void moveShip(char direction);
+    void draw();
 };
 
 class BrokenShip : public FlappyMovement {

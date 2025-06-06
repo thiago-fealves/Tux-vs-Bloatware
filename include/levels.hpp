@@ -19,14 +19,7 @@ class Level{
 };
 
 class LevelOne : public Level{
-  private:
 
-  public:
-    static FixedShip* setLevelTwo();
-    static void mainLoop(bool &playing);
-    static void handleTimerEvents(bool &playing, BrokenShip* player, std::vector<Obstacle> &obstacles);
-    static void handleKeyPressEvents(bool &playing, BrokenShip* player);
-    static void handleKeyReleaseEvents(bool &playing);
 };
 
 class LevelTwo : public Level{
@@ -41,3 +34,11 @@ class LevelTwo : public Level{
     static void handleKeyReleaseEvents(bool &playing);
 };
 
+class LevelThree : public Level{
+  public:
+    static FixedShip* setLevelThree();
+    static void mainLoop(bool &playing);
+    static void handleTimerEvents(bool &playing, FixedShip* player);
+    static void handleKeyPressEvents(bool &playing, FixedShip* player);
+    static void handleKeyReleaseEvents(bool &playing);
+};

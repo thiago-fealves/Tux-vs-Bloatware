@@ -1,5 +1,6 @@
 #include "levels.hpp"
 #include "bootstrap.hpp"
+#include "game_object.hpp"
 using namespace std;
 
 /* Static variables */
@@ -19,8 +20,8 @@ void Level::setMusic(Music* music){
 
 BrokenShip* LevelTwo::setLevelTwo(){
     // Setting Player
-    Level::_player = new BrokenShip();
-    BrokenShip* Player = dynamic_cast<BrokenShip*>(Level::_player);
+    _player = new BrokenShip();
+    BrokenShip* Player = dynamic_cast<BrokenShip*>(_player);
     
     // Setting Music
     setMusic(level_two_music); //AQUI--------------
@@ -30,6 +31,16 @@ BrokenShip* LevelTwo::setLevelTwo(){
 
     return Player;
 }
+FixedShip* LevelThree::setLevelThree(){
+  // Setting Player
+  _player = new FixedShip;
+  FixedShip* Player = dynamic_cast<FixedShip*>(_player);
+  
+  // Setting Music
+  setMusic(level_three_music);
+  
+  return Player;
+}
 
 void Level::cleanLevel(){
     delete _player;
@@ -38,7 +49,7 @@ void Level::cleanLevel(){
 }
 
 
-/* Event Logic */
+/* Event Logic Level Two*/
 void LevelTwo::handleKeyPressEvents(bool &playing, BrokenShip* player){
     switch (_event.keyboard.keycode) {
         case ALLEGRO_KEY_SPACE:                    
@@ -92,6 +103,62 @@ void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<Obsta
     al_flip_display();
 }
 
+/* Event Logic Level Three */
+void LevelThree::handleKeyPressEvents(bool &playing, FixedShip* player){
+    switch (_event.keyboard.keycode) {
+        case ALLEGRO_KEY_SPACE:                    
+            cout << "space key was pressed" << endl;
+            break;
+
+        case ALLEGRO_KEY_ESCAPE:
+            cleanLevel();
+            playing = false;
+            break;
+
+        case ALLEGRO_KEY_W:
+        case ALLEGRO_KEY_UP:
+            player->moveShip('U');
+            break;
+        case ALLEGRO_KEY_S:
+        case ALLEGRO_KEY_DOWN:
+            player->moveShip('D');
+            break;
+        case ALLEGRO_KEY_A:
+        case ALLEGRO_KEY_LEFT:
+            player->moveShip('L');
+            break;
+        case ALLEGRO_KEY_D:
+        case ALLEGRO_KEY_RIGHT:
+            player->moveShip('R');
+            break;
+    }
+}
+
+void LevelThree::handleKeyReleaseEvents(bool &playing){
+    switch (_event.keyboard.keycode) {
+        case ALLEGRO_KEY_SPACE:
+        cout << "space key was released" << endl;
+        break;
+    }
+}
+
+void LevelThree::handleTimerEvents(bool &playing, FixedShip* player){
+    // Update the music
+    Music::update_fade_in_fade_out();
+
+    // Update and redraw the game state
+    al_clear_to_color(al_map_rgba_f(1, 1, 1, 1));  // Clear the screen with white color
+
+    // Log elapsed time to the console every second
+    if (al_get_timer_count(timer) % (int)FPS == 0) {
+        cout << al_get_timer_count(timer) / FPS << " second..." << endl;
+    }
+
+    player->draw();
+
+    al_flip_display();
+}
+
 /* Main Loops */
 void LevelTwo::mainLoop(bool &playing){  
     // Initializing level
@@ -125,4 +192,35 @@ void LevelTwo::mainLoop(bool &playing){
         }
 
     } 
+}
+
+void LevelThree::mainLoop(bool &playing){
+  // Initializing level
+  FixedShip* player = setLevelThree();
+  _music->play();
+      while (playing) {
+        // Getting new event 
+        al_wait_for_event(event_queue, &_event);  
+        
+        // Timer events
+        if (_event.type == ALLEGRO_EVENT_TIMER) {
+          handleTimerEvents(playing, player);
+        }
+
+        // Key press events
+        else if (_event.type == ALLEGRO_EVENT_KEY_DOWN) {
+           handleKeyPressEvents(playing, player);
+        }
+
+        // Key release events
+        else if (_event.type == ALLEGRO_EVENT_KEY_UP) {
+          handleKeyReleaseEvents(playing);
+        }
+
+        // Handle window close event
+        else if (_event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+            cleanLevel();
+            playing = false; 
+        }
+    }
 }

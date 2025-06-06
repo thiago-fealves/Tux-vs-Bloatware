@@ -28,8 +28,8 @@ int main(int argc, char **argv) {
     bool playing = true; 
 
     StartMenu::mainLoopMenu(playing, menu_music);
-    
-    LevelTwo::mainLoop(playing);
+    //LevelTwo::mainLoop(playing);
+    LevelThree::mainLoop(playing);
 
     // Cleanup and exit
     Bootstrap::cleanup_allegro();
