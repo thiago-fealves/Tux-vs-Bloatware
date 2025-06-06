@@ -34,7 +34,7 @@ void FlappyMovement::move_flappy(){
 
 // FixedShip
 float FixedShip::_radius = 10;
-float FixedShip::move_force = 50;
+float FixedShip::move_force = 15;
 FixedShip::FixedShip() : FixedShip(Vector(375,300)) {}
 
 float FixedShip::get_radius() const {
@@ -51,20 +51,27 @@ FixedShip::FixedShip(const Vector &pos){
   this->set_radius(50);
 }
 void FixedShip::moveShip(char direction){
-  Vector position = get_position();
-  if (direction == 'U'){
-    position = position + Vector(0, -move_force);
-  }
-  if (direction == 'D'){
-    position = position + Vector(0, move_force);
-  }
-  if (direction == 'L'){
-    position = position + Vector(-move_force, 0);
-  }
-  if (direction == 'R'){
-    position = position + Vector(move_force, 0);
-  }
-  set_position(position);
+    Vector position = get_position();
+
+    if (direction == 'U') position = position + Vector(0, -move_force);
+    if (direction == 'D') position = position + Vector(0, move_force);
+    if (direction == 'L') position = position + Vector(-move_force, 0);
+    if (direction == 'R') position = position + Vector(move_force, 0);
+
+    // Limits
+    const float radius = get_radius(); // ou um valor tipo 32
+    const float min_x = radius;
+    const float max_x = SCREEN_W - radius;
+    const float min_y = radius;
+    const float max_y = SCREEN_H - radius;
+
+    // Verification to not exit screen
+    if (position._x < min_x) position._x = min_x;
+    if (position._x > max_x) position._x = max_x;
+    if (position._y < min_y) position._y = min_y;
+    if (position._y > max_y) position._y = max_y;
+
+    set_position(position);
 }
 void FixedShip::draw(){
   Vector pos = GameObject::get_position();
