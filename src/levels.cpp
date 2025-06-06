@@ -99,11 +99,14 @@ void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<Obsta
             obstacles.clear();
         }
     } 
+    
 
     al_flip_display();
 }
 
 /* Event Logic Level Three */
+bool LevelThree::key_pressed[ALLEGRO_KEY_MAX] = { false };
+
 void LevelThree::handleKeyPressEvents(bool &playing, FixedShip* player){
     switch (_event.keyboard.keycode) {
         case ALLEGRO_KEY_SPACE:                    
@@ -114,32 +117,23 @@ void LevelThree::handleKeyPressEvents(bool &playing, FixedShip* player){
             cleanLevel();
             playing = false;
             break;
-
-        case ALLEGRO_KEY_W:
-        case ALLEGRO_KEY_UP:
-            player->moveShip('U');
-            break;
-        case ALLEGRO_KEY_S:
-        case ALLEGRO_KEY_DOWN:
-            player->moveShip('D');
-            break;
-        case ALLEGRO_KEY_A:
-        case ALLEGRO_KEY_LEFT:
-            player->moveShip('L');
-            break;
-        case ALLEGRO_KEY_D:
-        case ALLEGRO_KEY_RIGHT:
-            player->moveShip('R');
-            break;
     }
 }
 
-void LevelThree::handleKeyReleaseEvents(bool &playing){
-    switch (_event.keyboard.keycode) {
-        case ALLEGRO_KEY_SPACE:
-        cout << "space key was released" << endl;
-        break;
+void LevelThree::updatePlayerPosition(FixedShip* player){
+    if (key_pressed[ALLEGRO_KEY_W] || key_pressed[ALLEGRO_KEY_UP]) {
+        player->moveShip('U');
     }
+    if (key_pressed[ALLEGRO_KEY_S] || key_pressed[ALLEGRO_KEY_DOWN]) {
+        player->moveShip('D');
+    }
+    if (key_pressed[ALLEGRO_KEY_A] || key_pressed[ALLEGRO_KEY_LEFT]) {
+        player->moveShip('L');
+    }
+    if (key_pressed[ALLEGRO_KEY_D] || key_pressed[ALLEGRO_KEY_RIGHT]) {
+        player->moveShip('R');
+    }
+
 }
 
 void LevelThree::handleTimerEvents(bool &playing, FixedShip* player){
@@ -153,6 +147,9 @@ void LevelThree::handleTimerEvents(bool &playing, FixedShip* player){
     if (al_get_timer_count(timer) % (int)FPS == 0) {
         cout << al_get_timer_count(timer) / FPS << " second..." << endl;
     }
+
+    // Movimento contínuo com tecla pressionada
+    updatePlayerPosition(player);
 
     player->draw();
 
@@ -209,12 +206,13 @@ void LevelThree::mainLoop(bool &playing){
 
         // Key press events
         else if (_event.type == ALLEGRO_EVENT_KEY_DOWN) {
-           handleKeyPressEvents(playing, player);
+          key_pressed[_event.keyboard.keycode] = true;
+          LevelThree::handleKeyPressEvents(playing, player);
         }
 
         // Key release events
         else if (_event.type == ALLEGRO_EVENT_KEY_UP) {
-          handleKeyReleaseEvents(playing);
+          key_pressed[_event.keyboard.keycode] = false;
         }
 
         // Handle window close event

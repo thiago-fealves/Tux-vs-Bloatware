@@ -35,9 +35,12 @@ class LevelTwo : public Level{
 };
 
 class LevelThree : public Level{
+  private:
+    static bool key_pressed[ALLEGRO_KEY_MAX];
   public:
     static FixedShip* setLevelThree();
     static void mainLoop(bool &playing);
+    static void updatePlayerPosition(FixedShip* player); 
     static void handleTimerEvents(bool &playing, FixedShip* player);
     static void handleKeyPressEvents(bool &playing, FixedShip* player);
     static void handleKeyReleaseEvents(bool &playing);
