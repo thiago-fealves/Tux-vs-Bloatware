@@ -1,6 +1,7 @@
 #include "levels.hpp"
 #include "bootstrap.hpp"
 #include "game_object.hpp"
+#include "shots.hpp"
 using namespace std;
 
 /* Static variables */
@@ -109,7 +110,8 @@ bool LevelThree::key_pressed[ALLEGRO_KEY_MAX] = { false };
 
 void LevelThree::handleKeyPressEvents(bool &playing, FixedShip* player){
     switch (_event.keyboard.keycode) {
-        case ALLEGRO_KEY_SPACE:                    
+        case ALLEGRO_KEY_SPACE:   
+            new BollShot(player->get_position(), Vector(0, -1), 10.0);                 
             cout << "space key was pressed" << endl;
             break;
 
@@ -136,12 +138,12 @@ void LevelThree::updatePlayerPosition(FixedShip* player){
 
 }
 
-void LevelThree::handleTimerEvents(bool &playing, FixedShip* player){
+void LevelThree::handleTimerEvents(bool &playing, FixedShip* player, WindowsBoss &windows){
     // Update the music
     Music::update_fade_in_fade_out();
 
     // Update and redraw the game state
-    al_clear_to_color(al_map_rgba_f(1, 1, 1, 1));  // Clear the screen with white color
+    al_clear_to_color(al_map_rgba_f(0.7, 0.9, 0.4, 1));  // Clear the screen with white color
 
     // Log elapsed time to the console every second
     if (al_get_timer_count(timer) % (int)FPS == 0) {
@@ -150,8 +152,13 @@ void LevelThree::handleTimerEvents(bool &playing, FixedShip* player){
 
     // Movimento contínuo com tecla pressionada
     updatePlayerPosition(player);
+    Shot::updateShots();
+    windows.update(player);
 
     player->draw();
+    Shot::drawShots();
+    windows.draw();
+
 
     al_flip_display();
 }
@@ -194,6 +201,8 @@ void LevelTwo::mainLoop(bool &playing){
 void LevelThree::mainLoop(bool &playing){
   // Initializing level
   FixedShip* player = setLevelThree();
+  WindowsBoss windows;
+
   _music->play();
       while (playing) {
         // Getting new event 
@@ -201,7 +210,7 @@ void LevelThree::mainLoop(bool &playing){
         
         // Timer events
         if (_event.type == ALLEGRO_EVENT_TIMER) {
-          handleTimerEvents(playing, player);
+          LevelThree::handleTimerEvents(playing, player, windows);
         }
 
         // Key press events

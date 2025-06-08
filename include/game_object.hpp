@@ -5,11 +5,14 @@
 #include <allegro5/allegro_primitives.h>
 #include <string>
 #include "movement.hpp"
+#include <list>
 
 class GameObject{
-  private:
+  protected:
     Vector _position; 
   public:
+    GameObject();
+    GameObject(Vector position);
     ALLEGRO_BITMAP *objectSprite = NULL;
     Vector get_position();
     void set_position(const Vector &position);
@@ -52,6 +55,30 @@ class BrokenShip : public FlappyMovement {
     void update();
     void draw();
     void restart();
+};
+
+
+class WindowsBoss : public GameObject {
+private:
+  float lado = 180; // mateade do lado, pq ele faz 180px para cada lado do ponto centro
+  ALLEGRO_COLOR _color = al_map_rgb(255, 255, 255);
+  int _estadoBoss = 0 ; // 0, 1, 2;
+  //float _vidaaa
+
+  void upBoss(float Y_parada, float speed);
+  void downBoss(float Y_Parada, float speed);
+
+public:
+  WindowsBoss();
+  ~WindowsBoss() override;
+
+  void draw();
+  void update(FixedShip* player);
+  //void setSize(float size);
+  //float getSize() const;
+  //void setColor(ALLEGRO_COLOR color);
+
+
 };
 
 #endif
