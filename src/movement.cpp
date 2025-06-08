@@ -1,7 +1,12 @@
 #include "movement.hpp"
 #include <cmath>
 
+
 Vector::Vector(float x, float y) : _x(x), _y(y) {}
+
+Vector::Vector(float _xy) : Vector(_xy, _xy) {}
+
+Vector::Vector() : Vector(0.0f, 0.0f) {}
 
 // Vector arithmetic
 Vector Vector::operator+(const Vector &other) const{

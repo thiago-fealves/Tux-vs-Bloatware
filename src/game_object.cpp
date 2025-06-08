@@ -5,11 +5,18 @@
 #include <allegro5/bitmap_draw.h>
 #include <allegro5/bitmap_io.h>
 #include <string>
+#include "bootstrap.hpp"
+#include "shots.hpp"
+
+#include <iostream>
 
 // Game Object
-GameObject::~GameObject() {
-  
-}
+
+GameObject::GameObject() : _position(Vector()) {}
+
+GameObject::GameObject(Vector position) : _position(position) {}
+
+GameObject::~GameObject() {}
 Vector GameObject::get_position(){
   return this->_position;
 }
@@ -23,15 +30,74 @@ void GameObject::set_position(const Vector &position){
 }
 
 // Flappy Movement
-Vector Flappy_movement::gravity = Vector(10, 0);
-Vector Flappy_movement::move_force = Vector(100, 0);
+Vector FlappyMovement::gravity = Vector(10, 0);
+Vector FlappyMovement::move_force = Vector(100, 0);
 
-void Flappy_movement::apply_gravity(){
+void FlappyMovement::apply_gravity(){
   if (this->get_position()._x > 50) set_position(this->get_position() - gravity); // Valor temporário trocar quando fizer o sprite
 }
 
-void Flappy_movement::move_flappy(){
+void FlappyMovement::move_flappy(){
   set_position(this->get_position() + move_force); 
+}
+
+// FixedShip
+float FixedShip::_radius = 10;
+float FixedShip::move_force = 15;
+FixedShip::FixedShip() : FixedShip(Vector(375,300)) {}
+
+float FixedShip::get_radius() const {
+    return _radius;
+}
+
+void FixedShip::set_radius(float r) {
+    _radius = r;
+}
+
+FixedShip::FixedShip(const Vector &pos){
+  this->set_position(pos);
+  this->set_bitmap("./assets/tux.png");
+  this->set_radius(50);
+}
+void FixedShip::moveShip(char direction){
+    Vector position = get_position();
+
+    if (direction == 'U') position = position + Vector(0, -move_force);
+    if (direction == 'D') position = position + Vector(0, move_force);
+    if (direction == 'L') position = position + Vector(-move_force, 0);
+    if (direction == 'R') position = position + Vector(move_force, 0);
+
+    // Limits
+    const float radius = get_radius(); // ou um valor tipo 32
+    const float min_x = radius;
+    const float max_x = SCREEN_W - radius;
+    const float min_y = radius;
+    const float max_y = SCREEN_H - radius;
+
+    // Verification to not exit screen
+    if (position._x < min_x) position._x = min_x;
+    if (position._x > max_x) position._x = max_x;
+    if (position._y < min_y) position._y = min_y;
+    if (position._y > max_y) position._y = max_y;
+
+    set_position(position);
+}
+void FixedShip::draw(){
+  Vector pos = GameObject::get_position();
+  // The total sprite region is a square of _radius*2 x _radius*2
+  float spriteDrawWidth = _radius* 2.0f;
+  float spriteDrawHeigth = _radius* 2.0f;
+  // Coordinates of the left upper corner
+  float spriteDrawX = pos._x - (spriteDrawWidth/2.0f);
+  float spriteDrawY = pos._y - (spriteDrawHeigth/2.0f);
+
+  al_draw_scaled_bitmap(objectSprite,
+          0, 0,
+          al_get_bitmap_width(objectSprite),
+          al_get_bitmap_height(objectSprite),
+          spriteDrawX, spriteDrawY,
+          spriteDrawWidth, spriteDrawHeigth,
+          0);
 }
 
 Vector Flappy_movement::getMoveForce(){
@@ -82,3 +148,79 @@ void BrokenShip::set_radius(float r) {
 void BrokenShip::restart() {
     this->set_position(Vector(375, 300));
 }
+
+// Final boss (Windersson)
+
+WindowsBoss::WindowsBoss() {
+  this->set_position(Vector(400, -lado)); // 400 e 300, o centro
+  // ele começa fora da tela e vem de cima e para em (400, 50)
+  // 400 no X e 300 no Y é o centro.
+  // colocando no 0, metade aado retangulo é deixado de fora.
+}
+
+WindowsBoss::~WindowsBoss() {}
+
+void WindowsBoss::downBoss(float Y_Parada = 300, float speed = 0.9) {
+  Vector position = this->get_position();
+
+  if(position._y < Y_Parada) { // Se a posição do windersson for menor q 50, entao temos q atualizar
+
+    float aux = std::min(Y_Parada, position._y+speed);
+    this->set_position(Vector(position._x, aux)); 
+  } else if (position._y == Y_Parada) _estadoBoss=1;
+}
+
+void WindowsBoss::upBoss(float Y_parada = 0, float speed = 0.9) {
+  Vector position = this->get_position();
+
+  if(position._y > Y_parada) { // O boss tem q subir para chegar em Y_parada
+    float novo_y = std::max(Y_parada, position._y - speed); //pegando o maior valor, ara nao passar de Y_parada
+    this->set_position(Vector(position._x, novo_y));
+  } else if (position._y == Y_parada) _estadoBoss = 2;
+
+}
+
+void WindowsBoss::draw() {
+  Vector position = this->get_position();
+  float size_mini_quadrados = lado/1.12f;
+  float espaço_entre_quadrados = lado/20.0f;
+
+  al_draw_filled_rectangle(
+    position._x - lado, position._y - lado, 
+    position._x + lado, position._y + lado, _color);
+
+  ALLEGRO_COLOR cor_mini_quadrados = al_map_rgb(0, 120, 214);
+  float cx[] = { -1, 1, -1, 1 };
+  float cy[] = { -1, -1, 1, 1 };
+
+  for (int i = 0; i < 4; ++i) {
+    float offset_x = cx[i] * (size_mini_quadrados / 2.0f + espaço_entre_quadrados);
+    float offset_y = cy[i] * (size_mini_quadrados / 2.0f + espaço_entre_quadrados);
+
+    al_draw_filled_rectangle(
+      position._x + offset_x - size_mini_quadrados / 2.0f,
+      position._y + offset_y - size_mini_quadrados / 2.0f,
+      position._x + offset_x + size_mini_quadrados / 2.0f,
+      position._y + offset_y + size_mini_quadrados / 2.0f,
+      cor_mini_quadrados
+    );
+  }
+
+}
+
+void WindowsBoss::update(FixedShip* player) {
+  if(_estadoBoss == 0) { // movimento de descer na tela 
+    WindowsBoss::downBoss(50);
+
+  } else if (_estadoBoss==1) { 
+    //new BollShot(player->get_position(), Vector(0, -1), 20.0);
+    _estadoBoss = 2;
+
+  } else if (_estadoBoss==2) {
+    WindowsBoss::upBoss(-lado);
+    
+  }
+  
+}
+
+

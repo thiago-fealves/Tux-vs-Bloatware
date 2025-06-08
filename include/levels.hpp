@@ -1,3 +1,4 @@
+#include <allegro5/bitmap.h>
 #include <iostream>
 #include <vector>
 #include "allegro5/events.h"
@@ -9,8 +10,24 @@
 #include "polygon_obstacle.hpp"
 #include "collision.hpp"
 
+class Background {
+    ALLEGRO_BITMAP *backgroundImage;
+    float scrollSpeed;
+    float bgY;
+
+    public:
+    
+    Background();
+    
+    void renderBackground();
+    void setBg(const char* path);
+
+
+};
+
 class Level{
   protected:
+    static Background _bg;
     static Music* _music;
     static GameObject* _player; 
     static ALLEGRO_EVENT _event;
@@ -18,9 +35,10 @@ class Level{
   public:
     static void setMusic(Music *music);
     static void cleanLevel();
+    static void setBackground(const char* path);
 };
 
-class LevelOne{
+class LevelOne : public Level{
 
 };
 
@@ -31,8 +49,22 @@ class LevelTwo : public Level{
   public:
     static BrokenShip* setLevelTwo();
     static void mainLoop(bool &playing);
-    static void handleTimerEvents(bool &playing, BrokenShip* player, std::vector<AbstractObstacle*>& obstacles);
+    static void handleTimerEvents(bool &playing, BrokenShip* player, std::vector<AbstractObstacle*>& obstacles, Background &bg);
     static void handleKeyPressEvents(bool &playing, BrokenShip* player);
     static void handleKeyReleaseEvents(bool &playing);
 };
 
+class LevelThree : public Level{
+  private:
+    static bool key_pressed[ALLEGRO_KEY_MAX];
+  public:
+    static FixedShip* setLevelThree();
+    static void mainLoop(bool &playing);
+    static void updatePlayerPosition(FixedShip* player); 
+
+    static void handleTimerEvents(bool &playing, FixedShip* player, 
+      Background &bg, WindowsBoss &windows);
+
+    static void handleKeyPressEvents(bool &playing, FixedShip* player);
+    static void handleKeyReleaseEvents(bool &playing);
+};

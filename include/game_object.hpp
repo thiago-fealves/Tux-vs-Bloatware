@@ -5,11 +5,14 @@
 #include <allegro5/allegro_primitives.h>
 #include <string>
 #include "movement.hpp"
+#include <list>
 
 class GameObject{
-  private:
+  protected:
     Vector _position; 
   public:
+    GameObject();
+    GameObject(Vector position);
     ALLEGRO_BITMAP *objectSprite = NULL;
     Vector get_position();
     void set_position(const Vector &position);
@@ -17,7 +20,7 @@ class GameObject{
     void set_bitmap(const char* path);
 };
 
-class Flappy_movement : public GameObject {
+class FlappyMovement : public GameObject {
   private:
     static Vector gravity;
     static Vector move_force;
@@ -27,7 +30,20 @@ class Flappy_movement : public GameObject {
     Vector getMoveForce();
 };
 
-class BrokenShip : public Flappy_movement {
+class FixedShip : public GameObject{
+  private:
+    static float move_force;
+    static float _radius;
+  public:
+    FixedShip();
+    FixedShip(const Vector &pos);
+    float get_radius() const;
+    void set_radius(float r);
+    void moveShip(char direction);
+    void draw();
+};
+
+class BrokenShip : public FlappyMovement {
   private:
     const ALLEGRO_COLOR OBJ_COLOR = al_map_rgb(10, 200, 20);
     float _radius = 12;
@@ -40,4 +56,29 @@ class BrokenShip : public Flappy_movement {
     void draw();
     void restart();
 };
+
+
+class WindowsBoss : public GameObject {
+private:
+  float lado = 180; // mateade do lado, pq ele faz 180px para cada lado do ponto centro
+  ALLEGRO_COLOR _color = al_map_rgb(255, 255, 255);
+  int _estadoBoss = 0 ; // 0, 1, 2;
+  //float _vidaaa
+
+  void upBoss(float Y_parada, float speed);
+  void downBoss(float Y_Parada, float speed);
+
+public:
+  WindowsBoss();
+  ~WindowsBoss() override;
+
+  void draw();
+  void update(FixedShip* player);
+  //void setSize(float size);
+  //float getSize() const;
+  //void setColor(ALLEGRO_COLOR color);
+
+
+};
+
 #endif
