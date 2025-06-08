@@ -1,5 +1,6 @@
 #include "levels.hpp"
 #include "bootstrap.hpp"
+#include "shapes_repository.hpp"
 using namespace std;
 
 /* Static variables */
@@ -8,6 +9,7 @@ using namespace std;
 GameObject* Level::_player = nullptr;
 ALLEGRO_EVENT Level::_event;
 Music* Level::_music = nullptr;
+PipeList pipeList; 
 
 // Level Two
 ObstaclesList LevelTwo::_obstaclesList;
@@ -24,9 +26,19 @@ BrokenShip* LevelTwo::setLevelTwo(){
     
     // Setting Music
     setMusic(level_two_music); //AQUI--------------
-    
+
     // Setting Obstacles 
-    _obstaclesList.setList();
+    //_obstaclesList.setPolygonsObstaclesList(shape_repository["asteroid2"], "./assets/asteroid2.png");
+    //_obstaclesList.setCircleObstaclesList("./assets/asteroid.png");
+
+    pipeList.generatePipes(
+        Vector(100, -100),
+        shape_repository["pipe_left"],
+        shape_repository["pipe_right"],
+        "./assets/pipe_left.png",
+        "./assets/pipe_right.png"
+    );
+
 
     return Player;
 }
@@ -50,7 +62,13 @@ void LevelTwo::handleKeyPressEvents(bool &playing, BrokenShip* player){
             break;
         case ALLEGRO_KEY_D:
         case ALLEGRO_KEY_RIGHT:
-            player->move_flappy();
+
+        Vector new_position = player->get_position() + player->getMoveForce();
+        if(isCollidingEdge(new_position, player)){
+            newPositionAfterCollisionEdge(new_position, player);
+        }
+        player->set_position(new_position);
+
     }
 }
 
@@ -62,9 +80,10 @@ void LevelTwo::handleKeyReleaseEvents(bool &playing){
     }
 }
 
-void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<Obstacle> &obstacles){
+void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<AbstractObstacle*>& obstacles){
     // Update the music
     Music::update_fade_in_fade_out();
+    bool collision_this_frame = false;
 
     // Update and redraw the game state
     al_clear_to_color(al_map_rgba_f(1, 1, 1, 1));  // Clear the screen with white color
@@ -76,19 +95,22 @@ void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<Obsta
 
     player->update();
 
-    for (auto& o : obstacles) {
-        o.update();
-        o.draw();
+    for (auto o : obstacles){
+        o->update();
+        o->draw();
+
+        if (o->checkCollisionWithPlayer(*player))
+        {
+            std::cout << "Colidiu\n";
+            playing = false;
+            collision_this_frame = true;
+            break;
+        }
     }
 
-    for (auto& obs : obstacles) {
-        if (check_collision(*player, player->get_radius(), obs, obs.get_radius())) {
-            std::cout << "Colidiu\n";
-            playing = false; 
-            obstacles.clear();
-        }
-    } 
+    if (collision_this_frame) obstacles.clear();
 
+    
     al_flip_display();
 }
 
@@ -96,7 +118,7 @@ void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<Obsta
 void LevelTwo::mainLoop(bool &playing){  
     // Initializing level
     BrokenShip* player = setLevelTwo();
-    vector<Obstacle> obstacles = _obstaclesList.getList();
+    vector<AbstractObstacle*> obstacles = pipeList.getList();
     _music->play();
 
     while (playing) {

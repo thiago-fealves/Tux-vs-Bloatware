@@ -8,7 +8,7 @@
 
 // Game Object
 GameObject::~GameObject() {
-    // Pode ser vazio, só precisa existir
+  
 }
 Vector GameObject::get_position(){
   return this->_position;
@@ -32,6 +32,10 @@ void Flappy_movement::apply_gravity(){
 
 void Flappy_movement::move_flappy(){
   set_position(this->get_position() + move_force); 
+}
+
+Vector Flappy_movement::getMoveForce(){
+  return Flappy_movement::move_force;
 }
 
 
@@ -60,10 +64,6 @@ void BrokenShip::draw(){
           spriteDrawX, spriteDrawY,
           spriteDrawWidth, spriteDrawHeigth,
           0);
-
-
-
-
 }
 
 void BrokenShip::update(){
@@ -79,9 +79,6 @@ void BrokenShip::set_radius(float r) {
     _radius = r;
 }
 
-
-
 void BrokenShip::restart() {
     this->set_position(Vector(375, 300));
-
 }

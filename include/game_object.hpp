@@ -14,7 +14,7 @@ class GameObject{
     Vector get_position();
     void set_position(const Vector &position);
     virtual ~GameObject() = 0;
-    void set_bitmap(const char *path);
+    void set_bitmap(const char* path);
 };
 
 class Flappy_movement : public GameObject {
@@ -24,7 +24,7 @@ class Flappy_movement : public GameObject {
   public:
     void apply_gravity();
     void move_flappy();
-    
+    Vector getMoveForce();
 };
 
 class BrokenShip : public Flappy_movement {

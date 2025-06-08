@@ -13,17 +13,13 @@
 #include "interface.hpp"
 #include "game_object.hpp"
 #include "collision.hpp"
-#include "obstacle.hpp"
 #include "levels.hpp"
 #include "menu.hpp"
-using namespace std;
 
 // Const pointers for Allegro components
 int main(int argc, char **argv) {
-
-    if(Bootstrap::initialize_allegro() == false) return 1;
     
-    srand(time(NULL)); 
+    if(Bootstrap::initialize_allegro() == false) return 1;
     
     bool playing = true; 
 
