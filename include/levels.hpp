@@ -59,7 +59,10 @@ class LevelThree : public Level{
     static FixedShip* setLevelThree();
     static void mainLoop(bool &playing);
     static void updatePlayerPosition(FixedShip* player); 
-    static void handleTimerEvents(bool &playing, FixedShip* player, Background &bg);
+
+    static void handleTimerEvents(bool &playing, FixedShip* player, 
+      Background &bg, WindowsBoss &windows);
+
     static void handleKeyPressEvents(bool &playing, FixedShip* player);
     static void handleKeyReleaseEvents(bool &playing);
 };

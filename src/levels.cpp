@@ -6,6 +6,7 @@
 #include <allegro5/bitmap_io.h>
 #include <allegro5/display.h>
 #include <allegro5/drawing.h>
+#include "shots.hpp"
 using namespace std;
 
 /* Static variables */
@@ -149,8 +150,8 @@ bool LevelThree::key_pressed[ALLEGRO_KEY_MAX] = { false };
 
 void LevelThree::handleKeyPressEvents(bool &playing, FixedShip* player){
     switch (_event.keyboard.keycode) {
-        case ALLEGRO_KEY_SPACE:                    
-            cout << "space key was pressed" << endl;
+        case ALLEGRO_KEY_SPACE:   
+            new BollShot(player->get_position(), Vector(0, -1), 10.0);                 
             break;
 
         case ALLEGRO_KEY_ESCAPE:
@@ -176,7 +177,7 @@ void LevelThree::updatePlayerPosition(FixedShip* player){
 
 }
 
-void LevelThree::handleTimerEvents(bool &playing, FixedShip* player, Background &bg){
+void LevelThree::handleTimerEvents(bool &playing, FixedShip* player, Background &bg, WindowsBoss &windows){
     // Update the music
     Music::update_fade_in_fade_out();
 
@@ -191,8 +192,13 @@ void LevelThree::handleTimerEvents(bool &playing, FixedShip* player, Background 
 
     // Movimento contínuo com tecla pressionada
     updatePlayerPosition(player);
+    Shot::updateShots();
+    windows.update(player);
 
     player->draw();
+    Shot::drawShots();
+    windows.draw();
+
 
     al_flip_display();
 }
@@ -235,6 +241,8 @@ void LevelTwo::mainLoop(bool &playing){
 void LevelThree::mainLoop(bool &playing){
   // Initializing level
   FixedShip* player = setLevelThree();
+  WindowsBoss windows;
+
   _music->play();
       while (playing) {
         // Getting new event 
@@ -242,7 +250,7 @@ void LevelThree::mainLoop(bool &playing){
         
         // Timer events
         if (_event.type == ALLEGRO_EVENT_TIMER) {
-          handleTimerEvents(playing, player, _bg);
+          handleTimerEvents(playing, player, _bg, windows);
         }
 
         // Key press events

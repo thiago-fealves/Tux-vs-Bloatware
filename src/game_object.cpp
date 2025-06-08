@@ -5,8 +5,17 @@
 #include <allegro5/bitmap_draw.h>
 #include <allegro5/bitmap_io.h>
 #include <string>
+#include "bootstrap.hpp"
+#include "shots.hpp"
+
+#include <iostream>
 
 // Game Object
+
+GameObject::GameObject() : _position(Vector()) {}
+
+GameObject::GameObject(Vector position) : _position(position) {}
+
 GameObject::~GameObject() {}
 Vector GameObject::get_position(){
   return this->_position;
@@ -136,3 +145,79 @@ void BrokenShip::restart() {
     this->set_position(Vector(375, 300));
 
 }
+
+// Final boss (Windersson)
+
+WindowsBoss::WindowsBoss() {
+  this->set_position(Vector(400, -lado)); // 400 e 300, o centro
+  // ele começa fora da tela e vem de cima e para em (400, 50)
+  // 400 no X e 300 no Y é o centro.
+  // colocando no 0, metade aado retangulo é deixado de fora.
+}
+
+WindowsBoss::~WindowsBoss() {}
+
+void WindowsBoss::downBoss(float Y_Parada = 300, float speed = 0.9) {
+  Vector position = this->get_position();
+
+  if(position._y < Y_Parada) { // Se a posição do windersson for menor q 50, entao temos q atualizar
+
+    float aux = std::min(Y_Parada, position._y+speed);
+    this->set_position(Vector(position._x, aux)); 
+  } else if (position._y == Y_Parada) _estadoBoss=1;
+}
+
+void WindowsBoss::upBoss(float Y_parada = 0, float speed = 0.9) {
+  Vector position = this->get_position();
+
+  if(position._y > Y_parada) { // O boss tem q subir para chegar em Y_parada
+    float novo_y = std::max(Y_parada, position._y - speed); //pegando o maior valor, ara nao passar de Y_parada
+    this->set_position(Vector(position._x, novo_y));
+  } else if (position._y == Y_parada) _estadoBoss = 2;
+
+}
+
+void WindowsBoss::draw() {
+  Vector position = this->get_position();
+  float size_mini_quadrados = lado/1.12f;
+  float espaço_entre_quadrados = lado/20.0f;
+
+  al_draw_filled_rectangle(
+    position._x - lado, position._y - lado, 
+    position._x + lado, position._y + lado, _color);
+
+  ALLEGRO_COLOR cor_mini_quadrados = al_map_rgb(0, 120, 214);
+  float cx[] = { -1, 1, -1, 1 };
+  float cy[] = { -1, -1, 1, 1 };
+
+  for (int i = 0; i < 4; ++i) {
+    float offset_x = cx[i] * (size_mini_quadrados / 2.0f + espaço_entre_quadrados);
+    float offset_y = cy[i] * (size_mini_quadrados / 2.0f + espaço_entre_quadrados);
+
+    al_draw_filled_rectangle(
+      position._x + offset_x - size_mini_quadrados / 2.0f,
+      position._y + offset_y - size_mini_quadrados / 2.0f,
+      position._x + offset_x + size_mini_quadrados / 2.0f,
+      position._y + offset_y + size_mini_quadrados / 2.0f,
+      cor_mini_quadrados
+    );
+  }
+
+}
+
+void WindowsBoss::update(FixedShip* player) {
+  if(_estadoBoss == 0) { // movimento de descer na tela 
+    WindowsBoss::downBoss(50);
+
+  } else if (_estadoBoss==1) { 
+    //new BollShot(player->get_position(), Vector(0, -1), 20.0);
+    _estadoBoss = 2;
+
+  } else if (_estadoBoss==2) {
+    WindowsBoss::upBoss(-lado);
+    
+  }
+  
+}
+
+
