@@ -9,7 +9,8 @@
 // Consts
 constexpr float FPS = 30; 
 constexpr int SCREEN_W = 800; 
-constexpr int SCREEN_H = 600; 
+constexpr int SCREEN_H = 600;
+constexpr int OBSTACLES_LIST_NUM = 5;
 extern const ALLEGRO_COLOR BACKGROUND_COLOR;
 extern ALLEGRO_DISPLAY* display;
 extern ALLEGRO_EVENT_QUEUE* event_queue;

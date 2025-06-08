@@ -3,8 +3,10 @@
 #include "allegro5/events.h"
 #include "bootstrap.hpp"
 #include "music.hpp"
+#include "abstract_obstacle.hpp"
 #include "game_object.hpp"
-#include "obstacle.hpp"
+#include "obstacles_list.hpp"
+#include "polygon_obstacle.hpp"
 #include "collision.hpp"
 
 class Level{
@@ -29,7 +31,7 @@ class LevelTwo : public Level{
   public:
     static BrokenShip* setLevelTwo();
     static void mainLoop(bool &playing);
-    static void handleTimerEvents(bool &playing, BrokenShip* player, std::vector<PolygonObstacle> &obstacles);
+    static void handleTimerEvents(bool &playing, BrokenShip* player, std::vector<AbstractObstacle*>& obstacles);
     static void handleKeyPressEvents(bool &playing, BrokenShip* player);
     static void handleKeyReleaseEvents(bool &playing);
 };

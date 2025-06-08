@@ -4,7 +4,7 @@
 #include <string>
 #include "movement.hpp"
 
-inline std::map<std::string, std::vector<Vector>> shape_repository = {
+std::map<std::string, const std::vector<Vector>> shape_repository = {
     {"asteroid2", {
         {33.071f, -151}, {72.071f, -160}, {78.071f, -154}, {100.071f, -153},
         {107.071f, -156}, {111.071f, -128}, {141.071f, -102}, {165.071f, -71},

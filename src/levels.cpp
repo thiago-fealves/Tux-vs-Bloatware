@@ -1,5 +1,6 @@
 #include "levels.hpp"
 #include "bootstrap.hpp"
+#include "shapes_repository.hpp"
 using namespace std;
 
 /* Static variables */
@@ -24,9 +25,10 @@ BrokenShip* LevelTwo::setLevelTwo(){
     
     // Setting Music
     setMusic(level_two_music); //AQUI--------------
-    
+
     // Setting Obstacles 
-    _obstaclesList.setList();
+    //_obstaclesList.setPolygonsObstaclesList(shape_repository["asteroid2"], "./assets/asteroid2.png");
+    _obstaclesList.setCircleObstaclesList("./assets/asteroid.png");
 
     return Player;
 }
@@ -68,7 +70,7 @@ void LevelTwo::handleKeyReleaseEvents(bool &playing){
     }
 }
 
-void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<PolygonObstacle> &obstacles){
+void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<AbstractObstacle*>& obstacles){
     // Update the music
     Music::update_fade_in_fade_out();
     bool collision_this_frame = false;
@@ -83,18 +85,21 @@ void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<Polyg
 
     player->update();
 
-    for (auto& o : obstacles) {
-        o.update();
-        o.draw();
-        if (o.checkCollisionWithPlayer(*player)){
+    for (auto o : obstacles){
+        o->update();
+        o->draw();
+
+        if (o->checkCollisionWithPlayer(*player))
+        {
             std::cout << "Colidiu\n";
-            playing = false; 
+            playing = false;
             collision_this_frame = true;
             break;
         }
-    } 
+    }
 
     if (collision_this_frame) obstacles.clear();
+
     
     al_flip_display();
 }
@@ -103,7 +108,7 @@ void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<Polyg
 void LevelTwo::mainLoop(bool &playing){  
     // Initializing level
     BrokenShip* player = setLevelTwo();
-    vector<PolygonObstacle> obstacles = _obstaclesList.getList();
+    vector<AbstractObstacle*> obstacles = _obstaclesList.getList();
     _music->play();
 
     while (playing) {

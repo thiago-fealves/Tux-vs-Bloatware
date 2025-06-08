@@ -13,7 +13,6 @@
 #include "interface.hpp"
 #include "game_object.hpp"
 #include "collision.hpp"
-#include "obstacle.hpp"
 #include "levels.hpp"
 #include "menu.hpp"
 

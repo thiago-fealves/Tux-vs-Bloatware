@@ -7,7 +7,7 @@
 
 // Game Object
 GameObject::~GameObject() {
-    // Pode ser vazio, só precisa existir
+  
 }
 Vector GameObject::get_position(){
   return this->_position;
@@ -63,11 +63,6 @@ void BrokenShip::draw(){
           spriteDrawX, spriteDrawY,
           spriteDrawWidth, spriteDrawHeigth,
           0);
-
-    
-Vector playerPos = this->get_position();
-float playerRadius = this->get_radius();
-al_draw_circle(playerPos._x, playerPos._y, playerRadius, al_map_rgb(0, 0, 255), 1); // Círculo azul para o jogador
 }
 
 void BrokenShip::update(){
