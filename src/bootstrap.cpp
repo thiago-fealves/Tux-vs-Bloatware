@@ -8,10 +8,14 @@
 #include "allegro5/events.h"
 #include "allegro5/timer.h"
 #include <allegro5/allegro_image.h>
+
 const ALLEGRO_COLOR BACKGROUND_COLOR = al_map_rgb(0, 0, 0);
 ALLEGRO_DISPLAY* display = nullptr;
 ALLEGRO_EVENT_QUEUE* event_queue = nullptr;
 ALLEGRO_TIMER* timer = nullptr;
+ALLEGRO_FONT* gameFont = nullptr; //fonte universal //new deivid
+ALLEGRO_BITMAP* gameOverBackground = nullptr; //tela
+
 
 Sound* death_sound = nullptr;
 Sound* gunshot_sound1 = nullptr;
@@ -91,6 +95,28 @@ bool Bootstrap::init_allegro_libs(){
         al_destroy_display(display);
         return false;
     }
+
+ //add deivid: cria a fonte do jogo 
+    gameFont = al_load_font("./assets/katana.ttf", 30, 0); 
+    if (!gameFont) {
+        cout << "ERROR: Failed to load font 'katana.ttf' (gameFont)" << endl;
+        //se der erro destoi os recusos criados anteriormente
+        al_destroy_timer(timer);
+        al_destroy_display(display);
+        al_destroy_event_queue(event_queue);
+        return false;
+    }
+    
+    //add deivid: imagem do game over
+    gameOverBackground = al_load_bitmap("./assets/game_over.png"); 
+    if (!gameOverBackground) {
+        cout << "ERROR: Failed to load game over background image './assets/game_over.png'!" << endl;
+        al_destroy_timer(timer);
+        al_destroy_display(display);
+        al_destroy_event_queue(event_queue);
+        return false;
+    }
+
     return true;
 }
 
@@ -176,6 +202,12 @@ void Bootstrap::cleanup_allegro(){
     al_destroy_timer(timer);
     al_destroy_display(display);
     al_destroy_event_queue(event_queue);
+
+    //Destroi as fontes
+    if (gameFont) al_destroy_font(gameFont);
+    
+    //destroi a imagem
+    if (gameOverBackground) al_destroy_bitmap(gameOverBackground);
     
     // criar uma função para limpar isso tudo?
     delete death_sound;

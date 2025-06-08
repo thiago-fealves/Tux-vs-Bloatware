@@ -20,10 +20,11 @@ class Button {
     ALLEGRO_COLOR _color;
     std::string _text;
     ALLEGRO_FONT* _font;
+
+    bool _drawBackground;
     
     public:
-
-        Button(Coordinates coords, ALLEGRO_COLOR color, std::string text, ALLEGRO_FONT* font); 
+        Button(Coordinates coords, ALLEGRO_COLOR color, std::string text, ALLEGRO_FONT* font, bool drawBackground = true);
         void drawButton();
         bool gotClicked(int mx, int my);
 

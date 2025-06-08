@@ -3,8 +3,11 @@
 
 #include "allegro5/color.h"
 #include "allegro5/events.h"
+#include <allegro5/allegro_image.h>
 #include "sound.hpp"
 #include "music.hpp"
+#include <allegro5/allegro_ttf.h>
+#include <allegro5/allegro_font.h> 
 
 // Consts
 constexpr float FPS = 30; 
@@ -15,7 +18,8 @@ extern const ALLEGRO_COLOR BACKGROUND_COLOR;
 extern ALLEGRO_DISPLAY* display;
 extern ALLEGRO_EVENT_QUEUE* event_queue;
 extern ALLEGRO_TIMER* timer;
-
+extern ALLEGRO_FONT* gameFont; //fonte padrao do jogo
+extern ALLEGRO_BITMAP* gameOverBackground; //imagem game over
 
 //Iniyialize musics and sounds
 extern Sound* death_sound;
