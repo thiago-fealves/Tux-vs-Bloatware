@@ -218,10 +218,6 @@ void LevelThree::handleTimerEvents(bool &playing, FixedShip* player, Background 
     Shot::drawShots();
     windows.draw();
 
-
-    if (collision_this_frame) obstacles.clear();
-
-    
     al_flip_display();
 }
 

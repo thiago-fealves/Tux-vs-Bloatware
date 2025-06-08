@@ -100,8 +100,8 @@ void FixedShip::draw(){
           0);
 }
 
-Vector Flappy_movement::getMoveForce(){
-  return Flappy_movement::move_force;
+Vector FlappyMovement::getMoveForce(){
+  return FlappyMovement::move_force;
 }
 
 
