@@ -9,6 +9,7 @@ using namespace std;
 GameObject* Level::_player = nullptr;
 ALLEGRO_EVENT Level::_event;
 Music* Level::_music = nullptr;
+PipeList pipeList; 
 
 // Level Two
 ObstaclesList LevelTwo::_obstaclesList;
@@ -28,7 +29,16 @@ BrokenShip* LevelTwo::setLevelTwo(){
 
     // Setting Obstacles 
     //_obstaclesList.setPolygonsObstaclesList(shape_repository["asteroid2"], "./assets/asteroid2.png");
-    _obstaclesList.setCircleObstaclesList("./assets/asteroid.png");
+    //_obstaclesList.setCircleObstaclesList("./assets/asteroid.png");
+
+    pipeList.generatePipes(
+        Vector(100, -100),
+        shape_repository["pipe_left"],
+        shape_repository["pipe_right"],
+        "./assets/pipe_left.png",
+        "./assets/pipe_right.png"
+    );
+
 
     return Player;
 }
@@ -108,7 +118,7 @@ void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<Abstr
 void LevelTwo::mainLoop(bool &playing){  
     // Initializing level
     BrokenShip* player = setLevelTwo();
-    vector<AbstractObstacle*> obstacles = _obstaclesList.getList();
+    vector<AbstractObstacle*> obstacles = pipeList.getList();
     _music->play();
 
     while (playing) {
