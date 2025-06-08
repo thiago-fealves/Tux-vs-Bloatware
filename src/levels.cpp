@@ -29,13 +29,13 @@ Background::Background()
 
 void Background::renderBackground() {
 
-    bgY -= scrollSpeed;
-    if(bgY <= -al_get_bitmap_height(backgroundImage)) {
+    bgY += scrollSpeed;
+    if(bgY >= al_get_bitmap_height(backgroundImage)) {
         bgY=0;
     }
 
     al_draw_bitmap(backgroundImage, 0, bgY, 0);
-    al_draw_bitmap(backgroundImage, 0, bgY + al_get_bitmap_height(backgroundImage), 0);
+    al_draw_bitmap(backgroundImage, 0, bgY - al_get_bitmap_height(backgroundImage), 0);
 
 
 }
