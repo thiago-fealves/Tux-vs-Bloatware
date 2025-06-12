@@ -1,24 +1,52 @@
 TARGET = main
+TEST_TARGET = test_runner
 
 SRC_DIR = src
 INC_DIR = include
+TEST_DIR = tests
 BUILD_DIR = build
+TEST_BUILD_DIR = build/tests
 
-SRC_FILES := $(wildcard $(SRC_DIR)/*.cpp)
+# Arquivos fonte principais (excluindo o main.cpp se existir)
+SRC_FILES := $(filter-out $(SRC_DIR)/main.cpp, $(wildcard $(SRC_DIR)/*.cpp))
+TEST_FILES := $(wildcard $(TEST_DIR)/*.cpp)
+
+# Objetos para o programa principal
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/%.o, $(SRC_FILES))
+MAIN_OBJ := $(BUILD_DIR)/main.o
+
+# Objetos para os testes
+TEST_OBJ_FILES := $(patsubst $(TEST_DIR)/%.cpp, $(TEST_BUILD_DIR)/%.o, $(TEST_FILES))
 
 CXX = g++
 CXXFLAGS = -Wall -g -std=c++11 -I$(INC_DIR) -I/opt/homebrew/Cellar/allegro/5.2.10.1_1/include/
 LDLIBS := $(shell pkg-config --libs allegro-5 allegro_main-5 allegro_audio-5 allegro_image-5 allegro_font-5 allegro_primitives-5 allegro_acodec-5 allegro_ttf-5)
+TEST_LDLIBS := $(shell pkg-config --libs allegro-5 allegro_audio-5 allegro_image-5 allegro_font-5 allegro_primitives-5 allegro_acodec-5 allegro_ttf-5)
 
-$(TARGET): $(OBJ_FILES)
-	$(CXX) $(OBJ_FILES) $(LDLIBS) -o $@
+# Target principal
+$(TARGET): $(OBJ_FILES) $(MAIN_OBJ)
+	$(CXX) $(OBJ_FILES) $(MAIN_OBJ) $(LDLIBS) -o $@
 
+# Target para testes (sem allegro_main)
+$(TEST_TARGET): $(OBJ_FILES) $(TEST_OBJ_FILES)
+	$(CXX) $(OBJ_FILES) $(TEST_OBJ_FILES) $(TEST_LDLIBS) -o $@
+
+# Compilação do arquivo principal
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(BUILD_DIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
+# Compilação dos arquivos de teste
+$(TEST_BUILD_DIR)/%.o: $(TEST_DIR)/%.cpp
+	@mkdir -p $(TEST_BUILD_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
 all: $(TARGET)
 
+test: $(TEST_TARGET)
+	./$(TEST_TARGET)
+
 clean:
-	rm -rf $(BUILD_DIR)
+	rm -rf $(BUILD_DIR) $(TARGET) $(TEST_TARGET)
+
+.PHONY: all test clean
