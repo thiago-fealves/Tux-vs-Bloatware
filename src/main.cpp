@@ -36,9 +36,8 @@ int main(int argc, char **argv) {
     StartMenu::mainLoopMenu(playing, menu_music);
     
      if (playing) {
-        LevelThree::mainLoop(playing);
-        //reinserir os levels
-        
+        //LevelTwo::mainLoop(playing);
+         LevelThree::mainLoop(playing);
     }
 
     if (!playing) {

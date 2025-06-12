@@ -34,6 +34,10 @@ bool Button::gotClicked(int mx, int my) {
 
 }
 
+void Button::setText(const char* txt) {
+    this->_text = txt;
+}
+
 Interface::Interface(ALLEGRO_FONT* font) :
     playButton(Coordinates(300, 300, 200, 100), al_map_rgb(50, 50, 50), "PLAY", font),
     stopSongButton(Coordinates(740, 10, 50, 50), al_map_rgb(50, 50, 50), "󰕾", font),
