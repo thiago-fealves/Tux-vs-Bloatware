@@ -19,7 +19,9 @@ extern ALLEGRO_DISPLAY* display;
 extern ALLEGRO_EVENT_QUEUE* event_queue;
 extern ALLEGRO_TIMER* timer;
 extern ALLEGRO_FONT* gameFont; //fonte padrao do jogo
+extern ALLEGRO_FONT* levelFont;
 extern ALLEGRO_BITMAP* gameOverBackground; //imagem game over
+extern ALLEGRO_BITMAP* pinguimBandido;
 
 //Iniyialize musics and sounds
 extern Sound* death_sound;

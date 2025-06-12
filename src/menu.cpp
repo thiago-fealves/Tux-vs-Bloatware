@@ -57,7 +57,7 @@ void StartMenu::handleMouseEvents(bool &playing, bool &displayInterface, Music* 
 }
 
 void StartMenu::cleanMenu() {
-    // preciso limpar o event(gabriel)?
+    // preciso limpar o event(gabriel)? acho q nao
     menu_music->pause();
     delete interface;
     al_destroy_font(font);

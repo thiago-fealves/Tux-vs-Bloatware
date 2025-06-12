@@ -14,7 +14,9 @@ ALLEGRO_DISPLAY* display = nullptr;
 ALLEGRO_EVENT_QUEUE* event_queue = nullptr;
 ALLEGRO_TIMER* timer = nullptr;
 ALLEGRO_FONT* gameFont = nullptr; //fonte universal //new deivid
+ALLEGRO_FONT* levelFont = nullptr;
 ALLEGRO_BITMAP* gameOverBackground = nullptr; //tela
+ALLEGRO_BITMAP* pinguimBandido = nullptr;
 
 
 Sound* death_sound = nullptr;
@@ -96,21 +98,32 @@ bool Bootstrap::init_allegro_libs(){
         return false;
     }
 
- //add deivid: cria a fonte do jogo 
+    //add deivid: cria a fonte do jogo 
     gameFont = al_load_font("./assets/katana.ttf", 30, 0); 
-    if (!gameFont) {
-        cout << "ERROR: Failed to load font 'katana.ttf' (gameFont)" << endl;
+    levelFont = al_load_font("./assets/katana.ttf", 20, 0);
+    if (!gameFont || !levelFont) {
+        cout << "ERROR: Failed to load font 'katana.ttf' (gameFont/levelFont)" << endl;
         //se der erro destoi os recusos criados anteriormente
         al_destroy_timer(timer);
         al_destroy_display(display);
         al_destroy_event_queue(event_queue);
         return false;
     }
+
     
     //add deivid: imagem do game over
     gameOverBackground = al_load_bitmap("./assets/game_over.png"); 
     if (!gameOverBackground) {
         cout << "ERROR: Failed to load game over background image './assets/game_over.png'!" << endl;
+        al_destroy_timer(timer);
+        al_destroy_display(display);
+        al_destroy_event_queue(event_queue);
+        return false;
+    }
+
+    pinguimBandido = al_load_bitmap("./assets/pinguim_bandido.png"); 
+    if (!gameOverBackground) {
+        cout << "ERROR: Failed to load game over background image './assets/pinguim_bandido.png'!" << endl;
         al_destroy_timer(timer);
         al_destroy_display(display);
         al_destroy_event_queue(event_queue);
@@ -206,6 +219,7 @@ void Bootstrap::cleanup_allegro(){
 
     //Destroi as fontes
     if (gameFont) al_destroy_font(gameFont);
+    if (levelFont) al_destroy_font(levelFont);
     
     //destroi a imagem
     if (gameOverBackground) al_destroy_bitmap(gameOverBackground);

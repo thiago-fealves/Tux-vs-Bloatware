@@ -36,8 +36,8 @@ int main(int argc, char **argv) {
     StartMenu::mainLoopMenu(playing, menu_music);
     
      if (playing) {
-        //LevelTwo::mainLoop(playing);
-         LevelThree::mainLoop(playing);
+        LevelTwo::mainLoop(playing);
+        LevelThree::mainLoop(playing);
     }
 
     if (!playing) {

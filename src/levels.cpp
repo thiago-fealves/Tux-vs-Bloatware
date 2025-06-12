@@ -1,18 +1,25 @@
 #include "levels.hpp"
 #include "bootstrap.hpp"
 #include "game_object.hpp"
+#include <allegro5/allegro_font.h>
 #include <allegro5/bitmap.h>
 #include <allegro5/bitmap_draw.h>
 #include <allegro5/bitmap_io.h>
+#include <allegro5/color.h>
 #include <allegro5/display.h>
 #include <allegro5/drawing.h>
+#include <allegro5/keycodes.h>
+#include <allegro5/timer.h>
 #include "shots.hpp"
 #include "shapes_repository.hpp"
+#define LEVEL_DURATION 03
 using namespace std;
 
 /* Static variables */
 
-
+namespace globalVars {
+    bool inInterLevel=false;
+}
 
 // Levels 
 Background Level::_bg;
@@ -112,6 +119,14 @@ void LevelTwo::handleKeyPressEvents(bool &playing, BrokenShip* player){
             cleanLevel();
             playing = false;
             break;
+        case ALLEGRO_KEY_ENTER:
+            if(globalVars::inInterLevel) {
+                cleanLevel();
+                playing = false;
+                globalVars::inInterLevel = false;
+                break;
+            }
+            else break;
         case ALLEGRO_KEY_D:
         case ALLEGRO_KEY_RIGHT:
 
@@ -145,7 +160,8 @@ void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<Abstr
         cout << al_get_timer_count(timer) / FPS << " second..." << endl;
     }
 
-    player->update();
+    if(!globalVars::inInterLevel)
+        player->update();
 
     for (auto o : obstacles){
         o->update();
@@ -160,6 +176,14 @@ void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<Abstr
         }
     }
     
+    if(static_cast<int>((al_get_timer_count(timer)/FPS))==LEVEL_DURATION) {
+        obstacles.clear();
+        globalVars::inInterLevel = true;
+    }
+    if(globalVars::inInterLevel) {
+        al_draw_multiline_text(levelFont, al_map_rgb(200, 200, 200), al_get_display_width(display)/2, 100, 400, 20, ALLEGRO_ALIGN_CENTRE, "PARABENS, APERTE ENTER\nPARA IR PARA O PRÓXIMO NÍVEL");
+        al_draw_bitmap(pinguimBandido, 50, 100, 0);
+    }
 
     al_flip_display();
 }
@@ -226,6 +250,8 @@ void LevelThree::handleTimerEvents(bool &playing, FixedShip* player, Background 
 /* Main Loops */
 void LevelTwo::mainLoop(bool &playing){  
     // Initializing level
+    al_set_timer_count(timer, 0);
+    playing = true;
     BrokenShip* player = setLevelTwo();
     vector<AbstractObstacle*> obstacles = pipeList.getList();
     _music->play();
@@ -260,6 +286,8 @@ void LevelTwo::mainLoop(bool &playing){
 
 void LevelThree::mainLoop(bool &playing){
   // Initializing level
+  al_set_timer_count(timer, 0);
+  playing = true;
   FixedShip* player = setLevelThree();
   WindowsBoss windows;
 
