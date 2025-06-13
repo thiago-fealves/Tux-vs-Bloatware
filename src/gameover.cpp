@@ -1,4 +1,4 @@
-#include "Game_Over.hpp"
+#include "game_over.hpp"
 #include <iostream>
 #include <string> 
 #include <allegro5/allegro_primitives.h>

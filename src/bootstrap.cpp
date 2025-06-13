@@ -159,23 +159,24 @@ bool Bootstrap::initialize_sounds() {
     // Check if the audio file exists
 
     // Musics
-    if(file_exists("sounds/music8.ogg")) menu_music = new Music("sounds/music8.ogg");  
-    if(file_exists("sounds/music3.ogg")) pause_game_music = new Music("sounds/music3.ogg");  
+    
+    menu_music = new Music("sounds/music8.ogg");  
+    pause_game_music = new Music("sounds/music3.ogg");  
 
-    if(file_exists("sounds/music7.ogg")) level_one_music = new Music("sounds/music7.ogg", 4.0, 1.0);
-    if(file_exists("sounds/music5.ogg")) level_two_music = new Music("sounds/music5.ogg");
-    if(file_exists("sounds/music4.ogg")) level_three_music = new Music("sounds/music4.ogg");
+    level_one_music = new Music("sounds/music7.ogg", 4.0, 1.0);
+    level_two_music = new Music("sounds/music5.ogg");
+    level_three_music = new Music("sounds/music4.ogg");
 
-    if(file_exists("sounds/music9.ogg")) defeat_music = new Music("sounds/music9.ogg");
-    if(file_exists("sounds/music6.ogg")) victory_music = new Music("sounds/music6.ogg");
+    defeat_music = new Music("sounds/music9.ogg");
+    victory_music = new Music("sounds/music6.ogg");
 
     // Sounds
-    if(file_exists("sounds/sound_gun4.ogg")) death_sound = new Sound("sounds/sound_gun4.ogg");
+    death_sound = new Sound("sounds/sound_gun4.ogg");
 
-    if(file_exists("sounds/sound_gun9.ogg")) gunshot_sound1 = new Sound("sounds/sound_gun9.ogg");
-    if(file_exists("sounds/sound_gun8.ogg")) gunshot_sound2 = new Sound("sounds/sound_gun8.ogg");
-    if(file_exists("sounds/sound_gun6.ogg")) gunshot_sound3 = new Sound("sounds/sound_gun6.ogg");
-    if(file_exists("sounds/sound_gun4.ogg")) gunshot_sound4 = new Sound("sounds/sound_gun4.ogg");
+    gunshot_sound1 = new Sound("sounds/sound_gun9.ogg");
+    gunshot_sound2 = new Sound("sounds/sound_gun8.ogg");
+    gunshot_sound3 = new Sound("sounds/sound_gun6.ogg");
+    gunshot_sound4 = new Sound("sounds/sound_gun4.ogg");
 
 
 
@@ -210,6 +211,7 @@ void Bootstrap::cleanup_allegro(){
     if (gameOverBackground) al_destroy_bitmap(gameOverBackground);
     
     // criar uma função para limpar isso tudo?
+    
     delete death_sound;
     delete gunshot_sound1;
     delete gunshot_sound2;
@@ -223,4 +225,5 @@ void Bootstrap::cleanup_allegro(){
     delete level_three_music;
     delete defeat_music;
     delete victory_music;
+    
 }

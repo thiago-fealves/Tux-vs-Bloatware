@@ -1,13 +1,5 @@
 #include "game_object.hpp"
-#include "bootstrap.hpp"
-#include <allegro5/allegro_primitives.h>
-#include <allegro5/bitmap.h>
-#include <allegro5/bitmap_draw.h>
-#include <allegro5/bitmap_io.h>
-#include <string>
-#include "bootstrap.hpp"
 #include "shots.hpp"
-
 #include <iostream>
 
 // Game Object
@@ -153,6 +145,7 @@ void BrokenShip::restart() {
 
 WindowsBoss::WindowsBoss() {
   this->set_position(Vector(400, -lado)); // 400 e 300, o centro
+  _aplicarDano = false;
   // ele começa fora da tela e vem de cima e para em (400, 50)
   // 400 no X e 300 no Y é o centro.
   // colocando no 0, metade aado retangulo é deixado de fora.
@@ -171,19 +164,17 @@ void WindowsBoss::downBoss(float Y_Parada = 300, float speed = 0.9) {
 }
 
 void WindowsBoss::upBoss(float Y_parada = 0, float speed = 0.9) {
-  Vector position = this->get_position();
-
-  if(position._y > Y_parada) { // O boss tem q subir para chegar em Y_parada
-    float novo_y = std::max(Y_parada, position._y - speed); //pegando o maior valor, ara nao passar de Y_parada
-    this->set_position(Vector(position._x, novo_y));
-  } else if (position._y == Y_parada) _estadoBoss = 2;
+  if(_position._y > Y_parada) { // O boss tem q subir para chegar em Y_parada
+    float novo_y = std::max(Y_parada, _position._y - speed); //pegando o maior valor, ara nao passar de Y_parada
+    this->set_position(Vector(_position._x, novo_y));
+  } else if (_position._y == Y_parada) _estadoBoss = 2;
 
 }
 
 void WindowsBoss::draw() {
   Vector position = this->get_position();
   float size_mini_quadrados = lado/1.12f;
-  float espaço_entre_quadrados = lado/20.0f;
+  float espaco_entre_quadrados = lado/20.0f;
 
   al_draw_filled_rectangle(
     position._x - lado, position._y - lado, 
@@ -194,8 +185,8 @@ void WindowsBoss::draw() {
   float cy[] = { -1, -1, 1, 1 };
 
   for (int i = 0; i < 4; ++i) {
-    float offset_x = cx[i] * (size_mini_quadrados / 2.0f + espaço_entre_quadrados);
-    float offset_y = cy[i] * (size_mini_quadrados / 2.0f + espaço_entre_quadrados);
+    float offset_x = cx[i] * (size_mini_quadrados / 2.0f + espaco_entre_quadrados);
+    float offset_y = cy[i] * (size_mini_quadrados / 2.0f + espaco_entre_quadrados);
 
     al_draw_filled_rectangle(
       position._x + offset_x - size_mini_quadrados / 2.0f,
@@ -208,14 +199,69 @@ void WindowsBoss::draw() {
 
 }
 
+float WindowsBoss::getMetadeLado() {
+  return lado;
+}
+
+int cont=0;
+int possibilidades_para_os_tiros=0; //varia de 1, 2 e 3.
+
+void WindowsBoss::receberDano() {
+  if(_aplicarDano==false || _vida==0) return;
+
+  _vida--;
+  std::cout << "Boss recebeu dano! Vida restante: " << _vida << std::endl;
+
+  if(_vida==0) {
+    std::cout << "O Boss morreu!   (:  ";
+    _estadoBoss = 2;
+
+    // <<<<<<<<<<<<<------------------------------- COLOCAR AQUI A TELA DE VITORIA
+  }
+}
+
 void WindowsBoss::update(FixedShip* player) {
   if(_estadoBoss == 0) { // movimento de descer na tela 
     WindowsBoss::downBoss(50);
 
   } else if (_estadoBoss==1) { 
+    _aplicarDano = true;
     //new BollShot(player->get_position(), Vector(0, -1), 20.0);
-    _estadoBoss = 2;
+    cont+=1;
+    int timer = FPS*6; //esse num q multiplica é o tempo em segundos
+    if (cont!=timer) return;
+    cont=0; //reseta o contador
+    
+    if(possibilidades_para_os_tiros==0) {
+      new BollShot(Vector(0, 280), Vector(1, 0), 10, 19);
+      new BollShot(Vector(0, 330), Vector(1, 0), 10, 10);
+      new BollShot(Vector(0, 380), Vector(1, 0), 10, 14);
+      new BollShot(Vector(0, 420), Vector(1, 0), 10, 13);
+      new BollShot(Vector(0, 470), Vector(1, 0), 10, 11);
+      new BollShot(Vector(0, 520), Vector(1, 0), 10, 15);
+      possibilidades_para_os_tiros=1;
 
+    } else if(possibilidades_para_os_tiros==1) {
+      new BollShot(Vector(0, 280), Vector(1, 0), 10, 10);
+      new BollShot(Vector(0, 330), Vector(1, 0), 10, 14);
+      new BollShot(Vector(0, 380), Vector(1, 0), 10, 10);
+      new BollShot(Vector(0, 420), Vector(1, 0), 10, 4);
+      new BollShot(Vector(0, 470), Vector(1, 0), 10, 2);
+      new BollShot(Vector(0, 520), Vector(1, 0), 10, 6);
+      possibilidades_para_os_tiros=2;
+
+    } else if(possibilidades_para_os_tiros==2) {
+      new BollShot(Vector(0, 280), Vector(1, 0), 10, 15);
+      new BollShot(Vector(0, 470), Vector(1, 0), 10, 18);
+      new BollShot(Vector(0, 520), Vector(1, 0), 10, 14);
+      possibilidades_para_os_tiros=3;
+      cont = -3; //para passar mais 3 segundos do que o normal
+
+    } else if(possibilidades_para_os_tiros==3) {
+      //IMPLEMENTAR O TIRO DE LASER AQUI -----------------------------
+      possibilidades_para_os_tiros=0;
+    }
+    
   } else if (_estadoBoss==2) {
     WindowsBoss::upBoss(-lado);
     

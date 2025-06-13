@@ -1,3 +1,6 @@
+#ifndef LEVEL_HPP
+#define LEVEL_HPP
+
 #include <allegro5/bitmap.h>
 #include <iostream>
 #include <vector>
@@ -68,3 +71,6 @@ class LevelThree : public Level{
     static void handleKeyPressEvents(bool &playing, FixedShip* player);
     static void handleKeyReleaseEvents(bool &playing);
 };
+
+
+#endif

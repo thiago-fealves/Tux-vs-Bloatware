@@ -170,7 +170,9 @@ bool LevelThree::key_pressed[ALLEGRO_KEY_MAX] = { false };
 void LevelThree::handleKeyPressEvents(bool &playing, FixedShip* player){
     switch (_event.keyboard.keycode) {
         case ALLEGRO_KEY_SPACE:   
-            new BollShot(player->get_position(), Vector(0, -1), 10.0);                 
+            // isto cria um tiro na posicao do jogador somado por um vetor (0, -40),
+            // que aponta para cima para o tiro nao pegar no jogador (:
+            new BollShot(player->get_position()+Vector(0, -40), Vector(0, -1), 10.0, 40);                 
             break;
 
         case ALLEGRO_KEY_ESCAPE:
@@ -211,7 +213,7 @@ void LevelThree::handleTimerEvents(bool &playing, FixedShip* player, Background 
 
     // Movimento contínuo com tecla pressionada
     updatePlayerPosition(player);
-    Shot::updateShots();
+    Shot::updateShots(player, windows);
     windows.update(player);
 
     player->draw();

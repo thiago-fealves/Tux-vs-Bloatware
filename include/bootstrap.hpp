@@ -41,11 +41,11 @@ class Bootstrap {
   private:
     static bool initialize_sys_sound();     // Initialize audio systems
     static bool initialize_sounds();
-    static bool file_exists(const char* path);
   public:
     static bool initialize_allegro();
     static bool init_allegro_libs();
     static void register_allegro_events();
     static void cleanup_allegro();
+    static bool file_exists(const char* path);
 };
 #endif
