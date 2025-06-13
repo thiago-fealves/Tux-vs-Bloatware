@@ -13,7 +13,9 @@
 #include "polygon_obstacle.hpp"
 #include "collision.hpp"
 
-void interLevelCheckHandling();
+void interLevelOneCheckHandling(std::vector<AbstractObstacle*>& obstacles);
+
+void interLevelTwoCheckHandling();
 
 class Background {
     ALLEGRO_BITMAP *backgroundImage;
@@ -41,7 +43,10 @@ class Level{
     static void setMusic(Music *music);
     static void cleanLevel();
     static void setBackground(const char* path);
+    friend void interLevelHandling(std::vector<AbstractObstacle*>& obstacles, ALLEGRO_BITMAP* sprite, const char* message, float bitmapScale);
 };
+
+void interLevelHandling(std::vector<AbstractObstacle*>& obstacles, ALLEGRO_BITMAP* sprite, const char* message, float bitmapScale);
 
 class LevelOne : public Level{
 

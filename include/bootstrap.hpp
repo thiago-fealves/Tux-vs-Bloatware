@@ -22,6 +22,7 @@ extern ALLEGRO_FONT* gameFont; //fonte padrao do jogo
 extern ALLEGRO_FONT* levelFont;
 extern ALLEGRO_BITMAP* gameOverBackground; //imagem game over
 extern ALLEGRO_BITMAP* pinguimBandido;
+extern ALLEGRO_BITMAP* pendrive;
 
 //Iniyialize musics and sounds
 extern Sound* death_sound;
