@@ -17,9 +17,27 @@ using namespace std;
 
 /* Static variables */
 
+
+// Inter Level Logic
 namespace globalVars {
     bool inInterLevel=false;
 }
+
+
+void interLevelCheckHandling(vector<AbstractObstacle*>& obstacles) {
+    if(static_cast<int>((al_get_timer_count(timer)/FPS))==LEVEL_DURATION) {
+        obstacles.clear();
+        globalVars::inInterLevel = true;
+    }
+    if(globalVars::inInterLevel) {
+        al_draw_multiline_text(levelFont, al_map_rgb(200, 200, 200), al_get_display_width(display)/2, 100, 400, 20, ALLEGRO_ALIGN_CENTRE, "PARABENS, APERTE ENTER\nPARA IR PARA O PRÓXIMO NÍVEL");
+        al_draw_bitmap(pinguimBandido, 50, 100, 0);
+    }
+}
+
+// End of Inter Level Logic
+
+
 
 // Levels 
 Background Level::_bg;
@@ -175,15 +193,9 @@ void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<Abstr
             break;
         }
     }
+
+    // interLevelCheckHandling(obstacles); // uncomment after finishing inter level 2-3 logic
     
-    if(static_cast<int>((al_get_timer_count(timer)/FPS))==LEVEL_DURATION) {
-        obstacles.clear();
-        globalVars::inInterLevel = true;
-    }
-    if(globalVars::inInterLevel) {
-        al_draw_multiline_text(levelFont, al_map_rgb(200, 200, 200), al_get_display_width(display)/2, 100, 400, 20, ALLEGRO_ALIGN_CENTRE, "PARABENS, APERTE ENTER\nPARA IR PARA O PRÓXIMO NÍVEL");
-        al_draw_bitmap(pinguimBandido, 50, 100, 0);
-    }
 
     al_flip_display();
 }

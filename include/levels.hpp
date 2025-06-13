@@ -13,6 +13,8 @@
 #include "polygon_obstacle.hpp"
 #include "collision.hpp"
 
+void interLevelCheckHandling();
+
 class Background {
     ALLEGRO_BITMAP *backgroundImage;
     float scrollSpeed;
