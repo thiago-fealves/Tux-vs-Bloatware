@@ -196,9 +196,10 @@ void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<Abstr
         }
     }
 
-    // interLevelCheckHandling(obstacles); // uncomment after finishing inter level 2-3 logic
     interLevelHandling(obstacles, pinguimBandido, "PARABENS, APERTE ENTER PARA IR PARA O PRÓXIMO NÍVEL", 300);
-    //interLevelHandling(obstacles, pendrive, "PARABENS, VOCÊ É DIGNO DE INSTALAR O LINUX, APERTE ENTER PARA PEGAR O PENDRIVE E DESTRUA O WINDOWS!!", 250);
+    //interLevelHandling(obstacles, pendrive, "PARABENS, VOCÊ É DIGNO DE INSTALAR O LINUX, APERTE ENTER PARA PEGAR O PENDRIVE E DESTRUA O WINDOWS!!", 250); 
+    // Essa linha deve ser movida para o final do handleTimerEvents do nível dois e a linha superior à esta deve ser movida para o handleTimerEvents do nível 1 quando estiver pronto
+    // TODO: fazer ajustes sobre o interLevel quando o nível 1 ficar pronto;
     al_flip_display();
 }
 
