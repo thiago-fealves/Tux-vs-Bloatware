@@ -12,7 +12,7 @@
 #include <allegro5/timer.h>
 #include "shots.hpp"
 #include "shapes_repository.hpp"
-#define LEVEL_DURATION 03
+#define LEVEL_DURATION 45
 using namespace std;
 
 /* Static variables */
