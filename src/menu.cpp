@@ -1,3 +1,5 @@
+#include <allegro5/bitmap.h>
+#include <allegro5/bitmap_draw.h>
 #include <allegro5/color.h>
 #include <allegro5/events.h>
 #include <iostream>
@@ -13,10 +15,41 @@ ALLEGRO_EVENT Menu::event;
 ALLEGRO_FONT* Menu::font = nullptr;
 Interface* Menu::interface = nullptr;
 
+void StartMenu::drawBackground() {
+
+    static float bgY{0};
+    float scrollSpeed{5.0f};
+
+    
+
+    bgY += scrollSpeed;
+    if(bgY >= al_get_bitmap_height(backgroundImage)) {
+        bgY=0;
+    }
+
+    al_draw_bitmap(backgroundImage, 0, bgY, 0);
+    al_draw_bitmap(backgroundImage, 0, bgY - al_get_bitmap_height(backgroundImage), 0);
+    
+
+    al_draw_scaled_bitmap(pinguimBandido, 0, 0,
+            al_get_bitmap_width(pinguimBandido),
+            al_get_bitmap_height(pinguimBandido),
+            0, 100, 250, 250, 0);
+
+    al_draw_multiline_text(levelFont, al_map_rgb(200, 200, 200),
+            static_cast<float>(al_get_display_width(display))/2.0, 175,
+            400, 20,
+            ALLEGRO_ALIGN_CENTRE,
+            "ALGUÉM INSTALOU WINDOWS NO MEU COMPUTADOR >:( ME AJUDE A INSTALAR O LINUX NOVAMENTE!!");
+
+
+}
+
 void StartMenu::handleTimerEvents() {
 
     // Update and redraw the game state
     al_clear_to_color(al_map_rgba_f(1, 1, 1, 1));  // Clear the screen with white color
+    drawBackground();
                                                            
     if (al_get_timer_count(timer) % (int)FPS == 0) {
         std::cout << al_get_timer_count(timer) / FPS << " seconds in interface..." << std::endl;
@@ -30,6 +63,8 @@ void StartMenu::handleTimerEvents() {
                
     al_flip_display();  // Update the display
 }
+
+
 
 void StartMenu::handleMouseEvents(bool &playing, bool &displayInterface, Music* &menu_music) {
     static bool musicIsPlaying = true;
@@ -55,6 +90,7 @@ void StartMenu::handleMouseEvents(bool &playing, bool &displayInterface, Music* 
         playing=0;
     }
 }
+
 
 void StartMenu::cleanMenu() {
     // preciso limpar o event(gabriel)? acho q nao

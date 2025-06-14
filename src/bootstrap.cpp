@@ -18,6 +18,7 @@ ALLEGRO_FONT* levelFont = nullptr;
 ALLEGRO_BITMAP* gameOverBackground = nullptr; //tela
 ALLEGRO_BITMAP* pinguimBandido = nullptr;
 ALLEGRO_BITMAP* pendrive = nullptr;
+ALLEGRO_BITMAP* backgroundImage = nullptr;
 
 
 Sound* death_sound = nullptr;
@@ -123,16 +124,24 @@ bool Bootstrap::init_allegro_libs(){
     }
 
     pinguimBandido = al_load_bitmap("./assets/pinguim_bandido.png"); 
-    if (!gameOverBackground) {
-        cout << "ERROR: Failed to load game over background image './assets/pinguim_bandido.png'!" << endl;
+    if (!pinguimBandido) {
+        cout << "ERROR: Failed to load image './assets/pinguim_bandido.png'!" << endl;
         al_destroy_timer(timer);
         al_destroy_display(display);
         al_destroy_event_queue(event_queue);
         return false;
     }
     pendrive = al_load_bitmap("./assets/pendrive.png"); 
-    if (!gameOverBackground) {
-        cout << "ERROR: Failed to load game over background image './assets/pendrive.png'!" << endl;
+    if (!pendrive) {
+        cout << "ERROR: Failed to load image './assets/pendrive.png'!" << endl;
+        al_destroy_timer(timer);
+        al_destroy_display(display);
+        al_destroy_event_queue(event_queue);
+        return false;
+    }
+    backgroundImage = al_load_bitmap("./assets/background.png"); 
+    if (!pendrive) {
+        cout << "ERROR: Failed to load image './assets/background.png'!" << endl;
         al_destroy_timer(timer);
         al_destroy_display(display);
         al_destroy_event_queue(event_queue);

@@ -48,6 +48,13 @@ void interLevelHandling(vector<AbstractObstacle*>& obstacles, ALLEGRO_BITMAP* sp
 
 // End of Inter Level Logic
 
+// Moving Background
+
+Background::Background()
+    : scrollSpeed(5.0f),
+    bgY{0}
+{
+}
 
 
 // Levels 
@@ -57,13 +64,6 @@ ALLEGRO_EVENT Level::_event;
 Music* Level::_music = nullptr;
 
 
-// Moving Background
-
-Background::Background()
-    :scrollSpeed(5.0f),
-    bgY{0}
-{
-}
 
 void Background::renderBackground() {
 
@@ -78,11 +78,6 @@ void Background::renderBackground() {
 
 }
 
-void Background::setBg(const char* path) {
-
-    backgroundImage = al_load_bitmap(path);
-}
-
 PipeList pipeList; 
 
 // Level Two
@@ -94,8 +89,6 @@ void Level::setMusic(Music* music){
 }
 
 BrokenShip* LevelTwo::setLevelTwo(){
-    // Setting background
-    _bg.setBg("./assets/background.png");
     // Setting Player
     _player = new BrokenShip();
     BrokenShip* Player = dynamic_cast<BrokenShip*>(_player);
@@ -119,8 +112,6 @@ BrokenShip* LevelTwo::setLevelTwo(){
     return Player;
 }
 FixedShip* LevelThree::setLevelThree(){
-  // Setting background
-  _bg.setBg("./assets/background.png");
   // Setting Player
   _player = new FixedShip;
   FixedShip* Player = dynamic_cast<FixedShip*>(_player);
@@ -176,14 +167,14 @@ void LevelTwo::handleKeyReleaseEvents(bool &playing){
     }
 }
 
-void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<AbstractObstacle*>& obstacles, Background &bg){
+void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<AbstractObstacle*>& obstacles){
     // Update the music
     Music::update_fade_in_fade_out();
     bool collision_this_frame = false;
 
     // Update and redraw the game state
     al_clear_to_color(al_map_rgb(0,0,0));
-    bg.renderBackground();
+    _bg.renderBackground();
     // Log elapsed time to the console every second
     if (al_get_timer_count(timer) % (int)FPS == 0) {
         cout << al_get_timer_count(timer) / FPS << " second..." << endl;
@@ -245,13 +236,13 @@ void LevelThree::updatePlayerPosition(FixedShip* player){
 
 }
 
-void LevelThree::handleTimerEvents(bool &playing, FixedShip* player, Background &bg, WindowsBoss &windows){
+void LevelThree::handleTimerEvents(bool &playing, FixedShip* player, WindowsBoss &windows){
     // Update the music
     Music::update_fade_in_fade_out();
 
     // Update and redraw the game state
     al_clear_to_color(al_map_rgb(0,0,0));
-    bg.renderBackground();
+    _bg.renderBackground();
 
     // Log elapsed time to the console every second
     if (al_get_timer_count(timer) % (int)FPS == 0) {
@@ -285,7 +276,7 @@ void LevelTwo::mainLoop(bool &playing){
         
         // Timer events
         if (_event.type == ALLEGRO_EVENT_TIMER) {
-          handleTimerEvents(playing, player, obstacles, _bg);
+          handleTimerEvents(playing, player, obstacles);
         }
 
         // Key press events
@@ -321,7 +312,7 @@ void LevelThree::mainLoop(bool &playing){
         
         // Timer events
         if (_event.type == ALLEGRO_EVENT_TIMER) {
-          handleTimerEvents(playing, player, _bg, windows);
+          handleTimerEvents(playing, player, windows);
         }
 
         // Key press events

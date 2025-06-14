@@ -43,6 +43,8 @@ int main(int argc, char **argv) {
     if (!playing) {
         gameOverOption* chosen_action = game_over_screen.run(event_queue, timer);
     }
+
+final:
     // Cleanup and exit
     Bootstrap::cleanup_allegro();
     return 0;
