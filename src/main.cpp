@@ -40,6 +40,7 @@ gameOverScreen game_over_screen(gameFont);
     if (playing) {
         al_flush_event_queue(event_queue);// Limpar eventos antigos
 
+start:
         LevelTwo::mainLoop(playing);//executa o nivel
 
         LevelTwo::cleanLevel(); ///limpa o nivel
@@ -59,8 +60,11 @@ gameOverScreen game_over_screen(gameFont);
                 //Escolha do jogador
             if (dynamic_cast<playAgain*>(chosen_action.get()) != nullptr) {
                 cout << "Reiniciando o jogo...\n";
+                LevelTwo::cleanLevel();
+                goto start;
                 playing = true;
                 inMenu = false;
+                
             }
             else if (dynamic_cast<returnMenu*>(chosen_action.get()) != nullptr) {
                cout << "Voltando para o menu...\n";
@@ -69,6 +73,8 @@ gameOverScreen game_over_screen(gameFont);
             }
             else if (dynamic_cast<exitGame*>(chosen_action.get()) != nullptr) {
                 cout << "Saindo do jogo...\n";
+                Bootstrap::cleanup_allegro();
+                return 0;
                 break;
             }
             else {
@@ -79,6 +85,6 @@ gameOverScreen game_over_screen(gameFont);
     }
 } // Fecha while(true)
 
+final:
     Bootstrap::cleanup_allegro();
-    return 0;
 } 

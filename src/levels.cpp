@@ -92,6 +92,7 @@ BrokenShip* LevelTwo::setLevelTwo(){
     // Setting Player
     _player = new BrokenShip();
     BrokenShip* Player = dynamic_cast<BrokenShip*>(_player);
+    Player->set_position(Vector(200, 300));
     
     // Setting Music
     setMusic(level_two_music); //AQUI--------------
