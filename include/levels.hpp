@@ -54,6 +54,7 @@ class LevelTwo : public Level{
 
   public:
     static BrokenShip* setLevelTwo();
+    static void cleanLevel();
     static void mainLoop(bool &playing);
     static void handleTimerEvents(bool &playing, BrokenShip* player, std::vector<AbstractObstacle*>& obstacles);
     static void handleKeyPressEvents(bool &playing, BrokenShip* player);

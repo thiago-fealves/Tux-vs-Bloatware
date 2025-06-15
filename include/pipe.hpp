@@ -14,7 +14,7 @@ class Pipe : public AbstractObstacle{
     void update() override;
     void draw() override;
     bool checkCollisionWithPlayer(BrokenShip& player) override;
-
+    
 
 
 };

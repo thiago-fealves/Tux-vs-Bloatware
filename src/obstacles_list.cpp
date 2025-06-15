@@ -67,7 +67,12 @@ PipeList::~PipeList() {
     }
     pipes.clear();
 }
-
+void PipeList::clear() {
+    for (auto& o : pipes) {
+        delete o;
+    }
+    pipes.clear();
+}
 
 void PipeList::generatePipes(const std::vector<Vector>& shapeLeft, 
                              const std::vector<Vector>& shapeRight, 

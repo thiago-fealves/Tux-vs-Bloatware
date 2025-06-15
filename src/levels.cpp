@@ -10,6 +10,7 @@
 #include <allegro5/drawing.h>
 #include <allegro5/keycodes.h>
 #include <allegro5/timer.h>
+#include <unistd.h>
 #include "shots.hpp"
 #include "shapes_repository.hpp"
 #define LEVEL_DURATION 45
@@ -92,7 +93,7 @@ BrokenShip* LevelTwo::setLevelTwo(){
     // Setting Player
     _player = new BrokenShip();
     BrokenShip* Player = dynamic_cast<BrokenShip*>(_player);
-    Player->set_position(Vector(200, 300));
+    Player->set_position(Vector(400, 300));
     
     // Setting Music
     setMusic(level_two_music); //AQUI--------------
@@ -134,6 +135,12 @@ void Level::cleanLevel(){
     _player = nullptr;
 }
 
+void LevelTwo::cleanLevel(){
+  delete _player;
+  _music = nullptr;
+  _player = nullptr;
+  pipeList.clear();
+}
 
 /* Event Logic Level Two*/
 void LevelTwo::handleKeyPressEvents(bool &playing, BrokenShip* player){
@@ -189,7 +196,7 @@ void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<Abstr
     if(!globalVars::inInterLevel)
         player->update();
 
-    for (auto o : obstacles){
+    for (auto& o : obstacles){
         o->update();
         o->draw();
 
@@ -200,6 +207,9 @@ void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<Abstr
             collision_this_frame = true;
             break;
         }
+    }
+    if (collision_this_frame){
+      obstacles.clear();
     }
 
     interLevelHandling(obstacles, pinguimBandido, "PARABENS, APERTE ENTER PARA IR PARA O PRÓXIMO NÍVEL", 300);
@@ -272,6 +282,7 @@ void LevelThree::handleTimerEvents(bool &playing, FixedShip* player, WindowsBoss
 void LevelTwo::mainLoop(bool &playing){  
     // Initializing level
     al_set_timer_count(timer, 0);
+    globalVars::inInterLevel = false;
     playing = true;
     BrokenShip* player = setLevelTwo();
     vector<AbstractObstacle*> obstacles = pipeList.getList();
@@ -298,8 +309,8 @@ void LevelTwo::mainLoop(bool &playing){
 
         // Handle window close event
         else if (_event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
-            cleanLevel();
-            playing = false; 
+          LevelTwo::cleanLevel();
+          playing = false; 
         }
 
     } 

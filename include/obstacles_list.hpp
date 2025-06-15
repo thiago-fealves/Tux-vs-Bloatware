@@ -32,4 +32,5 @@ public:
     void generatePipes(const std::vector<Vector>& shapeLeft, 
         const std::vector<Vector>& shapeRight, const char* imagePathLeft, const char* imagePathRight);
     std::vector<AbstractObstacle*>& getList();
+    void clear();
 };
