@@ -1,10 +1,15 @@
 #ifndef GAME_OBJECT_HPP
 #define GAME_OBJECT_HPP
 
+#include "movement.hpp"
+#include "bootstrap.hpp"
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
+#include <allegro5/bitmap.h>
+#include <allegro5/bitmap_draw.h>
+#include <allegro5/bitmap_io.h>
+
 #include <string>
-#include "movement.hpp"
 #include <list>
 
 class GameObject{
@@ -63,7 +68,9 @@ private:
   float lado = 180; // mateade do lado, pq ele faz 180px para cada lado do ponto centro
   ALLEGRO_COLOR _color = al_map_rgb(255, 255, 255);
   int _estadoBoss = 0 ; // 0, 1, 2;
-  //float _vidaaa
+
+  bool _aplicarDano = false;
+  float _vida = 100;
 
   void upBoss(float Y_parada, float speed);
   void downBoss(float Y_Parada, float speed);
@@ -74,9 +81,8 @@ public:
 
   void draw();
   void update(FixedShip* player);
-  //void setSize(float size);
-  //float getSize() const;
-  //void setColor(ALLEGRO_COLOR color);
+  float getMetadeLado();
+  void receberDano();
 
 
 };

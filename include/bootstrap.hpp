@@ -19,7 +19,11 @@ extern ALLEGRO_DISPLAY* display;
 extern ALLEGRO_EVENT_QUEUE* event_queue;
 extern ALLEGRO_TIMER* timer;
 extern ALLEGRO_FONT* gameFont; //fonte padrao do jogo
+extern ALLEGRO_FONT* levelFont;
 extern ALLEGRO_BITMAP* gameOverBackground; //imagem game over
+extern ALLEGRO_BITMAP* pinguimBandido;
+extern ALLEGRO_BITMAP* backgroundImage;
+extern ALLEGRO_BITMAP* pendrive;
 
 //Iniyialize musics and sounds
 extern Sound* death_sound;
@@ -41,11 +45,11 @@ class Bootstrap {
   private:
     static bool initialize_sys_sound();     // Initialize audio systems
     static bool initialize_sounds();
-    static bool file_exists(const char* path);
   public:
     static bool initialize_allegro();
     static bool init_allegro_libs();
     static void register_allegro_events();
     static void cleanup_allegro();
+    static bool file_exists(const char* path);
 };
 #endif

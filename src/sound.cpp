@@ -1,4 +1,5 @@
 #include "sound.hpp"
+#include "bootstrap.hpp"
 #include <iostream>
 
 bool Sound::isSoundMuted = false;
@@ -23,7 +24,11 @@ bool Sound::isSoundMuted = false;
  * @param sound_address The address of the sound.
 */
 Sound::Sound(const char* sound_address) {
-
+    
+    if(!Bootstrap::file_exists(sound_address)) {
+        std::cout << "Arquivo de som/musica nao encontrado: " << sound_address << "\n";
+        return;
+    }
     // Creates an ALLEGRO_SAMPLE and inserts it into sound_sample
     sound_sample = al_load_sample(sound_address);
 

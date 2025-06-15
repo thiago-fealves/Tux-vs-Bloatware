@@ -1,7 +1,6 @@
 #include "movement.hpp"
 #include <cmath>
 
-
 Vector::Vector(float x, float y) : _x(x), _y(y) {}
 
 Vector::Vector(float _xy) : Vector(_xy, _xy) {}

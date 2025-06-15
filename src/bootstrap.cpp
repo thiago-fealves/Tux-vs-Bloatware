@@ -14,7 +14,11 @@ ALLEGRO_DISPLAY* display = nullptr;
 ALLEGRO_EVENT_QUEUE* event_queue = nullptr;
 ALLEGRO_TIMER* timer = nullptr;
 ALLEGRO_FONT* gameFont = nullptr; //fonte universal //new deivid
+ALLEGRO_FONT* levelFont = nullptr;
 ALLEGRO_BITMAP* gameOverBackground = nullptr; //tela
+ALLEGRO_BITMAP* pinguimBandido = nullptr;
+ALLEGRO_BITMAP* pendrive = nullptr;
+ALLEGRO_BITMAP* backgroundImage = nullptr;
 
 
 Sound* death_sound = nullptr;
@@ -96,21 +100,48 @@ bool Bootstrap::init_allegro_libs(){
         return false;
     }
 
- //add deivid: cria a fonte do jogo 
+    //add deivid: cria a fonte do jogo 
     gameFont = al_load_font("./assets/katana.ttf", 30, 0); 
-    if (!gameFont) {
-        cout << "ERROR: Failed to load font 'katana.ttf' (gameFont)" << endl;
+    levelFont = al_load_font("./assets/katana.ttf", 20, 0);
+    if (!gameFont || !levelFont) {
+        cout << "ERROR: Failed to load font 'katana.ttf' (gameFont/levelFont)" << endl;
         //se der erro destoi os recusos criados anteriormente
         al_destroy_timer(timer);
         al_destroy_display(display);
         al_destroy_event_queue(event_queue);
         return false;
     }
+
     
     //add deivid: imagem do game over
     gameOverBackground = al_load_bitmap("./assets/game_over.png"); 
     if (!gameOverBackground) {
         cout << "ERROR: Failed to load game over background image './assets/game_over.png'!" << endl;
+        al_destroy_timer(timer);
+        al_destroy_display(display);
+        al_destroy_event_queue(event_queue);
+        return false;
+    }
+
+    pinguimBandido = al_load_bitmap("./assets/pinguim_bandido.png"); 
+    if (!pinguimBandido) {
+        cout << "ERROR: Failed to load image './assets/pinguim_bandido.png'!" << endl;
+        al_destroy_timer(timer);
+        al_destroy_display(display);
+        al_destroy_event_queue(event_queue);
+        return false;
+    }
+    pendrive = al_load_bitmap("./assets/pendrive.png"); 
+    if (!pendrive) {
+        cout << "ERROR: Failed to load image './assets/pendrive.png'!" << endl;
+        al_destroy_timer(timer);
+        al_destroy_display(display);
+        al_destroy_event_queue(event_queue);
+        return false;
+    }
+    backgroundImage = al_load_bitmap("./assets/background.png"); 
+    if (!pendrive) {
+        cout << "ERROR: Failed to load image './assets/background.png'!" << endl;
         al_destroy_timer(timer);
         al_destroy_display(display);
         al_destroy_event_queue(event_queue);
@@ -159,23 +190,24 @@ bool Bootstrap::initialize_sounds() {
     // Check if the audio file exists
 
     // Musics
-    if(file_exists("sounds/music8.ogg")) menu_music = new Music("sounds/music8.ogg");  
-    if(file_exists("sounds/music3.ogg")) pause_game_music = new Music("sounds/music3.ogg");  
+    
+    menu_music = new Music("sounds/music8.ogg");  
+    pause_game_music = new Music("sounds/music3.ogg");  
 
-    if(file_exists("sounds/music7.ogg")) level_one_music = new Music("sounds/music7.ogg", 4.0, 1.0);
-    if(file_exists("sounds/music5.ogg")) level_two_music = new Music("sounds/music5.ogg");
-    if(file_exists("sounds/music4.ogg")) level_three_music = new Music("sounds/music4.ogg");
+    level_one_music = new Music("sounds/music7.ogg", 4.0, 1.0);
+    level_two_music = new Music("sounds/music5.ogg");
+    level_three_music = new Music("sounds/music4.ogg");
 
-    if(file_exists("sounds/music9.ogg")) defeat_music = new Music("sounds/music9.ogg");
-    if(file_exists("sounds/music6.ogg")) victory_music = new Music("sounds/music6.ogg");
+    defeat_music = new Music("sounds/music9.ogg");
+    victory_music = new Music("sounds/music6.ogg");
 
     // Sounds
-    if(file_exists("sounds/sound_gun4.ogg")) death_sound = new Sound("sounds/sound_gun4.ogg");
+    death_sound = new Sound("sounds/sound_gun4.ogg");
 
-    if(file_exists("sounds/sound_gun9.ogg")) gunshot_sound1 = new Sound("sounds/sound_gun9.ogg");
-    if(file_exists("sounds/sound_gun8.ogg")) gunshot_sound2 = new Sound("sounds/sound_gun8.ogg");
-    if(file_exists("sounds/sound_gun6.ogg")) gunshot_sound3 = new Sound("sounds/sound_gun6.ogg");
-    if(file_exists("sounds/sound_gun4.ogg")) gunshot_sound4 = new Sound("sounds/sound_gun4.ogg");
+    gunshot_sound1 = new Sound("sounds/sound_gun9.ogg");
+    gunshot_sound2 = new Sound("sounds/sound_gun8.ogg");
+    gunshot_sound3 = new Sound("sounds/sound_gun6.ogg");
+    gunshot_sound4 = new Sound("sounds/sound_gun4.ogg");
 
 
 
@@ -205,11 +237,13 @@ void Bootstrap::cleanup_allegro(){
 
     //Destroi as fontes
     if (gameFont) al_destroy_font(gameFont);
+    if (levelFont) al_destroy_font(levelFont);
     
     //destroi a imagem
     if (gameOverBackground) al_destroy_bitmap(gameOverBackground);
     
     // criar uma função para limpar isso tudo?
+    
     delete death_sound;
     delete gunshot_sound1;
     delete gunshot_sound2;
@@ -223,4 +257,5 @@ void Bootstrap::cleanup_allegro(){
     delete level_three_music;
     delete defeat_music;
     delete victory_music;
+    
 }

@@ -77,7 +77,7 @@ void Music::pause() {
  * @brief Play the music, starting where it left off.
  */
 void Music::play() {
-    if(Music::isMusicMuted == true) return;
+    if(Music::isMusicMuted == true || music_sample == nullptr) return;
     volume = ballast_volume;                                                // Return the volume to the original value  
     al_set_sample_instance_position(music_sample, current_music_position);  // Put the music back on the instant it stopped
     al_set_sample_instance_playing(music_sample, true);                     // Play the music

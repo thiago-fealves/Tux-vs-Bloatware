@@ -1,49 +1,84 @@
-#include <allegro5/color.h>
-#include <allegro5/events.h>
-#include <math.h>
+#include <memory>
 #include <iostream>
 #include <allegro5/allegro.h>
-#include <allegro5/allegro_font.h>
-#include <allegro5/allegro_primitives.h>
-#include <allegro5/allegro_ttf.h>
-#include "allegro5/keycodes.h"
+#include "game_over.hpp"
+#include "menu.hpp"
+#include "levels.hpp"
 #include "bootstrap.hpp"
 #include "music.hpp"
-#include "sound.hpp"
-#include "interface.hpp"
-#include "game_object.hpp"
-#include "collision.hpp"
-#include "levels.hpp"
-#include "menu.hpp"
-#include "game_over.hpp"
+
 using namespace std;
 
+// Variáveis externas 
 extern ALLEGRO_EVENT_QUEUE* event_queue;
 extern ALLEGRO_TIMER* timer;
-extern ALLEGRO_FONT* gameFont; 
+extern ALLEGRO_FONT* gameFont;
 
-// Const pointers for Allegro components
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
+    if (!Bootstrap::initialize_allegro()) {return 1;
+    }
 
-    if(Bootstrap::initialize_allegro() == false) return 1;
-    
-    srand(time(NULL)); 
-    
+    srand(time(NULL));
+
     bool playing = true;
+    bool inMenu = true;
 
-    gameOverScreen game_over_screen(gameFont);
-    
-    StartMenu::mainLoopMenu(playing, menu_music);
-    
-     if (playing) {
-        LevelTwo::mainLoop(playing);
+gameOverScreen game_over_screen(gameFont); 
+
+ // instância da tela de Game Over
+
+    //Loop Principal Infinito do Jogo
+    while (true) {
+    //Estado MENU
+    if (inMenu) {
+        StartMenu::mainLoopMenu(playing, menu_music); //menu, musica e cliques sao feitos e processados
+        if (!playing) break;
+        inMenu = false; //se o jogador clicar em play InMenu vira falso
     }
 
-    if (!playing) {
-        gameOverOption* chosen_action = game_over_screen.run(event_queue, timer);
+    //Estado JOGO
+    if (playing) {
+        al_flush_event_queue(event_queue);// Limpar eventos antigos
+
+        LevelTwo::mainLoop(playing);//executa o nivel
+
+        LevelTwo::cleanLevel(); ///limpa o nivel
+
+    //Transicao para GAME OVER
+       if (playing) continue;
+            else { //se o jogador perdeu para a musica
+                if (level_two_music) { 
+                    level_two_music->pause(); 
+                }
+                //gameOverScrenn começa a ser executada
+                std::unique_ptr<gameOverOption> chosen_action(game_over_screen.run(event_queue, timer));
+
+                if (!chosen_action) break;
+
+            chosen_action->execute();
+                //Escolha do jogador
+            if (dynamic_cast<playAgain*>(chosen_action.get()) != nullptr) {
+                cout << "Reiniciando o jogo...\n";
+                playing = true;
+                inMenu = false;
+            }
+            else if (dynamic_cast<returnMenu*>(chosen_action.get()) != nullptr) {
+               cout << "Voltando para o menu...\n";
+                playing = true;
+                inMenu = true;
+            }
+            else if (dynamic_cast<exitGame*>(chosen_action.get()) != nullptr) {
+                cout << "Saindo do jogo...\n";
+                break;
+            }
+            else {
+                cout << "Ação desconhecida. Encerrando.\n";
+                break;
+            }
+        }
     }
-    // Cleanup and exit
+} // Fecha while(true)
+
     Bootstrap::cleanup_allegro();
     return 0;
-}
-
+} 

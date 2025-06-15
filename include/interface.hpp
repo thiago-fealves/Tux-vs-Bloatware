@@ -27,6 +27,7 @@ class Button {
         Button(Coordinates coords, ALLEGRO_COLOR color, std::string text, ALLEGRO_FONT* font, bool drawBackground = true);
         void drawButton();
         bool gotClicked(int mx, int my);
+        void setText(const char* txt);
 
 };
 
@@ -43,7 +44,5 @@ class Interface {
 
     void drawOffGameInterface();
     void drawIngameInterface();
-
-
 
 };

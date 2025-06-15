@@ -15,6 +15,7 @@ private:
     static void handleTimerEvents();
     static void handleMouseEvents(bool &playing, bool &displayInterface, Music* &menu_music);
     static void cleanMenu();
+    static void drawBackground();
 
 public:
     static void mainLoopMenu(bool &playing, Music* &menu_music);
