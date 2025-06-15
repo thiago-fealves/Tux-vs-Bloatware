@@ -9,34 +9,31 @@
 #include <allegro5/allegro_color.h>
 #include <allegro5/allegro_primitives.h>
 
-//ver com o grupo se a classe returnMenu é necessária.
 
 //classe mae para as classes derivadas (playAgain, exitGame,returnMenu,noAction)class gameOverOpition
 class gameOverOption {
 public:
     virtual ~gameOverOption() = default; //destrutor virtual
-    virtual void execute () = 0; //funcao virtual que sera subescrita
+    virtual void execute () = 0; //funcao virtual pura que sera subescrita
 };
 
 //classes filhas que sobescrevem
 class playAgain : public gameOverOption {
 public:
+    ~playAgain() override = default;
     void execute() override;
 };
 
-class exitGame : public gameOverOption{
+class exitGame : public gameOverOption {
 public:
-    void execute () override;
+    ~exitGame() override = default;
+    void execute() override;
 };
 
-class returnMenu : public gameOverOption{
+class returnMenu : public gameOverOption {
 public:
-    void execute () override;
-};
-
-class noAction : public gameOverOption{
-public:
-    void execute () override;
+    ~returnMenu() override = default;
+    void execute() override;
 };
 
 //class principal game Over
@@ -57,10 +54,10 @@ public:
     
     void setCurrentScore(int score); //define a pontuacao que o jogador teve
     void setHighScore(int score); //define o recorde atual
-    void draw(); //desenha os elemntos visuais na tela
+    void draw(); //desenha os elementos visuais na tela
     
     // Método run, que retorna um ponteiro para a ação escolhida
     gameOverOption* run(ALLEGRO_EVENT_QUEUE* event_queue, ALLEGRO_TIMER* timer);
+     
 };
-
 #endif

@@ -297,6 +297,7 @@ void LevelTwo::mainLoop(bool &playing){
         }
 
     } 
+    cleanLevel(); //Deivid 13/06
 }
 
 void LevelThree::mainLoop(bool &playing){

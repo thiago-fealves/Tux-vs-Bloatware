@@ -18,9 +18,9 @@ void Button::drawButton() {
     
     if (_drawBackground) {
         al_draw_filled_rectangle(_coords._x, _coords._y, _coords._x + _coords._width, _coords._y + _coords._heigth, _color);
-        colorForText = al_map_rgb(255, 255, 255); // Texto branco para botões com fundo
+        colorForText = al_map_rgb(255, 255, 255); // Texto branco para botões com retangulo em volta
     } else {
-        colorForText = _color; // Texto verde, azul, vermelho para Game Over
+        colorForText = _color;
     }
     al_draw_text(_font, colorForText, _coords._x+_coords._width/2, _coords._y+_coords._heigth/2 - al_get_font_line_height(_font) 
     / 2, ALLEGRO_ALIGN_CENTER, _text.c_str());
