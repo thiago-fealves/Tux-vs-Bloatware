@@ -231,31 +231,26 @@ bool Bootstrap::initialize_allegro(){
 } 
 
 void Bootstrap::cleanup_allegro(){
-    al_destroy_timer(timer);
-    al_destroy_display(display);
-    al_destroy_event_queue(event_queue);
+    al_destroy_timer(timer); timer = nullptr;
+    al_destroy_display(display); display = nullptr;
+    al_destroy_event_queue(event_queue); event_queue = nullptr;
 
-    //Destroi as fontes
-    if (gameFont) al_destroy_font(gameFont);
-    if (levelFont) al_destroy_font(levelFont);
-    
-    //destroi a imagem
-    if (gameOverBackground) al_destroy_bitmap(gameOverBackground);
-    
-    // criar uma função para limpar isso tudo?
-    
-    delete death_sound;
-    delete gunshot_sound1;
-    delete gunshot_sound2;
-    delete gunshot_sound3;
-    delete gunshot_sound4;
-    
-    delete menu_music;
-    delete pause_game_music;
-    delete level_one_music;
-    delete level_two_music;
-    delete level_three_music;
-    delete defeat_music;
-    delete victory_music;
-    
+    if (gameFont) { al_destroy_font(gameFont); gameFont = nullptr; }
+    if (levelFont) { al_destroy_font(levelFont); levelFont = nullptr; }
+
+    if (gameOverBackground) { al_destroy_bitmap(gameOverBackground); gameOverBackground = nullptr; }
+
+    delete death_sound; death_sound = nullptr;
+    delete gunshot_sound1; gunshot_sound1 = nullptr;
+    delete gunshot_sound2; gunshot_sound2 = nullptr;
+    delete gunshot_sound3; gunshot_sound3 = nullptr;
+    delete gunshot_sound4; gunshot_sound4 = nullptr;
+
+    delete menu_music; menu_music = nullptr;
+    delete pause_game_music; pause_game_music = nullptr;
+    delete level_one_music; level_one_music = nullptr;
+    delete level_two_music; level_two_music = nullptr;
+    delete level_three_music; level_three_music = nullptr;
+    delete defeat_music; defeat_music = nullptr;
+    delete victory_music; victory_music = nullptr;
 }
