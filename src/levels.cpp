@@ -71,10 +71,15 @@ BrokenShip* LevelTwo::setLevelTwo(){
     //_obstaclesList.setPolygonsObstaclesList(shape_repository["asteroid2"], "./assets/asteroid2.png");
     //_obstaclesList.setCircleObstaclesList("./assets/asteroid.png");
 
+    std::vector<Vector> shapeLeft = shape_repository["pipe"];
+    std::vector<Vector> shapeRight = shapeLeft;
+        for (auto& v : shapeRight) {
+        v._x *= -1;  // espelhamento horizontal
+        }
+
     pipeList.generatePipes(
-        Vector(100, -100),
-        shape_repository["pipe_left"],
-        shape_repository["pipe_right"],
+        shapeLeft,
+        shapeRight,
         "./assets/pipe_left.png",
         "./assets/pipe_right.png"
     );

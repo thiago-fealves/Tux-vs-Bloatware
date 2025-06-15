@@ -29,7 +29,7 @@ public:
     PipeList() = default;
     ~PipeList();
 
-    void generatePipes(const Vector& startPosition, const std::vector<Vector>& shapeTop, 
-        const std::vector<Vector>& shapeBottom, const char* imagePathTop, const char* imagePathBottom);
+    void generatePipes(const std::vector<Vector>& shapeLeft, 
+        const std::vector<Vector>& shapeRight, const char* imagePathLeft, const char* imagePathRight);
     std::vector<AbstractObstacle*>& getList();
 };

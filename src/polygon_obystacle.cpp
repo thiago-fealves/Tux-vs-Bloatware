@@ -34,15 +34,18 @@ std::vector<Vector> PolygonObstacle::getVertices(){
 
 bool PolygonObstacle::checkCollisionWithPlayer(BrokenShip& player){
     
-    // Testa contra todas as arestas
     for (size_t i = 0; i < this->vertices.size(); ++i) {
         
         Vector a = vertices[i] + this->get_position();
-        //é preciso dois pontos para formar um segmento, então pegamos o próximo, 
-        //sabendo que o vetor está na ordem correta, o módulo fecha o polígono
         Vector b = vertices[(i + 1) % vertices.size()] + this->get_position();
-        if (Vector::shortestDistancePointToSegment(player.get_position(), a, b) <= player.get_radius() * player.get_radius())
-        return true;
+
+          al_draw_line(
+            a._x, a._y,     
+            b._x, b._y,      
+            al_map_rgb(255, 255, 0),      
+            2.0f);
+            
+        if (Vector::shortestDistancePointToSegment(player.get_position(), a, b) <= player.get_radius() * player.get_radius()) return true;
     }
     return false;
 }

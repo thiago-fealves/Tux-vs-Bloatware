@@ -4,13 +4,13 @@
 class Pipe : public AbstractObstacle{
 
     private:
-    PolygonObstacle topPipe;
-    PolygonObstacle bottomPipe;
-    float gap = 100;
+    PolygonObstacle leftPipe;
+    PolygonObstacle rightPipe;
+    float gap = 110;
 
     public:
-    Pipe(const Vector& startPosition, const std::vector<Vector>& shapeTop, 
-        const std::vector<Vector>& shapeBottom, const char* imagePathTop, const char* imagePathBottom);
+    Pipe(const Vector& startPosition, const std::vector<Vector>& shapeLeft, 
+        const std::vector<Vector>& shapeRight, const char* imagePathLeft, const char* imagePathRight);
     void update() override;
     void draw() override;
     bool checkCollisionWithPlayer(BrokenShip& player) override;

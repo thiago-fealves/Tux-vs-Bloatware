@@ -7,7 +7,7 @@ class PolygonObstacle : public AbstractObstacle{
 
 private:
   std::vector<Vector> vertices;
-  float scale = 0.18f;
+  float scale = 0.33f;
 
 public:
     PolygonObstacle(const Vector &pos, const std::vector<Vector>& verts, const char* imagePath)

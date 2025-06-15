@@ -1,35 +1,55 @@
 #include "pipe.hpp"
+#include "iostream"
+#include "bootstrap.hpp"
 
-Pipe::Pipe(const Vector& startPosition, const std::vector<Vector>& shapeTop, const std::vector<Vector>& shapeBottom, const char* imagePathTop, const char* imagePathBottom)
-: topPipe(startPosition, shapeTop, imagePathTop),
-      bottomPipe(Vector(startPosition._x + this->gap + 100, startPosition._y), shapeBottom, imagePathBottom)
+Pipe::Pipe(const Vector &startPosition, const std::vector<Vector> &shapeLeft, const std::vector<Vector> &shapeRight, const char *imagePathLeft, const char *imagePathRight)
+    : leftPipe(startPosition, shapeLeft, imagePathLeft),
+      rightPipe(Vector(700, startPosition._y), shapeRight, imagePathRight)
 {
-    set_position(startPosition._x);
-    setSpeed(Vector(0, 2));
+    setSpeed(Vector(0, 3));
 }
 
 void Pipe::update() {
     Vector speed = getSpeed();
 
-    Vector topPos = topPipe.get_position() + speed;
-    Vector bottomPos = bottomPipe.get_position() + speed;
+    // move os dois canos para baixo
+    Vector lPos = leftPipe.get_position() + speed;
+    Vector rPos = rightPipe.get_position() + speed;
 
-    if (topPos._y > 600 + 50) {
-        float newX = rand() % 700 + 50;
-        float newY = -100;
-        topPos = Vector(newX, newY);
-        bottomPos = Vector(newX, newY + gap + 100);
+    // se os canos passaram do limite inferior da tela
+    if (lPos._y > 700) {
+        float pipeWidth = al_get_bitmap_width(leftPipe.objectSprite) * 0.33f;
+        float halfSpan = gap / 2 + pipeWidth / 2;
+
+        // intervalo seguro para o centro
+        float minCenterX = halfSpan;
+        float maxCenterX = SCREEN_W - halfSpan;
+        float centerX = rand() % static_cast<int>(maxCenterX - minCenterX) + minCenterX;
+
+        // nova posição no topo da tela
+        float y = -100;
+
+        // calcula posições esquerda e direita
+        float leftX = centerX - (gap / 2 + pipeWidth / 2);
+        float rightX = centerX + (gap / 2 + pipeWidth / 2);
+
+        // aplica nova posição
+        lPos = Vector(leftX, y);
+        rPos = Vector(rightX, y);
     }
 
-    topPipe.set_position(topPos);
-    bottomPipe.set_position(bottomPos);
+    // atualiza posição dos pipes
+    leftPipe.set_position(lPos);
+    rightPipe.set_position(rPos);
 }
 
-void Pipe::draw() {
-    topPipe.draw();
-    bottomPipe.draw();
+void Pipe::draw()
+{
+    leftPipe.draw();
+    rightPipe.draw();
 }
 
-bool Pipe::checkCollisionWithPlayer(BrokenShip& player) {
-    return topPipe.checkCollisionWithPlayer(player) || bottomPipe.checkCollisionWithPlayer(player);
+bool Pipe::checkCollisionWithPlayer(BrokenShip &player)
+{
+    return leftPipe.checkCollisionWithPlayer(player) || rightPipe.checkCollisionWithPlayer(player);
 }

@@ -68,14 +68,14 @@ PipeList::~PipeList() {
     pipes.clear();
 }
 
-void PipeList::generatePipes(const Vector& startPosition, const std::vector<Vector>& shapeTop, 
-        const std::vector<Vector>& shapeBottom, const char* imagePathTop, const char* imagePathBottom) {
-    for (int i = 0; i < 4; ++i) {
-        float x = rand() % 700 + 50;
-        float y = -(rand() % 400) - i * 250; // espalha verticalmente
 
-        pipes.push_back(new Pipe(Vector(x, y), shapeTop, shapeBottom, imagePathTop, imagePathBottom));
-    }
+void PipeList::generatePipes(const std::vector<Vector>& shapeLeft, 
+                             const std::vector<Vector>& shapeRight, 
+                             const char* imagePathLeft, 
+                             const char* imagePathRight) {
+    
+    pipes.push_back(new Pipe(Vector(100, 100), shapeLeft, shapeRight, imagePathLeft, imagePathRight));
+
 }
 
 std::vector<AbstractObstacle*>& PipeList::getList() {
