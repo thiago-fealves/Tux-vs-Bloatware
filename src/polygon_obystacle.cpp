@@ -39,11 +39,11 @@ bool PolygonObstacle::checkCollisionWithPlayer(BrokenShip& player){
         Vector a = vertices[i] + this->get_position();
         Vector b = vertices[(i + 1) % vertices.size()] + this->get_position();
 
-          al_draw_line(
+          /*al_draw_line(
             a._x, a._y,     
             b._x, b._y,      
             al_map_rgb(255, 255, 0),      
-            1.0f);
+            1.0f);*/
             
         if (Vector::shortestDistancePointToSegment(player.get_position(), a, b) <= player.get_radius() * player.get_radius()) return true;
     }

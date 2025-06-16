@@ -111,8 +111,8 @@ BrokenShip* LevelTwo::setLevelTwo(){
     pipeList.generatePipes(
         shapeLeft,
         shapeRight,
-        "./assets/pipe_left.png",
-        "./assets/pipe_right.png"
+        "./assets/new_pipe_left.png",
+        "./assets/new_pipe_right.png"
     );
 
 
