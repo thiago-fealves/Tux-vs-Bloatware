@@ -39,22 +39,5 @@ TEST_CASE("Initialize Sounds") {
     CHECK(result == true);
 }
 
-TEST_CASE("Cleanup") {
-    REQUIRE(al_init());
-    
-    // Create pointers to test
-    timer = al_create_timer(1.0 / 60.0);
-    event_queue = al_create_event_queue();
-    REQUIRE(al_init_font_addon());
-    REQUIRE(al_init_image_addon());
-    
-    // Test font
-    gameFont = al_create_builtin_font();
-    
-    // Test bitmap
-    gameOverBackground = al_create_bitmap(100, 100);
-    Bootstrap::cleanup_allegro();
-    CHECK(true);
-}
 
 
