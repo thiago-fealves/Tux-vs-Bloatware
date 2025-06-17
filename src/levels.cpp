@@ -227,7 +227,7 @@ void LevelThree::handleKeyPressEvents(bool &playing, FixedShip* player){
         case ALLEGRO_KEY_SPACE:   
             // isto cria um tiro na posicao do jogador somado por um vetor (0, -40),
             // que aponta para cima para o tiro nao pegar no jogador (:
-            new BollShot(player->get_position()+Vector(0, -40), Vector(0, -1), 10.0, 40);                 
+            new BallShot(player->get_position()+Vector(0, -40), Vector(0, -1), 10.0, 40);                 
             break;
 
         case ALLEGRO_KEY_ESCAPE:

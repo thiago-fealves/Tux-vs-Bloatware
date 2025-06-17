@@ -41,15 +41,17 @@ gameOverScreen game_over_screen(gameFont);
         al_flush_event_queue(event_queue);// Limpar eventos antigos
 
 start:
-        LevelTwo::mainLoop(playing);//executa o nivel
+        LevelThree::mainLoop(playing);
+        LevelThree::cleanLevel();
 
-        LevelTwo::cleanLevel(); ///limpa o nivel
+        //LevelTwo::mainLoop(playing);//executa o nivel
+        //LevelTwo::cleanLevel(); ///limpa o nivel
 
     //Transicao para GAME OVER
        if (playing) continue;
             else { //se o jogador perdeu para a musica
-                if (level_two_music) { 
-                    level_two_music->pause(); 
+                if (level_three_music) { 
+                    level_three_music->pause(); 
                 }
                 //gameOverScrenn começa a ser executada
                 std::unique_ptr<gameOverOption> chosen_action(game_over_screen.run(event_queue, timer));
@@ -60,7 +62,8 @@ start:
                 //Escolha do jogador
             if (dynamic_cast<playAgain*>(chosen_action.get()) != nullptr) {
                 cout << "Reiniciando o jogo...\n";
-                LevelTwo::cleanLevel();
+                //LevelTwo::cleanLevel();
+                LevelThree::cleanLevel();
                 goto start;
                 playing = true;
                 inMenu = false;

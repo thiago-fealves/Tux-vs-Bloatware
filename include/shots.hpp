@@ -1,3 +1,4 @@
+
 #ifndef SHOTS_HPP
 #define SHOTS_HPP
 
@@ -29,17 +30,17 @@ private:
 protected:
   Vector _direcao;
   ALLEGRO_COLOR _shotColor;
-  float _speed;
 
   static std::list<Shot*> listaDosTiros;//lista dos tiros que estao 'andando'
-  bool virtual estaForaDaTela() = 0;    //checa se o tiro especifico esta fora da tela
+  bool virtual estaAtivo() = 0;    //checa se o tiro especifico esta fora da tela
   bool virtual tiroColidioComJogador(FixedShip& player) = 0; //checa se o tiro especifico colidio com o jogador
   bool virtual tiroColidioComBoss(WindowsBoss& boss) = 0; //checa se o tiro especifico colidiu com o boss
   void virtual draw() = 0;
+  void virtual atualizar() = 0;
   
 
 public:
-  Shot(Vector position, Vector direcao, ALLEGRO_COLOR shotColor, float speed);
+  Shot(Vector position, Vector direcao, ALLEGRO_COLOR shotColor);
   virtual ~Shot() = default;
 
   static void updateShots(FixedShip* player, WindowsBoss& boss); // atualiza todos os tiros
@@ -48,40 +49,45 @@ public:
 
 };
 
-class BollShot : public Shot {
+class BallShot : public Shot {
 private:
+  float _speed;
+  float _raio;
   static bool colisaoDeCirculoComQuadrado(Vector centroCirculo, float raio, Vector centroQuadrado, float meioLado);
   static bool colisaoDeCirculoComCirculo(Vector circuloA, float raioA, Vector circuloB, float raioB);
   static float distanciaEntrePontos(Vector pontoA, Vector pontoB);
-  float _raio;
   
 public:
-  BollShot(Vector initial_posi, Vector direcao, float raio, float speed=40);
-  ~BollShot();
+  BallShot(Vector initial_posi, Vector direcao, float raio, float speed=40);
+  ~BallShot();
 
   void draw() override;
+  void atualizar() override;
 
-  bool estaForaDaTela() override;
+  bool estaAtivo() override;
   bool tiroColidioComBoss(WindowsBoss& boss) override;
   bool tiroColidioComJogador(FixedShip& player) override;
 };
 
-/*
+
 class LineShot : public Shot {
 private:
+  float _espessura;
+  float _comprimento; 
+  double _tempoAtivacao; //ele começa com algum valor e vai retirando a cada frame ai no zero ele LIGA
+  bool _ativado=false;
 
 public:
-  LineShot(Vector pontoInicial, Vector direcao, float espessura, float altura);
+  LineShot(Vector pontoInicial, Vector pontoFinal, float espessura, float comprimento, double tempoAtivacao);
+  ~LineShot();
+
   void draw() override;
+  void atualizar() override;
+
+  bool estaAtivo() override;
+  bool tiroColidioComBoss(WindowsBoss& boss) override;
+  bool tiroColidioComJogador(FixedShip& player) override;
     
 };
-*/
-
-
-
-
-
-
-
 
 #endif

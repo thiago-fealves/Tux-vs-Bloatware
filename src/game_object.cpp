@@ -203,7 +203,7 @@ float WindowsBoss::getMetadeLado() {
   return lado;
 }
 
-int cont=0;
+int cont=0, timerBoss=FPS*6;
 int possibilidades_para_os_tiros=0; //varia de 1, 2 e 3.
 
 void WindowsBoss::receberDano() {
@@ -226,39 +226,67 @@ void WindowsBoss::update(FixedShip* player) {
 
   } else if (_estadoBoss==1) { 
     _aplicarDano = true;
-    //new BollShot(player->get_position(), Vector(0, -1), 20.0);
     cont+=1;
-    int timer = FPS*6; //esse num q multiplica é o tempo em segundos
-    if (cont!=timer) return;
+    //timer = FPS*6; //esse num q multiplica é o tempo em segundos
+    if (cont!=timerBoss) return;
     cont=0; //reseta o contador
     
-    if(possibilidades_para_os_tiros==0) {
-      new BollShot(Vector(0, 280), Vector(1, 0), 10, 19);
-      new BollShot(Vector(0, 330), Vector(1, 0), 10, 10);
-      new BollShot(Vector(0, 380), Vector(1, 0), 10, 14);
-      new BollShot(Vector(0, 420), Vector(1, 0), 10, 13);
-      new BollShot(Vector(0, 470), Vector(1, 0), 10, 11);
-      new BollShot(Vector(0, 520), Vector(1, 0), 10, 15);
+    if(possibilidades_para_os_tiros==0) {      
+      new BallShot(Vector(0, 280), Vector(1, 0), 10, 19);
+      new BallShot(Vector(0, 330), Vector(1, 0), 10, 10);
+      new BallShot(Vector(0, 380), Vector(1, 0), 10, 14);
+      new BallShot(Vector(0, 420), Vector(1, 0), 10, 13);
+      new BallShot(Vector(0, 470), Vector(1, 0), 10, 11);
+      new BallShot(Vector(0, 520), Vector(1, 0), 10, 15);
+      
       possibilidades_para_os_tiros=1;
 
-    } else if(possibilidades_para_os_tiros==1) {
-      new BollShot(Vector(0, 280), Vector(1, 0), 10, 10);
-      new BollShot(Vector(0, 330), Vector(1, 0), 10, 14);
-      new BollShot(Vector(0, 380), Vector(1, 0), 10, 10);
-      new BollShot(Vector(0, 420), Vector(1, 0), 10, 4);
-      new BollShot(Vector(0, 470), Vector(1, 0), 10, 2);
-      new BollShot(Vector(0, 520), Vector(1, 0), 10, 6);
+    } else if(possibilidades_para_os_tiros==1) {      
+      new BallShot(Vector(0, 280), Vector(1, 0), 10, 10);
+      new BallShot(Vector(0, 330), Vector(1, 0), 10, 14);
+      new BallShot(Vector(0, 380), Vector(1, 0), 10, 10);
+      new BallShot(Vector(0, 420), Vector(1, 0), 10, 4);
+      new BallShot(Vector(0, 470), Vector(1, 0), 10, 2);
+      new BallShot(Vector(0, 520), Vector(1, 0), 10, 6);
       possibilidades_para_os_tiros=2;
 
     } else if(possibilidades_para_os_tiros==2) {
-      new BollShot(Vector(0, 280), Vector(1, 0), 10, 15);
-      new BollShot(Vector(0, 470), Vector(1, 0), 10, 18);
-      new BollShot(Vector(0, 520), Vector(1, 0), 10, 14);
+      new BallShot(Vector(0, 280), Vector(1, 0), 10, 15);
+      new BallShot(Vector(0, 470), Vector(1, 0), 10, 18);
+      new BallShot(Vector(0, 520), Vector(1, 0), 10, 14);
       possibilidades_para_os_tiros=3;
       cont = -3; //para passar mais 3 segundos do que o normal
 
     } else if(possibilidades_para_os_tiros==3) {
-      //IMPLEMENTAR O TIRO DE LASER AQUI -----------------------------
+      //LINHAS NA PARTE ESQUERDA 
+      
+      new LineShot(Vector(0, 100), Vector(1, 1), 15, 600, 18);
+      new LineShot(Vector(0, 200), Vector(1, 1), 15, 500, 16);
+      new LineShot(Vector(0, 300), Vector(1, 1), 15, 400, 14);
+      new LineShot(Vector(0, 400), Vector(1, 1), 15, 300, 12);
+      new LineShot(Vector(0, 500), Vector(1, 1), 15, 200, 10);
+      possibilidades_para_os_tiros=4;
+
+    } else if(possibilidades_para_os_tiros==4) {
+      // linhas da parte direita
+      new LineShot(Vector(800, 100), Vector(-1, 1), 15, 600, 18);
+      new LineShot(Vector(800, 200), Vector(-1, 1), 15, 500, 16);
+      new LineShot(Vector(800, 300), Vector(-1, 1), 15, 400, 14);
+      new LineShot(Vector(800, 400), Vector(-1, 1), 15, 300, 12);
+      new LineShot(Vector(800, 500), Vector(-1, 1), 15, 200, 10);
+      possibilidades_para_os_tiros=5;
+
+    } else if(possibilidades_para_os_tiros==5) {
+      //---------------------------------------------------------ponto final da tela (800, 600)
+      //linhas da parte de baixo
+
+      new LineShot(Vector(0, 500), Vector(1, 0), 15, 800, 10);
+      new LineShot(Vector(0, 550), Vector(1, 0), 15, 800, 11);
+      new LineShot(Vector(0, 500), Vector(1, 0), 15, 800, 12);
+      new LineShot(Vector(0, 450), Vector(1, 0), 15, 800, 13);
+      new LineShot(Vector(0, 400), Vector(1, 0), 15, 800, 14);
+      new LineShot(Vector(0, 350), Vector(1, 0), 15, 800, 15);
+      new LineShot(Vector(0, 300), Vector(1, 0), 15, 800, 16);
       possibilidades_para_os_tiros=0;
     }
     
