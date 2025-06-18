@@ -28,7 +28,6 @@ void Shot::updateShots(FixedShip* player, WindowsBoss& boss) {
       listaDosTirosParaRemover.push_back(tiro);
       continue;
     }
-
     tiro->atualizar();
 
     if(!tiro->estaAtivo()) {
@@ -42,6 +41,7 @@ void Shot::updateShots(FixedShip* player, WindowsBoss& boss) {
       boss.receberDano();
       listaDosTirosParaRemover.push_back(tiro);
     }
+    
   }
 
   //remove os tiros fora da tela e que coliram
@@ -65,7 +65,7 @@ BallShot::BallShot(Vector position, Vector direcao, float raio, float speed) :
     Shot::listaDosTiros.push_back(this);
   }
  
-BallShot::~BallShot() {//std::cout<<"matei bola \n";
+BallShot::~BallShot() {std::cout<<"matei bola \n";
   }
 
 void BallShot::draw() {
@@ -132,7 +132,7 @@ LineShot::LineShot(Vector pontoInicial, Vector pontoFinal, float espessura, floa
   Shot::listaDosTiros.push_back(this);
 }
 
-LineShot::~LineShot() {//std::cout<<"matei linha \n";
+LineShot::~LineShot() {std::cout<<"matei linha \n";
   }
 
 void LineShot::draw() {
@@ -157,8 +157,10 @@ void LineShot::atualizar() {
 }
 
 bool LineShot::tiroColidioComJogador(FixedShip& player) {
-  // --- IMPLEMNETAR ISSO AQUI
-  return false;
+  if(this->_ativado==false) return false;
+
+  return (Vector::shortestDistancePointToSegment(player.get_position(), this->_position, this->_direcao)
+  <=(player.get_radius() + (_espessura/2.0f)));
 }
 
 bool LineShot::tiroColidioComBoss(WindowsBoss& boss) {

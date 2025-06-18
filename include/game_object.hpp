@@ -70,7 +70,7 @@ private:
   int _estadoBoss = 0 ; // 0, 1, 2;
 
   bool _aplicarDano = false;
-  float _vida = 100;
+  float _vida = 150;
 
   void upBoss(float Y_parada, float speed);
   void downBoss(float Y_Parada, float speed);
