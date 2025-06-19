@@ -1,17 +1,24 @@
 #ifndef LEVEL_HPP
 #define LEVEL_HPP
 
+#include <allegro5/allegro_font.h>
 #include <allegro5/bitmap.h>
-#include <iostream>
-#include <vector>
-#include "allegro5/events.h"
-#include "bootstrap.hpp"
-#include "music.hpp"
+#include <allegro5/bitmap_draw.h>
+#include <allegro5/bitmap_io.h>
+#include <allegro5/color.h>
+#include <allegro5/display.h>
+#include <allegro5/drawing.h>
+#include <allegro5/keycodes.h>
+#include <allegro5/timer.h>
+#include <unistd.h>
+#include <allegro5/bitmap.h>
 #include "abstract_obstacle.hpp"
-#include "game_object.hpp"
 #include "obstacles_list.hpp"
-#include "polygon_obstacle.hpp"
-#include "collision.hpp"
+
+/**
+ * @brief Duração padrão das fases 1 e 2 (em segundos)
+ */
+#define LEVEL_DURATION 45
 
 void interLevelOneCheckHandling(std::vector<AbstractObstacle*>& obstacles);
 
@@ -29,6 +36,16 @@ class Background {
 
 };
 
+/**
+ * @class Level
+ * @brief Base class for the game levels, encapsulates the bare minimum logic to maintain a level
+ *
+ * - _music: pointer to the level's music
+ * - _player: pointer to the level's player (either BrokenShip or FixedShip)
+ * - _bg: Parallax background
+ * - _event: level's Allegro event
+ */
+
 class Level{
   protected:
     static Music* _music;
@@ -38,16 +55,25 @@ class Level{
 
   public:
     static void setMusic(Music *music);
-    static void cleanLevel();
     friend void interLevelHandling(std::vector<AbstractObstacle*>& obstacles, ALLEGRO_BITMAP* sprite, const char* message, float bitmapScale);
 };
 
 void interLevelHandling(std::vector<AbstractObstacle*>& obstacles, ALLEGRO_BITMAP* sprite, const char* message, float bitmapScale);
 
-class LevelOne : public Level{
+/**
+ * @class LevelOne 
+ * @brief First phase of the game, basic vertically-oriented flappy bird with satellites as pipes
+*/
 
+class LevelOne : public Level{
+  
 };
 
+/**
+ * @class LevelTwo
+ * @brief Second phase of the game, vertically-oriented flappy bird with moving obstacles (asteroids)
+ * - _obstaclesList: level's list of Obstacles objects
+*/
 class LevelTwo : public Level{
   private:
     static ObstaclesList _obstaclesList;
@@ -58,14 +84,21 @@ class LevelTwo : public Level{
     static void mainLoop(bool &playing);
     static void handleTimerEvents(bool &playing, BrokenShip* player, std::vector<AbstractObstacle*>& obstacles);
     static void handleKeyPressEvents(bool &playing, BrokenShip* player);
-    static void handleKeyReleaseEvents(bool &playing);
+    static void handleKeyReleaseEvents();
 };
+
+/**
+ * @class LevelThree
+ * @brief Third phase of the game, a free-movement, shooter boss fight against Windows (The biggest piece of bloatware in earth)
+ * - Key_pressed:
+*/
 
 class LevelThree : public Level{
   private:
     static bool key_pressed[ALLEGRO_KEY_MAX];
   public:
     static FixedShip* setLevelThree();
+    static void cleanLevel();
     static void mainLoop(bool &playing);
     static void updatePlayerPosition(FixedShip* player); 
 
@@ -73,7 +106,7 @@ class LevelThree : public Level{
       WindowsBoss &windows);
 
     static void handleKeyPressEvents(bool &playing, FixedShip* player);
-    static void handleKeyReleaseEvents(bool &playing);
+    static void handleKeyReleaseEvents();
 };
 
 

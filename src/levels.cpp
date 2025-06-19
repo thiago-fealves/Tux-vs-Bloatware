@@ -1,23 +1,16 @@
 #include "levels.hpp"
-#include "bootstrap.hpp"
-#include "game_object.hpp"
-#include <allegro5/allegro_font.h>
-#include <allegro5/bitmap.h>
-#include <allegro5/bitmap_draw.h>
-#include <allegro5/bitmap_io.h>
-#include <allegro5/color.h>
-#include <allegro5/display.h>
-#include <allegro5/drawing.h>
-#include <allegro5/keycodes.h>
-#include <allegro5/timer.h>
-#include <unistd.h>
 #include "shots.hpp"
 #include "shapes_repository.hpp"
-#define LEVEL_DURATION 45
+#include "bootstrap.hpp"
+#include "game_object.hpp"
+#include "allegro5/events.h"
+#include "music.hpp"
+#include "abstract_obstacle.hpp"
+#include "game_object.hpp"
+#include "obstacles_list.hpp"
+#include "collision.hpp"
+
 using namespace std;
-
-/* Static variables */
-
 
 // Inter Level Logic
 namespace globalVars {
@@ -58,13 +51,15 @@ Background::Background()
 }
 
 
-// Levels 
+/* -- Levels -- */
+
+// Initialization of shared variables
 Background Level::_bg;
 GameObject* Level::_player = nullptr;
 ALLEGRO_EVENT Level::_event;
 Music* Level::_music = nullptr;
-
-
+PipeList pipeList; 
+ObstaclesList LevelTwo::_obstaclesList;
 
 void Background::renderBackground() {
 
@@ -79,24 +74,31 @@ void Background::renderBackground() {
 
 }
 
-PipeList pipeList; 
 
-// Level Two
-ObstaclesList LevelTwo::_obstaclesList;
+/* Starting and cleaning levels */
 
-/* Initializing and cleaning levels */
+/**
+ * @brief Set the level's music 
+ * @param pointer to a .ogg file with the level's music
+*/
 void Level::setMusic(Music* music){
     _music = music;
 }
 
-BrokenShip* LevelTwo::setLevelTwo(){
+/**
+ * @brief Initializes Level Two 
+ * @return Pointer to the player object, in this case BrokenShip
+*/
+
+BrokenShip* LevelTwo::setLevelTwo() {
+
     // Setting Player
     _player = new BrokenShip();
     BrokenShip* Player = dynamic_cast<BrokenShip*>(_player);
     Player->set_position(Vector(400, 300));
     
     // Setting Music
-    setMusic(level_two_music); //AQUI--------------
+    setMusic(level_two_music); 
 
     // Setting Obstacles 
     //_obstaclesList.setPolygonsObstaclesList(shape_repository["asteroid2"], "./assets/asteroid2.png");
@@ -111,14 +113,21 @@ BrokenShip* LevelTwo::setLevelTwo(){
     pipeList.generatePipes(
         shapeLeft,
         shapeRight,
-        "./assets/new_pipe_left.png",
-        "./assets/new_pipe_right.png"
+        "./assets/pipe_left.png",
+        "./assets/pipe_right.png"
     );
 
 
     return Player;
 }
-FixedShip* LevelThree::setLevelThree(){
+
+/**
+ * @brief Initializes Level Three 
+ * @return Pointer to the player object, in this case FixedShip
+*/
+
+FixedShip* LevelThree::setLevelThree() {
+
   // Setting Player
   _player = new FixedShip;
   FixedShip* Player = dynamic_cast<FixedShip*>(_player);
@@ -129,12 +138,8 @@ FixedShip* LevelThree::setLevelThree(){
   return Player;
 }
 
-void Level::cleanLevel(){
-    delete _player;
-    _music = nullptr;
-    _player = nullptr;
-}
-
+/* @brief Frees memory used on Level Two
+*/
 void LevelTwo::cleanLevel(){
   delete _player;
   _music = nullptr;
@@ -142,7 +147,19 @@ void LevelTwo::cleanLevel(){
   pipeList.clear();
 }
 
-/* Event Logic Level Two*/
+void LevelThree::cleanLevel(){
+  delete _player;
+  _music = nullptr;
+  _player = nullptr;
+}
+
+/* Event Logic for Level Two */
+
+/* @brief Controls what is done when keys are pressed
+ * @param playing Reference to the loop control variable, so we can close the game when escape is pressed
+ * @param player Pointer to the player object of this phase (BrokenShip class)
+*/
+
 void LevelTwo::handleKeyPressEvents(bool &playing, BrokenShip* player){
     switch (_event.keyboard.keycode) {
         case ALLEGRO_KEY_SPACE:                    
@@ -172,7 +189,10 @@ void LevelTwo::handleKeyPressEvents(bool &playing, BrokenShip* player){
     }
 }
 
-void LevelTwo::handleKeyReleaseEvents(bool &playing){
+/**
+ * @brief Simple method for debug and logging
+*/
+void LevelTwo::handleKeyReleaseEvents(){
     switch (_event.keyboard.keycode) {
         case ALLEGRO_KEY_SPACE:
         cout << "space key was released" << endl;
@@ -180,7 +200,14 @@ void LevelTwo::handleKeyReleaseEvents(bool &playing){
     }
 }
 
+/**
+ * @brief Controls automatic events and events trigerred by time, implements DeltaTime
+ * @param playing loop control variable to close the game on collision
+ * @param player the player object of this phase (Brokenship class)
+ * @param obstacles Reference to vector of AbstractObstacles of this phase
+*/
 void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<AbstractObstacle*>& obstacles){
+
     // Update the music
     Music::update_fade_in_fade_out();
     bool collision_this_frame = false;
@@ -188,6 +215,7 @@ void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<Abstr
     // Update and redraw the game state
     al_clear_to_color(al_map_rgb(0,0,0));
     _bg.renderBackground();
+
     // Log elapsed time to the console every second
     if (al_get_timer_count(timer) % (int)FPS == 0) {
         cout << al_get_timer_count(timer) / FPS << " second..." << endl;
@@ -219,6 +247,7 @@ void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<Abstr
     al_flip_display();
 }
 
+
 /* Event Logic Level Three */
 bool LevelThree::key_pressed[ALLEGRO_KEY_MAX] = { false };
 
@@ -231,7 +260,7 @@ void LevelThree::handleKeyPressEvents(bool &playing, FixedShip* player){
             break;
 
         case ALLEGRO_KEY_ESCAPE:
-            cleanLevel();
+            LevelThree::cleanLevel();
             playing = false;
             break;
     }
@@ -279,6 +308,11 @@ void LevelThree::handleTimerEvents(bool &playing, FixedShip* player, WindowsBoss
 }
 
 /* Main Loops */
+
+/**
+ * @brief MainLoop of game's second phase
+ * @param playing Loop control variable to finish the level on collision or quit
+*/
 void LevelTwo::mainLoop(bool &playing){  
     // Initializing level
     al_set_timer_count(timer, 0);
@@ -304,7 +338,7 @@ void LevelTwo::mainLoop(bool &playing){
 
         // Key release events
         else if (_event.type == ALLEGRO_EVENT_KEY_UP) {
-          handleKeyReleaseEvents(playing);
+          handleKeyReleaseEvents();
         }
 
         // Handle window close event
@@ -347,7 +381,7 @@ void LevelThree::mainLoop(bool &playing){
 
         // Handle window close event
         else if (_event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
-            cleanLevel();
+            LevelThree::cleanLevel();
             playing = false; 
         }
     }
