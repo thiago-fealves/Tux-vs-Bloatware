@@ -1,25 +1,48 @@
 #include "movement.hpp"
 #include <cmath>
 
+/**
+ * @brief Creates a new vector based on x and y values
+*/
 Vector::Vector(float x, float y) : _x(x), _y(y) {}
 
+/**
+ * @brief Creats a new vector based on one value
+*/
 Vector::Vector(float _xy) : Vector(_xy, _xy) {}
 
+/**
+ * @brief Creates a new default vector
+*/
 Vector::Vector() : Vector(0.0f, 0.0f) {}
 
-// Vector arithmetic
+/* Vector arithmetic */
+
+/**
+ * @brief Implements vector sum using operator overload
+*/
 Vector Vector::operator+(const Vector &other) const{
   return Vector(this->_x + other._x, this->_y + other._y);
 }
+
+/**
+ * @brief Implements vector subtraction using operator overload
+*/
 Vector Vector::operator-(const Vector &other) const{
   return Vector(this->_x - other._x, this->_y - other._y);
 }
+
+/**
+ * @brief Implements vector multiplication by scalar using operator overload
+*/
 Vector Vector::operator*(float value) const{
   return Vector(this->_x * value, this->_y * value);
 }
+
 float Vector::dot(const Vector& a, const Vector& b){
   return (a._x * b._x + a._y * b._y);
 }
+
 float Vector::distance(const Vector& a, const Vector& b){
   Vector d = a - b;
   return dot(d, d);

@@ -1,5 +1,10 @@
 #ifndef MOVEMENT_HPP
 #define MOVEMENT_HPP
+
+/**
+ * @class Vector
+ * @brief Implements 2D vectors that represent cartesian coordinates
+*/
 struct Vector{
   public:
     float _x, _y;
