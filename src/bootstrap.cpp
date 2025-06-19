@@ -1,32 +1,34 @@
-#include <allegro5/allegro.h>
-#include <allegro5/allegro_font.h>
-#include <allegro5/allegro_primitives.h>
-#include <allegro5/allegro_ttf.h>
-#include <allegro5/mouse.h>
 #include <iostream>
 #include "bootstrap.hpp"
-#include "allegro5/events.h"
-#include "allegro5/timer.h"
-#include <allegro5/allegro_image.h>
+#include "sound.hpp"
+#include "music.hpp"
 
+using namespace std;
+
+/* Initialize Allegro Components */
 const ALLEGRO_COLOR BACKGROUND_COLOR = al_map_rgb(0, 0, 0);
 ALLEGRO_DISPLAY* display = nullptr;
 ALLEGRO_EVENT_QUEUE* event_queue = nullptr;
 ALLEGRO_TIMER* timer = nullptr;
-ALLEGRO_FONT* gameFont = nullptr; //fonte universal //new deivid
+
+/* Initialize Fonts */
+ALLEGRO_FONT* gameFont = nullptr; 
 ALLEGRO_FONT* levelFont = nullptr;
+
+/* Initialize Assets */
 ALLEGRO_BITMAP* gameOverBackground = nullptr; //tela
 ALLEGRO_BITMAP* pinguimBandido = nullptr;
 ALLEGRO_BITMAP* pendrive = nullptr;
 ALLEGRO_BITMAP* backgroundImage = nullptr;
 
-
+/* Initialize Sound FX */
 Sound* death_sound = nullptr;
 Sound* gunshot_sound1 = nullptr;
 Sound* gunshot_sound2 = nullptr;
 Sound* gunshot_sound3 = nullptr;
 Sound* gunshot_sound4 = nullptr;
 
+/* Initialize Game Music */
 Music* menu_music = nullptr;
 Music* pause_game_music = nullptr;
 Music* level_one_music = nullptr;
@@ -35,14 +37,22 @@ Music* level_three_music = nullptr;
 Music* defeat_music = nullptr;
 Music* victory_music = nullptr;
 
-using namespace std;
-
+/**
+ * @brief utility class that checks if a file exists
+ * @param path Path to the file
+ * @return boolean indicating if the file exists
+*/
 bool Bootstrap::file_exists(const char* path) {
     return (access(path, F_OK) == 0);
 }
 
+/**
+ * @brief Initialializes allegro libs one by one while checking if sucessfull, if not, print an error
+ * @return true if all initializes correctly, false if not
+*/
 bool Bootstrap::init_allegro_libs(){
-    // Initialize Allegro library
+
+    // Initialize Allegro base library
     if (!al_init()) {
         cout << "ERROR:" << "failed to initialize allegro" << endl;
         return false;
@@ -60,13 +70,13 @@ bool Bootstrap::init_allegro_libs(){
         al_destroy_timer(timer);
         return false;
     }
-
+    // Initialize Allegro image addon
     if(!al_init_image_addon()) {
         cout<< "ERROR:" << "failed to initialize images" << endl;
         return false;
     }
 
-    // Create an event queue to handle events
+    // Create an Event queue to handle events
     event_queue = al_create_event_queue();
     if (!event_queue) {
         cout << "ERROR:" << "failed to create _event_queue" << endl;
@@ -100,7 +110,7 @@ bool Bootstrap::init_allegro_libs(){
         return false;
     }
 
-    //add deivid: cria a fonte do jogo 
+    // add deivid: cria a fonte do jogo 
     gameFont = al_load_font("./assets/katana.ttf", 30, 0); 
     levelFont = al_load_font("./assets/katana.ttf", 20, 0);
     if (!gameFont || !levelFont) {
@@ -122,7 +132,8 @@ bool Bootstrap::init_allegro_libs(){
         al_destroy_event_queue(event_queue);
         return false;
     }
-
+    
+    // Load player sprite
     pinguimBandido = al_load_bitmap("./assets/pinguim_bandido.png"); 
     if (!pinguimBandido) {
         cout << "ERROR: Failed to load image './assets/pinguim_bandido.png'!" << endl;
@@ -131,6 +142,8 @@ bool Bootstrap::init_allegro_libs(){
         al_destroy_event_queue(event_queue);
         return false;
     }
+
+    // Load pendrive sprite
     pendrive = al_load_bitmap("./assets/pendrive.png"); 
     if (!pendrive) {
         cout << "ERROR: Failed to load image './assets/pendrive.png'!" << endl;
@@ -139,6 +152,8 @@ bool Bootstrap::init_allegro_libs(){
         al_destroy_event_queue(event_queue);
         return false;
     }
+
+    // Load background sprite
     backgroundImage = al_load_bitmap("./assets/background.png"); 
     if (!pendrive) {
         cout << "ERROR: Failed to load image './assets/background.png'!" << endl;
@@ -180,6 +195,11 @@ bool Bootstrap::initialize_sys_sound() {
     return true;
 }
 
+/**
+ * @brief 
+ *
+ *
+*/
 bool Bootstrap::initialize_sounds() {
     if(Bootstrap::initialize_sys_sound()==false) {
         std::cout << "Error initializing audio system\n";
@@ -214,6 +234,9 @@ bool Bootstrap::initialize_sounds() {
     return true;
 }
 
+/**
+ * @brief Regiester all allegro event sources used in the game
+*/
 void Bootstrap::register_allegro_events(){
     // Register event sources for the event queue
     al_register_event_source(event_queue, al_get_display_event_source(display));
@@ -222,6 +245,9 @@ void Bootstrap::register_allegro_events(){
     al_register_event_source(event_queue, al_get_mouse_event_source());
 }
 
+/**
+ * @brief Fully initializes Allegro
+*/
 bool Bootstrap::initialize_allegro(){
     if (!Bootstrap::init_allegro_libs()) return false;
     if (!Bootstrap::initialize_sounds()) return false;
@@ -230,6 +256,9 @@ bool Bootstrap::initialize_allegro(){
     return true;
 } 
 
+/**
+ * @brief Frees the memory deleting all pointers and destroys allegro components
+*/
 void Bootstrap::cleanup_allegro(){
     al_destroy_timer(timer); timer = nullptr;
     al_destroy_display(display); display = nullptr;
