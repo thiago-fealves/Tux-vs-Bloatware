@@ -1,56 +1,102 @@
+#include <iostream>
 #include "game_object.hpp"
 #include "shots.hpp"
-#include <iostream>
 
-// Game Object
+/* Game Object */
 
+/**
+ * @brief Create a new default GameObject 
+*/
 GameObject::GameObject() : _position(Vector()) {}
 
+/**
+ * @brief Create a new GameObject on given position
+*/
 GameObject::GameObject(Vector position) : _position(position) {}
 
+/**
+ * @brief Game Object empty destructor
+*/
 GameObject::~GameObject() {}
+
+/**
+ * @brief Get the position of a GameObject
+ * @return A vector that represents the GameObject position
+*/
 Vector GameObject::get_position(){
   return this->_position;
 }
 
+/**
+ * @brief Sets the sprite of the GameObject
+*/
 void GameObject::set_bitmap(const char *path) {
     objectSprite = al_load_bitmap(path);
 }
 
+/**
+ * @brief Sets the position of a GameObject
+*/
 void GameObject::set_position(const Vector &position){
   this->_position = position; 
 }
 
-// Flappy Movement
+/* Flappy Movement */
+
+// Initializing global variables
 Vector FlappyMovement::gravity = Vector(10, 0);
 Vector FlappyMovement::move_force = Vector(100, 0);
+const int PLAYER_RADIUS = 50;
 
+/**
+ * @brief Apply gravity physics on the object 
+*/
 void FlappyMovement::apply_gravity(){
-  if (this->get_position()._x > 50) set_position(this->get_position() - gravity); // Valor temporário trocar quando fizer o sprite
+  if (this->get_position()._x > PLAYER_RADIUS){
+    set_position(this->get_position() - gravity); 
+  }
 }
 
+/**
+ * @brief Apply movement physics on the object
+*/
 void FlappyMovement::move_flappy(){
   set_position(this->get_position() + move_force); 
 }
 
-// FixedShip
+/* FixedShip */
+
+// Settings Global variables 
 float FixedShip::_radius = 10;
 float FixedShip::move_force = 15;
 FixedShip::FixedShip() : FixedShip(Vector(375,300)) {}
 
+/**
+ * @brief Get FixedShip(player)'s Hitbox radius
+ * @returns A float that indicates the player's Hitbox Radius
+*/
 float FixedShip::get_radius() const {
     return _radius;
 }
 
+/**
+ * @brief Sets a radius to the player
+*/
 void FixedShip::set_radius(float r) {
     _radius = r;
 }
 
+/**
+ * @brief Creates a new FixedShip 
+*/
 FixedShip::FixedShip(const Vector &pos){
   this->set_position(pos);
   this->set_bitmap("./assets/tux.png");
   this->set_radius(50);
 }
+/**
+ * @brief Implements 2D movement on FixedShip
+*/
 void FixedShip::moveShip(char direction){
     Vector position = get_position();
 
@@ -74,6 +120,10 @@ void FixedShip::moveShip(char direction){
 
     set_position(position);
 }
+
+/**
+ * @brief Draw the player on the screen
+*/
 void FixedShip::draw(){
   Vector pos = GameObject::get_position();
   // The total sprite region is a square of _radius*2 x _radius*2
@@ -92,20 +142,33 @@ void FixedShip::draw(){
           0);
 }
 
+/**
+ * @brief Get the Move Force of a flappy movement 
+ * @return A Vector that represents the mount of force the object applies on itself in order to move
+*/
 Vector FlappyMovement::getMoveForce(){
   return FlappyMovement::move_force;
 }
 
+/* BorkenShip */
 
-// Broken Ship
+/**
+ * @brief Create a new default BrokenShip 
+*/
 BrokenShip::BrokenShip() : BrokenShip(Vector(375,300)) {}
 
+/**
+ * @brief Create a new BrokenShip at given position
+*/
 BrokenShip::BrokenShip(const Vector &pos){
   this->set_position(pos);
   this->set_bitmap("./assets/tux.png");
   this->set_radius(50);
 }
 
+/**
+ * @brief Draw the BrokenShip on the screen
+*/
 void BrokenShip::draw(){
   Vector pos = GameObject::get_position();
   // The total sprite region is a square of _radius*2 x _radius*2
@@ -124,19 +187,32 @@ void BrokenShip::draw(){
           0);
 }
 
+/**
+ * @brief Updates the physics of the BrokenShip by gravity and then re-draw it on the screen
+*/
 void BrokenShip::update(){
   this->apply_gravity();
   this->draw();
 }
 
+/**
+ * @brief Get the radius of the BrokenShip
+ * @return Float that represents the BrokenShip's Hitbox radius
+*/
 float BrokenShip::get_radius() const {
     return _radius;
 }
 
+/**
+ * @brief Sets the radius of the BrokenShip Hitbox's
+*/
 void BrokenShip::set_radius(float r) {
     _radius = r;
 }
 
+/**
+ * @brief Moves the BrokenShip back to default position
+*/
 void BrokenShip::restart() {
     this->set_position(Vector(375, 300));
 }

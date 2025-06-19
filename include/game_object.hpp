@@ -1,18 +1,20 @@
 #ifndef GAME_OBJECT_HPP
 #define GAME_OBJECT_HPP
 
-#include "movement.hpp"
-#include "bootstrap.hpp"
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/bitmap.h>
 #include <allegro5/bitmap_draw.h>
 #include <allegro5/bitmap_io.h>
+#include "movement.hpp"
 
-#include <string>
-#include <list>
+/** 
+ * @class GameObject
+ * @brief Base class to objects of the game   
+ * - _position: Vector that represents object's current position on screen 
+*/
 
-class GameObject{
+class GameObject {
   protected:
     Vector _position; 
   public:
@@ -25,6 +27,13 @@ class GameObject{
     void set_bitmap(const char* path);
 };
 
+/** 
+ * @class FlappyMovement
+ * @brief Base class that implements Flappy-Bird-like movement
+ * - gravity: Vector that represents the force that pulls the main character
+ * - move_force: Vector that represents the force object applies on itself to move
+ */
+
 class FlappyMovement : public GameObject {
   private:
     static Vector gravity;
@@ -35,6 +44,12 @@ class FlappyMovement : public GameObject {
     Vector getMoveForce();
 };
 
+/** 
+ * @class FixedShip
+ * @brief Player of phase 3, implements 2D movement
+ * - move_force: Vector that represents the force object can exerce on himself
+ * - _radius: Object's Hitbox radius
+ */
 class FixedShip : public GameObject{
   private:
     static float move_force;
@@ -47,10 +62,13 @@ class FixedShip : public GameObject{
     void moveShip(char direction);
     void draw();
 };
-
+/** 
+ * @class BrokenShip
+ * @brief Player of phases 1 and 2, implements Flappy Movement
+ * - _radius: Object's Hitbox radius
+ */
 class BrokenShip : public FlappyMovement {
   private:
-    const ALLEGRO_COLOR OBJ_COLOR = al_map_rgb(10, 200, 20);
     float _radius = 12;
   public:
     BrokenShip();
