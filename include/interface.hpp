@@ -9,11 +9,32 @@
 #include <string>
 
 
+/**
+ * @struct Coordinates
+ * 
+ * @brief Extremely basic coordinates struct.
+ * Takes x and y coordinates, width and height 
+ * as paramenters. Mostly used to keep better logic
+ * in buttons
+ */
+
 struct Coordinates {
     double _x, _y, _width, _heigth;
 
     Coordinates(double x, double y, double width, double heigth);
 };
+
+/**
+ * @class Button
+ * 
+ * @brief simple button logic with draw, click checking and setText
+ * functions
+ *
+ * - _coords: x and y coordinates, width and height of the created button
+ * - _text: button text
+ * - _font: pointer to an allegro font
+ * - _drawBackground: option to draw or not to draw the background
+ */
 
 class Button {
     Coordinates _coords;
@@ -24,12 +45,21 @@ class Button {
     bool _drawBackground;
     
     public:
-        Button(Coordinates coords, ALLEGRO_COLOR color, std::string text, ALLEGRO_FONT* font, bool drawBackground = true);
+        Button(Coordinates coords, ALLEGRO_COLOR color, std::string text,
+                ALLEGRO_FONT* font, bool drawBackground = true);
         void drawButton();
         bool gotClicked(int mx, int my);
         void setText(const char* txt);
 
 };
+
+/**
+ * @class Interface
+ * 
+ * @brief Base game start interface using
+ * button class
+ */
+
 
 class Interface {
     

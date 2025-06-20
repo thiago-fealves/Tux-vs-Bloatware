@@ -18,11 +18,27 @@
 /**
  * @brief Duração padrão das fases 1 e 2 (em segundos)
  */
-#define LEVEL_DURATION 45
+#define LEVEL_DURATION 15
 
-void interLevelOneCheckHandling(std::vector<AbstractObstacle*>& obstacles);
 
-void interLevelTwoCheckHandling();
+/**
+ * @brief Clears the obstacles, draw a selected sprite with a
+ * user controlled scale and a message
+ *
+ * @param obstacles vector of abstract obstacles to be cleared
+ * @param sprite allegro-typed bitmap of sprite
+ * @param message message in the screen
+ * @param bitmapScale new width and heigth scale
+ */
+
+void interLevelHandling(std::vector<AbstractObstacle*>& obstacles, ALLEGRO_BITMAP* sprite, const char* message, float bitmapScale);
+
+/**
+ * @class Background
+ *
+ * @brief moving background logic
+ *
+ */
 
 class Background {
     float scrollSpeed;

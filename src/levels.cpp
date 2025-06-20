@@ -61,6 +61,10 @@ Music* Level::_music = nullptr;
 PipeList pipeList; 
 ObstaclesList LevelTwo::_obstaclesList;
 
+
+/**
+ * @brief renders the moving background 
+*/
 void Background::renderBackground() {
 
     bgY += scrollSpeed;
@@ -244,6 +248,7 @@ void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<Abstr
     //interLevelHandling(obstacles, pendrive, "PARABENS, VOCÊ É DIGNO DE INSTALAR O LINUX, APERTE ENTER PARA PEGAR O PENDRIVE E DESTRUA O WINDOWS!!", 250); 
     // Essa linha deve ser movida para o final do handleTimerEvents do nível dois e a linha superior à esta deve ser movida para o handleTimerEvents do nível 1 quando estiver pronto
     // TODO: fazer ajustes sobre o interLevel quando o nível 1 ficar pronto;
+    // alguém lembra o Gabriel de fazer isso por favor ^
     al_flip_display();
 }
 
