@@ -3,8 +3,8 @@
 #include "bootstrap.hpp"
 
 Pipe::Pipe(const Vector &startPosition, const std::vector<Vector> &shapeLeft, const std::vector<Vector> &shapeRight, const char *imagePathLeft, const char *imagePathRight)
-    : leftPipe(startPosition, shapeLeft, imagePathLeft),
-      rightPipe(Vector(startPosition._x + 625, startPosition._y), shapeRight, imagePathRight)
+    : leftPipe(startPosition, shapeLeft, SCALE_PIPES, imagePathLeft),
+      rightPipe(Vector(startPosition._x + 625, startPosition._y), shapeRight, SCALE_PIPES,imagePathRight)
 {
     setSpeed(Vector(0, 5));
 }
@@ -18,7 +18,7 @@ void Pipe::update() {
 
     // se os canos passaram do limite inferior da tela
     if (lPos._y > SCREEN_H + 90) {
-        float pipeWidth = al_get_bitmap_width(leftPipe.objectSprite) * 0.33f;
+        float pipeWidth = al_get_bitmap_width(leftPipe.objectSprite) * SCALE_PIPES;
         float halfSpan = gap / 2 + pipeWidth / 2;
 
         // intervalo seguro para o centro

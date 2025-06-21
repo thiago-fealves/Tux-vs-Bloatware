@@ -42,11 +42,14 @@ int main(int argc, char** argv) {
 
     start:
        
-        //LevelThree::mainLoop(playing);
-        //LevelThree::cleanLevel();
-
+       
+        LevelOne::mainLoop(playing);//executa o nivel
+        LevelOne::cleanLevel(); ///limpa o nivel 
         LevelTwo::mainLoop(playing);//executa o nivel
-        LevelTwo::cleanLevel(); ///limpa o nivel
+        LevelTwo::cleanLevel(); ///limpa o nivel 
+        LevelThree::mainLoop(playing);
+        LevelThree::cleanLevel();
+
 
     //Transicao para GAME OVER
        if (playing) continue;
@@ -64,7 +67,7 @@ int main(int argc, char** argv) {
             if (dynamic_cast<playAgain*>(chosen_action.get()) != nullptr) {
                 cout << "Reiniciando o jogo...\n";
                 //LevelTwo::cleanLevel();
-                LevelTwo::cleanLevel();
+                LevelOne::cleanLevel();
                 goto start;
                 playing = true;
                 inMenu = false;
