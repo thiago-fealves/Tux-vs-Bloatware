@@ -45,7 +45,7 @@ bool PolygonObstacle::checkCollisionWithPlayer(BrokenShip& player){
             al_map_rgb(255, 255, 0),      
             1.0f);*/
             
-        if (Vector::shortestDistancePointToSegment(player.get_position(), a, b) <= player.get_radius() * player.get_radius()) return true;
+        if (Vector::shortestDistancePointToSegment(player.get_position(), a, b) <= player.get_radius()) return true;
     }
     return false;
 }
