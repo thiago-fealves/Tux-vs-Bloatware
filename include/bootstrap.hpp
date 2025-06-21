@@ -23,7 +23,9 @@
 constexpr float FPS = 30; 
 constexpr int SCREEN_W = 800; 
 constexpr int SCREEN_H = 600;
-constexpr int OBSTACLES_LIST_NUM = 5;
+constexpr int OBSTACLES_LIST_NUM = 6;
+constexpr float SCALE_PIPES = 0.33f;
+constexpr float SCALE_ASTEROID = 0.19f;
 extern const ALLEGRO_COLOR BACKGROUND_COLOR;
 
 /* Allegro Components */
