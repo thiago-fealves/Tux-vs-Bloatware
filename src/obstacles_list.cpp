@@ -80,7 +80,7 @@ void PipeList::generatePipes(const std::vector<Vector>& shapeLeft,
                              const char* imagePathRight) {
     
     pipes.push_back(new Pipe(Vector(100, -100), shapeLeft, shapeRight, imagePathLeft, imagePathRight));
-    pipes.push_back(new Pipe(Vector(200, -470), shapeLeft, shapeRight, imagePathLeft, imagePathRight));
+    pipes.push_back(new Pipe(Vector(170, -470), shapeLeft, shapeRight, imagePathLeft, imagePathRight));
 
 }
 
