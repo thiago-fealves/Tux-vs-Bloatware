@@ -9,9 +9,9 @@ void PolygonObstacle::draw() {
             Vector pos = get_position();
             al_draw_scaled_bitmap(objectSprite,
                 0, 0, sprite_width, sprite_height,
-                pos._x - (sprite_width * scale) / 2.0f,
-                pos._y - (sprite_height * scale) / 2.0f,
-                sprite_width * scale, sprite_height * scale,
+                pos._x - (sprite_width * _scale) / 2.0f,
+                pos._y - (sprite_height * _scale) / 2.0f,
+                sprite_width * _scale, sprite_height * _scale,
                 0
             );
     }

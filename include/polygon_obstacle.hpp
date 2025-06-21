@@ -10,17 +10,17 @@ class PolygonObstacle : public AbstractObstacle{
 
 private:
   std::vector<Vector> vertices;
-  float scale = 0.33f;
+  float _scale = 1.00f;
 
 public:
-    PolygonObstacle(const Vector &pos, const std::vector<Vector>& verts, const char* imagePath)
-        : vertices(verts) {
+    PolygonObstacle(const Vector &pos, const std::vector<Vector>& verts, float scale, const char* imagePath)
+        : vertices(verts), _scale(scale) {
 
         this->set_position(pos);
 
         // aplica a escala em todo o vetor
         for (auto& v : vertices) {
-            v = v * scale;
+            v = v * _scale;
         }
 
         this->set_bitmap(imagePath);
