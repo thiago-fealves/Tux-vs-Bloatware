@@ -1,6 +1,6 @@
 #include "shots.hpp"
 #include "windows_boss.hpp"
-
+#include "collision.hpp"
 //    --- BALL SHOT --- 
 /**
  * @class Shot 

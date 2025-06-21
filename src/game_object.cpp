@@ -150,6 +150,13 @@ Vector FlappyMovement::getMoveForce(){
   return FlappyMovement::move_force;
 }
 
+/**
+ * @brief Removes a life from the player, if the life is zero, the game is over.
+ */
+void FixedShip::takeDamage(bool &playing) {
+  _life--;
+  if(_life<=0) playing=false;
+}   
 
 // Broken Ship
 BrokenShip::BrokenShip() : BrokenShip(Vector(375,300)) {}
