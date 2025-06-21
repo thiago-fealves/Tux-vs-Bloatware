@@ -1,168 +1,237 @@
-
 #include "shots.hpp"
+#include "windows_boss.hpp"
 
+//    --- BALL SHOT --- 
+/**
+ * @class Shot 
+ * 
+ * @brief represents a shot in a more abstract way, abstract class.
+ */
 
-// --- SHOT ---  
+// Initializes static members
+std::list<Shot*> Shot::activeShotsList; 
+std::vector<Shot*> Shot::inactiveShotsList; 
 
-std::list<Shot*> Shot::listaDosTiros; //inicializo a lista dos tiros
-std::vector<Shot*> Shot::listaDosTirosParaRemover; //inicializo a lista dos tiros para remover
+/**
+ * @brief Build a standard shot.
+ * 
+ * @param position The initial position of the shot.
+ * @param direction A vector in which the shot moves or points.
+ * @param shotColor A shot color.
+ */
+Shot::Shot(Vector position, Vector direction, ALLEGRO_COLOR shotColor) : 
+      GameObject(position), _direction(direction), _shotColor(shotColor) {}
 
-Shot::Shot(Vector position, Vector direcao, ALLEGRO_COLOR shotColor) : 
-      GameObject(position), _direcao(direcao), _shotColor(shotColor) {}
-
-void Shot::removerTirosForaDaTela() {
-  for(auto tiro : Shot::listaDosTirosParaRemover) {
+/**
+ * @brief Clears the list of shots to be removed. (deletes all of them).
+ */
+void Shot::removeShots() {
+  for(auto tiro : Shot::inactiveShotsList) {
     if(tiro != nullptr) delete tiro;
-    Shot::listaDosTiros.remove(tiro);
+    Shot::activeShotsList.remove(tiro);
 
   }
-  Shot::listaDosTirosParaRemover.clear();
+  Shot::inactiveShotsList.clear();
 }
   
-void Shot::updateShots(FixedShip* player, WindowsBoss& boss) {
+/**
+ * @brief For all shots, from the shot list, they are updated and then it is
+ *  checked if the shot is active or if it collided with something (boss or the player)
+ * 
+ * @param player Player pointer.
+ * @param boss Boss address(windows).
+ * @param playing Address of the variable that indicates whether the game is still active.
+ */
+void Shot::updateShots(FixedShip* player, WindowsBoss& boss, bool &playing) {
 
   //atualiza a posição dos tiros e checa colisao
-  for(Shot* tiro : Shot::listaDosTiros) {
+  for(Shot* shot : Shot::activeShotsList) {
 
-    if(tiro==nullptr) {
-      listaDosTirosParaRemover.push_back(tiro);
-      continue;
-    }
-    tiro->atualizar();
+    if(shot==nullptr) continue;
+  
+    shot->update();
 
-    if(!tiro->estaAtivo()) {
-      listaDosTirosParaRemover.push_back(tiro);
+    if(!shot->isItActive()) {
+      inactiveShotsList.push_back(shot);
     
-    }else if(tiro->tiroColidioComJogador(*player)) {
-      Shot::colisaoJogador(); // ------- isso ainda n faz nada
-      listaDosTirosParaRemover.push_back(tiro);
+    }else if(shot->shotCollidedWithPlayer(*player)) {
+      player->takeDamage(playing);
+      inactiveShotsList.push_back(shot);
 
-    } else if(tiro->tiroColidioComBoss(boss)) {
-      boss.receberDano();
-      listaDosTirosParaRemover.push_back(tiro);
+    } else if(shot->shotCollidedWithBoss(boss)) {
+      boss.takeDamage();
+      inactiveShotsList.push_back(shot);
     }
     
   }
 
-  //remove os tiros fora da tela e que coliram
-  removerTirosForaDaTela();
+  // Removes the shots that are in the list of shots to remove.
+  removeShots();
 
 }
 
+/**
+ * @brief Calls the draw() function of all active shots.
+ */
 void Shot::drawShots() {
-  //preciso fazer com que toda a listas de tiros seja desenhada
-  for(auto it : Shot::listaDosTiros) it->draw();
+  for(auto shot : Shot::activeShotsList) shot->draw();
 }
 
-void Shot::colisaoJogador() {
-  //retira um ponto de vida do jogador
-}
 
-// --- BALL SHOT --- 
+//    --- BALL SHOT --- 
+/**
+ * @class Ball Shot
+ * 
+ * @brief represents a ball-shaped shot.
+ */
 
-BallShot::BallShot(Vector position, Vector direcao, float raio, float speed) : 
-  Shot(position, direcao, al_map_rgb(100, 150, 200)), _speed(speed), _raio(raio) {
-    Shot::listaDosTiros.push_back(this);
+/**
+ * @brief Constructs a ball-shaped shot and inserts it into the shot list.
+ * 
+ * @param initialPosi The initial position of the shot.
+ * @param direction A vector in which the shot moves.
+ * @param radius Radius of the shot.
+ * @param speed Speed of the shot.
+ */
+BallShot::BallShot(Vector initialPosi, Vector direction, float radius, float speed) : 
+  Shot(initialPosi, direction, al_map_rgb(100, 150, 200)), _speed(speed), _radius(radius) {
+    Shot::activeShotsList.push_back(this);
   }
  
-BallShot::~BallShot() {std::cout<<"matei bola \n";
-  }
-
+/**
+ * @brief Draw a ball
+ */
 void BallShot::draw() {
-  al_draw_filled_circle(_position._x, _position._y, _raio, _shotColor);
+  al_draw_filled_circle(_position._x, _position._y, _radius, _shotColor);
 }
 
-void BallShot::atualizar() {
-  this->_position = this->_position + (this->_direcao * this->_speed);
+/**
+ * @brief Add to the position of the ball (shot), the direction
+ *  vector multiplied by the velocity. (normally the direction vectors are unitary)
+ */
+void BallShot::update() {
+  this->_position = this->_position + (this->_direction * this->_speed);
 }
 
-bool BallShot::estaAtivo() {
-  return !(((_position._x + _raio) < 0 || (_position._x - _raio) > SCREEN_W) ||
-          ((_position._y + _raio) < 0 || (_position._y - _raio) > SCREEN_H));
+/**
+ * @brief Checks if the ball (shot) positions are within the game region.
+ * 
+ * @return If the ball shot is still active.
+ */
+bool BallShot::isItActive() {
+  return !(((_position._x + _radius) < 0 || (_position._x - _radius) > SCREEN_W) ||
+          ((_position._y + _radius) < 0 || (_position._y - _radius) > SCREEN_H));
 }
 
-bool BallShot::colisaoDeCirculoComQuadrado(Vector centroCirculo, float raio, Vector centroQuadrado, float meioLado) {
-    
-  //Calcular distância do centro do círculo até o centro do retângulo
-  float distanciaNoX = std::abs(centroCirculo._x - centroQuadrado._x);
-  float distanciaNoY = std::abs(centroCirculo._y - centroQuadrado._y);
-
-  //Verificar se está fora demais (não pode colidir):
-  if (distanciaNoX > (meioLado + raio)) return false;
-  if(distanciaNoY > (meioLado + raio)) return false;
-
-  //Verificar se está dentro dos limites horizontais ou verticais:
-  if(distanciaNoX <= meioLado) return true;
-  if(distanciaNoY <= meioLado) return true;
-
-
-  // caso o circulo se colida com o quadrado pelo CANTO temos q fzr 
-  // pitagoras para saber  
-  float cantoX = distanciaNoX - meioLado;
-  float cantoY = distanciaNoY - meioLado;
-  return ((cantoX*cantoX + cantoY*cantoY) <= (raio*raio));
-
+/**
+ * @brief Checks if the ball (shot) collided with the boss. (Circle-square collision.)
+ * 
+ * @param boss Boss address(windows).
+ * 
+ * @return If the ball shot collided like the boss.
+ */
+bool BallShot::shotCollidedWithBoss(WindowsBoss& boss) {
+  return circleSquareCollision(_position, _radius, boss.get_position(), boss.getHalfSide());
 }
 
-bool BallShot::tiroColidioComBoss(WindowsBoss& boss) {
-  return colisaoDeCirculoComQuadrado(_position, _raio, boss.get_position(), boss.getMetadeLado());
-}
-
-float BallShot::distanciaEntrePontos(Vector pontoA, Vector pontoB) {
-  return sqrt(((pontoA._x - pontoB._x)*(pontoA._x - pontoB._x)) +
-           ((pontoA._y - pontoB._y)*(pontoA._y - pontoB._y)));
-}
-
-bool BallShot::colisaoDeCirculoComCirculo(Vector circuloA, float raioA, Vector circuloB, float raioB) {
-  return (distanciaEntrePontos(circuloA, circuloB) <= (raioA+raioB));
-}
-
-bool BallShot::tiroColidioComJogador(FixedShip& player) {
-  return BallShot::colisaoDeCirculoComCirculo(_position, _raio, player.get_position(), player.get_radius());
+/**
+ * @brief Check if the ball (shot) collided with the player. (Circle-to-circle collision.)
+ * 
+ * @param player Player address.
+ * 
+ * @return If the ball shot collided like the player.
+ */
+bool BallShot::shotCollidedWithPlayer(FixedShip& player) {
+  return circleCircleCollision(_position, _radius, player.get_position(), player.get_radius());
 }
 
 
 // --- LINE SHOT --- 
+/**
+ * @class Line shot
+ * 
+ * @brief represents a line-shaped shot, like a laser.
+ */
 
-LineShot::LineShot(Vector pontoInicial, Vector pontoFinal, float espessura, float comprimento, double tempoAtivacao) : 
-      Shot(pontoInicial, pontoFinal, al_map_rgb(10, 150, 150)), _espessura(espessura),
-      _comprimento(comprimento), _tempoAtivacao(tempoAtivacao)
+/**
+ * @brief Build a shot in the form of a line, initializing the values, placing its address in
+ *  the list of shots and making the variable _direction store the end point of the half-line.
+ * 
+ * @param initialPosi Starting point of the line segment.
+ * @param direction Vector that indicates the direction of the line.
+ * @param thickness line thickness. (Unit vector normally.)
+ * @param length Length of the semi-straight.
+ * @param activationTime Time for the shot to cause damage.
+ */ 
+LineShot::LineShot(Vector initialPosi, Vector direction, float thickness, float length, double activationTime) : 
+      Shot(initialPosi, direction, al_map_rgb(10, 150, 150)), _thickness(thickness),
+      _length(length), _activationTime(activationTime)
 {
-  _direcao = (_direcao*_comprimento)+_position;
-  Shot::listaDosTiros.push_back(this);
+  _direction = (_direction*length)+_position;
+  Shot::activeShotsList.push_back(this);
 }
 
-LineShot::~LineShot() {std::cout<<"matei linha \n";
-  }
-
+/**
+ * @brief Draw a line.
+ */
 void LineShot::draw() {
-  al_draw_line(_position._x, _position._y, _direcao._x, _direcao._y, 
-  _shotColor, _espessura);
+  al_draw_line(_position._x, _position._y, _direction._x, _direction._y, 
+  _shotColor, _thickness);
 }
 
-bool LineShot::estaAtivo() {
-  return (_espessura > 0.4);
+/**
+ * @brief Checks if line thickness is greater than 0.4.
+ * 
+ * @return If the ball shot is still active.
+ */
+bool LineShot::isItActive() {
+  return (_thickness > 0.4);
 }
 
-void LineShot::atualizar() {
-  this->_espessura -= 0.1;
-  // retirar algum valor de tempoAtivacao, quando == 0, ele fica vermelçho.
-  if(_ativado==true) return;
+/**
+ * @brief It makes the line thinner over time,
+ *  and when the activation time ends, the line turns red and starts to deal damage.
+ */
+void LineShot::update() {
+  this->_thickness -= 0.1;
+  
+  //If the line is already 'activated' then
+  // there is no need to check the activation time anymore.
+  if(_activated==true) return;
 
-  this->_tempoAtivacao -= 0.3;
-  if(this->_tempoAtivacao<=0) {
+  this->_activationTime -= 0.3;
+  if(this->_activationTime<=0) {
     this->_shotColor = al_map_rgb(255, 0, 0);
-    this->_ativado=true;
+    this->_activated=true;
   }
 }
 
-bool LineShot::tiroColidioComJogador(FixedShip& player) {
-  if(this->_ativado==false) return false;
+/**
+ * @brief Check if the ball (line) collided with the player. (Circle-to-line collision.)
+ * 
+ * @param player Player address.
+ * 
+ * @return If the line shot collided like the player.
+ */
+bool LineShot::shotCollidedWithPlayer(FixedShip& player) {
+  if(this->_activated==false) return false;
 
-  return (Vector::shortestDistancePointToSegment(player.get_position(), this->_position, this->_direcao)
-  <=(player.get_radius() + (_espessura/2.0f)));
+  // Checks whether the distance between the center of the circle and the half-line,
+  // measured under perpendicular projection, is less than the radius plus half the thickness.
+  return (Vector::shortestDistancePointToSegment(player.get_position(), _position, _direction)
+  <=(player.get_radius() + (_thickness/2.0f)));
+
 }
 
-bool LineShot::tiroColidioComBoss(WindowsBoss& boss) {
+/**
+ * @brief We haven't implemented the line shot for the player,
+ *  so it doesn't make sense to implement this function.
+ * 
+ * @param boss Boss address(windows).
+ * 
+ * @return If the line shot collided like the boss.
+ */
+bool LineShot::shotCollidedWithBoss(WindowsBoss& boss) {
   return false;
 }
+

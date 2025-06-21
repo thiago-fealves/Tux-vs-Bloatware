@@ -1,6 +1,9 @@
 #ifndef GAME_OBJECT_HPP
 #define GAME_OBJECT_HPP
 
+#include "movement.hpp"
+#include "boss_states.hpp"
+#include "bootstrap.hpp"
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/bitmap.h>
@@ -54,6 +57,7 @@ class FixedShip : public GameObject{
   private:
     static float move_force;
     static float _radius;
+    int _life = 3;
   public:
     FixedShip();
     FixedShip(const Vector &pos);
@@ -61,6 +65,7 @@ class FixedShip : public GameObject{
     void set_radius(float r);
     void moveShip(char direction);
     void draw();
+    void takeDamage(bool &playing);
 };
 /** 
  * @class BrokenShip
@@ -78,31 +83,6 @@ class BrokenShip : public FlappyMovement {
     void update();
     void draw();
     void restart();
-};
-
-
-class WindowsBoss : public GameObject {
-private:
-  float lado = 180; // mateade do lado, pq ele faz 180px para cada lado do ponto centro
-  ALLEGRO_COLOR _color = al_map_rgb(255, 255, 255);
-  int _estadoBoss = 0 ; // 0, 1, 2;
-
-  bool _aplicarDano = false;
-  float _vida = 150;
-
-  void upBoss(float Y_parada, float speed);
-  void downBoss(float Y_Parada, float speed);
-
-public:
-  WindowsBoss();
-  ~WindowsBoss() override;
-
-  void draw();
-  void update(FixedShip* player);
-  float getMetadeLado();
-  void receberDano();
-
-
 };
 
 #endif

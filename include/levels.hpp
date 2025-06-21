@@ -121,6 +121,8 @@ class LevelThree : public Level{
     static void handleTimerEvents(bool &playing, FixedShip* player, 
       WindowsBoss &windows);
 
+    static void handleKeyPressEvents(bool &playing, FixedShip* player, WindowsBoss &boss);
+    static void handleKeyReleaseEvents(bool &playing);
     static void handleKeyPressEvents(bool &playing, FixedShip* player);
     static void handleKeyReleaseEvents();
 };
