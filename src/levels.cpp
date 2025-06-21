@@ -58,7 +58,7 @@ Background Level::_bg;
 GameObject* Level::_player = nullptr;
 ALLEGRO_EVENT Level::_event;
 Music* Level::_music = nullptr;
-PipeList pipeList; 
+PipeList LevelOne::_pipesList;
 ObstaclesList LevelTwo::_obstaclesList;
 
 
@@ -90,11 +90,11 @@ void Level::setMusic(Music* music){
 }
 
 /**
- * @brief Initializes Level Two 
+ * @brief Initializes Level One
  * @return Pointer to the player object, in this case BrokenShip
 */
 
-BrokenShip* LevelTwo::setLevelTwo() {
+BrokenShip* LevelOne::setLevelOne() {
 
     // Setting Player
     _player = new BrokenShip();
@@ -114,7 +114,7 @@ BrokenShip* LevelTwo::setLevelTwo() {
         v._x *= -1;  // espelhamento horizontal
         }
 
-    pipeList.generatePipes(
+    _pipesList.generatePipes(
         shapeLeft,
         shapeRight,
         "./assets/new_pipe_left.png",
@@ -124,6 +124,30 @@ BrokenShip* LevelTwo::setLevelTwo() {
 
     return Player;
 }
+
+/**
+ * @brief Initializes Level One
+ * @return Pointer to the player object, in this case BrokenShip
+*/
+
+BrokenShip* LevelTwo::setLevelTwo() {
+
+    // Setting Player
+    _player = new BrokenShip();
+    BrokenShip* Player = dynamic_cast<BrokenShip*>(_player);
+    Player->set_position(Vector(400, 300));
+    
+    // Setting Music
+    setMusic(level_two_music); 
+
+    // Setting Obstacles 
+    _obstaclesList.setPolygonsObstaclesList(shape_repository["asteroid2"], "./assets/asteroid2.png");
+    //_obstaclesList.setCircleObstaclesList("./assets/asteroid.png");
+
+    return Player;
+}
+
+
 
 /**
  * @brief Initializes Level Three 
@@ -144,11 +168,18 @@ FixedShip* LevelThree::setLevelThree() {
 
 /* @brief Frees memory used on Level Two
 */
+void LevelOne::cleanLevel(){
+  delete _player;
+  _music = nullptr;
+  _player = nullptr;
+  _pipesList.clear();
+}
+
 void LevelTwo::cleanLevel(){
   delete _player;
   _music = nullptr;
   _player = nullptr;
-  pipeList.clear();
+  _obstaclesList.clear();
 }
 
 void LevelThree::cleanLevel(){
@@ -157,14 +188,14 @@ void LevelThree::cleanLevel(){
   _player = nullptr;
 }
 
-/* Event Logic for Level Two */
+/* Event Logic for Level One */
 
 /* @brief Controls what is done when keys are pressed
  * @param playing Reference to the loop control variable, so we can close the game when escape is pressed
  * @param player Pointer to the player object of this phase (BrokenShip class)
 */
 
-void LevelTwo::handleKeyPressEvents(bool &playing, BrokenShip* player){
+void LevelOne::handleKeyPressEvents(bool &playing, BrokenShip* player){
     switch (_event.keyboard.keycode) {
         case ALLEGRO_KEY_SPACE:                    
             cout << "space key was pressed" << endl;
@@ -196,7 +227,7 @@ void LevelTwo::handleKeyPressEvents(bool &playing, BrokenShip* player){
 /**
  * @brief Simple method for debug and logging
 */
-void LevelTwo::handleKeyReleaseEvents(){
+void LevelOne::handleKeyReleaseEvents(){
     switch (_event.keyboard.keycode) {
         case ALLEGRO_KEY_SPACE:
         cout << "space key was released" << endl;
@@ -210,7 +241,7 @@ void LevelTwo::handleKeyReleaseEvents(){
  * @param player the player object of this phase (Brokenship class)
  * @param obstacles Reference to vector of AbstractObstacles of this phase
 */
-void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<AbstractObstacle*>& obstacles){
+void LevelOne::handleTimerEvents(bool &playing, BrokenShip* player, vector<AbstractObstacle*>& obstacles){
 
     // Update the music
     Music::update_fade_in_fade_out();
@@ -228,7 +259,7 @@ void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<Abstr
     if(!globalVars::inInterLevel)
         player->update();
 
-    for (auto& o : obstacles){
+     for (auto& o : obstacles){
         o->update();
         o->draw();
 
@@ -251,6 +282,87 @@ void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<Abstr
     // alguém lembra o Gabriel de fazer isso por favor ^
     al_flip_display();
 }
+
+void LevelTwo::handleKeyPressEvents(bool &playing, BrokenShip* player){
+    switch (_event.keyboard.keycode) {
+        case ALLEGRO_KEY_SPACE:                    
+            cout << "space key was pressed" << endl;
+            break;
+        case ALLEGRO_KEY_ESCAPE:
+            cleanLevel();
+            playing = false;
+            break;
+        case ALLEGRO_KEY_ENTER:
+            if(globalVars::inInterLevel) {
+                cleanLevel();
+                playing = false;
+                globalVars::inInterLevel = false;
+                break;
+            }
+            else break;
+        case ALLEGRO_KEY_D:
+        case ALLEGRO_KEY_RIGHT:
+
+        Vector new_position = player->get_position() + player->getMoveForce();
+        if(isCollidingEdge(new_position, player)){
+            newPositionAfterCollisionEdge(new_position, player);
+        }
+        player->set_position(new_position);
+
+    }
+}
+
+void LevelTwo::handleKeyReleaseEvents(){
+    switch (_event.keyboard.keycode) {
+        case ALLEGRO_KEY_SPACE:
+        cout << "space key was released" << endl;
+        break;
+    }
+}
+
+void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<AbstractObstacle*>& obstacles){
+
+    // Update the music
+    Music::update_fade_in_fade_out();
+    bool collision_this_frame = false;
+
+    // Update and redraw the game state
+    al_clear_to_color(al_map_rgb(0,0,0));
+    _bg.renderBackground();
+
+    // Log elapsed time to the console every second
+    if (al_get_timer_count(timer) % (int)FPS == 0) {
+        cout << al_get_timer_count(timer) / FPS << " second..." << endl;
+    }
+
+    if(!globalVars::inInterLevel)
+        player->update();
+
+     for (auto& o : obstacles){
+        o->update();
+        o->draw();
+
+        if (o->checkCollisionWithPlayer(*player))
+        {
+            std::cout << "Colidiu\n";
+            playing = false;
+            collision_this_frame = true;
+            break;
+        }
+    }
+    if (collision_this_frame){
+      obstacles.clear();
+    }
+
+    interLevelHandling(obstacles, pinguimBandido, "PARABENS, APERTE ENTER PARA IR PARA O PRÓXIMO NÍVEL", 300);
+    //interLevelHandling(obstacles, pendrive, "PARABENS, VOCÊ É DIGNO DE INSTALAR O LINUX, APERTE ENTER PARA PEGAR O PENDRIVE E DESTRUA O WINDOWS!!", 250); 
+    // Essa linha deve ser movida para o final do handleTimerEvents do nível dois e a linha superior à esta deve ser movida para o handleTimerEvents do nível 1 quando estiver pronto
+    // TODO: fazer ajustes sobre o interLevel quando o nível 1 ficar pronto;
+    // alguém lembra o Gabriel de fazer isso por favor ^
+    al_flip_display();
+}
+
+
 
 
 /* Event Logic Level Three */
@@ -316,13 +428,13 @@ void LevelThree::handleTimerEvents(bool &playing, FixedShip* player, WindowsBoss
  * @brief MainLoop of game's second phase
  * @param playing Loop control variable to finish the level on collision or quit
 */
-void LevelTwo::mainLoop(bool &playing){  
+void LevelOne::mainLoop(bool &playing){  
     // Initializing level
     al_set_timer_count(timer, 0);
     globalVars::inInterLevel = false;
     playing = true;
-    BrokenShip* player = setLevelTwo();
-    vector<AbstractObstacle*> obstacles = pipeList.getList();
+    BrokenShip* player = setLevelOne();
+    vector<AbstractObstacle*> obstacles = _pipesList.getList();
     _music->play();
 
     while (playing) {
@@ -346,12 +458,50 @@ void LevelTwo::mainLoop(bool &playing){
 
         // Handle window close event
         else if (_event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
-          LevelTwo::cleanLevel();
+          LevelOne::cleanLevel();
           playing = false; 
         }
 
     } 
     cleanLevel(); //Deivid 13/06
+}
+
+void LevelTwo::mainLoop(bool &playing){  
+    // Initializing level
+    al_set_timer_count(timer, 0);
+    globalVars::inInterLevel = false;
+    playing = true;
+    BrokenShip* player = setLevelTwo();
+    vector<AbstractObstacle*> obstacles = _obstaclesList.getList();
+    _music->play();
+
+    while (playing) {
+        // Getting new event 
+        al_wait_for_event(event_queue, &_event);  
+        
+        // Timer events
+        if (_event.type == ALLEGRO_EVENT_TIMER) {
+          handleTimerEvents(playing, player, obstacles);
+        }
+
+        // Key press events
+        else if (_event.type == ALLEGRO_EVENT_KEY_DOWN) {
+           handleKeyPressEvents(playing, player);
+        }
+
+        // Key release events
+        else if (_event.type == ALLEGRO_EVENT_KEY_UP) {
+          handleKeyReleaseEvents();
+        }
+
+        // Handle window close event
+        else if (_event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+          LevelOne::cleanLevel();
+          playing = false; 
+        }
+
+    } 
+    cleanLevel(); 
 }
 
 void LevelThree::mainLoop(bool &playing){

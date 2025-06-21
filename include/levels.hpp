@@ -82,7 +82,16 @@ void interLevelHandling(std::vector<AbstractObstacle*>& obstacles, ALLEGRO_BITMA
 */
 
 class LevelOne : public Level{
-  
+  private:
+    static PipeList _pipesList;
+
+  public:
+    static BrokenShip* setLevelOne();
+    static void cleanLevel();
+    static void mainLoop(bool &playing);
+    static void handleTimerEvents(bool &playing, BrokenShip* player, std::vector<AbstractObstacle*>& obstacles);
+    static void handleKeyPressEvents(bool &playing, BrokenShip* player);
+    static void handleKeyReleaseEvents();
 };
 
 /**
