@@ -5,6 +5,7 @@
 DatabaseUsers::DatabaseUsers() : _connect(nullptr) {
     try {
         // Tenta estabelecer a conexão com o banco de dados
+        dotenv::init();
         const char* connection_string = std::getenv("DB_CONNECTION_STRING");
         _connect = new pqxx::connection(connection_string);
         if (_connect->is_open()) {
