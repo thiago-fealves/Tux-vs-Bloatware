@@ -521,7 +521,7 @@ void LevelThree::mainLoop(bool &playing, bool &isAlive){
   al_set_timer_count(timer, 0);
   playing = true;
   FixedShip* player = setLevelThree();
-  WindowsBoss windows(180, 2);
+  WindowsBoss windows(180, 150);
 
   _music->play();
       while (playing) {

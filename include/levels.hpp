@@ -18,7 +18,7 @@
 /**
  * @brief Duração padrão das fases 1 e 2 (em segundos)
  */
-#define LEVEL_DURATION 3
+#define LEVEL_DURATION 15
 
 
 /**
