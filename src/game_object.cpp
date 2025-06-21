@@ -1,5 +1,6 @@
 #include "game_object.hpp"
 #include "shots.hpp"
+#include "boss_states.hpp"
 #include <iostream>
 
 // Game Object
@@ -96,6 +97,13 @@ Vector FlappyMovement::getMoveForce(){
   return FlappyMovement::move_force;
 }
 
+/**
+ * @brief Removes a life from the player, if the life is zero, the game is over.
+ */
+void FixedShip::takeDamage(bool &playing) {
+  _life--;
+  if(_life<=0) playing=false;
+}   
 
 // Broken Ship
 BrokenShip::BrokenShip() : BrokenShip(Vector(375,300)) {}
@@ -140,162 +148,3 @@ void BrokenShip::set_radius(float r) {
 void BrokenShip::restart() {
     this->set_position(Vector(375, 300));
 }
-
-// Final boss (Windersson)
-
-WindowsBoss::WindowsBoss() {
-  this->set_position(Vector(400, -lado)); // 400 e 300, o centro
-  _aplicarDano = false;
-  // ele começa fora da tela e vem de cima e para em (400, 50)
-  // 400 no X e 300 no Y é o centro.
-  // colocando no 0, metade aado retangulo é deixado de fora.
-}
-
-WindowsBoss::~WindowsBoss() {}
-
-void WindowsBoss::downBoss(float Y_Parada = 300, float speed = 1.3) {
-  Vector position = this->get_position();
-
-  if(position._y < Y_Parada) { // Se a posição do windersson for menor q 50, entao temos q atualizar
-
-    float aux = std::min(Y_Parada, position._y+speed);
-    this->set_position(Vector(position._x, aux)); 
-  } else if (position._y == Y_Parada) _estadoBoss=1;
-}
-
-void WindowsBoss::upBoss(float Y_parada = 0, float speed = 1.3) {
-  if(_position._y > Y_parada) { // O boss tem q subir para chegar em Y_parada
-    float novo_y = std::max(Y_parada, _position._y - speed); //pegando o maior valor, ara nao passar de Y_parada
-    this->set_position(Vector(_position._x, novo_y));
-  } else if (_position._y == Y_parada) _estadoBoss = 2;
-
-}
-
-void WindowsBoss::draw() {
-  Vector position = this->get_position();
-  float size_mini_quadrados = lado/1.12f;
-  float espaco_entre_quadrados = lado/20.0f;
-
-  al_draw_filled_rectangle(
-    position._x - lado, position._y - lado, 
-    position._x + lado, position._y + lado, _color);
-
-  ALLEGRO_COLOR cor_mini_quadrados = al_map_rgb(0, 120, 214);
-  float cx[] = { -1, 1, -1, 1 };
-  float cy[] = { -1, -1, 1, 1 };
-
-  for (int i = 0; i < 4; ++i) {
-    float offset_x = cx[i] * (size_mini_quadrados / 2.0f + espaco_entre_quadrados);
-    float offset_y = cy[i] * (size_mini_quadrados / 2.0f + espaco_entre_quadrados);
-
-    al_draw_filled_rectangle(
-      position._x + offset_x - size_mini_quadrados / 2.0f,
-      position._y + offset_y - size_mini_quadrados / 2.0f,
-      position._x + offset_x + size_mini_quadrados / 2.0f,
-      position._y + offset_y + size_mini_quadrados / 2.0f,
-      cor_mini_quadrados
-    );
-  }
-
-}
-
-float WindowsBoss::getMetadeLado() {
-  return lado;
-}
-
-int cont=0, timerBoss=FPS*6;
-int possibilidades_para_os_tiros=0; //varia de 1, 2 e 3.
-
-void WindowsBoss::receberDano() {
-  if(_aplicarDano==false || _vida==0) return;
-
-  _vida--;
-  std::cout << "Boss recebeu dano! Vida restante: " << _vida << std::endl;
-
-  if(_vida==0) {
-    std::cout << "O Boss morreu!   (:  ";
-    _estadoBoss = 2;
-
-    // <<<<<<<<<<<<<------------------------------- COLOCAR AQUI A TELA DE VITORIA
-  }
-}
-
-void WindowsBoss::update(FixedShip* player) {
-  if(_estadoBoss == 0) { // movimento de descer na tela 
-    WindowsBoss::downBoss(50);
-
-  } else if (_estadoBoss==1) { 
-    _aplicarDano = true;
-    cont+=1;
-    if (cont!=timerBoss) return;
-    cont=0; //reseta o contador
-    
-    if(possibilidades_para_os_tiros==0) {      
-      new BallShot(Vector(0, 280), Vector(1, 0), 10, 19);
-      new BallShot(Vector(0, 330), Vector(1, 0), 10, 10);
-      new BallShot(Vector(0, 380), Vector(1, 0), 10, 14);
-      new BallShot(Vector(0, 420), Vector(1, 0), 10, 13);
-      new BallShot(Vector(0, 470), Vector(1, 0), 10, 11);
-      new BallShot(Vector(0, 520), Vector(1, 0), 10, 15);
-      
-      possibilidades_para_os_tiros=1;
-
-    } else if(possibilidades_para_os_tiros==1) {      
-      new BallShot(Vector(0, 280), Vector(1, 0), 10, 10);
-      new BallShot(Vector(0, 330), Vector(1, 0), 10, 14);
-      new BallShot(Vector(0, 380), Vector(1, 0), 10, 10);
-      new BallShot(Vector(0, 420), Vector(1, 0), 10, 4);
-      new BallShot(Vector(0, 470), Vector(1, 0), 10, 4 );
-      new BallShot(Vector(0, 520), Vector(1, 0), 10, 6);
-      possibilidades_para_os_tiros=2;
-
-    } else if(possibilidades_para_os_tiros==2) {
-      new BallShot(Vector(0, 280), Vector(1, 0), 10, 15);
-      new BallShot(Vector(0, 470), Vector(1, 0), 10, 18);
-      new BallShot(Vector(0, 520), Vector(1, 0), 10, 14);
-      possibilidades_para_os_tiros=3;
-      //para passar mais 3 segundos do que o normal
-
-    } else if(possibilidades_para_os_tiros==3) {
-      //LINHAS NA PARTE ESQUERDA 
-      
-      new LineShot(Vector(0, 100), Vector(1, 1), 15, 600, 14);
-      new LineShot(Vector(0, 200), Vector(1, 1), 15, 500, 13);
-      new LineShot(Vector(0, 300), Vector(1, 1), 15, 400, 12);
-      new LineShot(Vector(0, 400), Vector(1, 1), 15, 300, 11);
-      new LineShot(Vector(0, 500), Vector(1, 1), 15, 200, 10);
-      possibilidades_para_os_tiros=4;
-
-    } else if(possibilidades_para_os_tiros==4) {
-      // linhas da parte direita
-      new LineShot(Vector(800, 100), Vector(-1, 1), 15, 600, 14);
-      new LineShot(Vector(800, 200), Vector(-1, 1), 15, 500, 13);
-      new LineShot(Vector(800, 300), Vector(-1, 1), 15, 400, 12);
-      new LineShot(Vector(800, 400), Vector(-1, 1), 15, 300, 11);
-      new LineShot(Vector(800, 500), Vector(-1, 1), 15, 200, 10);
-      possibilidades_para_os_tiros=5;
-
-    } else if(possibilidades_para_os_tiros==5) {
-      //---------------------------------------------------------ponto final da tela (800, 600)
-      //linhas da parte de baixo
-
-      new LineShot(Vector(0, 500), Vector(1, 0), 15, 800, 10);
-      new LineShot(Vector(0, 550), Vector(1, 0), 15, 800, 11);
-      new LineShot(Vector(0, 500), Vector(1, 0), 15, 800, 12);
-      new LineShot(Vector(0, 450), Vector(1, 0), 15, 800, 13);
-      new LineShot(Vector(0, 400), Vector(1, 0), 15, 800, 14);
-      new LineShot(Vector(0, 350), Vector(1, 0), 15, 800, 15);
-      new LineShot(Vector(0, 300), Vector(1, 0), 15, 800, 16);
-      possibilidades_para_os_tiros=0;
-
-      if(timerBoss>FPS*4) timerBoss -= FPS;
-    }
-    
-  } else if (_estadoBoss==2) {
-    WindowsBoss::upBoss(-lado);
-    
-  }
-  
-}
-
-

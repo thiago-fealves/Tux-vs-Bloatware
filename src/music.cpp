@@ -8,7 +8,8 @@
  * with pause and playback methods with fade-in and fade-out systems.
  */
 
-std::list<Music*> Music::music_address; // Initialize the music list
+// Initializes static members
+std::list<Music*> Music::music_address; 
 bool Music::isMusicMuted = false;
 
 /**

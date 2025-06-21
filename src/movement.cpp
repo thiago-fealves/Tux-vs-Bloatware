@@ -22,7 +22,7 @@ float Vector::dot(const Vector& a, const Vector& b){
 }
 float Vector::distance(const Vector& a, const Vector& b){
   Vector d = a - b;
-  return dot(d, d);
+  return sqrt(dot(d, d));
 }
 
 float Vector::shortestDistancePointToSegment(const Vector& p, const Vector& a, const Vector& b){

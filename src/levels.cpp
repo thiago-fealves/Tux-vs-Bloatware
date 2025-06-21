@@ -222,7 +222,7 @@ void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<Abstr
 /* Event Logic Level Three */
 bool LevelThree::key_pressed[ALLEGRO_KEY_MAX] = { false };
 
-void LevelThree::handleKeyPressEvents(bool &playing, FixedShip* player){
+void LevelThree::handleKeyPressEvents(bool &playing, FixedShip* player, WindowsBoss &boss){
     switch (_event.keyboard.keycode) {
         case ALLEGRO_KEY_SPACE:   
             // isto cria um tiro na posicao do jogador somado por um vetor (0, -40),
@@ -250,7 +250,6 @@ void LevelThree::updatePlayerPosition(FixedShip* player){
     if (key_pressed[ALLEGRO_KEY_D] || key_pressed[ALLEGRO_KEY_RIGHT]) {
         player->moveShip('R');
     }
-
 }
 
 void LevelThree::handleTimerEvents(bool &playing, FixedShip* player, WindowsBoss &windows){
@@ -266,10 +265,9 @@ void LevelThree::handleTimerEvents(bool &playing, FixedShip* player, WindowsBoss
         cout << al_get_timer_count(timer) / FPS << " second..." << endl;
     }
 
-    // Movimento contínuo com tecla pressionada
     updatePlayerPosition(player);
-    Shot::updateShots(player, windows);
-    windows.update(player);
+    Shot::updateShots(player, windows, playing);
+    windows.update(player, playing);
 
     player->draw();
     Shot::drawShots();
@@ -322,7 +320,7 @@ void LevelThree::mainLoop(bool &playing){
   al_set_timer_count(timer, 0);
   playing = true;
   FixedShip* player = setLevelThree();
-  WindowsBoss windows;
+  WindowsBoss windows(180, 150);
 
   _music->play();
       while (playing) {
@@ -337,7 +335,7 @@ void LevelThree::mainLoop(bool &playing){
         // Key press events
         else if (_event.type == ALLEGRO_EVENT_KEY_DOWN) {
           key_pressed[_event.keyboard.keycode] = true;
-          LevelThree::handleKeyPressEvents(playing, player);
+          LevelThree::handleKeyPressEvents(playing, player, windows);
         }
 
         // Key release events

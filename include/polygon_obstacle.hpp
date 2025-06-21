@@ -1,6 +1,9 @@
 #pragma once
 
 #include "abstract_obstacle.hpp"
+#include "game_object.hpp"
+#include "windows_boss.hpp"
+#include "boss_states.hpp"
 #include <vector>
 
 class PolygonObstacle : public AbstractObstacle{

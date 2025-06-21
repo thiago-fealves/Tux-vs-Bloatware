@@ -1,4 +1,3 @@
-
 #ifndef SHOTS_HPP
 #define SHOTS_HPP
 
@@ -8,6 +7,7 @@
 #include "levels.hpp"
 #include "bootstrap.hpp"
 #include "abstract_obstacle.hpp"
+#include "windows_boss.hpp"
 
 #include <string>
 #include <list>
@@ -22,71 +22,77 @@
 #include <allegro5/bitmap_io.h>
 
 
+/**
+ * @class Shot 
+ * 
+ * @brief represents a shot in a more abstract way, abstract class.
+ */
 class Shot : public GameObject {
 private:
-  static void removerTirosForaDaTela();//pega a list de tiros_par_remover e remove todos
-  static std::vector<Shot*> listaDosTirosParaRemover;//listas dos tiros que devem ser removidos
+  static void removeShots(); // Clears the list of inactive shots
+  static std::vector<Shot*> inactiveShotsList; // List of inactive shots
 
 protected:
-  Vector _direcao;
+  Vector _direction;  
   ALLEGRO_COLOR _shotColor;
+  static std::list<Shot*> activeShotsList; // List of active shots
 
-  static std::list<Shot*> listaDosTiros;//lista dos tiros que estao 'andando'
-  bool virtual estaAtivo() = 0;    //checa se o tiro especifico esta fora da tela
-  bool virtual tiroColidioComJogador(FixedShip& player) = 0; //checa se o tiro especifico colidio com o jogador
-  bool virtual tiroColidioComBoss(WindowsBoss& boss) = 0; //checa se o tiro especifico colidiu com o boss
-  void virtual draw() = 0;
-  void virtual atualizar() = 0;
   
-
 public:
-  Shot(Vector position, Vector direcao, ALLEGRO_COLOR shotColor);
+  Shot(Vector position, Vector direction, ALLEGRO_COLOR shotColor);
   virtual ~Shot() = default;
+  
+  bool virtual isItActive() = 0;    
+  bool virtual shotCollidedWithPlayer(FixedShip& player) = 0; 
+  bool virtual shotCollidedWithBoss(WindowsBoss& boss) = 0; 
+  void virtual draw() = 0;
+  void virtual update() = 0;
 
-  static void updateShots(FixedShip* player, WindowsBoss& boss); // atualiza todos os tiros
-  static void drawShots();   // desenha todos os tiros
-  static void colisaoJogador(); //quando chamado causa a colisao com jogador(perde vida)
+  static void updateShots(FixedShip* player, WindowsBoss& boss, bool &playing); // Updates all shots
+  static void drawShots();   // Draws all the shots
 
 };
 
+/**
+ * @class Ball Shot
+ * 
+ * @brief represents a ball-shaped shot.
+ */
 class BallShot : public Shot {
 private:
   float _speed;
-  float _raio;
-  static bool colisaoDeCirculoComQuadrado(Vector centroCirculo, float raio, Vector centroQuadrado, float meioLado);
-  static bool colisaoDeCirculoComCirculo(Vector circuloA, float raioA, Vector circuloB, float raioB);
-  static float distanciaEntrePontos(Vector pontoA, Vector pontoB);
+  float _radius;
   
 public:
-  BallShot(Vector initial_posi, Vector direcao, float raio, float speed=40);
-  ~BallShot();
+  BallShot(Vector initialPosi, Vector direction, float radius, float speed=40);
 
   void draw() override;
-  void atualizar() override;
-
-  bool estaAtivo() override;
-  bool tiroColidioComBoss(WindowsBoss& boss) override;
-  bool tiroColidioComJogador(FixedShip& player) override;
+  void update() override;
+  bool isItActive() override;
+  bool shotCollidedWithBoss(WindowsBoss& boss) override;
+  bool shotCollidedWithPlayer(FixedShip& player) override;
 };
 
-
+/**
+ * @class Line shot
+ * 
+ * @brief represents a line-shaped shot, like a laser.
+ */
 class LineShot : public Shot {
 private:
-  float _espessura;
-  float _comprimento; 
-  double _tempoAtivacao; //ele começa com algum valor e vai retirando a cada frame ai no zero ele LIGA
-  bool _ativado=false;
+  float _thickness;
+  float _length; 
+  double _activationTime; // Time for the line shot to cause damage
+  bool _activated=false;
 
 public:
-  LineShot(Vector pontoInicial, Vector pontoFinal, float espessura, float comprimento, double tempoAtivacao);
-  ~LineShot();
+  LineShot(Vector initialPosi, Vector direction, float espessura, float comprimento, double tempoAtivacao);
 
   void draw() override;
-  void atualizar() override;
-
-  bool estaAtivo() override;
-  bool tiroColidioComBoss(WindowsBoss& boss) override;
-  bool tiroColidioComJogador(FixedShip& player) override;
+  void update() override;
+  bool isItActive() override;
+  bool shotCollidedWithBoss(WindowsBoss& boss) override;
+  bool shotCollidedWithPlayer(FixedShip& player) override;
     
 };
 
