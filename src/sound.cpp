@@ -3,6 +3,7 @@
 #include <iostream>
 
 bool Sound::isSoundMuted = false;
+float Sound::volumeMester = 1.0f;
 
 /** 
  * @class Sound
@@ -11,12 +12,6 @@ bool Sound::isSoundMuted = false;
  * 
 */
 
-/**
- * @brief Starts and checks the allegro audio systems and reserves an audio channel.
- * 
- * @return Returns whether the initializations were successful.
- */
-//era aqui o 
 
 /**
  * @brief Construct a sound.
@@ -64,13 +59,15 @@ void Sound::play(float volume) {
     if(Sound::isSoundMuted==true) return;
 
     // Create and play a new sound
-    al_play_sample(sound_sample, volume, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, nullptr);
+    al_play_sample(sound_sample, volume*Sound::volumeMester, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, nullptr);
 }
 
-void Sound::muteSound() {
+void Sound::muteSounds() {
     Sound::isSoundMuted = true;
+    Music::muteMusic();
 }
 
-void Sound::unmuteSound() {
+void Sound::unmuteSounds() {
     Sound::isSoundMuted = false;
+    Music::unMuteMusic();
 }

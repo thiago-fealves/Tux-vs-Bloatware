@@ -63,8 +63,8 @@ int main(int argc, char** argv) {
 gameOver:
        if (playing) continue;
             else { //se o jogador perdeu para a musica
-                if (level_two_music) { 
-                    level_two_music->pause(); 
+                if (level_three_music) { 
+                    level_three_music->pause(); 
                 }
                 //gameOverScreen começa a ser executada
                 std::unique_ptr<gameOverOption> chosen_action(game_over_screen.run(event_queue, timer));

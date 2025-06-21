@@ -196,42 +196,29 @@ bool Bootstrap::initialize_sys_sound() {
 }
 
 /**
- * @brief 
+ * @brief Initializes all the music in the game.
  *
- *
+ * @return If the songs were successfully initialized, specifically the audio system.
 */
-bool Bootstrap::initialize_sounds() {
-    if(Bootstrap::initialize_sys_sound()==false) {
-        std::cout << "Error initializing audio system\n";
-        return false;
-    }
+void Bootstrap::initialize_sounds() {
 
-    // INICIALIZAR TODAS AS MUSICAS E SONS AQUI!
-    // Check if the audio file exists
-
-    // Musics
+    if(Bootstrap::initialize_sys_sound()==false) std::cout << "Error initializing audio system\n";
     
-    menu_music = new Music("sounds/music8.ogg");  
+    // --- Musics
+    menu_music = new Music("sounds/music8.ogg", 1.0f);  
     pause_game_music = new Music("sounds/music3.ogg");  
-
-    level_one_music = new Music("sounds/music7.ogg", 4.0, 1.0);
+    level_one_music = new Music("sounds/music7.ogg");
     level_two_music = new Music("sounds/music5.ogg");
     level_three_music = new Music("sounds/music4.ogg");
-
     defeat_music = new Music("sounds/music9.ogg");
     victory_music = new Music("sounds/music6.ogg");
 
-    // Sounds
-    death_sound = new Sound("sounds/sound_gun4.ogg");
-
+    // --- Sounds
+    death_sound = new Sound("sounds/deathSound.ogg");
     gunshot_sound1 = new Sound("sounds/sound_gun9.ogg");
     gunshot_sound2 = new Sound("sounds/sound_gun8.ogg");
     gunshot_sound3 = new Sound("sounds/sound_gun6.ogg");
-    gunshot_sound4 = new Sound("sounds/sound_gun4.ogg");
-
-
-
-    return true;
+    gunshot_sound4 = new Sound("sounds/sound_gun4.ogg");   
 }
 
 /**
@@ -250,7 +237,7 @@ void Bootstrap::register_allegro_events(){
 */
 bool Bootstrap::initialize_allegro(){
     if (!Bootstrap::init_allegro_libs()) return false;
-    if (!Bootstrap::initialize_sounds()) return false;
+    Bootstrap::initialize_sounds();
     Bootstrap::register_allegro_events();
     al_start_timer(timer);
     return true;

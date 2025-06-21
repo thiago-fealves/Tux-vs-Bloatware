@@ -1,6 +1,7 @@
 #include <iostream>
 #include "game_object.hpp"
 #include "shots.hpp"
+#include "bootstrap.hpp"
 
 /* Game Object */
 
@@ -153,9 +154,12 @@ Vector FlappyMovement::getMoveForce(){
 /**
  * @brief Removes a life from the player, if the life is zero, the game is over.
  */
-void FixedShip::takeDamage(bool &playing) {
-  _life--;
-  if(_life<=0) playing=false;
+void FixedShip::takeDamage(bool &playing, int damage) {
+  _life -= damage;
+  if(_life<=0) {
+    playing=false;
+    death_sound->play();
+  }
 }   
 
 // Broken Ship

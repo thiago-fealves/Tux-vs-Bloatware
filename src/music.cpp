@@ -10,7 +10,7 @@
 
 // Initializes static members
 std::list<Music*> Music::music_address; 
-bool Music::isMusicMuted = false;
+Music* Music::lastMusicPlayed = nullptr;
 
 /**
  * @brief Construct a music.
@@ -20,7 +20,7 @@ bool Music::isMusicMuted = false;
  * @param fade_speed_parameter Initializes the fade_speed of the object.
  */
 Music::Music(const char* sound_address, float volume_parameter, float fade_speed_parameter) : Sound(sound_address), 
-        ballast_volume(volume_parameter), fade_speed(fade_speed_parameter) {
+        ballast_volume(volume_parameter*Sound::volumeMester), fade_speed(fade_speed_parameter) {
     
     // Check if sound_sample, of Sound, has been started
     if(sound_sample == nullptr) {
@@ -78,8 +78,9 @@ void Music::pause() {
  * @brief Play the music, starting where it left off.
  */
 void Music::play() {
-    if(Music::isMusicMuted == true || music_sample == nullptr) return;
-    volume = ballast_volume;                                                // Return the volume to the original value  
+    Music::lastMusicPlayed = this;
+    if(Sound::isSoundMuted == true || music_sample == nullptr) return;
+    volume = ballast_volume;                            // Return the volume to the original value  
     al_set_sample_instance_position(music_sample, current_music_position);  // Put the music back on the instant it stopped
     al_set_sample_instance_playing(music_sample, true);                     // Play the music
 }
@@ -120,16 +121,13 @@ void Music::update_fade_in_fade_out() {
 }
 
 void Music::muteMusic() {
-    Music::isMusicMuted = true;
-
     for(auto &it : Music::music_address) {
         it->pause();
     }
 }
 
-void Music::unmuteMusic(Music* &music) {
+void Music::unMuteMusic() {
     // é preciso este parametro, pois quando se desmuta as musicas
     // nao tem como saber a musica que estaria tocando no momento.
-    Music::isMusicMuted = false;
-    music->play();
+    Music::lastMusicPlayed->play();
 }

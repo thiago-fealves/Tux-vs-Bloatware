@@ -3,6 +3,7 @@
 #include "interface.hpp"
 #include "shots.hpp"
 #include "levels.hpp"
+#include "bootstrap.hpp"
 #include <iostream>
 
 /**
@@ -16,7 +17,10 @@
  */
 WindowsBoss::WindowsBoss(float halfSide, float life) : _halfSide(halfSide), _life(life) {
   _position = Vector(400, -_halfSide); // Set the boss's initial pose centered on the X axis and at the top of the screen.
+  
   timeBetweenAttacks = FPS*5; // Set the time between attacks to 5 seconds
+  
+  calculateMiniSquarePositions(); // Calculates the positions of the mini-squares that form the winows
 }
 
 /**
@@ -48,31 +52,48 @@ bool WindowsBoss::upBoss(float yStop = 0, float speed = 1.3) {
 }
   
 /**
+ * @brief calculates the side of the small squares and calculates the distance
+ *  between the center point of the square and the center points of the small squares
+ */
+void WindowsBoss::calculateMiniSquarePositions() {
+  this->_sideOfTheMiniSquare = _halfSide/1.12f;         // Defines the side of the small squares
+  this->miniSquaresColor = al_map_rgb(0, 120, 214);
+
+  float spacesBetweenTheMiniSquares = _halfSide/20.0f; // Defines the distance between the small squares
+  
+  // Defines the directions that the small squares will be in relation to the central point of the large square
+  Vector positionsRelativeToCenterSquare[4] = {Vector(-1, -1), Vector(1, -1), 
+    Vector(-1, 1), Vector(1, 1)};
+
+  // Calculates the distance in module from the center point of the square to the center point of the mini square
+  float aux = (_sideOfTheMiniSquare/2.0f+spacesBetweenTheMiniSquares);
+
+  // Calculates all relative distances
+  for (int i=0; i<4; ++i) {
+    _relativeDistanceToCenterSquare[i] = Vector(positionsRelativeToCenterSquare[i]._x*aux,
+      positionsRelativeToCenterSquare[i]._y*aux);
+  }
+}
+
+/**
  * @brief Draw the boss, first he draws the big square and then the 
  * 4 smaller ones inside and they are all made from the center point of the square.
  */
 void WindowsBoss::draw() {
-  float size_mini_quadrados = _halfSide/1.12f;
-  float espaco_entre_quadrados = _halfSide/20.0f;
-  
+
+  // Draw the big square
   al_draw_filled_rectangle(
     _position._x - _halfSide, _position._y - _halfSide, 
     _position._x + _halfSide, _position._y + _halfSide, _color);
 
-  ALLEGRO_COLOR cor_mini_quadrados = al_map_rgb(0, 120, 214);
-  float cx[] = { -1, 1, -1, 1 };
-  float cy[] = { -1, -1, 1, 1 };
-
+  // Draw the big square
   for (int i=0; i<4; ++i) {
-    float offset_x = cx[i] * (size_mini_quadrados / 2.0f + espaco_entre_quadrados);
-    float offset_y = cy[i] * (size_mini_quadrados / 2.0f + espaco_entre_quadrados);
-
     al_draw_filled_rectangle(
-      _position._x + offset_x - size_mini_quadrados / 2.0f,
-      _position._y + offset_y - size_mini_quadrados / 2.0f,
-      _position._x + offset_x + size_mini_quadrados / 2.0f,
-      _position._y + offset_y + size_mini_quadrados / 2.0f,
-      cor_mini_quadrados
+      _position._x + _relativeDistanceToCenterSquare[i]._x - _sideOfTheMiniSquare / 2.0f,
+      _position._y + _relativeDistanceToCenterSquare[i]._y - _sideOfTheMiniSquare / 2.0f,
+      _position._x + _relativeDistanceToCenterSquare[i]._x + _sideOfTheMiniSquare / 2.0f,
+      _position._y + _relativeDistanceToCenterSquare[i]._y + _sideOfTheMiniSquare / 2.0f,
+      miniSquaresColor
     );
   }
 
@@ -113,6 +134,7 @@ bool WindowsBoss::isDead() {
  * @brief Produces the ball shots in format 1.
  */
 void WindowsBoss::makeBallShots1() {
+  gunshot_sound2->play();
   new BallShot(Vector(0, 280), Vector(1, 0), 10, 10);
   new BallShot(Vector(0, 330), Vector(1, 0), 10, 14);
   new BallShot(Vector(0, 380), Vector(1, 0), 10, 10);
@@ -125,6 +147,7 @@ void WindowsBoss::makeBallShots1() {
  * @brief Produces the ball shots in format 2.
  */
 void WindowsBoss::makeBallShots2() {
+  gunshot_sound2->play();
   new BallShot(Vector(0, 280), Vector(1, 0), 10, 10);
   new BallShot(Vector(0, 330), Vector(1, 0), 10, 14);
   new BallShot(Vector(0, 380), Vector(1, 0), 10, 10);
@@ -137,6 +160,7 @@ void WindowsBoss::makeBallShots2() {
  * @brief Produces the ball shots in format 3.
  */
 void WindowsBoss::makeBallShots3() {
+  gunshot_sound2->play();
   new BallShot(Vector(0, 280), Vector(1, 0), 10, 15);
   new BallShot(Vector(0, 470), Vector(1, 0), 10, 18);
   new BallShot(Vector(0, 520), Vector(1, 0), 10, 14);
@@ -146,6 +170,7 @@ void WindowsBoss::makeBallShots3() {
  * @brief Produces the line shots on the right.
  */
 void WindowsBoss::makeLineShotsRight() {
+  gunshot_sound4->play();
   new LineShot(Vector(800, 100), Vector(-1, 1), 15, 600, 14);
   new LineShot(Vector(800, 200), Vector(-1, 1), 15, 500, 13);
   new LineShot(Vector(800, 300), Vector(-1, 1), 15, 400, 12);
@@ -157,6 +182,7 @@ void WindowsBoss::makeLineShotsRight() {
  * @brief produces the line shots on the left.
  */
 void WindowsBoss::makeLineShotsLeft() {
+  gunshot_sound4->play();
   new LineShot(Vector(0, 100), Vector(1, 1), 15, 600, 14);
   new LineShot(Vector(0, 200), Vector(1, 1), 15, 500, 13);
   new LineShot(Vector(0, 300), Vector(1, 1), 15, 400, 12);
@@ -168,6 +194,7 @@ void WindowsBoss::makeLineShotsLeft() {
  * @brief produces the line shots below.
  */
 void WindowsBoss::makeLineShotsDown() {
+  gunshot_sound4->play();
   new LineShot(Vector(0, 500), Vector(1, 0), 15, 800, 10);
   new LineShot(Vector(0, 550), Vector(1, 0), 15, 800, 11);
   new LineShot(Vector(0, 500), Vector(1, 0), 15, 800, 12);
@@ -228,7 +255,7 @@ void WindowsBoss::update(FixedShip* player, bool &playing) {
 
   // Checks if the player collided with the boss
   if(circleSquareCollision(player->get_position(), player->get_radius(), 
-    this->_position, _halfSide)) playing=false; 
+    this->_position, _halfSide)) player->takeDamage(playing, 3); // Kill the player
 
   // Boss control
   switch (_bossState) {

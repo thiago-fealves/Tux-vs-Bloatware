@@ -13,19 +13,19 @@
 */
 
 class Sound {
-private:
-    static bool isSoundMuted;
-
 protected:
     ALLEGRO_SAMPLE* sound_sample = nullptr;     // Simple music object
+    static bool isSoundMuted;
 
 public:
     Sound(const char* sound_address);           // Build the sound
     virtual ~Sound();                           // Destroy the sound
-    void play(float gain=4.0);                  // Play the sound
+    void play(float volume=1.0);                // Play the sound
 
-    static void muteSound();
-    static void unmuteSound();
+    static void muteSounds();
+    static void unmuteSounds();
+
+    static float volumeMester;
 };
 
 

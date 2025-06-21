@@ -65,7 +65,7 @@ class FixedShip : public GameObject{
     void set_radius(float r);
     void moveShip(char direction);
     void draw();
-    void takeDamage(bool &playing);
+    void takeDamage(bool &playing, int damage=1);
 };
 /** 
  * @class BrokenShip
