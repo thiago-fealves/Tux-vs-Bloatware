@@ -122,3 +122,24 @@ void DatabaseUsers::updateScore(const std::string& username, int new_score) {
     }
 }
 
+void DatabaseUsers::updateGamesNumber(const std::string& username, int new_games) {
+    try {
+        pqxx::work W(*_connect);
+        pqxx::result R = W.exec_params(
+            "UPDATE users SET games = $1 WHERE username = $2 RETURNING id;",
+            new_games, username
+        );
+        W.commit();
+        if (R.empty()) {
+            std::cout << "Usuario '" << username << "' nao encontrado para atualização de score." << std::endl;
+        } else {
+            std::cout << "Score do usuario '" << username << "' (ID: " << R[0][0].as<int>() << ") atualizado para " << new_games << "." << std::endl;
+        }
+    } catch (const pqxx::sql_error& e) {
+        std::cerr << "Erro SQL ao atualizar numero de games: " << e.what() << std::endl;
+        std::cerr << "Query que causou o erro: " << e.query() << std::endl;
+    } catch (const std::exception& e) {
+        std::cerr << "Erro ao atualizar numero de games: " << e.what() << std::endl;
+    }
+}
+

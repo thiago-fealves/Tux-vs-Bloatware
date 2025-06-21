@@ -24,6 +24,7 @@ public:
     void deleteUser(const std::string& username);
     std::vector<User> listUsers();
     void updateScore(const std::string& username, int new_score);
+    void updateGamesNumber(const std::string& username, int new_games);
     User getUserByUsername(const std::string& username); 
 };
 
