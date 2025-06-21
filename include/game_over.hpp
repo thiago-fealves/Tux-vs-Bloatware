@@ -59,8 +59,8 @@ public:
 
 
 /**
-/*@class gameOverScreen
- * @brief Gerencia a exibição da mensagem de Game Over, scores, botões de ação e a interação do jogador.
+ *@class gameOverScreen
+  * @brief Gerencia a exibição da mensagem de Game Over, scores, botões de ação e a interação do jogador.
   * _currentScore: pontuação na partida
   *_highScore: maior pontuação (recorde)
   * ALLEGRO_FONT* _font: fonte dos textos da tela
@@ -70,11 +70,12 @@ public:
   */
 class gameOverScreen {
 private:
-    int _currentScore;
-    int _highScore;
-    
+
     ALLEGRO_FONT* _font;
 
+    int _currentScore;
+    int _highScore;    
+    
     Button _playAgainButton;
     Button _returnToMenuButton;
     Button _exitGameButton;
