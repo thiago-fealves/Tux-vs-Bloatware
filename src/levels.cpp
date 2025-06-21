@@ -63,7 +63,7 @@ ObstaclesList LevelTwo::_obstaclesList;
 
 
 /**
- * @brief renders the moving background 
+ * @brief renders the moving background
 */
 void Background::renderBackground() {
 
@@ -82,7 +82,7 @@ void Background::renderBackground() {
 /* Starting and cleaning levels */
 
 /**
- * @brief Set the level's music 
+ * @brief Set the level's music
  * @param pointer to a .ogg file with the level's music
 */
 void Level::setMusic(Music* music){
@@ -100,13 +100,9 @@ BrokenShip* LevelOne::setLevelOne() {
     _player = new BrokenShip();
     BrokenShip* Player = dynamic_cast<BrokenShip*>(_player);
     Player->set_position(Vector(400, 300));
-    
-    // Setting Music
-    setMusic(level_two_music); 
 
-    // Setting Obstacles 
-    //_obstaclesList.setPolygonsObstaclesList(shape_repository["asteroid2"], "./assets/asteroid2.png");
-    //_obstaclesList.setCircleObstaclesList("./assets/asteroid.png");
+    // Setting Music
+    setMusic(level_two_music);
 
     std::vector<Vector> shapeLeft = shape_repository["pipe"];
     std::vector<Vector> shapeRight = shapeLeft;
@@ -136,13 +132,13 @@ BrokenShip* LevelTwo::setLevelTwo() {
     _player = new BrokenShip();
     BrokenShip* Player = dynamic_cast<BrokenShip*>(_player);
     Player->set_position(Vector(400, 300));
-    
-    // Setting Music
-    setMusic(level_two_music); 
 
-    // Setting Obstacles 
-    _obstaclesList.setPolygonsObstaclesList(shape_repository["asteroid2"], "./assets/asteroid2.png");
-    //_obstaclesList.setCircleObstaclesList("./assets/asteroid.png");
+    // Setting Music
+    setMusic(level_two_music);
+
+    // Setting Obstacles
+    //_obstaclesList.setPolygonsObstaclesList(shape_repository["asteroid2"], "./assets/asteroid2.png");
+    _obstaclesList.setCircleObstaclesList("./assets/asteroid.png");
 
     return Player;
 }
@@ -150,7 +146,7 @@ BrokenShip* LevelTwo::setLevelTwo() {
 
 
 /**
- * @brief Initializes Level Three 
+ * @brief Initializes Level Three
  * @return Pointer to the player object, in this case FixedShip
 */
 
@@ -159,10 +155,10 @@ FixedShip* LevelThree::setLevelThree() {
   // Setting Player
   _player = new FixedShip;
   FixedShip* Player = dynamic_cast<FixedShip*>(_player);
-  
+
   // Setting Music
   setMusic(level_three_music);
-  
+
   return Player;
 }
 
@@ -197,7 +193,7 @@ void LevelThree::cleanLevel(){
 
 void LevelOne::handleKeyPressEvents(bool &playing, BrokenShip* player){
     switch (_event.keyboard.keycode) {
-        case ALLEGRO_KEY_SPACE:                    
+        case ALLEGRO_KEY_SPACE:
             cout << "space key was pressed" << endl;
             break;
         case ALLEGRO_KEY_ESCAPE:
@@ -277,7 +273,7 @@ void LevelOne::handleTimerEvents(bool &playing, BrokenShip* player, vector<Abstr
     }
 
     interLevelHandling(obstacles, pinguimBandido, "PARABENS, APERTE ENTER PARA IR PARA O PRÓXIMO NÍVEL", 300);
-    //interLevelHandling(obstacles, pendrive, "PARABENS, VOCÊ É DIGNO DE INSTALAR O LINUX, APERTE ENTER PARA PEGAR O PENDRIVE E DESTRUA O WINDOWS!!", 250); 
+    //interLevelHandling(obstacles, pendrive, "PARABENS, VOCÊ É DIGNO DE INSTALAR O LINUX, APERTE ENTER PARA PEGAR O PENDRIVE E DESTRUA O WINDOWS!!", 250);
     // Essa linha deve ser movida para o final do handleTimerEvents do nível dois e a linha superior à esta deve ser movida para o handleTimerEvents do nível 1 quando estiver pronto
     // TODO: fazer ajustes sobre o interLevel quando o nível 1 ficar pronto;
     // alguém lembra o Gabriel de fazer isso por favor ^
@@ -286,7 +282,7 @@ void LevelOne::handleTimerEvents(bool &playing, BrokenShip* player, vector<Abstr
 
 void LevelTwo::handleKeyPressEvents(bool &playing, BrokenShip* player){
     switch (_event.keyboard.keycode) {
-        case ALLEGRO_KEY_SPACE:                    
+        case ALLEGRO_KEY_SPACE:
             cout << "space key was pressed" << endl;
             break;
         case ALLEGRO_KEY_ESCAPE:
@@ -356,7 +352,7 @@ void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<Abstr
       obstacles.clear();
     }
 
-    interLevelHandling(obstacles, pendrive, "PARABENS, VOCÊ É DIGNO DE INSTALAR O LINUX, APERTE ENTER PARA PEGAR O PENDRIVE E DESTRUA O WINDOWS!!", 250); 
+    interLevelHandling(obstacles, pendrive, "PARABENS, VOCÊ É DIGNO DE INSTALAR O LINUX, APERTE ENTER PARA PEGAR O PENDRIVE E DESTRUA O WINDOWS!!", 250);
     al_flip_display();
 }
 
@@ -368,10 +364,10 @@ bool LevelThree::key_pressed[ALLEGRO_KEY_MAX] = { false };
 
 void LevelThree::handleKeyPressEvents(bool &playing, FixedShip* player, WindowsBoss &boss){
     switch (_event.keyboard.keycode) {
-        case ALLEGRO_KEY_SPACE:   
+        case ALLEGRO_KEY_SPACE:
             // isto cria um tiro na posicao do jogador somado por um vetor (0, -40),
             // que aponta para cima para o tiro nao pegar no jogador (:
-            new BallShot(player->get_position()+Vector(0, -40), Vector(0, -1), 10.0, 40);                 
+            new BallShot(player->get_position()+Vector(0, -40), Vector(0, -1), 10.0, 40);
             break;
 
         case ALLEGRO_KEY_ESCAPE:
@@ -426,7 +422,7 @@ void LevelThree::handleTimerEvents(bool &playing, FixedShip* player, WindowsBoss
  * @brief MainLoop of game's second phase
  * @param playing Loop control variable to finish the level on collision or quit
 */
-void LevelOne::mainLoop(bool &playing, bool &isAlive){  
+void LevelOne::mainLoop(bool &playing, bool &isAlive){
     // Initializing level
     al_set_timer_count(timer, 0);
     globalVars::inInterLevel = false;
@@ -436,9 +432,9 @@ void LevelOne::mainLoop(bool &playing, bool &isAlive){
     _music->play();
 
     while (playing) {
-        // Getting new event 
-        al_wait_for_event(event_queue, &_event);  
-        
+        // Getting new event
+        al_wait_for_event(event_queue, &_event);
+
         // Timer events
         if (_event.type == ALLEGRO_EVENT_TIMER) {
           handleTimerEvents(playing, player, obstacles, isAlive);
@@ -457,14 +453,14 @@ void LevelOne::mainLoop(bool &playing, bool &isAlive){
         // Handle window close event
         else if (_event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
           LevelOne::cleanLevel();
-          playing = false; 
+          playing = false;
         }
 
-    } 
+    }
     cleanLevel(); //Deivid 13/06
 }
 
-void LevelTwo::mainLoop(bool &playing, bool &isAlive){ 
+void LevelTwo::mainLoop(bool &playing, bool &isAlive){
     // Initializing level
     al_set_timer_count(timer, 0);
     globalVars::inInterLevel = false;
@@ -474,9 +470,9 @@ void LevelTwo::mainLoop(bool &playing, bool &isAlive){
     _music->play();
 
     while (playing) {
-        // Getting new event 
-        al_wait_for_event(event_queue, &_event);  
-        
+        // Getting new event
+        al_wait_for_event(event_queue, &_event);
+
         // Timer events
         if (_event.type == ALLEGRO_EVENT_TIMER) {
           handleTimerEvents(playing, player, obstacles, isAlive);
@@ -495,11 +491,11 @@ void LevelTwo::mainLoop(bool &playing, bool &isAlive){
         // Handle window close event
         else if (_event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
           LevelOne::cleanLevel();
-          playing = false; 
+          playing = false;
         }
 
-    } 
-    cleanLevel(); 
+    }
+    cleanLevel();
 }
 
 void LevelThree::mainLoop(bool &playing, bool &isAlive){
@@ -511,9 +507,9 @@ void LevelThree::mainLoop(bool &playing, bool &isAlive){
 
   _music->play();
       while (playing) {
-        // Getting new event 
-        al_wait_for_event(event_queue, &_event);  
-        
+        // Getting new event
+        al_wait_for_event(event_queue, &_event);
+
         // Timer events
         if (_event.type == ALLEGRO_EVENT_TIMER) {
           handleTimerEvents(playing, player, windows, isAlive);
@@ -533,7 +529,7 @@ void LevelThree::mainLoop(bool &playing, bool &isAlive){
         // Handle window close event
         else if (_event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
             LevelThree::cleanLevel();
-            playing = false; 
+            playing = false;
         }
     }
 }
