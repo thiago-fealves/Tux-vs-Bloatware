@@ -426,6 +426,7 @@ void LevelThree::handleTimerEvents(bool &playing, FixedShip* player, WindowsBoss
     windows.draw();
 
     if(windows.isDead()) {
+          globalVars::inInterLevel = true;
           victoryInterface victory(levelFont);
           victory.drawVictoryScreen();
     }

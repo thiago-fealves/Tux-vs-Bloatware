@@ -33,6 +33,7 @@ int main(int argc, char** argv) {
     //Loop Principal Infinito do Jogo
     while (true) {
     //Estado MENU
+menu:
     if (inMenu) {
         StartMenu::mainLoopMenu(playing, menu_music); //menu, musica e cliques sao feitos e processados
         if (!playing) break;
@@ -43,7 +44,7 @@ int main(int argc, char** argv) {
     if (playing) {
         al_flush_event_queue(event_queue);// Limpar eventos antigos
 
-    start:
+start:
         bool isAlive = true;
         playing = true;
        
@@ -56,7 +57,7 @@ int main(int argc, char** argv) {
         if(!isAlive) goto gameOver;
         LevelThree::mainLoop(playing, isAlive);
         LevelThree::cleanLevel();
-        if(!isAlive) goto gameOver;
+        //if(isAlive) goto menu;
 
 
     //Transicao para GAME OVER
@@ -76,7 +77,7 @@ gameOver:
             if (dynamic_cast<playAgain*>(chosen_action.get()) != nullptr) {
                 cout << "Reiniciando o jogo...\n";
                 //LevelTwo::cleanLevel();
-                LevelOne::cleanLevel();
+                //LevelOne::cleanLevel();
                 goto start;
                 playing = true;
                 inMenu = false;
