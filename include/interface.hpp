@@ -73,6 +73,16 @@ class Interface {
     Interface(ALLEGRO_FONT* font);
 
     void drawOffGameInterface();
-    void drawIngameInterface();
 
 };
+
+class victoryInterface {
+    ALLEGRO_FONT* _font;
+    public:
+
+    victoryInterface(ALLEGRO_FONT* font);
+    void drawVictoryScreen();
+
+
+};
+

@@ -1,4 +1,5 @@
 #include "levels.hpp"
+#include "interface.hpp"
 #include "shots.hpp"
 #include "shapes_repository.hpp"
 #include "bootstrap.hpp"
@@ -36,7 +37,6 @@ void interLevelHandling(vector<AbstractObstacle*>& obstacles, ALLEGRO_BITMAP* sp
                 bitmapScale, bitmapScale,
                 0);
     }
-
 }
 
 
@@ -369,7 +369,14 @@ void LevelThree::handleKeyPressEvents(bool &playing, FixedShip* player, WindowsB
             // que aponta para cima para o tiro nao pegar no jogador (:
             new BallShot(player->get_position()+Vector(0, -40), Vector(0, -1), 10.0, 40);
             break;
-
+        case ALLEGRO_KEY_ENTER:
+            if(globalVars::inInterLevel) {
+                cleanLevel();
+                playing = false;
+                globalVars::inInterLevel = false;
+                break;
+            }
+            else break;
         case ALLEGRO_KEY_ESCAPE:
             LevelThree::cleanLevel();
             playing = false;
@@ -412,6 +419,11 @@ void LevelThree::handleTimerEvents(bool &playing, FixedShip* player, WindowsBoss
     player->draw();
     Shot::drawShots();
     windows.draw();
+
+    if(windows.isDead()) {
+          victoryInterface victory(levelFont);
+          victory.drawVictoryScreen();
+    }
 
     al_flip_display();
 }
@@ -503,7 +515,7 @@ void LevelThree::mainLoop(bool &playing, bool &isAlive){
   al_set_timer_count(timer, 0);
   playing = true;
   FixedShip* player = setLevelThree();
-  WindowsBoss windows(180, 150);
+  WindowsBoss windows(180, 2);
 
   _music->play();
       while (playing) {

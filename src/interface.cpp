@@ -1,4 +1,5 @@
 #include "interface.hpp"
+#include "bootstrap.hpp"
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/color.h>
@@ -89,9 +90,15 @@ void Interface::drawOffGameInterface() {
     exitGameButton.drawButton();
 }
 
-// can be modified to serve other purposes later
-// ( like some type of "gameover" screen)
-//void Interface::drawIngameInterface() {
-    //returnToMenuButton.drawButton();
-//}
+victoryInterface::victoryInterface(ALLEGRO_FONT* font) : _font(font)
+{}
+
+void victoryInterface::drawVictoryScreen() {
+    al_draw_multiline_text(levelFont, al_map_rgb(200, 200, 200),
+        static_cast<float>(al_get_display_width(display))/2,
+        100, 400, 20, ALLEGRO_ALIGN_CENTRE, "PARABENS!! VOCÊ DESTRUIU A BOSTA DO WINDOWS!! O JOGO ACABOU PODE APERTAR ENTER SEU FUDIDO HAAHHAHAHAHH ");
+
+
+
+};
 

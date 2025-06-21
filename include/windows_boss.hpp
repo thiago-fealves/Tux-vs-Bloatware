@@ -37,6 +37,7 @@ public:
   void draw();
   void update(FixedShip* player, bool &playing);
   float getHalfSide();
+  bool isDead();
   void takeDamage();
 
 

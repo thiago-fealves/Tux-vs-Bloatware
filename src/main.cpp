@@ -23,13 +23,13 @@ int main(int argc, char** argv) {
 
     srand(time(NULL));
 
-    bool playing = true;
     bool inMenu = true;
 
     gameOverScreen game_over_screen(gameFont); 
 
  // instância da tela de Game Over
 
+    bool playing = true;
     //Loop Principal Infinito do Jogo
     while (true) {
     //Estado MENU
@@ -45,6 +45,7 @@ int main(int argc, char** argv) {
 
     start:
         bool isAlive = true;
+        playing = true;
        
        
         LevelOne::mainLoop(playing, isAlive);
@@ -65,7 +66,7 @@ gameOver:
                 if (level_two_music) { 
                     level_two_music->pause(); 
                 }
-                //gameOverScrenn começa a ser executada
+                //gameOverScreen começa a ser executada
                 std::unique_ptr<gameOverOption> chosen_action(game_over_screen.run(event_queue, timer));
 
                 if (!chosen_action) break;

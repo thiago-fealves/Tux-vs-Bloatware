@@ -1,6 +1,8 @@
 #include "windows_boss.hpp"
 #include "collision.hpp"
+#include "interface.hpp"
 #include "shots.hpp"
+#include "levels.hpp"
 #include <iostream>
 
 /**
@@ -98,8 +100,13 @@ void WindowsBoss::takeDamage() {
     _bossState = BossStates::ascending; 
     _applyDamage = false; 
 
+
     // <<<<<<<<<<<<<------------------------------- COLOCAR AQUI A TELA DE VITORIA
   }
+}
+
+bool WindowsBoss::isDead() {
+    return _life <= 0;
 }
 
 /**
@@ -243,7 +250,11 @@ void WindowsBoss::update(FixedShip* player, bool &playing) {
       break;
 
     case BossStates::ascending:
-      WindowsBoss::upBoss(-_halfSide); 
+      if(WindowsBoss::upBoss(-_halfSide)) {
+          victoryInterface victory(levelFont);
+          victory.drawVictoryScreen();
+            
+      }; 
       break;
   }
 }
