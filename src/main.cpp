@@ -24,7 +24,6 @@ int main(int argc, char** argv) {
     srand(time(NULL));
 
     bool playing = true;
-    bool isAlive = true;
     bool inMenu = true;
 
     gameOverScreen game_over_screen(gameFont); 
@@ -45,6 +44,7 @@ int main(int argc, char** argv) {
         al_flush_event_queue(event_queue);// Limpar eventos antigos
 
     start:
+        bool isAlive = true;
        
        
         LevelOne::mainLoop(playing, isAlive);
