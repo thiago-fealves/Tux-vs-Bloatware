@@ -31,6 +31,14 @@ ObstaclesList::~ObstaclesList()
     _obstaclesList.clear();
 }
 
+void ObstaclesList::clear() {
+    for (auto& o : _obstaclesList) {
+        delete o;
+    }
+    _obstaclesList.clear();
+}
+
+
 void ObstaclesList::setPolygonsObstaclesList(const std::vector<Vector>& verts, const char* path){
 
     this->_obstaclesList.clear();
@@ -39,7 +47,7 @@ void ObstaclesList::setPolygonsObstaclesList(const std::vector<Vector>& verts, c
         float x = rand() % SCREEN_W;
         float y = -(rand() % 100);
         Vector position(x, y);
-        PolygonObstacle* polyObstacle = new PolygonObstacle(position, verts, path);
+        PolygonObstacle* polyObstacle = new PolygonObstacle(position, verts, SCALE_ASTEROID, path);
         AbstractObstacle* baseObstacle = polyObstacle;
         this->_obstaclesList.emplace_back(baseObstacle);
     }

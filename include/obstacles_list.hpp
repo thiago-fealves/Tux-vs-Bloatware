@@ -18,6 +18,7 @@ public:
     std::vector<AbstractObstacle*>& getList();
     void updateAll(std::vector<AbstractObstacle*> obstaclesList);
     void drawAll(std::vector<AbstractObstacle*> obstaclesList);
+    void clear();
     ~ObstaclesList();
 };
 
