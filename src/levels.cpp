@@ -9,7 +9,7 @@
 #include "game_object.hpp"
 #include "obstacles_list.hpp"
 #include "collision.hpp"
-
+#include "sound.hpp"
 using namespace std;
 
 // Inter Level Logic
@@ -151,10 +151,14 @@ void LevelTwo::cleanLevel(){
   pipeList.clear();
 }
 
-void LevelThree::cleanLevel(){
+/**
+ * @brief Delete the player and clear the shots.
+ */
+void LevelThree::cleanLevel(){ 
+    // There is no need to clean other things as they are in the stack
   delete _player;
-  _music = nullptr;
   _player = nullptr;
+  Shot::cleanShots();
 }
 
 /* Event Logic for Level Two */
@@ -261,7 +265,8 @@ void LevelThree::handleKeyPressEvents(bool &playing, FixedShip* player, WindowsB
         case ALLEGRO_KEY_SPACE:   
             // isto cria um tiro na posicao do jogador somado por um vetor (0, -40),
             // que aponta para cima para o tiro nao pegar no jogador (:
-            new BallShot(player->get_position()+Vector(0, -40), Vector(0, -1), 10.0, 40);                 
+            new BallShot(player->get_position()+Vector(0, -40), Vector(0, -1), 10.0, 40);  
+            gunshot_sound3->play(0.18);             
             break;
 
         case ALLEGRO_KEY_ESCAPE:

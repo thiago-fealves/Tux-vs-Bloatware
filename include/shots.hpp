@@ -29,13 +29,13 @@
  */
 class Shot : public GameObject {
 private:
-  static void removeShots(); // Clears the list of inactive shots
+  static void removeInactiveShots(); // Clears the list of inactive shots
   static std::vector<Shot*> inactiveShotsList; // List of inactive shots
 
 protected:
   Vector _direction;  
   ALLEGRO_COLOR _shotColor;
-  static std::list<Shot*> activeShotsList; // List of active shots
+  static std::list<Shot*> ShotsList; // List of active shots
 
   
 public:
@@ -50,7 +50,7 @@ public:
 
   static void updateShots(FixedShip* player, WindowsBoss& boss, bool &playing); // Updates all shots
   static void drawShots();   // Draws all the shots
-
+  static void cleanShots();
 };
 
 /**

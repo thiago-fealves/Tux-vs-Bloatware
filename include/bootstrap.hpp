@@ -65,7 +65,7 @@ extern Music* victory_music;
 class Bootstrap {
   private:
     static bool initialize_sys_sound(); 
-    static bool initialize_sounds();
+    static void initialize_sounds();
   public:
     static bool initialize_allegro();
     static bool init_allegro_libs();

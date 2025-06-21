@@ -70,12 +70,12 @@ void StartMenu::handleMouseEvents(bool &playing, bool &displayInterface, Music* 
     static bool musicIsPlaying = true;
     if(interface->stopSongButton.gotClicked(event.mouse.x, event.mouse.y)) {
         if(musicIsPlaying) { 
-            Music::muteMusic();
+            Sound::muteSounds();
             musicIsPlaying = false;
             interface->stopSongButton.setText("󰝟");
             std::cout<<"Music is now paused!" << std::endl;
         } else {
-            Music::unmuteMusic(menu_music);
+            Sound::unmuteSounds();
             musicIsPlaying = true;
             interface->stopSongButton.setText("󰕾");
             std::cout << "Music is now playing!" << std::endl;

@@ -31,6 +31,11 @@ private:
   static void makeLineShotsLeft();
   static void makeLineShotsDown();
 
+  Vector _relativeDistanceToCenterSquare[4];
+  float _sideOfTheMiniSquare;
+  ALLEGRO_COLOR miniSquaresColor;
+  void calculateMiniSquarePositions(); // Calculates the 2 variables above for draw() to work
+
 public:
   WindowsBoss(float halfSide, float life);
 

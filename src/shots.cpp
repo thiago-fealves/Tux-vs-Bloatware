@@ -1,5 +1,6 @@
 #include "shots.hpp"
 #include "windows_boss.hpp"
+#include "bootstrap.hpp"
 #include "collision.hpp"
 //    --- BALL SHOT --- 
 /**
@@ -9,8 +10,34 @@
  */
 
 // Initializes static members
-std::list<Shot*> Shot::activeShotsList; 
+std::list<Shot*> Shot::ShotsList; 
 std::vector<Shot*> Shot::inactiveShotsList; 
+
+/**
+ * @brief Destroys all shots.
+ */
+void Shot::cleanShots() {
+  // Delete the shots that are not nullptr and then clear the list, in both lists.
+
+  for(Shot* &shot : ShotsList) {
+    std::cout << shot << "\n";
+    if(shot!=nullptr) {
+      delete shot;
+      shot=nullptr;
+    }
+  }
+  ShotsList.clear();
+
+  std::cout << "Lista dos tiros para remover" << "\n";
+  for(Shot* &shot : inactiveShotsList) {
+    std::cout << shot << "\n";
+    if(shot!=nullptr) {
+      delete shot;
+      shot=nullptr;
+    }
+  }
+  inactiveShotsList.clear();
+}
 
 /**
  * @brief Build a standard shot.
@@ -25,11 +52,13 @@ Shot::Shot(Vector position, Vector direction, ALLEGRO_COLOR shotColor) :
 /**
  * @brief Clears the list of shots to be removed. (deletes all of them).
  */
-void Shot::removeShots() {
-  for(auto tiro : Shot::inactiveShotsList) {
-    if(tiro != nullptr) delete tiro;
-    Shot::activeShotsList.remove(tiro);
-
+void Shot::removeInactiveShots() {
+  for(Shot* &tiro : Shot::inactiveShotsList) {
+    if(tiro != nullptr) {
+      Shot::ShotsList.remove(tiro);
+      delete tiro;
+      tiro = nullptr;
+    }
   }
   Shot::inactiveShotsList.clear();
 }
@@ -45,7 +74,7 @@ void Shot::removeShots() {
 void Shot::updateShots(FixedShip* player, WindowsBoss& boss, bool &playing) {
 
   //atualiza a posição dos tiros e checa colisao
-  for(Shot* shot : Shot::activeShotsList) {
+  for(Shot* shot : Shot::ShotsList) {
 
     if(shot==nullptr) continue;
   
@@ -66,7 +95,7 @@ void Shot::updateShots(FixedShip* player, WindowsBoss& boss, bool &playing) {
   }
 
   // Removes the shots that are in the list of shots to remove.
-  removeShots();
+  removeInactiveShots();
 
 }
 
@@ -74,7 +103,7 @@ void Shot::updateShots(FixedShip* player, WindowsBoss& boss, bool &playing) {
  * @brief Calls the draw() function of all active shots.
  */
 void Shot::drawShots() {
-  for(auto shot : Shot::activeShotsList) shot->draw();
+  for(auto shot : Shot::ShotsList) shot->draw();
 }
 
 
@@ -95,7 +124,7 @@ void Shot::drawShots() {
  */
 BallShot::BallShot(Vector initialPosi, Vector direction, float radius, float speed) : 
   Shot(initialPosi, direction, al_map_rgb(100, 150, 200)), _speed(speed), _radius(radius) {
-    Shot::activeShotsList.push_back(this);
+    Shot::ShotsList.push_back(this);
   }
  
 /**
@@ -168,7 +197,7 @@ LineShot::LineShot(Vector initialPosi, Vector direction, float thickness, float 
       _length(length), _activationTime(activationTime)
 {
   _direction = (_direction*length)+_position;
-  Shot::activeShotsList.push_back(this);
+  Shot::ShotsList.push_back(this);
 }
 
 /**
@@ -203,6 +232,7 @@ void LineShot::update() {
   if(this->_activationTime<=0) {
     this->_shotColor = al_map_rgb(255, 0, 0);
     this->_activated=true;
+    gunshot_sound4->play(0.5);
   }
 }
 
