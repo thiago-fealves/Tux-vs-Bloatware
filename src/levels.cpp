@@ -241,7 +241,7 @@ void LevelOne::handleKeyReleaseEvents(){
  * @param player the player object of this phase (Brokenship class)
  * @param obstacles Reference to vector of AbstractObstacles of this phase
 */
-void LevelOne::handleTimerEvents(bool &playing, BrokenShip* player, vector<AbstractObstacle*>& obstacles){
+void LevelOne::handleTimerEvents(bool &playing, BrokenShip* player, vector<AbstractObstacle*>& obstacles, bool &isAlive){
 
     // Update the music
     Music::update_fade_in_fade_out();
@@ -268,6 +268,7 @@ void LevelOne::handleTimerEvents(bool &playing, BrokenShip* player, vector<Abstr
             std::cout << "Colidiu\n";
             playing = false;
             collision_this_frame = true;
+            isAlive = false;
             break;
         }
     }
@@ -320,7 +321,7 @@ void LevelTwo::handleKeyReleaseEvents(){
     }
 }
 
-void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<AbstractObstacle*>& obstacles){
+void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<AbstractObstacle*>& obstacles, bool &isAlive){
 
     // Update the music
     Music::update_fade_in_fade_out();
@@ -347,6 +348,7 @@ void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<Abstr
             std::cout << "Colidiu\n";
             playing = false;
             collision_this_frame = true;
+            isAlive = false;
             break;
         }
     }
@@ -354,11 +356,7 @@ void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<Abstr
       obstacles.clear();
     }
 
-    interLevelHandling(obstacles, pinguimBandido, "PARABENS, APERTE ENTER PARA IR PARA O PRÓXIMO NÍVEL", 300);
-    //interLevelHandling(obstacles, pendrive, "PARABENS, VOCÊ É DIGNO DE INSTALAR O LINUX, APERTE ENTER PARA PEGAR O PENDRIVE E DESTRUA O WINDOWS!!", 250); 
-    // Essa linha deve ser movida para o final do handleTimerEvents do nível dois e a linha superior à esta deve ser movida para o handleTimerEvents do nível 1 quando estiver pronto
-    // TODO: fazer ajustes sobre o interLevel quando o nível 1 ficar pronto;
-    // alguém lembra o Gabriel de fazer isso por favor ^
+    interLevelHandling(obstacles, pendrive, "PARABENS, VOCÊ É DIGNO DE INSTALAR O LINUX, APERTE ENTER PARA PEGAR O PENDRIVE E DESTRUA O WINDOWS!!", 250); 
     al_flip_display();
 }
 
@@ -398,7 +396,7 @@ void LevelThree::updatePlayerPosition(FixedShip* player){
     }
 }
 
-void LevelThree::handleTimerEvents(bool &playing, FixedShip* player, WindowsBoss &windows){
+void LevelThree::handleTimerEvents(bool &playing, FixedShip* player, WindowsBoss &windows, bool &isAlive){
     // Update the music
     Music::update_fade_in_fade_out();
 
@@ -428,7 +426,7 @@ void LevelThree::handleTimerEvents(bool &playing, FixedShip* player, WindowsBoss
  * @brief MainLoop of game's second phase
  * @param playing Loop control variable to finish the level on collision or quit
 */
-void LevelOne::mainLoop(bool &playing){  
+void LevelOne::mainLoop(bool &playing, bool &isAlive){  
     // Initializing level
     al_set_timer_count(timer, 0);
     globalVars::inInterLevel = false;
@@ -443,7 +441,7 @@ void LevelOne::mainLoop(bool &playing){
         
         // Timer events
         if (_event.type == ALLEGRO_EVENT_TIMER) {
-          handleTimerEvents(playing, player, obstacles);
+          handleTimerEvents(playing, player, obstacles, isAlive);
         }
 
         // Key press events
@@ -466,7 +464,7 @@ void LevelOne::mainLoop(bool &playing){
     cleanLevel(); //Deivid 13/06
 }
 
-void LevelTwo::mainLoop(bool &playing){  
+void LevelTwo::mainLoop(bool &playing, bool &isAlive){ 
     // Initializing level
     al_set_timer_count(timer, 0);
     globalVars::inInterLevel = false;
@@ -481,7 +479,7 @@ void LevelTwo::mainLoop(bool &playing){
         
         // Timer events
         if (_event.type == ALLEGRO_EVENT_TIMER) {
-          handleTimerEvents(playing, player, obstacles);
+          handleTimerEvents(playing, player, obstacles, isAlive);
         }
 
         // Key press events
@@ -504,7 +502,7 @@ void LevelTwo::mainLoop(bool &playing){
     cleanLevel(); 
 }
 
-void LevelThree::mainLoop(bool &playing){
+void LevelThree::mainLoop(bool &playing, bool &isAlive){
   // Initializing level
   al_set_timer_count(timer, 0);
   playing = true;
@@ -518,7 +516,7 @@ void LevelThree::mainLoop(bool &playing){
         
         // Timer events
         if (_event.type == ALLEGRO_EVENT_TIMER) {
-          handleTimerEvents(playing, player, windows);
+          handleTimerEvents(playing, player, windows, isAlive);
         }
 
         // Key press events

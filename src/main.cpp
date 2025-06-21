@@ -24,6 +24,7 @@ int main(int argc, char** argv) {
     srand(time(NULL));
 
     bool playing = true;
+    bool isAlive = true;
     bool inMenu = true;
 
     gameOverScreen game_over_screen(gameFont); 
@@ -46,15 +47,19 @@ int main(int argc, char** argv) {
     start:
        
        
-        LevelOne::mainLoop(playing);//executa o nivel
-        LevelOne::cleanLevel(); ///limpa o nivel 
-        LevelTwo::mainLoop(playing);//executa o nivel
-        LevelTwo::cleanLevel(); ///limpa o nivel 
-        LevelThree::mainLoop(playing);
+        LevelOne::mainLoop(playing, isAlive);
+        LevelOne::cleanLevel(); 
+        if(!isAlive) goto gameOver;
+        LevelTwo::mainLoop(playing, isAlive);
+        LevelTwo::cleanLevel(); 
+        if(!isAlive) goto gameOver;
+        LevelThree::mainLoop(playing, isAlive);
         LevelThree::cleanLevel();
+        if(!isAlive) goto gameOver;
 
 
     //Transicao para GAME OVER
+gameOver:
        if (playing) continue;
             else { //se o jogador perdeu para a musica
                 if (level_two_music) { 
@@ -95,6 +100,5 @@ int main(int argc, char** argv) {
     }
 } // Fecha while(true)
 
-final:
     Bootstrap::cleanup_allegro();
 } 

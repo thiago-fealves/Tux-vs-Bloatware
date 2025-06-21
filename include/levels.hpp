@@ -88,8 +88,8 @@ class LevelOne : public Level{
   public:
     static BrokenShip* setLevelOne();
     static void cleanLevel();
-    static void mainLoop(bool &playing);
-    static void handleTimerEvents(bool &playing, BrokenShip* player, std::vector<AbstractObstacle*>& obstacles);
+    static void mainLoop(bool &playing, bool &isAlive);
+    static void handleTimerEvents(bool &playing, BrokenShip* player, std::vector<AbstractObstacle*>& obstacles, bool &isAlive);
     static void handleKeyPressEvents(bool &playing, BrokenShip* player);
     static void handleKeyReleaseEvents();
 };
@@ -106,8 +106,8 @@ class LevelTwo : public Level{
   public:
     static BrokenShip* setLevelTwo();
     static void cleanLevel();
-    static void mainLoop(bool &playing);
-    static void handleTimerEvents(bool &playing, BrokenShip* player, std::vector<AbstractObstacle*>& obstacles);
+    static void mainLoop(bool &playing, bool &isAlive);
+    static void handleTimerEvents(bool &playing, BrokenShip* player, std::vector<AbstractObstacle*>& obstacles, bool &isAlive);
     static void handleKeyPressEvents(bool &playing, BrokenShip* player);
     static void handleKeyReleaseEvents();
 };
@@ -124,11 +124,11 @@ class LevelThree : public Level{
   public:
     static FixedShip* setLevelThree();
     static void cleanLevel();
-    static void mainLoop(bool &playing);
+    static void mainLoop(bool &playing, bool &isAlive);
     static void updatePlayerPosition(FixedShip* player); 
 
     static void handleTimerEvents(bool &playing, FixedShip* player, 
-      WindowsBoss &windows);
+      WindowsBoss &windows, bool &isAlive);
 
     static void handleKeyPressEvents(bool &playing, FixedShip* player, WindowsBoss &boss);
     static void handleKeyReleaseEvents(bool &playing);
