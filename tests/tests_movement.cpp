@@ -1,6 +1,7 @@
 #define TESTS_MOVEMENT
 #include "doctest.h"
 #include "movement.hpp"
+#include <math.h>
 
 TEST_CASE("Vector constructors") {
     SUBCASE("Default constructor") {
@@ -59,7 +60,7 @@ TEST_CASE("Vector distance") {
     Vector b(4.0f, 6.0f);
     
     float dist = Vector::distance(a, b);
-    CHECK(doctest::Approx(dist) == 25.0f);
+    CHECK(doctest::Approx(dist) == 5.0f);
 }
 
 TEST_CASE("Vector shortest distance point to segment") {
@@ -69,7 +70,7 @@ TEST_CASE("Vector shortest distance point to segment") {
         Vector b(6.0f, 0.0f);
         
         float dist = Vector::shortestDistancePointToSegment(p, a, b);
-        CHECK(doctest::Approx(dist) == 9.0f);
+        CHECK(doctest::Approx(dist) == 3.0f);
     }
     
     SUBCASE("Point projects before segment start") {
@@ -78,7 +79,7 @@ TEST_CASE("Vector shortest distance point to segment") {
         Vector b(5.0f, 0.0f);
         
         float dist = Vector::shortestDistancePointToSegment(p, a, b);
-        CHECK(doctest::Approx(dist) == 5.0f);
+        CHECK(doctest::Approx(dist) == sqrt(5));
     }
     
     SUBCASE("Point projects after segment end") {
@@ -87,7 +88,7 @@ TEST_CASE("Vector shortest distance point to segment") {
         Vector b(5.0f, 0.0f);
         
         float dist = Vector::shortestDistancePointToSegment(p, a, b);
-        CHECK(doctest::Approx(dist) == 8.0f);
+        CHECK(doctest::Approx(dist) == sqrt(8.0f));
     }
 }
 
