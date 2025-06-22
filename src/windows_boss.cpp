@@ -110,8 +110,10 @@ float WindowsBoss::getHalfSide() {
 
 /**
  * @brief Applies damage to the boss.
+ * 
+ * @param player The player's address, to disable player damage when necessary.
  */
-void WindowsBoss::takeDamage() {
+void WindowsBoss::takeDamage(FixedShip* player) {
   if(_applyDamage==false) return;
 
   _life--;
@@ -120,6 +122,8 @@ void WindowsBoss::takeDamage() {
   if(_life==0) { // If life reaches zero, then the boss changes state.
     _bossState = BossStates::ascending; 
     _applyDamage = false; 
+    player->setCanTakeDamage(false);
+    
   }
 }
 
@@ -260,7 +264,8 @@ void WindowsBoss::update(FixedShip* player, bool &playing) {
     case BossStates::descending:
       if(WindowsBoss::downBoss(50)) { // 50 is just a y value that I think looks good
         _bossState = BossStates::attacking;
-        _applyDamage = true;
+        this->_applyDamage = true;
+        player->setCanTakeDamage(true); // Player can only take damage after the boss descends
       }
       break;
 
@@ -274,6 +279,7 @@ void WindowsBoss::update(FixedShip* player, bool &playing) {
       break;
 
     case BossStates::ascending:
+      
       if(WindowsBoss::upBoss(-_halfSide)) {
           victoryInterface victory(levelFont);
           victory.drawVictoryScreen();
