@@ -2,6 +2,7 @@
 #include "bootstrap.hpp"
 #include "sound.hpp"
 #include "music.hpp"
+#include "shots.hpp"
 
 using namespace std;
 
@@ -20,6 +21,7 @@ ALLEGRO_BITMAP* gameOverBackground = nullptr; //tela
 ALLEGRO_BITMAP* pinguimBandido = nullptr;
 ALLEGRO_BITMAP* pendrive = nullptr;
 ALLEGRO_BITMAP* backgroundImage = nullptr;
+ALLEGRO_BITMAP* ballShotSprite = nullptr;
 
 /* Initialize Sound FX */
 Sound* death_sound = nullptr;
@@ -155,8 +157,17 @@ bool Bootstrap::init_allegro_libs(){
 
     // Load background sprite
     backgroundImage = al_load_bitmap("./assets/background.png"); 
-    if (!pendrive) {
+    if (!backgroundImage) {
         cout << "ERROR: Failed to load image './assets/background.png'!" << endl;
+        al_destroy_timer(timer);
+        al_destroy_display(display);
+        al_destroy_event_queue(event_queue);
+        return false;
+    }
+
+    ballShotSprite = al_load_bitmap("./assets/ballShot.png"); 
+    if (!ballShotSprite) {
+        cout << "ERROR: Failed to load image './assets/ballShot.png'!" << endl;
         al_destroy_timer(timer);
         al_destroy_display(display);
         al_destroy_event_queue(event_queue);

@@ -78,7 +78,8 @@ void Music::pause() {
  * @brief Play the music, starting where it left off.
  */
 void Music::play() {
-    Music::lastMusicPlayed = this;
+    Music::lastMusicPlayed = this; // Saves the last song that was played
+    
     if(Sound::isSoundMuted == true || music_sample == nullptr) return;
     volume = ballast_volume;                            // Return the volume to the original value  
     al_set_sample_instance_position(music_sample, current_music_position);  // Put the music back on the instant it stopped
@@ -120,14 +121,17 @@ void Music::update_fade_in_fade_out() {
     }
 }
 
+/**
+ * @brief Pauses the currently playing music. (By definition it should 
+ * only play one song at a time, that's why this works.)
+ */
 void Music::muteMusic() {
-    for(auto &it : Music::music_address) {
-        it->pause();
-    }
+    Music::lastMusicPlayed->pause();
 }
 
+/**
+ * @brief Play the last song that tried to be played.
+ */
 void Music::unMuteMusic() {
-    // é preciso este parametro, pois quando se desmuta as musicas
-    // nao tem como saber a musica que estaria tocando no momento.
     Music::lastMusicPlayed->play();
 }

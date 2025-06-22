@@ -20,7 +20,6 @@ void Shot::cleanShots() {
   // Delete the shots that are not nullptr and then clear the list, in both lists.
 
   for(Shot* &shot : ShotsList) {
-    std::cout << shot << "\n";
     if(shot!=nullptr) {
       delete shot;
       shot=nullptr;
@@ -30,7 +29,6 @@ void Shot::cleanShots() {
 
   std::cout << "Lista dos tiros para remover" << "\n";
   for(Shot* &shot : inactiveShotsList) {
-    std::cout << shot << "\n";
     if(shot!=nullptr) {
       delete shot;
       shot=nullptr;
@@ -131,7 +129,21 @@ BallShot::BallShot(Vector initialPosi, Vector direction, float radius, float spe
  * @brief Draw a ball
  */
 void BallShot::draw() {
-  al_draw_filled_circle(_position._x, _position._y, _radius, _shotColor);
+  
+  // ------------------------------------------<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+  float draw_x = _position._x - (_radius /2);  // centralizar no x
+  float draw_y = _position._y - (_radius/2); // centralizar no y
+
+  al_draw_scaled_bitmap(
+      ballShotSprite,          // ALLEGRO_BITMAP* do sprite
+      0, 0,             // origem na imagem (top-left)
+      al_get_bitmap_width(ballShotSprite),   // largura original do sprite
+      al_get_bitmap_height(ballShotSprite),  // altura original do sprite
+      draw_x, draw_y,   // posição na tela (centralizado na posição da bola)
+      _radius*3, _radius*3,  // nova largura e altura desejadas
+      0                 // flags (normalmente 0)
+  );
 }
 
 /**

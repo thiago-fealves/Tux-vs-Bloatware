@@ -18,7 +18,7 @@
 WindowsBoss::WindowsBoss(float halfSide, float life) : _halfSide(halfSide), _life(life) {
   _position = Vector(400, -_halfSide); // Set the boss's initial pose centered on the X axis and at the top of the screen.
   
-  timeBetweenAttacks = FPS*5; // Set the time between attacks to 5 seconds
+  timeBetweenAttacks = FPS*3; // Set the time between attacks to 3 seconds
   
   calculateMiniSquarePositions(); // Calculates the positions of the mini-squares that form the winows
 }
@@ -120,9 +120,6 @@ void WindowsBoss::takeDamage() {
   if(_life==0) { // If life reaches zero, then the boss changes state.
     _bossState = BossStates::ascending; 
     _applyDamage = false; 
-
-
-    // <<<<<<<<<<<<<------------------------------- COLOCAR AQUI A TELA DE VITORIA
   }
 }
 
@@ -139,7 +136,7 @@ void WindowsBoss::makeBallShots1() {
   new BallShot(Vector(0, 330), Vector(1, 0), 10, 14);
   new BallShot(Vector(0, 380), Vector(1, 0), 10, 10);
   new BallShot(Vector(0, 420), Vector(1, 0), 10, 4);
-  new BallShot(Vector(0, 470), Vector(1, 0), 10, 4 );
+  new BallShot(Vector(0, 470), Vector(1, 0), 10, 4);
   new BallShot(Vector(0, 520), Vector(1, 0), 10, 6);
 }
 
@@ -152,7 +149,7 @@ void WindowsBoss::makeBallShots2() {
   new BallShot(Vector(0, 330), Vector(1, 0), 10, 14);
   new BallShot(Vector(0, 380), Vector(1, 0), 10, 10);
   new BallShot(Vector(0, 420), Vector(1, 0), 10, 4);
-  new BallShot(Vector(0, 470), Vector(1, 0), 10, 4 );
+  new BallShot(Vector(0, 470), Vector(1, 0), 10, 4);
   new BallShot(Vector(0, 520), Vector(1, 0), 10, 6);
 }
 
@@ -235,7 +232,7 @@ void WindowsBoss::bossAttack() {
     case AttackType::lineShotsDown:
       makeLineShotsDown();
       // The timer that dictates the time between shots is decreased to increase the difficulty.
-      if(timeBetweenAttacks>FPS*3) timeBetweenAttacks -= FPS; 
+      if(timeBetweenAttacks>FPS*2) timeBetweenAttacks -= FPS; 
       _attacktype = AttackType::ballShots1; // Restart loop
       break;
   }

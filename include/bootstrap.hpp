@@ -42,6 +42,7 @@ extern ALLEGRO_BITMAP* gameOverBackground;
 extern ALLEGRO_BITMAP* pinguimBandido;
 extern ALLEGRO_BITMAP* backgroundImage;
 extern ALLEGRO_BITMAP* pendrive;
+extern ALLEGRO_BITMAP* ballShotSprite;
 
 /* Sound FX */
 extern Sound* death_sound;

@@ -12,7 +12,6 @@ float Sound::volumeMester = 1.0f;
  * 
 */
 
-
 /**
  * @brief Construct a sound.
  * 
@@ -62,12 +61,18 @@ void Sound::play(float volume) {
     al_play_sample(sound_sample, volume*Sound::volumeMester, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, nullptr);
 }
 
+/**
+ * @brief Disables sounds and mutes music.
+ */
 void Sound::muteSounds() {
-    Sound::isSoundMuted = true;
-    Music::muteMusic();
+    Sound::isSoundMuted = true; // Does not allow sounds to play
+    Music::muteMusic(); // Make the current music stop playing
 }
 
+/**
+ * @brief Enables sounds and plays music.
+ */
 void Sound::unmuteSounds() {
-    Sound::isSoundMuted = false;
-    Music::unMuteMusic();
+    Sound::isSoundMuted = false; // Enable sounds
+    Music::unMuteMusic(); // Play the last song you tried or played
 }
