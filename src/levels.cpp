@@ -195,7 +195,7 @@ void LevelThree::cleanLevel(){
  * @param player Pointer to the player object of this phase (BrokenShip class)
 */
 
-void LevelOne::handleKeyPressEvents(bool &playing, BrokenShip* player){
+void LevelOne::handleKeyPressEvents(bool &playing, BrokenShip* player, bool &isAlive){
     switch (_event.keyboard.keycode) {
         case ALLEGRO_KEY_SPACE:
             cout << "space key was pressed" << endl;
@@ -203,6 +203,7 @@ void LevelOne::handleKeyPressEvents(bool &playing, BrokenShip* player){
         case ALLEGRO_KEY_ESCAPE:
             cleanLevel();
             playing = false;
+            isAlive = false;
             break;
         case ALLEGRO_KEY_ENTER:
             if(globalVars::inInterLevel) {
@@ -284,7 +285,7 @@ void LevelOne::handleTimerEvents(bool &playing, BrokenShip* player, vector<Abstr
     al_flip_display();
 }
 
-void LevelTwo::handleKeyPressEvents(bool &playing, BrokenShip* player){
+void LevelTwo::handleKeyPressEvents(bool &playing, BrokenShip* player, bool &isAlive){
     switch (_event.keyboard.keycode) {
         case ALLEGRO_KEY_SPACE:
             cout << "space key was pressed" << endl;
@@ -292,6 +293,7 @@ void LevelTwo::handleKeyPressEvents(bool &playing, BrokenShip* player){
         case ALLEGRO_KEY_ESCAPE:
             cleanLevel();
             playing = false;
+            isAlive = false;
             break;
         case ALLEGRO_KEY_ENTER:
             if(globalVars::inInterLevel) {
@@ -366,7 +368,7 @@ void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<Abstr
 /* Event Logic Level Three */
 bool LevelThree::key_pressed[ALLEGRO_KEY_MAX] = { false };
 
-void LevelThree::handleKeyPressEvents(bool &playing, FixedShip* player, WindowsBoss &boss){
+void LevelThree::handleKeyPressEvents(bool &playing, FixedShip* player, WindowsBoss &boss, bool &isAlive){
     switch (_event.keyboard.keycode) {
         case ALLEGRO_KEY_SPACE:
             // isto cria um tiro na posicao do jogador somado por um vetor (0, -40),
@@ -378,6 +380,7 @@ void LevelThree::handleKeyPressEvents(bool &playing, FixedShip* player, WindowsB
             if(globalVars::inInterLevel) {
                 cleanLevel();
                 playing = false;
+                isAlive = false;
                 globalVars::inInterLevel = false;
                 break;
             }
@@ -460,7 +463,7 @@ void LevelOne::mainLoop(bool &playing, bool &isAlive){
 
         // Key press events
         else if (_event.type == ALLEGRO_EVENT_KEY_DOWN) {
-           handleKeyPressEvents(playing, player);
+           handleKeyPressEvents(playing, player, isAlive);
         }
 
         // Key release events
@@ -498,7 +501,7 @@ void LevelTwo::mainLoop(bool &playing, bool &isAlive){
 
         // Key press events
         else if (_event.type == ALLEGRO_EVENT_KEY_DOWN) {
-           handleKeyPressEvents(playing, player);
+           handleKeyPressEvents(playing, player, isAlive);
         }
 
         // Key release events
@@ -536,7 +539,7 @@ void LevelThree::mainLoop(bool &playing, bool &isAlive){
         // Key press events
         else if (_event.type == ALLEGRO_EVENT_KEY_DOWN) {
           key_pressed[_event.keyboard.keycode] = true;
-          LevelThree::handleKeyPressEvents(playing, player, windows);
+          LevelThree::handleKeyPressEvents(playing, player, windows, isAlive);
         }
 
         // Key release events
