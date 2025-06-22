@@ -16,10 +16,11 @@ extern ALLEGRO_TIMER* timer;
 extern ALLEGRO_FONT* gameFont;
 
 int main(int argc, char** argv) {
+    
     if (!Bootstrap::initialize_allegro()) {return 1;
     }
+
     DatabaseUsers db = DatabaseUsers();
-    db.registerUser("Arthur", "arthur.cordeiro", "123456", 0, 0);
 
     srand(time(NULL));
 
