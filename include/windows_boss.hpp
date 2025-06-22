@@ -11,10 +11,11 @@
 class WindowsBoss : public GameObject {
 private:
   ALLEGRO_COLOR _color = al_map_rgb(255, 255, 255);
+
   BossStates _bossState = BossStates::descending; // Initial
   AttackType _attacktype = AttackType::ballShots1; // Initial
 
-  bool _applyDamage = false;
+  bool _applyDamage = false; // Indicates whether or not the boss can take damage
   int timeBetweenAttacks;
 
   float _halfSide; 
@@ -43,7 +44,7 @@ public:
   void update(FixedShip* player, bool &playing);
   float getHalfSide();
   bool isDead();
-  void takeDamage();
+  void takeDamage(FixedShip* player);
 
 
 };

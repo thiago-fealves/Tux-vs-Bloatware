@@ -57,7 +57,9 @@ class FixedShip : public GameObject{
   private:
     static float move_force;
     static float _radius;
+    bool _applyDamage = false; // Indicates whether or not the player can take damage
     int _life = 3;
+
   public:
     FixedShip();
     FixedShip(const Vector &pos);
@@ -65,6 +67,8 @@ class FixedShip : public GameObject{
     void set_radius(float r);
     void moveShip(char direction);
     void draw();
+
+    void setCanTakeDamage(bool canTakeDamage);
     void takeDamage(bool &playing, int damage=1);
 };
 /** 

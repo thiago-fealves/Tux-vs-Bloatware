@@ -152,9 +152,22 @@ Vector FlappyMovement::getMoveForce(){
 }
 
 /**
+ * @brief Method of setting whether or not the player can take damage.
+ * 
+ * @param canTakeDamage Boolean using to set.
+ */
+void FixedShip::setCanTakeDamage(bool canTakeDamage) {
+  this->_applyDamage = canTakeDamage;
+}
+
+/**
  * @brief Removes a life from the player, if the life is zero, the game is over.
+ * 
+ * @param playing Variable that controls whether the game is active.
+ * @param damage Integer that informs the damage taken.
  */
 void FixedShip::takeDamage(bool &playing, int damage) {
+  if(_applyDamage==false) return;
   _life -= damage;
   if(_life<=0) {
     playing=false;
