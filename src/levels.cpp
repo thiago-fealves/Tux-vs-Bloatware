@@ -185,6 +185,9 @@ void LevelThree::cleanLevel(){
     // There is no need to clean other things as they are in the stack
   delete _player;
   _player = nullptr;
+  for (int i = 0; i < ALLEGRO_KEY_MAX; i++) {
+    LevelThree::key_pressed[i] = false;
+  }
   Shot::cleanShots();
 }
 

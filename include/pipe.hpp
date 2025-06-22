@@ -6,7 +6,7 @@ class Pipe : public AbstractObstacle{
     private:
     PolygonObstacle leftPipe;
     PolygonObstacle rightPipe;
-    float gap = 110;
+    float gap = 150;
 
     public:
     Pipe(const Vector& startPosition, const std::vector<Vector>& shapeLeft, 
