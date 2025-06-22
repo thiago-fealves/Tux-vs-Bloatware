@@ -50,15 +50,14 @@ start:
         playing = true;
        
        
-        //LevelOne::mainLoop(playing, isAlive);
-        //LevelOne::cleanLevel(); 
-        //if(!isAlive) goto gameOver;
-        //LevelTwo::mainLoop(playing, isAlive);
-        //LevelTwo::cleanLevel(); 
-        //if(!isAlive) goto gameOver;
+        LevelOne::mainLoop(playing, isAlive);
+        LevelOne::cleanLevel(); 
+        if(!isAlive) goto gameOver;
+        LevelTwo::mainLoop(playing, isAlive);
+        LevelTwo::cleanLevel(); 
+        if(!isAlive) goto gameOver;
         LevelThree::mainLoop(playing, isAlive);
         LevelThree::cleanLevel();
-        //if(isAlive) goto menu;
 
 
     //Transicao para GAME OVER
