@@ -478,6 +478,7 @@ void LevelOne::mainLoop(bool &playing, bool &isAlive){
         else if (_event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
           LevelOne::cleanLevel();
           playing = false;
+          isAlive = false;
         }
 
     }
@@ -516,6 +517,7 @@ void LevelTwo::mainLoop(bool &playing, bool &isAlive){
         else if (_event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
           LevelOne::cleanLevel();
           playing = false;
+          isAlive = false;
         }
 
     }
@@ -554,6 +556,7 @@ void LevelThree::mainLoop(bool &playing, bool &isAlive){
         else if (_event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
             LevelThree::cleanLevel();
             playing = false;
+            isAlive = false;
         }
     }
 }
