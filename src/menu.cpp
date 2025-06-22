@@ -40,7 +40,7 @@ void StartMenu::drawBackground() {
             static_cast<float>(al_get_display_width(display))/2.0, 175,
             400, 20,
             ALLEGRO_ALIGN_CENTRE,
-            "ALGUÉM INSTALOU WINDOWS NO MEU COMPUTADOR >:( ME AJUDE A INSTALAR O LINUX NOVAMENTE!!");
+            "ALGUÉM INSTALOU WINDOWS NO MEU COMPUTADOR >:( ME AJUDE A INSTALAR O LINUX NOVAMENTE!! USE A TECLA PARA DIREITA OU A LETRA \"D\" PARA DESVIAR");
 
 
 }

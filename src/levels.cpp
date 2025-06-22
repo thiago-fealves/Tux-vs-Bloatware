@@ -361,7 +361,7 @@ void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<Abstr
       obstacles.clear();
     }
 
-    interLevelHandling(obstacles, pendrive, "PARABENS, VOCÊ É DIGNO DE INSTALAR O LINUX, APERTE ENTER PARA PEGAR O PENDRIVE E DESTRUA O WINDOWS!!", 250);
+    interLevelHandling(obstacles, pendrive, "PARABENS, VOCÊ É DIGNO DE INSTALAR O LINUX, APERTE ENTER PARA PEGAR O PENDRIVE E DESTRUA O WINDOWS!! USE WASD PARA SE MOVER E ESPAÇO PARA ATIRAR", 250);
     al_flip_display();
 }
 
