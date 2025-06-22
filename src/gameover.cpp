@@ -101,7 +101,6 @@ void gameOverScreen::draw() {
 /**
  * @brief Gerencia o loop de eventos da tela de Game Over e a interação do jogador.
  * @details A tela permanece ativa, desenhando e capturando cliques, até que o jogador
- * escolha uma opção (Play Again, Return Menu, Exit) ou feche a janela.
  * @param event_queue Fila de eventos Allegro para capturar input.
  * @param timer Timer Allegro para controlar o redesenho da tela.
  * @return Um ponteiro para o objeto 'gameOverOption' que representa a ação escolhida pelo jogador.
