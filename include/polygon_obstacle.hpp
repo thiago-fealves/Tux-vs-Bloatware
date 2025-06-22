@@ -17,7 +17,7 @@ public:
         : vertices(verts), _scale(scale) {
 
         this->set_position(pos);
-
+        
         // aplica a escala em todo o vetor
         for (auto& v : vertices) {
             v = v * _scale;

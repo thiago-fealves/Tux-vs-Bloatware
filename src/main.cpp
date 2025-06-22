@@ -20,8 +20,7 @@ int main(int argc, char** argv) {
     if (!Bootstrap::initialize_allegro()) {return 1;
     }
 
-    DatabaseUsers db = DatabaseUsers();
-
+    //DatabaseUsers db = DatabaseUsers();
     srand(time(NULL));
 
     bool inMenu = true;
@@ -50,9 +49,9 @@ start:
         playing = true;
        
        
-        LevelOne::mainLoop(playing, isAlive);
-        LevelOne::cleanLevel(); 
-        if(!isAlive) goto gameOver;
+        //LevelOne::mainLoop(playing, isAlive);
+        //LevelOne::cleanLevel(); 
+        //if(!isAlive) goto gameOver;
         LevelTwo::mainLoop(playing, isAlive);
         LevelTwo::cleanLevel(); 
         if(!isAlive) goto gameOver;

@@ -1,5 +1,5 @@
 #include "polygon_obstacle.hpp"
-#include <iostream>
+
 
 void PolygonObstacle::draw() {
 
@@ -20,10 +20,10 @@ void PolygonObstacle::draw() {
  void PolygonObstacle::update() {
 
         Vector pos = get_position();
-        pos._y += 2;
-        if (pos._y > 600 + 50) {
+        pos._y += this->getSpeed()._y;
+        if (pos._y > 650) {
             pos._y = -50;
-            pos._x = rand() % 800;
+            pos._x = std::rand() % 800;
         }
         set_position(pos);
 }
@@ -39,12 +39,6 @@ bool PolygonObstacle::checkCollisionWithPlayer(BrokenShip& player){
         Vector a = vertices[i] + this->get_position();
         Vector b = vertices[(i + 1) % vertices.size()] + this->get_position();
 
-          /*al_draw_line(
-            a._x, a._y,     
-            b._x, b._y,      
-            al_map_rgb(255, 255, 0),      
-            1.0f);*/
-            
         if (Vector::shortestDistancePointToSegment(player.get_position(), a, b) <= player.get_radius()) return true;
     }
     return false;

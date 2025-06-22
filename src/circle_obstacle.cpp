@@ -1,7 +1,9 @@
 #include "circle_obstacle.hpp"
+#include "bootstrap.hpp"
 
 CircleObstacle::CircleObstacle(const Vector &pos, const char* path){
-    this->setSpeed(Vector(0,3));
+    this->setSpeed(Vector(0, static_cast<float>(velocity[std::rand() % TAM_VECTOR_VELOCITY])));
+
     this->set_position(pos);
     this->set_bitmap(path);
 }
@@ -44,7 +46,8 @@ void CircleObstacle::update() {
 bool CircleObstacle::checkCollisionWithPlayer(BrokenShip& player) {
     Vector pos1 = player.get_position();
     Vector pos2 = this->get_position();
-    float dx = pos1._x - pos2._x;
+    float dx = pos1._x - pos2.
+    _x;
     float dy = pos1._y - pos2._y;
     float distance = sqrt(dx * dx + dy * dy);
     return (distance < (player.get_radius() + this->get_radius()));

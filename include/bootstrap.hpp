@@ -26,8 +26,10 @@ constexpr int SCREEN_H = 600;
 constexpr int OBSTACLES_LIST_NUM = 6;
 constexpr float SCALE_PIPES = 0.33f;
 constexpr float SCALE_ASTEROID = 0.19f;
-extern const ALLEGRO_COLOR BACKGROUND_COLOR;
+const float velocity[] = {9.0f, 9.3f, 9.7f, 10.2f, 10.8f, 11.5f, 12.0f, 12.8f, 13.5f};
+const int TAM_VECTOR_VELOCITY = sizeof(velocity)/sizeof(velocity[0]);
 
+extern const ALLEGRO_COLOR BACKGROUND_COLOR;
 /* Allegro Components */
 extern ALLEGRO_DISPLAY* display;
 extern ALLEGRO_EVENT_QUEUE* event_queue;
