@@ -34,7 +34,7 @@ void StartMenu::drawBackground() {
     al_draw_scaled_bitmap(pinguimBandido, 0, 0,
             al_get_bitmap_width(pinguimBandido),
             al_get_bitmap_height(pinguimBandido),
-            0, 100, 250, 250, 0);
+            0, 125, 250, 250, 0);
 
     al_draw_multiline_text(levelFont, al_map_rgb(200, 200, 200),
             static_cast<float>(al_get_display_width(display))/2.0, 175,
