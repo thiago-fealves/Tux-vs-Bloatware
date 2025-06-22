@@ -1,0 +1,146 @@
+\doxysection{Game\+Object Class Reference}
+\hypertarget{class_game_object}{}\label{class_game_object}\index{GameObject@{GameObject}}
+
+
+Base class to objects of the game.  
+
+
+
+
+{\ttfamily \#include $<$game\+\_\+object.\+hpp$>$}
+
+Inheritance diagram for Game\+Object\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.051282cm]{class_game_object}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_game_object_a0348e3ee2e83d56eafca7a3547f432c4}{Game\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Create a new default \doxylink{class_game_object}{Game\+Object}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_game_object_ab1d658c663b75ad693a8a3bc57d7d482}{Game\+Object}} (\mbox{\hyperlink{struct_vector}{Vector}} position)
+\begin{DoxyCompactList}\small\item\em Create a new \doxylink{class_game_object}{Game\+Object} on given position. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_vector}{Vector}} \mbox{\hyperlink{class_game_object_a7c24fe9f255ef8fc094046501e6ab452}{get\+\_\+position}} ()
+\begin{DoxyCompactList}\small\item\em Get the position of a \doxylink{class_game_object}{Game\+Object}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_object_ac39b48b4d12f59bc1dbc969e49f1afa9}{set\+\_\+position}} (const \mbox{\hyperlink{struct_vector}{Vector}} \&position)
+\begin{DoxyCompactList}\small\item\em Sets the position of a \doxylink{class_game_object}{Game\+Object}. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_game_object_ad0081ad2e2838529e0ce903b59e4c836}{\texorpdfstring{$\sim$}{\string~}\+Game\+Object}} ()=0
+\begin{DoxyCompactList}\small\item\em Game Object empty destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_object_a0d7b25073bbe03a5bf19c9fd0814e56a}{set\+\_\+bitmap}} (const char \texorpdfstring{$\ast$}{*}path)
+\begin{DoxyCompactList}\small\item\em Sets the sprite of the \doxylink{class_game_object}{Game\+Object}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+ALLEGRO\+\_\+\+BITMAP \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_game_object_add9f8ed8d82a876cc26893978321961f}{object\+Sprite}} = NULL
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_vector}{Vector}} \mbox{\hyperlink{class_game_object_acf2dfa279d81923e6b65c8a69bd6d48a}{\+\_\+position}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class to objects of the game. 
+
+
+\begin{DoxyItemize}
+\item \+\_\+position\+: \doxylink{struct_vector}{Vector} that represents object\textquotesingle{}s current position on screen 
+\end{DoxyItemize}
+
+\label{doc-constructors}
+\Hypertarget{class_game_object_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_game_object_a0348e3ee2e83d56eafca7a3547f432c4}\index{GameObject@{GameObject}!GameObject@{GameObject}}
+\index{GameObject@{GameObject}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{GameObject()}{GameObject()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_game_object_a0348e3ee2e83d56eafca7a3547f432c4} 
+Game\+Object\+::\+Game\+Object (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Create a new default \doxylink{class_game_object}{Game\+Object}. 
+
+\Hypertarget{class_game_object_ab1d658c663b75ad693a8a3bc57d7d482}\index{GameObject@{GameObject}!GameObject@{GameObject}}
+\index{GameObject@{GameObject}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{GameObject()}{GameObject()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_game_object_ab1d658c663b75ad693a8a3bc57d7d482} 
+Game\+Object\+::\+Game\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_vector}{Vector}}}]{position}{}\end{DoxyParamCaption})}
+
+
+
+Create a new \doxylink{class_game_object}{Game\+Object} on given position. 
+
+\Hypertarget{class_game_object_ad0081ad2e2838529e0ce903b59e4c836}\index{GameObject@{GameObject}!````~GameObject@{\texorpdfstring{$\sim$}{\string~}GameObject}}
+\index{````~GameObject@{\texorpdfstring{$\sim$}{\string~}GameObject}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}GameObject()}{\string~GameObject()}}
+{\footnotesize\ttfamily \label{class_game_object_ad0081ad2e2838529e0ce903b59e4c836} 
+Game\+Object\+::\texorpdfstring{$\sim$}{\string~}\+Game\+Object (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Game Object empty destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_game_object_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_game_object_a7c24fe9f255ef8fc094046501e6ab452}\index{GameObject@{GameObject}!get\_position@{get\_position}}
+\index{get\_position@{get\_position}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{get\_position()}{get\_position()}}
+{\footnotesize\ttfamily \label{class_game_object_a7c24fe9f255ef8fc094046501e6ab452} 
+\mbox{\hyperlink{struct_vector}{Vector}} Game\+Object\+::get\+\_\+position (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Get the position of a \doxylink{class_game_object}{Game\+Object}. 
+
+\begin{DoxyReturn}{Returns}
+A vector that represents the \doxylink{class_game_object}{Game\+Object} position 
+\end{DoxyReturn}
+\Hypertarget{class_game_object_a0d7b25073bbe03a5bf19c9fd0814e56a}\index{GameObject@{GameObject}!set\_bitmap@{set\_bitmap}}
+\index{set\_bitmap@{set\_bitmap}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{set\_bitmap()}{set\_bitmap()}}
+{\footnotesize\ttfamily \label{class_game_object_a0d7b25073bbe03a5bf19c9fd0814e56a} 
+void Game\+Object\+::set\+\_\+bitmap (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{path}{}\end{DoxyParamCaption})}
+
+
+
+Sets the sprite of the \doxylink{class_game_object}{Game\+Object}. 
+
+\Hypertarget{class_game_object_ac39b48b4d12f59bc1dbc969e49f1afa9}\index{GameObject@{GameObject}!set\_position@{set\_position}}
+\index{set\_position@{set\_position}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{set\_position()}{set\_position()}}
+{\footnotesize\ttfamily \label{class_game_object_ac39b48b4d12f59bc1dbc969e49f1afa9} 
+void Game\+Object\+::set\+\_\+position (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_vector}{Vector}} \&}]{position}{}\end{DoxyParamCaption})}
+
+
+
+Sets the position of a \doxylink{class_game_object}{Game\+Object}. 
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_game_object_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_game_object_acf2dfa279d81923e6b65c8a69bd6d48a}\index{GameObject@{GameObject}!\_position@{\_position}}
+\index{\_position@{\_position}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{\_position}{\_position}}
+{\footnotesize\ttfamily \label{class_game_object_acf2dfa279d81923e6b65c8a69bd6d48a} 
+\mbox{\hyperlink{struct_vector}{Vector}} Game\+Object\+::\+\_\+position\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_game_object_add9f8ed8d82a876cc26893978321961f}\index{GameObject@{GameObject}!objectSprite@{objectSprite}}
+\index{objectSprite@{objectSprite}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{objectSprite}{objectSprite}}
+{\footnotesize\ttfamily \label{class_game_object_add9f8ed8d82a876cc26893978321961f} 
+ALLEGRO\+\_\+\+BITMAP\texorpdfstring{$\ast$}{*} Game\+Object\+::object\+Sprite = NULL}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{game__object_8hpp}{game\+\_\+object.\+hpp}}\item 
+src/\mbox{\hyperlink{game__object_8cpp}{game\+\_\+object.\+cpp}}\end{DoxyCompactItemize}

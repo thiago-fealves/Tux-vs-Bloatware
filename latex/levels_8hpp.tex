@@ -1,0 +1,78 @@
+\doxysection{include/levels.hpp File Reference}
+\hypertarget{levels_8hpp}{}\label{levels_8hpp}\index{include/levels.hpp@{include/levels.hpp}}
+{\ttfamily \#include $<$allegro5/allegro\+\_\+font.\+h$>$}\newline
+{\ttfamily \#include $<$allegro5/bitmap.\+h$>$}\newline
+{\ttfamily \#include $<$allegro5/bitmap\+\_\+draw.\+h$>$}\newline
+{\ttfamily \#include $<$allegro5/bitmap\+\_\+io.\+h$>$}\newline
+{\ttfamily \#include $<$allegro5/color.\+h$>$}\newline
+{\ttfamily \#include $<$allegro5/display.\+h$>$}\newline
+{\ttfamily \#include $<$allegro5/drawing.\+h$>$}\newline
+{\ttfamily \#include $<$allegro5/keycodes.\+h$>$}\newline
+{\ttfamily \#include $<$allegro5/timer.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include "{}abstract\+\_\+obstacle.\+hpp"{}}\newline
+{\ttfamily \#include "{}obstacles\+\_\+list.\+hpp"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_background}{Background}}
+\begin{DoxyCompactList}\small\item\em moving background logic \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_level}{Level}}
+\begin{DoxyCompactList}\small\item\em Base class for the game levels, encapsulates the bare minimum logic to maintain a level. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_level_one}{Level\+One}}
+\begin{DoxyCompactList}\small\item\em First phase of the game, basic vertically-\/oriented flappy bird with satellites as pipes. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_level_two}{Level\+Two}}
+\begin{DoxyCompactList}\small\item\em Second phase of the game, vertically-\/oriented flappy bird with moving obstacles (asteroids) \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_level_three}{Level\+Three}}
+\begin{DoxyCompactList}\small\item\em Third phase of the game, a free-\/movement, shooter boss fight against \doxylink{class_windows}{Windows} (The biggest piece of bloatware in earth) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{levels_8hpp_a28fa15a97b594b9e4fe0704cfab9829a}{LEVEL\+\_\+\+DURATION}}~15
+\begin{DoxyCompactList}\small\item\em Duração padrão das fases 1 e 2 (em segundos) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{levels_8hpp_aaedb90e2376e37475a99e82694ad1a20}{inter\+Level\+Handling}} (std\+::vector$<$ \mbox{\hyperlink{class_abstract_obstacle}{Abstract\+Obstacle}} \texorpdfstring{$\ast$}{*} $>$ \&obstacles, ALLEGRO\+\_\+\+BITMAP \texorpdfstring{$\ast$}{*}sprite, const char \texorpdfstring{$\ast$}{*}message, float bitmap\+Scale)
+\begin{DoxyCompactList}\small\item\em Clears the obstacles, draw a selected sprite with a user controlled scale and a message. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{levels_8hpp_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{levels_8hpp_a28fa15a97b594b9e4fe0704cfab9829a}\index{levels.hpp@{levels.hpp}!LEVEL\_DURATION@{LEVEL\_DURATION}}
+\index{LEVEL\_DURATION@{LEVEL\_DURATION}!levels.hpp@{levels.hpp}}
+\doxysubsubsection{\texorpdfstring{LEVEL\_DURATION}{LEVEL\_DURATION}}
+{\footnotesize\ttfamily \label{levels_8hpp_a28fa15a97b594b9e4fe0704cfab9829a} 
+\#define LEVEL\+\_\+\+DURATION~15}
+
+
+
+Duração padrão das fases 1 e 2 (em segundos) 
+
+
+
+\label{doc-func-members}
+\Hypertarget{levels_8hpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{levels_8hpp_aaedb90e2376e37475a99e82694ad1a20}\index{levels.hpp@{levels.hpp}!interLevelHandling@{interLevelHandling}}
+\index{interLevelHandling@{interLevelHandling}!levels.hpp@{levels.hpp}}
+\doxysubsubsection{\texorpdfstring{interLevelHandling()}{interLevelHandling()}}
+{\footnotesize\ttfamily \label{levels_8hpp_aaedb90e2376e37475a99e82694ad1a20} 
+void inter\+Level\+Handling (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{class_abstract_obstacle}{Abstract\+Obstacle}} \texorpdfstring{$\ast$}{*} $>$ \&}]{obstacles}{, }\item[{ALLEGRO\+\_\+\+BITMAP \texorpdfstring{$\ast$}{*}}]{sprite}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{message}{, }\item[{float}]{bitmap\+Scale}{}\end{DoxyParamCaption})}
+
+
+
+Clears the obstacles, draw a selected sprite with a user controlled scale and a message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obstacles} & vector of abstract obstacles to be cleared \\
+\hline
+{\em sprite} & allegro-\/typed bitmap of sprite \\
+\hline
+{\em message} & message in the screen \\
+\hline
+{\em bitmap\+Scale} & new width and heigth scale \\
+\hline
+\end{DoxyParams}

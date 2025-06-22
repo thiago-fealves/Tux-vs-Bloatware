@@ -1,0 +1,38 @@
+\doxysection{polygon\+\_\+obstacle.\+hpp}
+\hypertarget{polygon__obstacle_8hpp_source}{}\label{polygon__obstacle_8hpp_source}\index{include/polygon\_obstacle.hpp@{include/polygon\_obstacle.hpp}}
+\mbox{\hyperlink{polygon__obstacle_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{abstract__obstacle_8hpp}{abstract\_obstacle.hpp}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{game__object_8hpp}{game\_object.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{windows__boss_8hpp}{windows\_boss.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{boss__states_8hpp}{boss\_states.hpp}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_polygon_obstacle_a72d6b899352ae51d18433baf0ee845f8}{PolygonObstacle}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_abstract_obstacle}{AbstractObstacle}}\{}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00012\ \ \ std::vector<Vector>\ vertices;}
+\DoxyCodeLine{00013\ \ \ \textcolor{keywordtype}{float}\ \_scale\ =\ 1.00f;}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{class_polygon_obstacle_a72d6b899352ae51d18433baf0ee845f8}{PolygonObstacle}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_vector}{Vector}}\ \&pos,\ \textcolor{keyword}{const}\ std::vector<Vector>\&\ verts,\ \textcolor{keywordtype}{float}\ scale,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ imagePath)}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ :\ vertices(verts),\ \_scale(scale)\ \{}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{class_game_object_ac39b48b4d12f59bc1dbc969e49f1afa9}{set\_position}}(pos);}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ aplica\ a\ escala\ em\ todo\ o\ vetor}}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ v\ :\ vertices)\ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ v\ =\ v\ *\ \_scale;}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{class_game_object_a0d7b25073bbe03a5bf19c9fd0814e56a}{set\_bitmap}}(imagePath);}
+\DoxyCodeLine{00027\ \ \ \ \ \}}
+\DoxyCodeLine{00028\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_polygon_obstacle_a0e96d2f3d384b80728f7be5c14f4d2f1}{draw}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00029\ \ \ std::vector<Vector>\ \mbox{\hyperlink{class_polygon_obstacle_a1c14b34780d88b266600fe6542f2e686}{getVertices}}();}
+\DoxyCodeLine{00030\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_polygon_obstacle_ae5e2e7006124486c4c8aaeaa762907d0}{update}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00031\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_polygon_obstacle_a4f7591a4aba1c4e6226bbd54dd294ee9}{checkCollisionWithPlayer}}(\mbox{\hyperlink{class_broken_ship}{BrokenShip}}\&\ player)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00032\ \};}
+
+\end{DoxyCode}

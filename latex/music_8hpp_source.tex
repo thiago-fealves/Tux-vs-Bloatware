@@ -1,0 +1,46 @@
+\doxysection{music.\+hpp}
+\hypertarget{music_8hpp_source}{}\label{music_8hpp_source}\index{include/music.hpp@{include/music.hpp}}
+\mbox{\hyperlink{music_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ MUSIC\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ MUSIC\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <list>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{sound_8hpp}{sound.hpp}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <allegro5/allegro.h>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <allegro5/allegro\_audio.h>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <allegro5/allegro\_acodec.h>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_music_a724ec86e5a48598df663e5b0a9b9c7c7}{Music}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_sound_a61f8caf4f40d22e8bfbc7efcf09b930b}{Sound}}\ \{}
+\DoxyCodeLine{00019\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00020\ \ \ \ \ ALLEGRO\_SAMPLE\_INSTANCE*\ music\_sample\ =\ \textcolor{keyword}{nullptr};\ \ \ \ \ \ \textcolor{comment}{//\ Music\ object\ (more\ complex\ than\ the\ sample)}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{float}\ ballast\_volume;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Save\ the\ default\ volume}}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{float}\ volume\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Reference\ volume\ at\ which\ the\ system\ follows}}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{float}\ current\_volume\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Real-\/time\ volume}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ current\_music\_position\ =\ 0;\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Position\ at\ which\ the\ music\ was\ paused}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{float}\ fade\_speed;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Fade-\/in\ and\ fade-\/out\ speed}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{static}\ std::list\ <Music*>\ music\_address;\ \ \ \ \textcolor{comment}{//\ Music\ addresses\ to\ have\ their\ volumes\ updated,\ with\ fade-\/in\ and\ fade-\/out}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_music_a724ec86e5a48598df663e5b0a9b9c7c7}{Music}}*\ lastMusicPlayed;}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{class_music_a724ec86e5a48598df663e5b0a9b9c7c7}{Music}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ sound\_address,\ \textcolor{keywordtype}{float}\ volume\_parameter=0.6f,\ \textcolor{keywordtype}{float}\ fade\_speed\_parameter=2.0f);\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{class_music_a6677407ee42c06d3a9c48837ef0714a9}{\string~Music}}()\ \textcolor{keyword}{override};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ the\ destroyer\ of\ music\ is\ called,\ the\ destroyer\ of\ sound\ will\ not\ be\ called}}
+\DoxyCodeLine{00037\ \ \ \ \ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_music_a54b941f6f7634d7f99b473c78fe6e4da}{play}}();\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Method\ of\ playing\ music}}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_music_a10e5537400b6f018a8c86085751a90cb}{pause}}();\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Method\ to\ pause\ music}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_music_a618ef81c86b2780440c193916f5bd540}{update\_fade\_in\_fade\_out}}();\ \ \ \ \ \ \textcolor{comment}{//\ Method\ to\ do\ fade-\/in\ and\ fade-\/out}}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_music_a21678e64b80b713c34f369439ccf591e}{muteMusic}}();}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_music_a42eb2907837ef893b06f4c8ea041ed62}{unMuteMusic}}();}
+\DoxyCodeLine{00044\ \};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

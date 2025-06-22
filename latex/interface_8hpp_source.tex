@@ -1,0 +1,69 @@
+\doxysection{interface.\+hpp}
+\hypertarget{interface_8hpp_source}{}\label{interface_8hpp_source}\index{include/interface.hpp@{include/interface.hpp}}
+\mbox{\hyperlink{interface_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <allegro5/allegro.h>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <allegro5/allegro\_font.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <allegro5/allegro\_ttf.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <allegro5/allegro\_primitives.h>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <allegro5/color.h>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <allegro5/transformations.h>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_coordinates_a7de8c8e869f198f285a2644c95fe51f5}{Coordinates}}\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{struct_coordinates_a46cd0305b4b243bed88609cae8a8deaa}{\_x}},\ \mbox{\hyperlink{struct_coordinates_a4b1ebcbd2c5762be3a0bf12db756a2f9}{\_y}},\ \mbox{\hyperlink{struct_coordinates_a4eb6829181fa11d29c76ec319fa970ef}{\_width}},\ \mbox{\hyperlink{struct_coordinates_a68cea1339fb4dfa3076b99fb3ff60e7f}{\_heigth}};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{struct_coordinates_a7de8c8e869f198f285a2644c95fe51f5}{Coordinates}}(\textcolor{keywordtype}{double}\ x,\ \textcolor{keywordtype}{double}\ y,\ \textcolor{keywordtype}{double}\ width,\ \textcolor{keywordtype}{double}\ heigth);}
+\DoxyCodeLine{00025\ \};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_button_a8d4bcc88792027a0a27bb907dde62c16}{Button}}\ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \mbox{\hyperlink{struct_coordinates}{Coordinates}}\ \_coords;}
+\DoxyCodeLine{00041\ \ \ \ \ ALLEGRO\_COLOR\ \_color;}
+\DoxyCodeLine{00042\ \ \ \ \ std::string\ \_text;}
+\DoxyCodeLine{00043\ \ \ \ \ ALLEGRO\_FONT*\ \_font;}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{bool}\ \_drawBackground;}
+\DoxyCodeLine{00046\ \ \ \ \ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_button_a8d4bcc88792027a0a27bb907dde62c16}{Button}}(\mbox{\hyperlink{struct_coordinates}{Coordinates}}\ coords,\ ALLEGRO\_COLOR\ color,\ std::string\ text,}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ALLEGRO\_FONT*\ font,\ \textcolor{keywordtype}{bool}\ drawBackground\ =\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_button_aefe153559b2477c09a934c9f4ca1588d}{drawButton}}();}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_button_a887051ba237d349028cfefae9fa922fe}{gotClicked}}(\textcolor{keywordtype}{int}\ mx,\ \textcolor{keywordtype}{int}\ my);}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_button_a67e9d14aa4f10202f20c0613b307711d}{setText}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ txt);}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_interface_af8eb1a5793cee5ef32debc8d6b866eb9}{Interface}}\ \{}
+\DoxyCodeLine{00065\ \ \ \ \ }
+\DoxyCodeLine{00066\ \ \ \ \ ALLEGRO\_FONT*\ \_font;}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00068\ \ \ \ \ \mbox{\hyperlink{class_button}{Button}}\ \mbox{\hyperlink{class_interface_a813db426d3147b5954a7e42453b542b4}{playButton}};}
+\DoxyCodeLine{00069\ \ \ \ \ \mbox{\hyperlink{class_button}{Button}}\ \mbox{\hyperlink{class_interface_a0d760505976a3153519fbd9a9d6e2e94}{stopSongButton}};}
+\DoxyCodeLine{00070\ \ \ \ \ \mbox{\hyperlink{class_button}{Button}}\ \mbox{\hyperlink{class_interface_a51640e1056e74f766376e1d8e6c507a8}{returnToMenuButton}};}
+\DoxyCodeLine{00071\ \ \ \ \ \mbox{\hyperlink{class_button}{Button}}\ \mbox{\hyperlink{class_interface_a2bf2dfe2d500a5fefa2b12c57fe3f275}{exitGameButton}};}
+\DoxyCodeLine{00072\ \ \ \ \ }
+\DoxyCodeLine{00073\ \ \ \ \ \mbox{\hyperlink{class_interface_af8eb1a5793cee5ef32debc8d6b866eb9}{Interface}}(ALLEGRO\_FONT*\ font);}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_interface_a07c510ceb858f9396d4b2b91c5595975}{drawOffGameInterface}}();}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \};}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classvictory_interface_ace9bb282a888a3e09ef2b486444c917b}{victoryInterface}}\ \{}
+\DoxyCodeLine{00080\ \ \ \ \ ALLEGRO\_FONT*\ \_font;}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \mbox{\hyperlink{classvictory_interface_ace9bb282a888a3e09ef2b486444c917b}{victoryInterface}}(ALLEGRO\_FONT*\ font);}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classvictory_interface_af236813608ea5857d0ebb8c58a08a737}{drawVictoryScreen}}();}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \};}
+\DoxyCodeLine{00088\ }
+
+\end{DoxyCode}

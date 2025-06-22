@@ -1,0 +1,90 @@
+\doxysection{shots.\+hpp}
+\hypertarget{shots_8hpp_source}{}\label{shots_8hpp_source}\index{include/shots.hpp@{include/shots.hpp}}
+\mbox{\hyperlink{shots_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ SHOTS\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ SHOTS\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{bootstrap_8hpp}{bootstrap.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{movement_8hpp}{movement.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{game__object_8hpp}{game\_object.hpp}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{levels_8hpp}{levels.hpp}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{bootstrap_8hpp}{bootstrap.hpp}}"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{abstract__obstacle_8hpp}{abstract\_obstacle.hpp}}"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{windows__boss_8hpp}{windows\_boss.hpp}}"{}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <list>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <allegro5/allegro.h>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <allegro5/allegro\_primitives.h>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <allegro5/allegro\_primitives.h>}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <allegro5/bitmap.h>}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <allegro5/bitmap\_draw.h>}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <allegro5/bitmap\_io.h>}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_shot_add50611c469a1592ba8eed84775d0b2b}{Shot}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_game_object_a0348e3ee2e83d56eafca7a3547f432c4}{GameObject}}\ \{}
+\DoxyCodeLine{00031\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00032\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ removeInactiveShots();\ \textcolor{comment}{//\ Clears\ the\ list\ of\ inactive\ shots}}
+\DoxyCodeLine{00033\ \ \ \textcolor{keyword}{static}\ std::vector<Shot*>\ inactiveShotsList;\ \textcolor{comment}{//\ List\ of\ inactive\ shots}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00036\ \ \ \mbox{\hyperlink{struct_vector}{Vector}}\ \mbox{\hyperlink{class_shot_a13ba1815ead176debb915a55c697b6e1}{\_direction}};\ \ }
+\DoxyCodeLine{00037\ \ \ ALLEGRO\_COLOR\ \mbox{\hyperlink{class_shot_a3e5394c80fb6eb06899d4dd3644f16aa}{\_shotColor}};}
+\DoxyCodeLine{00038\ \ \ \textcolor{keyword}{static}\ std::list<Shot*>\ \mbox{\hyperlink{class_shot_a4c02e3ab557fc392bcf9d20b557ebb56}{ShotsList}};\ \textcolor{comment}{//\ List\ of\ active\ shots}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00042\ \ \ \mbox{\hyperlink{class_shot_add50611c469a1592ba8eed84775d0b2b}{Shot}}(\mbox{\hyperlink{struct_vector}{Vector}}\ position,\ \mbox{\hyperlink{struct_vector}{Vector}}\ direction,\ ALLEGRO\_COLOR\ shotColor);}
+\DoxyCodeLine{00043\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_shot_ad329f4658e93bf5717529b9b2d078eaf}{\string~Shot}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00044\ \ \ }
+\DoxyCodeLine{00045\ \ \ \textcolor{keywordtype}{bool}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_shot_a1a70e4236a36444432b8404bd8542a43}{isItActive}}()\ =\ 0;\ \ \ \ }
+\DoxyCodeLine{00046\ \ \ \textcolor{keywordtype}{bool}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_shot_af3f49c25856cd87d6a44c6fe9a5bab39}{shotCollidedWithPlayer}}(\mbox{\hyperlink{class_fixed_ship}{FixedShip}}\&\ player)\ =\ 0;\ }
+\DoxyCodeLine{00047\ \ \ \textcolor{keywordtype}{bool}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_shot_ac9d81a7e984783ca9bfaeb58b67b5d52}{shotCollidedWithBoss}}(\mbox{\hyperlink{class_windows_boss}{WindowsBoss}}\&\ boss)\ =\ 0;\ }
+\DoxyCodeLine{00048\ \ \ \textcolor{keywordtype}{void}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_shot_a8392eea2d47656b2b16d59d28467d41e}{draw}}()\ =\ 0;}
+\DoxyCodeLine{00049\ \ \ \textcolor{keywordtype}{void}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_shot_a86375c6cb648ca7502c124caf9f73ec8}{update}}()\ =\ 0;}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_shot_a4fba0257edbb5c81b4fff8427246d0d8}{updateShots}}(\mbox{\hyperlink{class_fixed_ship}{FixedShip}}*\ player,\ \mbox{\hyperlink{class_windows_boss}{WindowsBoss}}\&\ boss,\ \textcolor{keywordtype}{bool}\ \&playing);\ \textcolor{comment}{//\ Updates\ all\ shots}}
+\DoxyCodeLine{00052\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_shot_aa045efc754355b53a5ab06dd23ef0ac1}{drawShots}}();\ \ \ \textcolor{comment}{//\ Draws\ all\ the\ shots}}
+\DoxyCodeLine{00053\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_shot_a89099d8decbb022ef7e72e7d42fcdd75}{cleanShots}}();}
+\DoxyCodeLine{00054\ \};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00061\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_ball_shot_a1d12e764f604833bfedcda896da7cb46}{BallShot}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_shot_add50611c469a1592ba8eed84775d0b2b}{Shot}}\ \{}
+\DoxyCodeLine{00062\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00063\ \ \ \textcolor{keywordtype}{float}\ \_speed;}
+\DoxyCodeLine{00064\ \ \ \textcolor{keywordtype}{float}\ \_radius;}
+\DoxyCodeLine{00065\ \ \ }
+\DoxyCodeLine{00066\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00067\ \ \ \mbox{\hyperlink{class_ball_shot_a1d12e764f604833bfedcda896da7cb46}{BallShot}}(\mbox{\hyperlink{struct_vector}{Vector}}\ initialPosi,\ \mbox{\hyperlink{struct_vector}{Vector}}\ direction,\ \textcolor{keywordtype}{float}\ radius,\ \textcolor{keywordtype}{float}\ speed=40);}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_ball_shot_aa62029a61b31ad13cd33d42e5f550ff9}{draw}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00070\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_ball_shot_ae2721a909d82eab80f27abfb0d8e2632}{update}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00071\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_ball_shot_ad5de5c00d1b324eb414b25cde3d1e413}{isItActive}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00072\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_ball_shot_acb6e1f9ee53f731f67d9d06a8a6621e9}{shotCollidedWithBoss}}(\mbox{\hyperlink{class_windows_boss}{WindowsBoss}}\&\ boss)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00073\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_ball_shot_a0dd3178d717f4cff04cb1fb48de9a7e3}{shotCollidedWithPlayer}}(\mbox{\hyperlink{class_fixed_ship}{FixedShip}}\&\ player)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00074\ \};}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00081\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_line_shot_a9aec29b1fc5901c769aa4c6cfb226a50}{LineShot}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_shot_add50611c469a1592ba8eed84775d0b2b}{Shot}}\ \{}
+\DoxyCodeLine{00082\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00083\ \ \ \textcolor{keywordtype}{float}\ \_thickness;}
+\DoxyCodeLine{00084\ \ \ \textcolor{keywordtype}{float}\ \_length;\ }
+\DoxyCodeLine{00085\ \ \ \textcolor{keywordtype}{double}\ \_activationTime;\ \textcolor{comment}{//\ Time\ for\ the\ line\ shot\ to\ cause\ damage}}
+\DoxyCodeLine{00086\ \ \ \textcolor{keywordtype}{bool}\ \_activated=\textcolor{keyword}{false};}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00089\ \ \ \mbox{\hyperlink{class_line_shot_a9aec29b1fc5901c769aa4c6cfb226a50}{LineShot}}(\mbox{\hyperlink{struct_vector}{Vector}}\ initialPosi,\ \mbox{\hyperlink{struct_vector}{Vector}}\ direction,\ \textcolor{keywordtype}{float}\ espessura,\ \textcolor{keywordtype}{float}\ comprimento,\ \textcolor{keywordtype}{double}\ tempoAtivacao);}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_line_shot_aa6fc87eff60f4a9c24d1bced1b5e98ad}{draw}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00092\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_line_shot_ae09980e0450f0c058197f3a7c9c0e6a6}{update}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00093\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_line_shot_a3260e79f9ebd05efbd2d693865ba59d8}{isItActive}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00094\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_line_shot_ae5140740141905f015b0a05f5c8bef94}{shotCollidedWithBoss}}(\mbox{\hyperlink{class_windows_boss}{WindowsBoss}}\&\ boss)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00095\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_line_shot_a740580ac9d2d0ce7ec80ec04f832a160}{shotCollidedWithPlayer}}(\mbox{\hyperlink{class_fixed_ship}{FixedShip}}\&\ player)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00096\ \ \ \ \ }
+\DoxyCodeLine{00097\ \};}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

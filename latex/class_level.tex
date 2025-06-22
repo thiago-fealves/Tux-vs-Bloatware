@@ -1,0 +1,130 @@
+\doxysection{Level Class Reference}
+\hypertarget{class_level}{}\label{class_level}\index{Level@{Level}}
+
+
+Base class for the game levels, encapsulates the bare minimum logic to maintain a level.  
+
+
+
+
+{\ttfamily \#include $<$levels.\+hpp$>$}
+
+Inheritance diagram for Level\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_level}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{class_level_a7f11bfb80cabe621654c252447471004}{set\+Music}} (\mbox{\hyperlink{class_music}{Music}} \texorpdfstring{$\ast$}{*}music)
+\begin{DoxyCompactList}\small\item\em Set the level\textquotesingle{}s music. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_music}{Music}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_level_abf93346e3e650e8803af278ecc78345a}{\+\_\+music}} = nullptr
+\item 
+static \mbox{\hyperlink{class_game_object}{Game\+Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_level_a001b27733015d3a4e782f21b9b762ef2}{\+\_\+player}} = nullptr
+\item 
+static \mbox{\hyperlink{class_background}{Background}} \mbox{\hyperlink{class_level_ab845da410833affbb83f207ce69fc3a8}{\+\_\+bg}}
+\item 
+static ALLEGRO\+\_\+\+EVENT \mbox{\hyperlink{class_level_a2dda77d62b1b6527609fd8c271da6770}{\+\_\+event}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_level_aaedb90e2376e37475a99e82694ad1a20}{inter\+Level\+Handling}} (std\+::vector$<$ \mbox{\hyperlink{class_abstract_obstacle}{Abstract\+Obstacle}} \texorpdfstring{$\ast$}{*} $>$ \&obstacles, ALLEGRO\+\_\+\+BITMAP \texorpdfstring{$\ast$}{*}sprite, const char \texorpdfstring{$\ast$}{*}message, float bitmap\+Scale)
+\begin{DoxyCompactList}\small\item\em Clears the obstacles, draw a selected sprite with a user controlled scale and a message. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class for the game levels, encapsulates the bare minimum logic to maintain a level. 
+
+
+\begin{DoxyItemize}
+\item \+\_\+music\+: pointer to the level\textquotesingle{}s music
+\item \+\_\+player\+: pointer to the level\textquotesingle{}s player (either \doxylink{class_broken_ship}{Broken\+Ship} or \doxylink{class_fixed_ship}{Fixed\+Ship})
+\item \+\_\+bg\+: Parallax background
+\item \+\_\+event\+: level\textquotesingle{}s Allegro event 
+\end{DoxyItemize}
+
+\label{doc-func-members}
+\Hypertarget{class_level_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_level_a7f11bfb80cabe621654c252447471004}\index{Level@{Level}!setMusic@{setMusic}}
+\index{setMusic@{setMusic}!Level@{Level}}
+\doxysubsubsection{\texorpdfstring{setMusic()}{setMusic()}}
+{\footnotesize\ttfamily \label{class_level_a7f11bfb80cabe621654c252447471004} 
+void Level\+::set\+Music (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_music}{Music}} \texorpdfstring{$\ast$}{*}}]{music}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Set the level\textquotesingle{}s music. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pointer} & to a .ogg file with the level\textquotesingle{}s music \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-related-members}
+\Hypertarget{class_level_doc-related-members}
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{class_level_aaedb90e2376e37475a99e82694ad1a20}\index{Level@{Level}!interLevelHandling@{interLevelHandling}}
+\index{interLevelHandling@{interLevelHandling}!Level@{Level}}
+\doxysubsubsection{\texorpdfstring{interLevelHandling}{interLevelHandling}}
+{\footnotesize\ttfamily \label{class_level_aaedb90e2376e37475a99e82694ad1a20} 
+void inter\+Level\+Handling (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{class_abstract_obstacle}{Abstract\+Obstacle}} \texorpdfstring{$\ast$}{*} $>$ \&}]{obstacles}{, }\item[{ALLEGRO\+\_\+\+BITMAP \texorpdfstring{$\ast$}{*}}]{sprite}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{message}{, }\item[{float}]{bitmap\+Scale}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Clears the obstacles, draw a selected sprite with a user controlled scale and a message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obstacles} & vector of abstract obstacles to be cleared \\
+\hline
+{\em sprite} & allegro-\/typed bitmap of sprite \\
+\hline
+{\em message} & message in the screen \\
+\hline
+{\em bitmap\+Scale} & new width and heigth scale \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{class_level_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_level_ab845da410833affbb83f207ce69fc3a8}\index{Level@{Level}!\_bg@{\_bg}}
+\index{\_bg@{\_bg}!Level@{Level}}
+\doxysubsubsection{\texorpdfstring{\_bg}{\_bg}}
+{\footnotesize\ttfamily \label{class_level_ab845da410833affbb83f207ce69fc3a8} 
+\mbox{\hyperlink{class_background}{Background}} Level\+::\+\_\+bg\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+\Hypertarget{class_level_a2dda77d62b1b6527609fd8c271da6770}\index{Level@{Level}!\_event@{\_event}}
+\index{\_event@{\_event}!Level@{Level}}
+\doxysubsubsection{\texorpdfstring{\_event}{\_event}}
+{\footnotesize\ttfamily \label{class_level_a2dda77d62b1b6527609fd8c271da6770} 
+ALLEGRO\+\_\+\+EVENT Level\+::\+\_\+event\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+\Hypertarget{class_level_abf93346e3e650e8803af278ecc78345a}\index{Level@{Level}!\_music@{\_music}}
+\index{\_music@{\_music}!Level@{Level}}
+\doxysubsubsection{\texorpdfstring{\_music}{\_music}}
+{\footnotesize\ttfamily \label{class_level_abf93346e3e650e8803af278ecc78345a} 
+\mbox{\hyperlink{class_music}{Music}} \texorpdfstring{$\ast$}{*} Level\+::\+\_\+music = nullptr\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+\Hypertarget{class_level_a001b27733015d3a4e782f21b9b762ef2}\index{Level@{Level}!\_player@{\_player}}
+\index{\_player@{\_player}!Level@{Level}}
+\doxysubsubsection{\texorpdfstring{\_player}{\_player}}
+{\footnotesize\ttfamily \label{class_level_a001b27733015d3a4e782f21b9b762ef2} 
+\mbox{\hyperlink{class_game_object}{Game\+Object}} \texorpdfstring{$\ast$}{*} Level\+::\+\_\+player = nullptr\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{levels_8hpp}{levels.\+hpp}}\item 
+src/\mbox{\hyperlink{levels_8cpp}{levels.\+cpp}}\end{DoxyCompactItemize}

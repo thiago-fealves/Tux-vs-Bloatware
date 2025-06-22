@@ -1,0 +1,113 @@
+\doxysection{game\+Over\+Screen Class Reference}
+\hypertarget{classgame_over_screen}{}\label{classgame_over_screen}\index{gameOverScreen@{gameOverScreen}}
+
+
+Gerencia a exibição da mensagem de Game Over, scores, botões de ação e a interação do jogador. \+\_\+current\+Score\+: pontuação na partida \+\_\+high\+Score\+: maior pontuação (recorde) ALLEGRO\+\_\+\+FONT\texorpdfstring{$\ast$}{*} \+\_\+font\+: fonte dos textos da tela \+\_\+play\+Again\+Button\+: botão jogar novamente \+\_\+return\+To\+Menu\+Button\+: botão para retornar para a tela inicial \+\_\+exit\+Game\+Button\+: botão para sair do jogo.  
+
+
+
+
+{\ttfamily \#include $<$game\+\_\+over.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgame_over_screen_aa0c513214f2e0a920f5c1e45756a3d59}{game\+Over\+Screen}} (ALLEGRO\+\_\+\+FONT \texorpdfstring{$\ast$}{*}font)
+\begin{DoxyCompactList}\small\item\em Construtor da classe \doxylink{classgame_over_screen}{game\+Over\+Screen}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgame_over_screen_a15f3b7fb20f804052da4a0767cab61f9}{set\+Current\+Score}} (int score)
+\begin{DoxyCompactList}\small\item\em metodos para acessar e modificar as pontuações do jogo e desenhar os elementos visuais na tela. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgame_over_screen_a02a38dfe54fd15a85c465640eb9ad7d2}{set\+High\+Score}} (int score)
+\begin{DoxyCompactList}\small\item\em Define o recorde (maior pontuação) a ser exibido na tela. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgame_over_screen_a62827761c43757763df36ce45ced5804}{draw}} ()
+\begin{DoxyCompactList}\small\item\em Desenha todos os elementos visuais na tela de Game Over. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgame_over_option}{game\+Over\+Option}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classgame_over_screen_a673c4ac393b75b1062a549af6c45fb72}{run}} (ALLEGRO\+\_\+\+EVENT\+\_\+\+QUEUE \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{bootstrap_8cpp_a1b547b3fd150c01ccf92506cf719a14d}{event\+\_\+queue}}, ALLEGRO\+\_\+\+TIMER \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{bootstrap_8cpp_a5a56835e8f246f98761fb994723020cb}{timer}})
+\begin{DoxyCompactList}\small\item\em Gerencia o loop de eventos da tela de Game Over e a interação do jogador. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Gerencia a exibição da mensagem de Game Over, scores, botões de ação e a interação do jogador. \+\_\+current\+Score\+: pontuação na partida \+\_\+high\+Score\+: maior pontuação (recorde) ALLEGRO\+\_\+\+FONT\texorpdfstring{$\ast$}{*} \+\_\+font\+: fonte dos textos da tela \+\_\+play\+Again\+Button\+: botão jogar novamente \+\_\+return\+To\+Menu\+Button\+: botão para retornar para a tela inicial \+\_\+exit\+Game\+Button\+: botão para sair do jogo. 
+
+\label{doc-constructors}
+\Hypertarget{classgame_over_screen_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classgame_over_screen_aa0c513214f2e0a920f5c1e45756a3d59}\index{gameOverScreen@{gameOverScreen}!gameOverScreen@{gameOverScreen}}
+\index{gameOverScreen@{gameOverScreen}!gameOverScreen@{gameOverScreen}}
+\doxysubsubsection{\texorpdfstring{gameOverScreen()}{gameOverScreen()}}
+{\footnotesize\ttfamily \label{classgame_over_screen_aa0c513214f2e0a920f5c1e45756a3d59} 
+game\+Over\+Screen\+::game\+Over\+Screen (\begin{DoxyParamCaption}\item[{ALLEGRO\+\_\+\+FONT \texorpdfstring{$\ast$}{*}}]{font}{}\end{DoxyParamCaption})}
+
+
+
+Construtor da classe \doxylink{classgame_over_screen}{game\+Over\+Screen}. 
+
+Construtor da tela de Game Over. Inicializa os membros da classe, incluindo a fonte e os botões com suas posições e textos. 
+
+\label{doc-func-members}
+\Hypertarget{classgame_over_screen_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classgame_over_screen_a62827761c43757763df36ce45ced5804}\index{gameOverScreen@{gameOverScreen}!draw@{draw}}
+\index{draw@{draw}!gameOverScreen@{gameOverScreen}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily \label{classgame_over_screen_a62827761c43757763df36ce45ced5804} 
+void game\+Over\+Screen\+::draw (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Desenha todos os elementos visuais na tela de Game Over. 
+
+Inclui a imagem de fundo, textos informativos e os botões. \Hypertarget{classgame_over_screen_a673c4ac393b75b1062a549af6c45fb72}\index{gameOverScreen@{gameOverScreen}!run@{run}}
+\index{run@{run}!gameOverScreen@{gameOverScreen}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily \label{classgame_over_screen_a673c4ac393b75b1062a549af6c45fb72} 
+\mbox{\hyperlink{classgame_over_option}{game\+Over\+Option}} \texorpdfstring{$\ast$}{*} game\+Over\+Screen\+::run (\begin{DoxyParamCaption}\item[{ALLEGRO\+\_\+\+EVENT\+\_\+\+QUEUE \texorpdfstring{$\ast$}{*}}]{event\+\_\+queue}{, }\item[{ALLEGRO\+\_\+\+TIMER \texorpdfstring{$\ast$}{*}}]{timer}{}\end{DoxyParamCaption})}
+
+
+
+Gerencia o loop de eventos da tela de Game Over e a interação do jogador. 
+
+A tela permanece ativa, desenhando e capturando cliques, até que o jogador 
+\begin{DoxyParams}{Parameters}
+{\em event\+\_\+queue} & Fila de eventos Allegro para capturar input. \\
+\hline
+{\em timer} & Timer Allegro para controlar o redesenho da tela. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Um ponteiro para o objeto \textquotesingle{}\doxylink{classgame_over_option}{game\+Over\+Option}\textquotesingle{} que representa a ação escolhida pelo jogador.
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em event\+\_\+queue} & Ponteiro para a fila de eventos Allegro do jogo. \\
+\hline
+{\em timer} & Ponteiro para o timer Allegro do jogo. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Ponteiro para o objeto \doxylink{classgame_over_option}{game\+Over\+Option} que representa a ação escolhida pelo jogador. 
+\end{DoxyReturn}
+\Hypertarget{classgame_over_screen_a15f3b7fb20f804052da4a0767cab61f9}\index{gameOverScreen@{gameOverScreen}!setCurrentScore@{setCurrentScore}}
+\index{setCurrentScore@{setCurrentScore}!gameOverScreen@{gameOverScreen}}
+\doxysubsubsection{\texorpdfstring{setCurrentScore()}{setCurrentScore()}}
+{\footnotesize\ttfamily \label{classgame_over_screen_a15f3b7fb20f804052da4a0767cab61f9} 
+void game\+Over\+Screen\+::set\+Current\+Score (\begin{DoxyParamCaption}\item[{int}]{score}{}\end{DoxyParamCaption})}
+
+
+
+metodos para acessar e modificar as pontuações do jogo e desenhar os elementos visuais na tela. 
+
+Define a pontuação da partida atual a ser exibida na tela.. \Hypertarget{classgame_over_screen_a02a38dfe54fd15a85c465640eb9ad7d2}\index{gameOverScreen@{gameOverScreen}!setHighScore@{setHighScore}}
+\index{setHighScore@{setHighScore}!gameOverScreen@{gameOverScreen}}
+\doxysubsubsection{\texorpdfstring{setHighScore()}{setHighScore()}}
+{\footnotesize\ttfamily \label{classgame_over_screen_a02a38dfe54fd15a85c465640eb9ad7d2} 
+void game\+Over\+Screen\+::set\+High\+Score (\begin{DoxyParamCaption}\item[{int}]{score}{}\end{DoxyParamCaption})}
+
+
+
+Define o recorde (maior pontuação) a ser exibido na tela. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{game__over_8hpp}{game\+\_\+over.\+hpp}}\item 
+src/\mbox{\hyperlink{gameover_8cpp}{gameover.\+cpp}}\end{DoxyCompactItemize}

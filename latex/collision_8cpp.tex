@@ -1,0 +1,95 @@
+\doxysection{src/collision.cpp File Reference}
+\hypertarget{collision_8cpp}{}\label{collision_8cpp}\index{src/collision.cpp@{src/collision.cpp}}
+{\ttfamily \#include "{}collision.\+hpp"{}}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{collision_8cpp_ae8b3c7e369211b3fe7a5f7a1b8d39626}{is\+Colliding\+Edge}} (\mbox{\hyperlink{struct_vector}{Vector}} \&new\+\_\+position, \mbox{\hyperlink{class_broken_ship}{Broken\+Ship}} \texorpdfstring{$\ast$}{*}player)
+\item 
+void \mbox{\hyperlink{collision_8cpp_a205f01ba80b24a19aa79b4493f1c6510}{new\+Position\+After\+Collision\+Edge}} (\mbox{\hyperlink{struct_vector}{Vector}} \&new\+\_\+position, \mbox{\hyperlink{class_broken_ship}{Broken\+Ship}} \texorpdfstring{$\ast$}{*}player)
+\item 
+bool \mbox{\hyperlink{collision_8cpp_a333a4116c4aa13e932a714d07550db78}{circle\+Square\+Collision}} (\mbox{\hyperlink{struct_vector}{Vector}} circle\+Point, float radius, \mbox{\hyperlink{struct_vector}{Vector}} square\+Point, float half\+Side)
+\begin{DoxyCompactList}\small\item\em Checks whether a circle and a square collide on the plane. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{collision_8cpp_ad4975316b03b61ac4f48e0d47c5cd376}{circle\+Circle\+Collision}} (\mbox{\hyperlink{struct_vector}{Vector}} circleA, float radiusA, \mbox{\hyperlink{struct_vector}{Vector}} circleB, float radiusB)
+\begin{DoxyCompactList}\small\item\em Check if two circles collided. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{collision_8cpp_a7fbc25c33a73ea7e5a3e775b928be3b2}{distance\+Between\+Points}} (\mbox{\hyperlink{struct_vector}{Vector}} pointA, \mbox{\hyperlink{struct_vector}{Vector}} pointB)
+\begin{DoxyCompactList}\small\item\em Calculates the distance between two points on the plane. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{collision_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{collision_8cpp_ad4975316b03b61ac4f48e0d47c5cd376}\index{collision.cpp@{collision.cpp}!circleCircleCollision@{circleCircleCollision}}
+\index{circleCircleCollision@{circleCircleCollision}!collision.cpp@{collision.cpp}}
+\doxysubsubsection{\texorpdfstring{circleCircleCollision()}{circleCircleCollision()}}
+{\footnotesize\ttfamily \label{collision_8cpp_ad4975316b03b61ac4f48e0d47c5cd376} 
+bool circle\+Circle\+Collision (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_vector}{Vector}}}]{circleA}{, }\item[{float}]{radiusA}{, }\item[{\mbox{\hyperlink{struct_vector}{Vector}}}]{circleB}{, }\item[{float}]{radiusB}{}\end{DoxyParamCaption})}
+
+
+
+Check if two circles collided. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em circleA} & Center point of circle A. \\
+\hline
+{\em radiusA} & Radius of circle A. \\
+\hline
+{\em CircleB} & Center point of circle B. \\
+\hline
+{\em radiusB} & Radius of circle B.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+There was a collision. 
+\end{DoxyReturn}
+\Hypertarget{collision_8cpp_a333a4116c4aa13e932a714d07550db78}\index{collision.cpp@{collision.cpp}!circleSquareCollision@{circleSquareCollision}}
+\index{circleSquareCollision@{circleSquareCollision}!collision.cpp@{collision.cpp}}
+\doxysubsubsection{\texorpdfstring{circleSquareCollision()}{circleSquareCollision()}}
+{\footnotesize\ttfamily \label{collision_8cpp_a333a4116c4aa13e932a714d07550db78} 
+bool circle\+Square\+Collision (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_vector}{Vector}}}]{circle\+Point}{, }\item[{float}]{radius}{, }\item[{\mbox{\hyperlink{struct_vector}{Vector}}}]{square\+Point}{, }\item[{float}]{half\+Side}{}\end{DoxyParamCaption})}
+
+
+
+Checks whether a circle and a square collide on the plane. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em circle\+Point} & Center point of the circle. \\
+\hline
+{\em radius} & Radius of circle. \\
+\hline
+{\em square\+Point} & Center point of the square. \\
+\hline
+{\em half\+Side} & Half the side of the square.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+There was a collision. 
+\end{DoxyReturn}
+\Hypertarget{collision_8cpp_a7fbc25c33a73ea7e5a3e775b928be3b2}\index{collision.cpp@{collision.cpp}!distanceBetweenPoints@{distanceBetweenPoints}}
+\index{distanceBetweenPoints@{distanceBetweenPoints}!collision.cpp@{collision.cpp}}
+\doxysubsubsection{\texorpdfstring{distanceBetweenPoints()}{distanceBetweenPoints()}}
+{\footnotesize\ttfamily \label{collision_8cpp_a7fbc25c33a73ea7e5a3e775b928be3b2} 
+float distance\+Between\+Points (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_vector}{Vector}}}]{pointA}{, }\item[{\mbox{\hyperlink{struct_vector}{Vector}}}]{pointB}{}\end{DoxyParamCaption})}
+
+
+
+Calculates the distance between two points on the plane. 
+
+\begin{DoxyReturn}{Returns}
+The distance. 
+\end{DoxyReturn}
+\Hypertarget{collision_8cpp_ae8b3c7e369211b3fe7a5f7a1b8d39626}\index{collision.cpp@{collision.cpp}!isCollidingEdge@{isCollidingEdge}}
+\index{isCollidingEdge@{isCollidingEdge}!collision.cpp@{collision.cpp}}
+\doxysubsubsection{\texorpdfstring{isCollidingEdge()}{isCollidingEdge()}}
+{\footnotesize\ttfamily \label{collision_8cpp_ae8b3c7e369211b3fe7a5f7a1b8d39626} 
+bool is\+Colliding\+Edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_vector}{Vector}} \&}]{new\+\_\+position}{, }\item[{\mbox{\hyperlink{class_broken_ship}{Broken\+Ship}} \texorpdfstring{$\ast$}{*}}]{player}{}\end{DoxyParamCaption})}
+
+\Hypertarget{collision_8cpp_a205f01ba80b24a19aa79b4493f1c6510}\index{collision.cpp@{collision.cpp}!newPositionAfterCollisionEdge@{newPositionAfterCollisionEdge}}
+\index{newPositionAfterCollisionEdge@{newPositionAfterCollisionEdge}!collision.cpp@{collision.cpp}}
+\doxysubsubsection{\texorpdfstring{newPositionAfterCollisionEdge()}{newPositionAfterCollisionEdge()}}
+{\footnotesize\ttfamily \label{collision_8cpp_a205f01ba80b24a19aa79b4493f1c6510} 
+void new\+Position\+After\+Collision\+Edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_vector}{Vector}} \&}]{new\+\_\+position}{, }\item[{\mbox{\hyperlink{class_broken_ship}{Broken\+Ship}} \texorpdfstring{$\ast$}{*}}]{player}{}\end{DoxyParamCaption})}
+

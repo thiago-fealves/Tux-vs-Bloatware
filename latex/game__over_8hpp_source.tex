@@ -1,0 +1,69 @@
+\doxysection{game\+\_\+over.\+hpp}
+\hypertarget{game__over_8hpp_source}{}\label{game__over_8hpp_source}\index{include/game\_over.hpp@{include/game\_over.hpp}}
+\mbox{\hyperlink{game__over_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ GAME\_OVER\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ GAME\_OVER\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{interface_8hpp}{interface.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <allegro5/allegro.h>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <allegro5/allegro\_font.h>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <allegro5/allegro\_color.h>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <allegro5/allegro\_primitives.h>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \ }
+\DoxyCodeLine{00017\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classgame_over_option}{gameOverOption}}\ \{}
+\DoxyCodeLine{00018\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classgame_over_option_ade4a3567ae29a4f49eba548584f5b4bf}{\string~gameOverOption}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classgame_over_option_a039012773b416c5dad96971ed5b31e23}{execute}}\ ()\ =\ 0;}
+\DoxyCodeLine{00027\ \};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classplay_again}{playAgain}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classgame_over_option}{gameOverOption}}\ \{}
+\DoxyCodeLine{00035\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{classplay_again_a9b7724d5ae8e3a9557ebfcac89450874}{\string~playAgain}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classplay_again_a41a8605e938d09ff9e670e269a16ce3b}{execute}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00038\ \};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00044\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classreturn_menu}{returnMenu}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classgame_over_option}{gameOverOption}}\ \{}
+\DoxyCodeLine{00045\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{classreturn_menu_a62fcea900471cfb29d10bf0f3e660582}{\string~returnMenu}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classreturn_menu_aaa49035280bc5a86512076637f975266}{execute}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00048\ \};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00054\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classexit_game}{exitGame}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classgame_over_option}{gameOverOption}}\ \{}
+\DoxyCodeLine{00055\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00056\ \ \ \ \ \mbox{\hyperlink{classexit_game_a21686f5888695aabab5e0afc8acddd4d}{\string~exitGame}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classexit_game_ace13fbf38dea7311b0cd94896fdd897d}{execute}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00058\ \};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00071\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classgame_over_screen_aa0c513214f2e0a920f5c1e45756a3d59}{gameOverScreen}}\ \{}
+\DoxyCodeLine{00072\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \ \ ALLEGRO\_FONT*\ \_font;}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{int}\ \_currentScore;}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{int}\ \_highScore;\ \ \ \ }
+\DoxyCodeLine{00078\ \ \ \ \ }
+\DoxyCodeLine{00079\ \ \ \ \ \mbox{\hyperlink{class_button}{Button}}\ \_playAgainButton;}
+\DoxyCodeLine{00080\ \ \ \ \ \mbox{\hyperlink{class_button}{Button}}\ \_returnToMenuButton;}
+\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{class_button}{Button}}\ \_exitGameButton;}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00088\ \ \ \ \ \mbox{\hyperlink{classgame_over_screen_aa0c513214f2e0a920f5c1e45756a3d59}{gameOverScreen}}\ (ALLEGRO\_FONT*\ font);}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classgame_over_screen_a15f3b7fb20f804052da4a0767cab61f9}{setCurrentScore}}(\textcolor{keywordtype}{int}\ score);}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classgame_over_screen_a02a38dfe54fd15a85c465640eb9ad7d2}{setHighScore}}(\textcolor{keywordtype}{int}\ score);\ }
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classgame_over_screen_a62827761c43757763df36ce45ced5804}{draw}}();}
+\DoxyCodeLine{00096\ \ \ \ \ }
+\DoxyCodeLine{00097\ \ \ \ \ }
+\DoxyCodeLine{00105\ \ \ \ \ \mbox{\hyperlink{classgame_over_option}{gameOverOption}}*\ \mbox{\hyperlink{classgame_over_screen_a673c4ac393b75b1062a549af6c45fb72}{run}}(ALLEGRO\_EVENT\_QUEUE*\ \mbox{\hyperlink{bootstrap_8cpp_a1b547b3fd150c01ccf92506cf719a14d}{event\_queue}},\ ALLEGRO\_TIMER*\ \mbox{\hyperlink{bootstrap_8cpp_a5a56835e8f246f98761fb994723020cb}{timer}});}
+\DoxyCodeLine{00106\ \ \ \ \ \ }
+\DoxyCodeLine{00107\ \};}
+\DoxyCodeLine{00108\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

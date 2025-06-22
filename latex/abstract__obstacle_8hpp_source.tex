@@ -1,0 +1,22 @@
+\doxysection{abstract\+\_\+obstacle.\+hpp}
+\hypertarget{abstract__obstacle_8hpp_source}{}\label{abstract__obstacle_8hpp_source}\index{include/abstract\_obstacle.hpp@{include/abstract\_obstacle.hpp}}
+\mbox{\hyperlink{abstract__obstacle_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{game__object_8hpp}{game\_object.hpp}}"{}}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_abstract_obstacle}{AbstractObstacle}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_game_object_a0348e3ee2e83d56eafca7a3547f432c4}{GameObject}}\ \{}
+\DoxyCodeLine{00005\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00006\ \ \ \mbox{\hyperlink{struct_vector}{Vector}}\ \_speed;}
+\DoxyCodeLine{00007\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_abstract_obstacle_a89de638167d93d6255631e7815be1db4}{setSpeed}}(\mbox{\hyperlink{struct_vector}{Vector}}\ speed);}
+\DoxyCodeLine{00009\ \ \ \ \ \mbox{\hyperlink{struct_vector}{Vector}}\ \mbox{\hyperlink{class_abstract_obstacle_a11b21476f3d123a8b56e4290b7b093f4}{getSpeed}}();}
+\DoxyCodeLine{00010\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_abstract_obstacle_ad78e576756510241baf10290f7c7f920}{draw}}()\ =\ 0;}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_abstract_obstacle_aeae5b0a5721c7aeaa0c9812f91fac25c}{update}}()\ =\ 0;}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_abstract_obstacle_a34255f2be703d1b7d61f6c48ee853270}{checkCollisionWithPlayer}}(\mbox{\hyperlink{class_broken_ship}{BrokenShip}}\&\ player)\ =\ 0;}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_abstract_obstacle_a39e607d297a35e3e688a9e638aa3de6a}{\string~AbstractObstacle}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00015\ \ \ \ \ }
+\DoxyCodeLine{00016\ \};}
+
+\end{DoxyCode}

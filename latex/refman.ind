@@ -1,0 +1,885 @@
+\begin{theindex}
+
+  \item {\_bg}
+    \subitem {Level}, \hyperpage{44}
+  \item {\_direction}
+    \subitem {Shot}, \hyperpage{72}
+  \item {\_event}
+    \subitem {Level}, \hyperpage{44}
+  \item {\_heigth}
+    \subitem {Coordinates}, \hyperpage{26}
+  \item {\_music}
+    \subitem {Level}, \hyperpage{45}
+  \item {\_player}
+    \subitem {Level}, \hyperpage{45}
+  \item {\_position}
+    \subitem {GameObject}, \hyperpage{38}
+  \item {\_shotColor}
+    \subitem {Shot}, \hyperpage{72}
+  \item {\_width}
+    \subitem {Coordinates}, \hyperpage{26}
+  \item {\_x}
+    \subitem {Coordinates}, \hyperpage{26}
+    \subitem {Vector}, \hyperpage{78}
+  \item {\_y}
+    \subitem {Coordinates}, \hyperpage{26}
+    \subitem {Vector}, \hyperpage{78}
+  \item {\texorpdfstring{$\sim$}{\string~}AbstractObstacle}
+    \subitem {AbstractObstacle}, \hyperpage{12}
+  \item {\texorpdfstring{$\sim$}{\string~}DatabaseUsers}
+    \subitem {DatabaseUsers}, \hyperpage{27}
+  \item {\texorpdfstring{$\sim$}{\string~}GameObject}
+    \subitem {GameObject}, \hyperpage{37}
+  \item {\texorpdfstring{$\sim$}{\string~}Music}
+    \subitem {Music}, \hyperpage{58}
+  \item {\texorpdfstring{$\sim$}{\string~}ObstaclesList}
+    \subitem {ObstaclesList}, \hyperpage{60}
+  \item {\texorpdfstring{$\sim$}{\string~}PipeList}
+    \subitem {PipeList}, \hyperpage{63}
+  \item {\texorpdfstring{$\sim$}{\string~}Shot}
+    \subitem {Shot}, \hyperpage{70}
+  \item {\texorpdfstring{$\sim$}{\string~}Sound}
+    \subitem {Sound}, \hyperpage{73}
+  \item {\texorpdfstring{$\sim$}{\string~}dotenv}
+    \subitem {dotenv}, \hyperpage{29}
+  \item {\texorpdfstring{$\sim$}{\string~}exitGame}
+    \subitem {exitGame}, \hyperpage{31}
+  \item {\texorpdfstring{$\sim$}{\string~}gameOverOption}
+    \subitem {gameOverOption}, \hyperpage{39}
+  \item {\texorpdfstring{$\sim$}{\string~}playAgain}
+    \subitem {playAgain}, \hyperpage{65}
+  \item {\texorpdfstring{$\sim$}{\string~}returnMenu}
+    \subitem {returnMenu}, \hyperpage{68}
+
+  \indexspace
+
+  \item {AbstractObstacle}, \hyperpage{11}
+    \subitem {\texorpdfstring{$\sim$}{\string~}AbstractObstacle}, 
+		\hyperpage{12}
+    \subitem {checkCollisionWithPlayer}, \hyperpage{12}
+    \subitem {draw}, \hyperpage{12}
+    \subitem {getSpeed}, \hyperpage{12}
+    \subitem {setSpeed}, \hyperpage{12}
+    \subitem {update}, \hyperpage{12}
+  \item {apply\_gravity}
+    \subitem {FlappyMovement}, \hyperpage{36}
+  \item {ascending}
+    \subitem {boss\_states.hpp}, \hyperpage{89}
+  \item {attacking}
+    \subitem {boss\_states.hpp}, \hyperpage{89}
+  \item {AttackType}
+    \subitem {boss\_states.hpp}, \hyperpage{88}
+
+  \indexspace
+
+  \item {Background}, \hyperpage{13}
+    \subitem {Background}, \hyperpage{13}
+    \subitem {renderBackground}, \hyperpage{13}
+  \item {BACKGROUND\_COLOR}
+    \subitem {bootstrap.cpp}, \hyperpage{113}
+    \subitem {bootstrap.hpp}, \hyperpage{84}
+  \item {backgroundImage}
+    \subitem {bootstrap.cpp}, \hyperpage{113}
+    \subitem {bootstrap.hpp}, \hyperpage{84}
+  \item {Ball}, \hyperpage{14}
+  \item {BallShot}, \hyperpage{14}
+    \subitem {BallShot}, \hyperpage{15}
+    \subitem {draw}, \hyperpage{16}
+    \subitem {isItActive}, \hyperpage{16}
+    \subitem {shotCollidedWithBoss}, \hyperpage{16}
+    \subitem {shotCollidedWithPlayer}, \hyperpage{16}
+    \subitem {update}, \hyperpage{17}
+  \item {ballShots1}
+    \subitem {boss\_states.hpp}, \hyperpage{88}
+  \item {ballShots2}
+    \subitem {boss\_states.hpp}, \hyperpage{88}
+  \item {ballShots3}
+    \subitem {boss\_states.hpp}, \hyperpage{88}
+  \item {Bootstrap}, \hyperpage{17}
+    \subitem {cleanup\_allegro}, \hyperpage{18}
+    \subitem {file\_exists}, \hyperpage{18}
+    \subitem {init\_allegro\_libs}, \hyperpage{18}
+    \subitem {initialize\_allegro}, \hyperpage{18}
+    \subitem {register\_allegro\_events}, \hyperpage{18}
+  \item {bootstrap.cpp}
+    \subitem {BACKGROUND\_COLOR}, \hyperpage{113}
+    \subitem {backgroundImage}, \hyperpage{113}
+    \subitem {death\_sound}, \hyperpage{113}
+    \subitem {defeat\_music}, \hyperpage{113}
+    \subitem {display}, \hyperpage{113}
+    \subitem {event\_queue}, \hyperpage{113}
+    \subitem {gameFont}, \hyperpage{113}
+    \subitem {gameOverBackground}, \hyperpage{113}
+    \subitem {gunshot\_sound1}, \hyperpage{113}
+    \subitem {gunshot\_sound2}, \hyperpage{113}
+    \subitem {gunshot\_sound3}, \hyperpage{113}
+    \subitem {gunshot\_sound4}, \hyperpage{114}
+    \subitem {level\_one\_music}, \hyperpage{114}
+    \subitem {level\_three\_music}, \hyperpage{114}
+    \subitem {level\_two\_music}, \hyperpage{114}
+    \subitem {levelFont}, \hyperpage{114}
+    \subitem {menu\_music}, \hyperpage{114}
+    \subitem {pause\_game\_music}, \hyperpage{114}
+    \subitem {pendrive}, \hyperpage{114}
+    \subitem {pinguimBandido}, \hyperpage{114}
+    \subitem {timer}, \hyperpage{114}
+    \subitem {victory\_music}, \hyperpage{115}
+  \item {bootstrap.hpp}
+    \subitem {BACKGROUND\_COLOR}, \hyperpage{84}
+    \subitem {backgroundImage}, \hyperpage{84}
+    \subitem {death\_sound}, \hyperpage{84}
+    \subitem {defeat\_music}, \hyperpage{84}
+    \subitem {display}, \hyperpage{85}
+    \subitem {event\_queue}, \hyperpage{85}
+    \subitem {FPS}, \hyperpage{85}
+    \subitem {gameFont}, \hyperpage{85}
+    \subitem {gameOverBackground}, \hyperpage{85}
+    \subitem {gunshot\_sound1}, \hyperpage{85}
+    \subitem {gunshot\_sound2}, \hyperpage{85}
+    \subitem {gunshot\_sound3}, \hyperpage{85}
+    \subitem {gunshot\_sound4}, \hyperpage{85}
+    \subitem {level\_one\_music}, \hyperpage{85}
+    \subitem {level\_three\_music}, \hyperpage{86}
+    \subitem {level\_two\_music}, \hyperpage{86}
+    \subitem {levelFont}, \hyperpage{86}
+    \subitem {menu\_music}, \hyperpage{86}
+    \subitem {OBSTACLES\_LIST\_NUM}, \hyperpage{86}
+    \subitem {pause\_game\_music}, \hyperpage{86}
+    \subitem {pendrive}, \hyperpage{86}
+    \subitem {pinguimBandido}, \hyperpage{86}
+    \subitem {SCALE\_ASTEROID}, \hyperpage{86}
+    \subitem {SCALE\_PIPES}, \hyperpage{86}
+    \subitem {SCREEN\_H}, \hyperpage{87}
+    \subitem {SCREEN\_W}, \hyperpage{87}
+    \subitem {timer}, \hyperpage{87}
+    \subitem {victory\_music}, \hyperpage{87}
+  \item {boss\_states.hpp}
+    \subitem {ascending}, \hyperpage{89}
+    \subitem {attacking}, \hyperpage{89}
+    \subitem {AttackType}, \hyperpage{88}
+    \subitem {ballShots1}, \hyperpage{88}
+    \subitem {ballShots2}, \hyperpage{88}
+    \subitem {ballShots3}, \hyperpage{88}
+    \subitem {BossStates}, \hyperpage{88}
+    \subitem {descending}, \hyperpage{89}
+    \subitem {lineShotsDown}, \hyperpage{88}
+    \subitem {lineShotsLeft}, \hyperpage{88}
+    \subitem {lineShotsRight}, \hyperpage{88}
+  \item {BossStates}
+    \subitem {boss\_states.hpp}, \hyperpage{88}
+  \item {BrokenShip}, \hyperpage{19}
+    \subitem {BrokenShip}, \hyperpage{20}
+    \subitem {draw}, \hyperpage{20}
+    \subitem {get\_radius}, \hyperpage{20}
+    \subitem {restart}, \hyperpage{20}
+    \subitem {set\_radius}, \hyperpage{21}
+    \subitem {update}, \hyperpage{21}
+  \item {Button}, \hyperpage{21}
+    \subitem {Button}, \hyperpage{22}
+    \subitem {drawButton}, \hyperpage{22}
+    \subitem {gotClicked}, \hyperpage{22}
+    \subitem {setText}, \hyperpage{23}
+
+  \indexspace
+
+  \item {checkCircleCollision}
+    \subitem {collision.hpp}, \hyperpage{90}
+  \item {checkCollisionWithPlayer}
+    \subitem {AbstractObstacle}, \hyperpage{12}
+    \subitem {CircleObstacle}, \hyperpage{24}
+    \subitem {collision.hpp}, \hyperpage{90}
+    \subitem {Pipe}, \hyperpage{62}
+    \subitem {PolygonObstacle}, \hyperpage{66}
+  \item {circleCircleCollision}
+    \subitem {collision.cpp}, \hyperpage{115}
+    \subitem {collision.hpp}, \hyperpage{90}
+  \item {CircleObstacle}, \hyperpage{23}
+    \subitem {checkCollisionWithPlayer}, \hyperpage{24}
+    \subitem {CircleObstacle}, \hyperpage{24}
+    \subitem {draw}, \hyperpage{24}
+    \subitem {get\_radius}, \hyperpage{25}
+    \subitem {setCircleObstaclesList}, \hyperpage{25}
+    \subitem {update}, \hyperpage{25}
+  \item {circleSquareCollision}
+    \subitem {collision.cpp}, \hyperpage{116}
+    \subitem {collision.hpp}, \hyperpage{91}
+  \item {cleanLevel}
+    \subitem {LevelOne}, \hyperpage{46}
+    \subitem {LevelThree}, \hyperpage{48}
+    \subitem {LevelTwo}, \hyperpage{51}
+  \item {cleanShots}
+    \subitem {Shot}, \hyperpage{70}
+  \item {cleanup\_allegro}
+    \subitem {Bootstrap}, \hyperpage{18}
+  \item {clear}
+    \subitem {ObstaclesList}, \hyperpage{60}
+    \subitem {PipeList}, \hyperpage{63}
+  \item {collision.cpp}
+    \subitem {circleCircleCollision}, \hyperpage{115}
+    \subitem {circleSquareCollision}, \hyperpage{116}
+    \subitem {distanceBetweenPoints}, \hyperpage{116}
+    \subitem {isCollidingEdge}, \hyperpage{116}
+    \subitem {newPositionAfterCollisionEdge}, \hyperpage{116}
+  \item {collision.hpp}
+    \subitem {checkCircleCollision}, \hyperpage{90}
+    \subitem {checkCollisionWithPlayer}, \hyperpage{90}
+    \subitem {circleCircleCollision}, \hyperpage{90}
+    \subitem {circleSquareCollision}, \hyperpage{91}
+    \subitem {distanceBetweenPoints}, \hyperpage{91}
+    \subitem {isCollidingEdge}, \hyperpage{91}
+    \subitem {newPositionAfterCollisionEdge}, \hyperpage{91}
+  \item {cont}
+    \subitem {windows\_boss.cpp}, \hyperpage{122}
+  \item {Coordinates}, \hyperpage{25}
+    \subitem {\_heigth}, \hyperpage{26}
+    \subitem {\_width}, \hyperpage{26}
+    \subitem {\_x}, \hyperpage{26}
+    \subitem {\_y}, \hyperpage{26}
+    \subitem {Coordinates}, \hyperpage{26}
+
+  \indexspace
+
+  \item {DatabaseUsers}, \hyperpage{27}
+    \subitem {\texorpdfstring{$\sim$}{\string~}DatabaseUsers}, 
+		\hyperpage{27}
+    \subitem {DatabaseUsers}, \hyperpage{27}
+    \subitem {deleteUser}, \hyperpage{27}
+    \subitem {getUserByUsername}, \hyperpage{27}
+    \subitem {listUsers}, \hyperpage{27}
+    \subitem {registerUser}, \hyperpage{27}
+    \subitem {updateGamesNumber}, \hyperpage{28}
+    \subitem {updateScore}, \hyperpage{28}
+  \item {death\_sound}
+    \subitem {bootstrap.cpp}, \hyperpage{113}
+    \subitem {bootstrap.hpp}, \hyperpage{84}
+  \item {defeat\_music}
+    \subitem {bootstrap.cpp}, \hyperpage{113}
+    \subitem {bootstrap.hpp}, \hyperpage{84}
+    \subitem {gameover.cpp}, \hyperpage{118}
+  \item {deleteUser}
+    \subitem {DatabaseUsers}, \hyperpage{27}
+  \item {descending}
+    \subitem {boss\_states.hpp}, \hyperpage{89}
+  \item {display}
+    \subitem {bootstrap.cpp}, \hyperpage{113}
+    \subitem {bootstrap.hpp}, \hyperpage{85}
+  \item {distance}
+    \subitem {Vector}, \hyperpage{77}
+  \item {distanceBetweenPoints}
+    \subitem {collision.cpp}, \hyperpage{116}
+    \subitem {collision.hpp}, \hyperpage{91}
+  \item {dot}
+    \subitem {Vector}, \hyperpage{77}
+  \item {dotenv}, \hyperpage{28}
+    \subitem {\texorpdfstring{$\sim$}{\string~}dotenv}, \hyperpage{29}
+    \subitem {dotenv}, \hyperpage{29}
+    \subitem {getenv}, \hyperpage{29}
+    \subitem {init}, \hyperpage{30}
+    \subitem {OptionsNone}, \hyperpage{30}
+    \subitem {Preserve}, \hyperpage{30}
+  \item {draw}
+    \subitem {AbstractObstacle}, \hyperpage{12}
+    \subitem {BallShot}, \hyperpage{16}
+    \subitem {BrokenShip}, \hyperpage{20}
+    \subitem {CircleObstacle}, \hyperpage{24}
+    \subitem {FixedShip}, \hyperpage{34}
+    \subitem {gameOverScreen}, \hyperpage{40}
+    \subitem {LineShot}, \hyperpage{55}
+    \subitem {Pipe}, \hyperpage{62}
+    \subitem {PolygonObstacle}, \hyperpage{66}
+    \subitem {Shot}, \hyperpage{70}
+    \subitem {WindowsBoss}, \hyperpage{81}
+  \item {drawAll}
+    \subitem {ObstaclesList}, \hyperpage{60}
+  \item {drawButton}
+    \subitem {Button}, \hyperpage{22}
+  \item {drawOffGameInterface}
+    \subitem {Interface}, \hyperpage{42}
+  \item {drawShots}
+    \subitem {Shot}, \hyperpage{70}
+  \item {drawVictoryScreen}
+    \subitem {victoryInterface}, \hyperpage{79}
+
+  \indexspace
+
+  \item {event}
+    \subitem {Menu}, \hyperpage{56}
+  \item {event\_queue}
+    \subitem {bootstrap.cpp}, \hyperpage{113}
+    \subitem {bootstrap.hpp}, \hyperpage{85}
+    \subitem {gameover.cpp}, \hyperpage{118}
+    \subitem {main.cpp}, \hyperpage{120}
+  \item {execute}
+    \subitem {exitGame}, \hyperpage{32}
+    \subitem {gameOverOption}, \hyperpage{39}
+    \subitem {playAgain}, \hyperpage{65}
+    \subitem {returnMenu}, \hyperpage{68}
+  \item {exitGame}, \hyperpage{31}
+    \subitem {\texorpdfstring{$\sim$}{\string~}exitGame}, 
+		\hyperpage{31}
+    \subitem {execute}, \hyperpage{32}
+  \item {exitGameButton}
+    \subitem {Interface}, \hyperpage{42}
+
+  \indexspace
+
+  \item {file\_exists}
+    \subitem {Bootstrap}, \hyperpage{18}
+  \item {FixedShip}, \hyperpage{32}
+    \subitem {draw}, \hyperpage{34}
+    \subitem {FixedShip}, \hyperpage{33}
+    \subitem {get\_radius}, \hyperpage{34}
+    \subitem {moveShip}, \hyperpage{34}
+    \subitem {set\_radius}, \hyperpage{34}
+    \subitem {takeDamage}, \hyperpage{34}
+  \item {FlappyMovement}, \hyperpage{35}
+    \subitem {apply\_gravity}, \hyperpage{36}
+    \subitem {getMoveForce}, \hyperpage{36}
+    \subitem {move\_flappy}, \hyperpage{36}
+  \item {font}
+    \subitem {Menu}, \hyperpage{56}
+  \item {FPS}
+    \subitem {bootstrap.hpp}, \hyperpage{85}
+
+  \indexspace
+
+  \item {game\_object.cpp}
+    \subitem {PLAYER\_RADIUS}, \hyperpage{117}
+  \item {gameFont}
+    \subitem {bootstrap.cpp}, \hyperpage{113}
+    \subitem {bootstrap.hpp}, \hyperpage{85}
+    \subitem {main.cpp}, \hyperpage{120}
+  \item {GameObject}, \hyperpage{36}
+    \subitem {\_position}, \hyperpage{38}
+    \subitem {\texorpdfstring{$\sim$}{\string~}GameObject}, 
+		\hyperpage{37}
+    \subitem {GameObject}, \hyperpage{37}
+    \subitem {get\_position}, \hyperpage{38}
+    \subitem {objectSprite}, \hyperpage{38}
+    \subitem {set\_bitmap}, \hyperpage{38}
+    \subitem {set\_position}, \hyperpage{38}
+  \item {gameover.cpp}
+    \subitem {defeat\_music}, \hyperpage{118}
+    \subitem {event\_queue}, \hyperpage{118}
+    \subitem {gameOverBackground}, \hyperpage{118}
+    \subitem {timer}, \hyperpage{118}
+  \item {gameOverBackground}
+    \subitem {bootstrap.cpp}, \hyperpage{113}
+    \subitem {bootstrap.hpp}, \hyperpage{85}
+    \subitem {gameover.cpp}, \hyperpage{118}
+  \item {gameOverOption}, \hyperpage{39}
+    \subitem {\texorpdfstring{$\sim$}{\string~}gameOverOption}, 
+		\hyperpage{39}
+    \subitem {execute}, \hyperpage{39}
+  \item {gameOverScreen}, \hyperpage{40}
+    \subitem {draw}, \hyperpage{40}
+    \subitem {gameOverScreen}, \hyperpage{40}
+    \subitem {run}, \hyperpage{40}
+    \subitem {setCurrentScore}, \hyperpage{41}
+    \subitem {setHighScore}, \hyperpage{41}
+  \item {games}
+    \subitem {User}, \hyperpage{75}
+  \item {generatePipes}
+    \subitem {PipeList}, \hyperpage{63}
+  \item {get\_position}
+    \subitem {GameObject}, \hyperpage{38}
+  \item {get\_radius}
+    \subitem {BrokenShip}, \hyperpage{20}
+    \subitem {CircleObstacle}, \hyperpage{25}
+    \subitem {FixedShip}, \hyperpage{34}
+  \item {getenv}
+    \subitem {dotenv}, \hyperpage{29}
+  \item {getHalfSide}
+    \subitem {WindowsBoss}, \hyperpage{81}
+  \item {getList}
+    \subitem {ObstaclesList}, \hyperpage{60}
+    \subitem {PipeList}, \hyperpage{64}
+  \item {getMoveForce}
+    \subitem {FlappyMovement}, \hyperpage{36}
+  \item {getSpeed}
+    \subitem {AbstractObstacle}, \hyperpage{12}
+  \item {getUserByUsername}
+    \subitem {DatabaseUsers}, \hyperpage{27}
+  \item {getVertices}
+    \subitem {PolygonObstacle}, \hyperpage{67}
+  \item {globalVars}, \hyperpage{9}
+    \subitem {inInterLevel}, \hyperpage{9}
+  \item {gotClicked}
+    \subitem {Button}, \hyperpage{22}
+  \item {gunshot\_sound1}
+    \subitem {bootstrap.cpp}, \hyperpage{113}
+    \subitem {bootstrap.hpp}, \hyperpage{85}
+  \item {gunshot\_sound2}
+    \subitem {bootstrap.cpp}, \hyperpage{113}
+    \subitem {bootstrap.hpp}, \hyperpage{85}
+  \item {gunshot\_sound3}
+    \subitem {bootstrap.cpp}, \hyperpage{113}
+    \subitem {bootstrap.hpp}, \hyperpage{85}
+  \item {gunshot\_sound4}
+    \subitem {bootstrap.cpp}, \hyperpage{114}
+    \subitem {bootstrap.hpp}, \hyperpage{85}
+
+  \indexspace
+
+  \item {handleKeyPressEvents}
+    \subitem {LevelOne}, \hyperpage{46}
+    \subitem {LevelThree}, \hyperpage{48}
+    \subitem {LevelTwo}, \hyperpage{51}
+  \item {handleKeyReleaseEvents}
+    \subitem {LevelOne}, \hyperpage{46}
+    \subitem {LevelThree}, \hyperpage{49}
+    \subitem {LevelTwo}, \hyperpage{51}
+  \item {handleTimerEvents}
+    \subitem {LevelOne}, \hyperpage{46}
+    \subitem {LevelThree}, \hyperpage{49}
+    \subitem {LevelTwo}, \hyperpage{51}
+
+  \indexspace
+
+  \item {id}
+    \subitem {User}, \hyperpage{75}
+  \item {include/abstract\_obstacle.hpp}, \hyperpage{83}
+  \item {include/bootstrap.hpp}, \hyperpage{83}, \hyperpage{87}
+  \item {include/boss\_states.hpp}, \hyperpage{88, 89}
+  \item {include/circle\_obstacle.hpp}, \hyperpage{89}
+  \item {include/collision.hpp}, \hyperpage{90}, \hyperpage{92}
+  \item {include/database\_users.hpp}, \hyperpage{92}
+  \item {include/dotenv.h}, \hyperpage{93}
+  \item {include/game\_object.hpp}, \hyperpage{96, 97}
+  \item {include/game\_over.hpp}, \hyperpage{98}
+  \item {include/interface.hpp}, \hyperpage{99, 100}
+  \item {include/levels.hpp}, \hyperpage{100}, \hyperpage{102}
+  \item {include/menu.hpp}, \hyperpage{103}
+  \item {include/movement.hpp}, \hyperpage{104}
+  \item {include/music.hpp}, \hyperpage{104, 105}
+  \item {include/obstacles\_list.hpp}, \hyperpage{105, 106}
+  \item {include/pipe.hpp}, \hyperpage{106}
+  \item {include/polygon\_obstacle.hpp}, \hyperpage{107}
+  \item {include/shapes\_repository.hpp}, \hyperpage{107, 108}
+  \item {include/shots.hpp}, \hyperpage{109}
+  \item {include/sound.hpp}, \hyperpage{110}
+  \item {include/windows\_boss.hpp}, \hyperpage{111}
+  \item {inInterLevel}
+    \subitem {globalVars}, \hyperpage{9}
+  \item {init}
+    \subitem {dotenv}, \hyperpage{30}
+  \item {init\_allegro\_libs}
+    \subitem {Bootstrap}, \hyperpage{18}
+  \item {initialize\_allegro}
+    \subitem {Bootstrap}, \hyperpage{18}
+  \item {Interface}, \hyperpage{42}
+    \subitem {drawOffGameInterface}, \hyperpage{42}
+    \subitem {exitGameButton}, \hyperpage{42}
+    \subitem {Interface}, \hyperpage{42}
+    \subitem {playButton}, \hyperpage{42}
+    \subitem {returnToMenuButton}, \hyperpage{43}
+    \subitem {stopSongButton}, \hyperpage{43}
+  \item {interface}
+    \subitem {Menu}, \hyperpage{57}
+  \item {interLevelHandling}
+    \subitem {Level}, \hyperpage{44}
+    \subitem {levels.cpp}, \hyperpage{119}
+    \subitem {levels.hpp}, \hyperpage{101}
+  \item {isCollidingEdge}
+    \subitem {collision.cpp}, \hyperpage{116}
+    \subitem {collision.hpp}, \hyperpage{91}
+  \item {isDead}
+    \subitem {WindowsBoss}, \hyperpage{81}
+  \item {isItActive}
+    \subitem {BallShot}, \hyperpage{16}
+    \subitem {LineShot}, \hyperpage{55}
+    \subitem {Shot}, \hyperpage{71}
+  \item {isSoundMuted}
+    \subitem {Sound}, \hyperpage{74}
+
+  \indexspace
+
+  \item {Level}, \hyperpage{43}
+    \subitem {\_bg}, \hyperpage{44}
+    \subitem {\_event}, \hyperpage{44}
+    \subitem {\_music}, \hyperpage{45}
+    \subitem {\_player}, \hyperpage{45}
+    \subitem {interLevelHandling}, \hyperpage{44}
+    \subitem {setMusic}, \hyperpage{44}
+  \item {LEVEL\_DURATION}
+    \subitem {levels.hpp}, \hyperpage{101}
+  \item {level\_one\_music}
+    \subitem {bootstrap.cpp}, \hyperpage{114}
+    \subitem {bootstrap.hpp}, \hyperpage{85}
+  \item {level\_three\_music}
+    \subitem {bootstrap.cpp}, \hyperpage{114}
+    \subitem {bootstrap.hpp}, \hyperpage{86}
+  \item {level\_two\_music}
+    \subitem {bootstrap.cpp}, \hyperpage{114}
+    \subitem {bootstrap.hpp}, \hyperpage{86}
+  \item {levelFont}
+    \subitem {bootstrap.cpp}, \hyperpage{114}
+    \subitem {bootstrap.hpp}, \hyperpage{86}
+  \item {LevelOne}, \hyperpage{45}
+    \subitem {cleanLevel}, \hyperpage{46}
+    \subitem {handleKeyPressEvents}, \hyperpage{46}
+    \subitem {handleKeyReleaseEvents}, \hyperpage{46}
+    \subitem {handleTimerEvents}, \hyperpage{46}
+    \subitem {mainLoop}, \hyperpage{47}
+    \subitem {setLevelOne}, \hyperpage{47}
+  \item {levels.cpp}
+    \subitem {interLevelHandling}, \hyperpage{119}
+  \item {levels.hpp}
+    \subitem {interLevelHandling}, \hyperpage{101}
+    \subitem {LEVEL\_DURATION}, \hyperpage{101}
+  \item {LevelThree}, \hyperpage{47}
+    \subitem {cleanLevel}, \hyperpage{48}
+    \subitem {handleKeyPressEvents}, \hyperpage{48}
+    \subitem {handleKeyReleaseEvents}, \hyperpage{49}
+    \subitem {handleTimerEvents}, \hyperpage{49}
+    \subitem {mainLoop}, \hyperpage{49}
+    \subitem {setLevelThree}, \hyperpage{49}
+    \subitem {updatePlayerPosition}, \hyperpage{49}
+  \item {LevelTwo}, \hyperpage{50}
+    \subitem {cleanLevel}, \hyperpage{51}
+    \subitem {handleKeyPressEvents}, \hyperpage{51}
+    \subitem {handleKeyReleaseEvents}, \hyperpage{51}
+    \subitem {handleTimerEvents}, \hyperpage{51}
+    \subitem {mainLoop}, \hyperpage{51}
+    \subitem {setLevelTwo}, \hyperpage{51}
+  \item {Line}, \hyperpage{52}
+  \item {LineShot}, \hyperpage{52}
+    \subitem {draw}, \hyperpage{55}
+    \subitem {isItActive}, \hyperpage{55}
+    \subitem {LineShot}, \hyperpage{54}
+    \subitem {shotCollidedWithBoss}, \hyperpage{55}
+    \subitem {shotCollidedWithPlayer}, \hyperpage{55}
+    \subitem {update}, \hyperpage{56}
+  \item {lineShotsDown}
+    \subitem {boss\_states.hpp}, \hyperpage{88}
+  \item {lineShotsLeft}
+    \subitem {boss\_states.hpp}, \hyperpage{88}
+  \item {lineShotsRight}
+    \subitem {boss\_states.hpp}, \hyperpage{88}
+  \item {listUsers}
+    \subitem {DatabaseUsers}, \hyperpage{27}
+
+  \indexspace
+
+  \item {main}
+    \subitem {main.cpp}, \hyperpage{120}
+  \item {main.cpp}
+    \subitem {event\_queue}, \hyperpage{120}
+    \subitem {gameFont}, \hyperpage{120}
+    \subitem {main}, \hyperpage{120}
+    \subitem {timer}, \hyperpage{120}
+  \item {mainLoop}
+    \subitem {LevelOne}, \hyperpage{47}
+    \subitem {LevelThree}, \hyperpage{49}
+    \subitem {LevelTwo}, \hyperpage{51}
+  \item {mainLoopMenu}
+    \subitem {StartMenu}, \hyperpage{75}
+  \item {Menu}, \hyperpage{56}
+    \subitem {event}, \hyperpage{56}
+    \subitem {font}, \hyperpage{56}
+    \subitem {interface}, \hyperpage{57}
+  \item {menu\_music}
+    \subitem {bootstrap.cpp}, \hyperpage{114}
+    \subitem {bootstrap.hpp}, \hyperpage{86}
+  \item {move\_flappy}
+    \subitem {FlappyMovement}, \hyperpage{36}
+  \item {moveShip}
+    \subitem {FixedShip}, \hyperpage{34}
+  \item {Music}, \hyperpage{57}
+    \subitem {\texorpdfstring{$\sim$}{\string~}Music}, \hyperpage{58}
+    \subitem {Music}, \hyperpage{58}
+    \subitem {muteMusic}, \hyperpage{59}
+    \subitem {pause}, \hyperpage{59}
+    \subitem {play}, \hyperpage{59}
+    \subitem {unMuteMusic}, \hyperpage{59}
+    \subitem {update\_fade\_in\_fade\_out}, \hyperpage{59}
+  \item {muteMusic}
+    \subitem {Music}, \hyperpage{59}
+  \item {muteSounds}
+    \subitem {Sound}, \hyperpage{73}
+
+  \indexspace
+
+  \item {name}
+    \subitem {User}, \hyperpage{75}
+  \item {newPositionAfterCollisionEdge}
+    \subitem {collision.cpp}, \hyperpage{116}
+    \subitem {collision.hpp}, \hyperpage{91}
+
+  \indexspace
+
+  \item {objectSprite}
+    \subitem {GameObject}, \hyperpage{38}
+  \item {OBSTACLES\_LIST\_NUM}
+    \subitem {bootstrap.hpp}, \hyperpage{86}
+  \item {ObstaclesList}, \hyperpage{59}
+    \subitem {\texorpdfstring{$\sim$}{\string~}ObstaclesList}, 
+		\hyperpage{60}
+    \subitem {clear}, \hyperpage{60}
+    \subitem {drawAll}, \hyperpage{60}
+    \subitem {getList}, \hyperpage{60}
+    \subitem {setCircleObstaclesList}, \hyperpage{60}
+    \subitem {setPolygonsObstaclesList}, \hyperpage{60}
+    \subitem {updateAll}, \hyperpage{60}
+  \item {operator+}
+    \subitem {Vector}, \hyperpage{77}
+  \item {operator-\/}
+    \subitem {Vector}, \hyperpage{78}
+  \item {operator\texorpdfstring{$\ast$}{*}}
+    \subitem {Vector}, \hyperpage{77}
+  \item {OptionsNone}
+    \subitem {dotenv}, \hyperpage{30}
+
+  \indexspace
+
+  \item {pause}
+    \subitem {Music}, \hyperpage{59}
+  \item {pause\_game\_music}
+    \subitem {bootstrap.cpp}, \hyperpage{114}
+    \subitem {bootstrap.hpp}, \hyperpage{86}
+  \item {pendrive}
+    \subitem {bootstrap.cpp}, \hyperpage{114}
+    \subitem {bootstrap.hpp}, \hyperpage{86}
+  \item {pinguimBandido}
+    \subitem {bootstrap.cpp}, \hyperpage{114}
+    \subitem {bootstrap.hpp}, \hyperpage{86}
+  \item {Pipe}, \hyperpage{61}
+    \subitem {checkCollisionWithPlayer}, \hyperpage{62}
+    \subitem {draw}, \hyperpage{62}
+    \subitem {Pipe}, \hyperpage{62}
+    \subitem {update}, \hyperpage{62}
+  \item {PipeList}, \hyperpage{63}
+    \subitem {\texorpdfstring{$\sim$}{\string~}PipeList}, 
+		\hyperpage{63}
+    \subitem {clear}, \hyperpage{63}
+    \subitem {generatePipes}, \hyperpage{63}
+    \subitem {getList}, \hyperpage{64}
+    \subitem {PipeList}, \hyperpage{63}
+  \item {play}
+    \subitem {Music}, \hyperpage{59}
+    \subitem {Sound}, \hyperpage{73}
+  \item {playAgain}, \hyperpage{64}
+    \subitem {\texorpdfstring{$\sim$}{\string~}playAgain}, 
+		\hyperpage{65}
+    \subitem {execute}, \hyperpage{65}
+  \item {playButton}
+    \subitem {Interface}, \hyperpage{42}
+  \item {PLAYER\_RADIUS}
+    \subitem {game\_object.cpp}, \hyperpage{117}
+  \item {PolygonObstacle}, \hyperpage{65}
+    \subitem {checkCollisionWithPlayer}, \hyperpage{66}
+    \subitem {draw}, \hyperpage{66}
+    \subitem {getVertices}, \hyperpage{67}
+    \subitem {PolygonObstacle}, \hyperpage{66}
+    \subitem {update}, \hyperpage{67}
+  \item {Preserve}
+    \subitem {dotenv}, \hyperpage{30}
+
+  \indexspace
+
+  \item {register\_allegro\_events}
+    \subitem {Bootstrap}, \hyperpage{18}
+  \item {registerUser}
+    \subitem {DatabaseUsers}, \hyperpage{27}
+  \item {renderBackground}
+    \subitem {Background}, \hyperpage{13}
+  \item {Represents}, \hyperpage{67}
+  \item {restart}
+    \subitem {BrokenShip}, \hyperpage{20}
+  \item {returnMenu}, \hyperpage{67}
+    \subitem {\texorpdfstring{$\sim$}{\string~}returnMenu}, 
+		\hyperpage{68}
+    \subitem {execute}, \hyperpage{68}
+  \item {returnToMenuButton}
+    \subitem {Interface}, \hyperpage{43}
+  \item {run}
+    \subitem {gameOverScreen}, \hyperpage{40}
+
+  \indexspace
+
+  \item {SCALE\_ASTEROID}
+    \subitem {bootstrap.hpp}, \hyperpage{86}
+  \item {SCALE\_PIPES}
+    \subitem {bootstrap.hpp}, \hyperpage{86}
+  \item {score}
+    \subitem {User}, \hyperpage{76}
+  \item {SCREEN\_H}
+    \subitem {bootstrap.hpp}, \hyperpage{87}
+  \item {SCREEN\_W}
+    \subitem {bootstrap.hpp}, \hyperpage{87}
+  \item {set\_bitmap}
+    \subitem {GameObject}, \hyperpage{38}
+  \item {set\_position}
+    \subitem {GameObject}, \hyperpage{38}
+  \item {set\_radius}
+    \subitem {BrokenShip}, \hyperpage{21}
+    \subitem {FixedShip}, \hyperpage{34}
+  \item {setCircleObstaclesList}
+    \subitem {CircleObstacle}, \hyperpage{25}
+    \subitem {ObstaclesList}, \hyperpage{60}
+  \item {setCurrentScore}
+    \subitem {gameOverScreen}, \hyperpage{41}
+  \item {setHighScore}
+    \subitem {gameOverScreen}, \hyperpage{41}
+  \item {setLevelOne}
+    \subitem {LevelOne}, \hyperpage{47}
+  \item {setLevelThree}
+    \subitem {LevelThree}, \hyperpage{49}
+  \item {setLevelTwo}
+    \subitem {LevelTwo}, \hyperpage{51}
+  \item {setMusic}
+    \subitem {Level}, \hyperpage{44}
+  \item {setPolygonsObstaclesList}
+    \subitem {ObstaclesList}, \hyperpage{60}
+  \item {setSpeed}
+    \subitem {AbstractObstacle}, \hyperpage{12}
+  \item {setText}
+    \subitem {Button}, \hyperpage{23}
+  \item {shape\_repository}
+    \subitem {shapes\_repository.hpp}, \hyperpage{108}
+  \item {shapes\_repository.hpp}
+    \subitem {shape\_repository}, \hyperpage{108}
+  \item {shortestDistancePointToSegment}
+    \subitem {Vector}, \hyperpage{78}
+  \item {Shot}, \hyperpage{68}
+    \subitem {\_direction}, \hyperpage{72}
+    \subitem {\_shotColor}, \hyperpage{72}
+    \subitem {\texorpdfstring{$\sim$}{\string~}Shot}, \hyperpage{70}
+    \subitem {cleanShots}, \hyperpage{70}
+    \subitem {draw}, \hyperpage{70}
+    \subitem {drawShots}, \hyperpage{70}
+    \subitem {isItActive}, \hyperpage{71}
+    \subitem {Shot}, \hyperpage{70}
+    \subitem {shotCollidedWithBoss}, \hyperpage{71}
+    \subitem {shotCollidedWithPlayer}, \hyperpage{71}
+    \subitem {ShotsList}, \hyperpage{72}
+    \subitem {update}, \hyperpage{71}
+    \subitem {updateShots}, \hyperpage{71}
+  \item {shotCollidedWithBoss}
+    \subitem {BallShot}, \hyperpage{16}
+    \subitem {LineShot}, \hyperpage{55}
+    \subitem {Shot}, \hyperpage{71}
+  \item {shotCollidedWithPlayer}
+    \subitem {BallShot}, \hyperpage{16}
+    \subitem {LineShot}, \hyperpage{55}
+    \subitem {Shot}, \hyperpage{71}
+  \item {ShotsList}
+    \subitem {Shot}, \hyperpage{72}
+  \item {Sound}, \hyperpage{72}
+    \subitem {\texorpdfstring{$\sim$}{\string~}Sound}, \hyperpage{73}
+    \subitem {isSoundMuted}, \hyperpage{74}
+    \subitem {muteSounds}, \hyperpage{73}
+    \subitem {play}, \hyperpage{73}
+    \subitem {Sound}, \hyperpage{73}
+    \subitem {sound\_sample}, \hyperpage{74}
+    \subitem {unmuteSounds}, \hyperpage{74}
+    \subitem {volumeMester}, \hyperpage{74}
+  \item {sound\_sample}
+    \subitem {Sound}, \hyperpage{74}
+  \item {src/abstract\_obstacle.cpp}, \hyperpage{112}
+  \item {src/bootstrap.cpp}, \hyperpage{112}
+  \item {src/circle\_obstacle.cpp}, \hyperpage{115}
+  \item {src/collision.cpp}, \hyperpage{115}
+  \item {src/database\_users.cpp}, \hyperpage{117}
+  \item {src/game\_object.cpp}, \hyperpage{117}
+  \item {src/gameover.cpp}, \hyperpage{117}
+  \item {src/interface.cpp}, \hyperpage{118}
+  \item {src/levels.cpp}, \hyperpage{118}
+  \item {src/main.cpp}, \hyperpage{119}
+  \item {src/menu.cpp}, \hyperpage{120}
+  \item {src/movement.cpp}, \hyperpage{120}
+  \item {src/music.cpp}, \hyperpage{121}
+  \item {src/obstacles\_list.cpp}, \hyperpage{121}
+  \item {src/pipe.cpp}, \hyperpage{121}
+  \item {src/polygon\_obystacle.cpp}, \hyperpage{121}
+  \item {src/shots.cpp}, \hyperpage{121}
+  \item {src/sound.cpp}, \hyperpage{121}
+  \item {src/windows\_boss.cpp}, \hyperpage{122}
+  \item {StartMenu}, \hyperpage{74}
+    \subitem {mainLoopMenu}, \hyperpage{75}
+  \item {stopSongButton}
+    \subitem {Interface}, \hyperpage{43}
+
+  \indexspace
+
+  \item {takeDamage}
+    \subitem {FixedShip}, \hyperpage{34}
+    \subitem {WindowsBoss}, \hyperpage{81}
+  \item {timer}
+    \subitem {bootstrap.cpp}, \hyperpage{114}
+    \subitem {bootstrap.hpp}, \hyperpage{87}
+    \subitem {gameover.cpp}, \hyperpage{118}
+    \subitem {main.cpp}, \hyperpage{120}
+
+  \indexspace
+
+  \item {unMuteMusic}
+    \subitem {Music}, \hyperpage{59}
+  \item {unmuteSounds}
+    \subitem {Sound}, \hyperpage{74}
+  \item {update}
+    \subitem {AbstractObstacle}, \hyperpage{12}
+    \subitem {BallShot}, \hyperpage{17}
+    \subitem {BrokenShip}, \hyperpage{21}
+    \subitem {CircleObstacle}, \hyperpage{25}
+    \subitem {LineShot}, \hyperpage{56}
+    \subitem {Pipe}, \hyperpage{62}
+    \subitem {PolygonObstacle}, \hyperpage{67}
+    \subitem {Shot}, \hyperpage{71}
+    \subitem {WindowsBoss}, \hyperpage{81}
+  \item {update\_fade\_in\_fade\_out}
+    \subitem {Music}, \hyperpage{59}
+  \item {updateAll}
+    \subitem {ObstaclesList}, \hyperpage{60}
+  \item {updateGamesNumber}
+    \subitem {DatabaseUsers}, \hyperpage{28}
+  \item {updatePlayerPosition}
+    \subitem {LevelThree}, \hyperpage{49}
+  \item {updateScore}
+    \subitem {DatabaseUsers}, \hyperpage{28}
+  \item {updateShots}
+    \subitem {Shot}, \hyperpage{71}
+  \item {User}, \hyperpage{75}
+    \subitem {games}, \hyperpage{75}
+    \subitem {id}, \hyperpage{75}
+    \subitem {name}, \hyperpage{75}
+    \subitem {score}, \hyperpage{76}
+    \subitem {username}, \hyperpage{76}
+  \item {username}
+    \subitem {User}, \hyperpage{76}
+
+  \indexspace
+
+  \item {Vector}, \hyperpage{76}
+    \subitem {\_x}, \hyperpage{78}
+    \subitem {\_y}, \hyperpage{78}
+    \subitem {distance}, \hyperpage{77}
+    \subitem {dot}, \hyperpage{77}
+    \subitem {operator+}, \hyperpage{77}
+    \subitem {operator-\/}, \hyperpage{78}
+    \subitem {operator\texorpdfstring{$\ast$}{*}}, \hyperpage{77}
+    \subitem {shortestDistancePointToSegment}, \hyperpage{78}
+    \subitem {Vector}, \hyperpage{77}
+  \item {victory\_music}
+    \subitem {bootstrap.cpp}, \hyperpage{115}
+    \subitem {bootstrap.hpp}, \hyperpage{87}
+  \item {victoryInterface}, \hyperpage{78}
+    \subitem {drawVictoryScreen}, \hyperpage{79}
+    \subitem {victoryInterface}, \hyperpage{79}
+  \item {volumeMester}
+    \subitem {Sound}, \hyperpage{74}
+
+  \indexspace
+
+  \item {Windows}, \hyperpage{79}
+  \item {windows\_boss.cpp}
+    \subitem {cont}, \hyperpage{122}
+  \item {WindowsBoss}, \hyperpage{79}
+    \subitem {draw}, \hyperpage{81}
+    \subitem {getHalfSide}, \hyperpage{81}
+    \subitem {isDead}, \hyperpage{81}
+    \subitem {takeDamage}, \hyperpage{81}
+    \subitem {update}, \hyperpage{81}
+    \subitem {WindowsBoss}, \hyperpage{80}
+
+\end{theindex}

@@ -1,0 +1,120 @@
+\doxysection{Abstract\+Obstacle Class Reference}
+\hypertarget{class_abstract_obstacle}{}\label{class_abstract_obstacle}\index{AbstractObstacle@{AbstractObstacle}}
+
+
+{\ttfamily \#include $<$abstract\+\_\+obstacle.\+hpp$>$}
+
+Inheritance diagram for Abstract\+Obstacle\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_abstract_obstacle}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_abstract_obstacle_ad78e576756510241baf10290f7c7f920}{draw}} ()=0
+\item 
+virtual void \mbox{\hyperlink{class_abstract_obstacle_aeae5b0a5721c7aeaa0c9812f91fac25c}{update}} ()=0
+\item 
+virtual bool \mbox{\hyperlink{class_abstract_obstacle_a34255f2be703d1b7d61f6c48ee853270}{check\+Collision\+With\+Player}} (\mbox{\hyperlink{class_broken_ship}{Broken\+Ship}} \&player)=0
+\item 
+virtual \mbox{\hyperlink{class_abstract_obstacle_a39e607d297a35e3e688a9e638aa3de6a}{\texorpdfstring{$\sim$}{\string~}\+Abstract\+Obstacle}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_game_object}{Game\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_game_object_a0348e3ee2e83d56eafca7a3547f432c4}{Game\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Create a new default \doxylink{class_game_object}{Game\+Object}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_game_object_ab1d658c663b75ad693a8a3bc57d7d482}{Game\+Object}} (\mbox{\hyperlink{struct_vector}{Vector}} position)
+\begin{DoxyCompactList}\small\item\em Create a new \doxylink{class_game_object}{Game\+Object} on given position. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_vector}{Vector}} \mbox{\hyperlink{class_game_object_a7c24fe9f255ef8fc094046501e6ab452}{get\+\_\+position}} ()
+\begin{DoxyCompactList}\small\item\em Get the position of a \doxylink{class_game_object}{Game\+Object}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_object_ac39b48b4d12f59bc1dbc969e49f1afa9}{set\+\_\+position}} (const \mbox{\hyperlink{struct_vector}{Vector}} \&position)
+\begin{DoxyCompactList}\small\item\em Sets the position of a \doxylink{class_game_object}{Game\+Object}. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_game_object_ad0081ad2e2838529e0ce903b59e4c836}{\texorpdfstring{$\sim$}{\string~}\+Game\+Object}} ()=0
+\begin{DoxyCompactList}\small\item\em Game Object empty destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_object_a0d7b25073bbe03a5bf19c9fd0814e56a}{set\+\_\+bitmap}} (const char \texorpdfstring{$\ast$}{*}path)
+\begin{DoxyCompactList}\small\item\em Sets the sprite of the \doxylink{class_game_object}{Game\+Object}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_abstract_obstacle_a89de638167d93d6255631e7815be1db4}{set\+Speed}} (\mbox{\hyperlink{struct_vector}{Vector}} speed)
+\item 
+\mbox{\hyperlink{struct_vector}{Vector}} \mbox{\hyperlink{class_abstract_obstacle_a11b21476f3d123a8b56e4290b7b093f4}{get\+Speed}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{class_game_object}{Game\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+ALLEGRO\+\_\+\+BITMAP \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_game_object_add9f8ed8d82a876cc26893978321961f}{object\+Sprite}} = NULL
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_game_object}{Game\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_vector}{Vector}} \mbox{\hyperlink{class_game_object_acf2dfa279d81923e6b65c8a69bd6d48a}{\+\_\+position}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_abstract_obstacle_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_abstract_obstacle_a39e607d297a35e3e688a9e638aa3de6a}\index{AbstractObstacle@{AbstractObstacle}!````~AbstractObstacle@{\texorpdfstring{$\sim$}{\string~}AbstractObstacle}}
+\index{````~AbstractObstacle@{\texorpdfstring{$\sim$}{\string~}AbstractObstacle}!AbstractObstacle@{AbstractObstacle}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}AbstractObstacle()}{\string~AbstractObstacle()}}
+{\footnotesize\ttfamily \label{class_abstract_obstacle_a39e607d297a35e3e688a9e638aa3de6a} 
+virtual Abstract\+Obstacle\+::\texorpdfstring{$\sim$}{\string~}\+Abstract\+Obstacle (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_abstract_obstacle_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_abstract_obstacle_a34255f2be703d1b7d61f6c48ee853270}\index{AbstractObstacle@{AbstractObstacle}!checkCollisionWithPlayer@{checkCollisionWithPlayer}}
+\index{checkCollisionWithPlayer@{checkCollisionWithPlayer}!AbstractObstacle@{AbstractObstacle}}
+\doxysubsubsection{\texorpdfstring{checkCollisionWithPlayer()}{checkCollisionWithPlayer()}}
+{\footnotesize\ttfamily \label{class_abstract_obstacle_a34255f2be703d1b7d61f6c48ee853270} 
+virtual bool Abstract\+Obstacle\+::check\+Collision\+With\+Player (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_broken_ship}{Broken\+Ship}} \&}]{player}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_circle_obstacle_aa4b9f4ec16147a79ec124260024147df}{Circle\+Obstacle}}, \mbox{\hyperlink{class_pipe_ac9abaf461c3c91733f9387555683bc17}{Pipe}}, and \mbox{\hyperlink{class_polygon_obstacle_a4f7591a4aba1c4e6226bbd54dd294ee9}{Polygon\+Obstacle}}.
+
+\Hypertarget{class_abstract_obstacle_ad78e576756510241baf10290f7c7f920}\index{AbstractObstacle@{AbstractObstacle}!draw@{draw}}
+\index{draw@{draw}!AbstractObstacle@{AbstractObstacle}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily \label{class_abstract_obstacle_ad78e576756510241baf10290f7c7f920} 
+virtual void Abstract\+Obstacle\+::draw (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_circle_obstacle_ad3a2e42f2ff86772221b357a91d4ae03}{Circle\+Obstacle}}, \mbox{\hyperlink{class_pipe_a0628794f8a04c822434c4a44dc47743d}{Pipe}}, and \mbox{\hyperlink{class_polygon_obstacle_a0e96d2f3d384b80728f7be5c14f4d2f1}{Polygon\+Obstacle}}.
+
+\Hypertarget{class_abstract_obstacle_a11b21476f3d123a8b56e4290b7b093f4}\index{AbstractObstacle@{AbstractObstacle}!getSpeed@{getSpeed}}
+\index{getSpeed@{getSpeed}!AbstractObstacle@{AbstractObstacle}}
+\doxysubsubsection{\texorpdfstring{getSpeed()}{getSpeed()}}
+{\footnotesize\ttfamily \label{class_abstract_obstacle_a11b21476f3d123a8b56e4290b7b093f4} 
+\mbox{\hyperlink{struct_vector}{Vector}} Abstract\+Obstacle\+::get\+Speed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_abstract_obstacle_a89de638167d93d6255631e7815be1db4}\index{AbstractObstacle@{AbstractObstacle}!setSpeed@{setSpeed}}
+\index{setSpeed@{setSpeed}!AbstractObstacle@{AbstractObstacle}}
+\doxysubsubsection{\texorpdfstring{setSpeed()}{setSpeed()}}
+{\footnotesize\ttfamily \label{class_abstract_obstacle_a89de638167d93d6255631e7815be1db4} 
+void Abstract\+Obstacle\+::set\+Speed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_vector}{Vector}}}]{speed}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_abstract_obstacle_aeae5b0a5721c7aeaa0c9812f91fac25c}\index{AbstractObstacle@{AbstractObstacle}!update@{update}}
+\index{update@{update}!AbstractObstacle@{AbstractObstacle}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily \label{class_abstract_obstacle_aeae5b0a5721c7aeaa0c9812f91fac25c} 
+virtual void Abstract\+Obstacle\+::update (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_circle_obstacle_a706370c70df1f273793977ac80c61bf9}{Circle\+Obstacle}}, \mbox{\hyperlink{class_pipe_a5c21f37e6bf9ff0ee1c16fee62eb1039}{Pipe}}, and \mbox{\hyperlink{class_polygon_obstacle_ae5e2e7006124486c4c8aaeaa762907d0}{Polygon\+Obstacle}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{abstract__obstacle_8hpp}{abstract\+\_\+obstacle.\+hpp}}\item 
+src/\mbox{\hyperlink{abstract__obstacle_8cpp}{abstract\+\_\+obstacle.\+cpp}}\end{DoxyCompactItemize}
