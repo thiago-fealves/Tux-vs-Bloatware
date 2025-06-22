@@ -20,7 +20,7 @@ int main(int argc, char** argv) {
     if (!Bootstrap::initialize_allegro()) {return 1;
     }
 
-    DatabaseUsers db = DatabaseUsers();
+    //DatabaseUsers db = DatabaseUsers();
 
     srand(time(NULL));
 

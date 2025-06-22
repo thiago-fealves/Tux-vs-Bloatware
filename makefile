@@ -21,8 +21,13 @@ PQXX_LIB_DIR := $(shell brew --prefix libpqxx)/lib
 PQ_INCLUDE_DIR := $(shell brew --prefix libpq)/include
 PQ_LIB_DIR := $(shell brew --prefix libpq)/lib
 
-CXXFLAGS += $(ALLEGRO_FLAGS) -I$(PQXX_INCLUDE_DIR) -I$(PQ_INCLUDE_DIR)
-LDLIBS = $(ALLEGRO_LIBS) -L$(PQXX_LIB_DIR) -L$(PQ_LIB_DIR) -lpqxx -lpq
+
+# OpenCV (opencv4)
+OPENCV_CFLAGS := $(shell pkg-config --cflags opencv4)
+OPENCV_LIBS := $(shell pkg-config --libs opencv4)
+
+CXXFLAGS += $(ALLEGRO_FLAGS) -I$(PQXX_INCLUDE_DIR) -I$(PQ_INCLUDE_DIR) $(OPENCV_CFLAGS)
+LDLIBS = $(ALLEGRO_LIBS) -L$(PQXX_LIB_DIR) -L$(PQ_LIB_DIR) -lpqxx -lpq $(OPENCV_LIBS)
 
 # Source and Object files
 SRC_FILES := $(filter-out $(SRC_DIR)/main.cpp, $(wildcard $(SRC_DIR)/*.cpp))
