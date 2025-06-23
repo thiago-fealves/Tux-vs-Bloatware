@@ -112,7 +112,7 @@ void RegisterInterface::resetFields()
     typingPassword = false;
 }
 
-int RegisterInterface::mainLoop(RegisterInterface registerScreen, bool inRegister){
+int RegisterInterface::mainLoop(bool &inRegister, bool& playing){
 
     while (inRegister){
 
@@ -131,31 +131,33 @@ int RegisterInterface::mainLoop(RegisterInterface registerScreen, bool inRegiste
             }
             else
             {
-                registerScreen.handleKeyInput(ev.keyboard.keycode, ev.keyboard.unichar);
+                this->handleKeyInput(ev.keyboard.keycode, ev.keyboard.unichar);
             }
         }
         else if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN){
             int mx = ev.mouse.x;
             int my = ev.mouse.y;
 
-            registerScreen.handleMouseClick(mx, my);
+            this->handleMouseClick(mx, my);
 
-            if (registerScreen.loginRegisterButton.gotClicked(mx, my))
+            if (this->loginRegisterButton.gotClicked(mx, my))
             {
-                std::string username = registerScreen.getUsername();
-                std::string name = registerScreen.getName();
-                std::string password = registerScreen.getPassword();
+                std::string username = this->getUsername();
+                std::string name = this->getName();
+                std::string password = this->getPassword();
 
                 inRegister = false; // Simplesmente permite o login por enquanto
 
-            }else if (registerScreen.exitButton.gotClicked(mx, my)){
+            }else if (this->exitButton.gotClicked(mx, my)){
                 Bootstrap::cleanup_allegro();
+                inRegister = false; 
+                playing = false;
                 return 0;
             }
         }
 
         al_clear_to_color(al_map_rgb(0, 0, 0));
-        registerScreen.draw();
+        this->draw();
         al_flip_display();
     }
 

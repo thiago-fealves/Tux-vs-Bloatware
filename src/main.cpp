@@ -27,15 +27,15 @@ int main(int argc, char** argv) {
 
     RegisterInterface registerScreen(gameFont);
     bool inRegister = true;
-
-    RegisterInterface::mainLoop(registerScreen, inRegister);
-
     bool inMenu = true;
+    bool playing = true;
+
+    registerScreen.mainLoop(inRegister, playing);
 
     // instância da tela de Game Over
     gameOverScreen game_over_screen(gameFont); 
 
-    bool playing = true;
+    
     //Loop Principal Infinito do Jogo
     while (true) {
     //Estado MENU
@@ -55,9 +55,9 @@ start:
         playing = true;
        
        
-        //LevelOne::mainLoop(playing, isAlive);
-        //LevelOne::cleanLevel(); 
-        //if(!isAlive) goto gameOver;
+        LevelOne::mainLoop(playing, isAlive);
+        LevelOne::cleanLevel(); 
+        if(!isAlive) goto gameOver;
         LevelTwo::mainLoop(playing, isAlive);
         LevelTwo::cleanLevel(); 
         if(!isAlive) goto gameOver;

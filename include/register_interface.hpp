@@ -27,5 +27,5 @@ public:
     std::string getName() const;
     std::string getPassword() const;
     void resetFields();
-    static int mainLoop(RegisterInterface registerScreen, bool inRegister);
+    int mainLoop(bool &inRegister,  bool &playing);
 };
