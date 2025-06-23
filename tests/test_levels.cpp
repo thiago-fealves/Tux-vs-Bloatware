@@ -1,130 +1,116 @@
 // Doctest
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
+
+#define private public
+#include "levels.hpp"
+#include "game_object.hpp"
 #include "movement.hpp"
-#include <cmath>
+#undef private
+
 #include <cstdlib>
 
-// ========== TESTES DE CONSTRUTORES ==========
-TEST_CASE("Vector constructors") {
-    SUBCASE("Default constructor") {
-        Vector v;
-        CHECK(v._x == 0.0f);
-        CHECK(v._y == 0.0f);
-    }
+// Helper (usado só se algum teste precisar de Allegro):
+bool has_display() {
+#ifdef __APPLE__
+    return std::getenv("ALLOW_GRAPHICS_TESTS") != nullptr;
+#else
+    return std::getenv("DISPLAY") != nullptr;
+#endif
+}
 
-    SUBCASE("Single value constructor") {
-        Vector v(5.0f);
-        CHECK(v._x == 5.0f);
-        CHECK(v._y == 5.0f);
+// Teste do estado das teclas do LevelThree
+TEST_CASE("LevelThree key state handling") {
+    for (int i = 0; i < ALLEGRO_KEY_MAX; i++) {
+        LevelThree::key_pressed[i] = false;
     }
-
-    SUBCASE("Two value constructor") {
-        Vector v(3.0f, 4.0f);
-        CHECK(v._x == 3.0f);
-        CHECK(v._y == 4.0f);
+    SUBCASE("Key state initialization") {
+        for (int i = 0; i < ALLEGRO_KEY_MAX; i++) {
+            CHECK_FALSE(LevelThree::key_pressed[i]);
+        }
+    }
+    SUBCASE("Key press tracking") {
+        LevelThree::key_pressed[ALLEGRO_KEY_W] = true;
+        CHECK(LevelThree::key_pressed[ALLEGRO_KEY_W]);
+        CHECK_FALSE(LevelThree::key_pressed[ALLEGRO_KEY_S]);
     }
 }
 
-// ========== TESTES DE OPERAÇÕES ARITMÉTICAS ==========
-TEST_CASE("Vector arithmetic operations") {
-    Vector a(2.0f, 3.0f);
-    Vector b(1.0f, 5.0f);
+// Teste de movimentação do FixedShip (testa lógica de movimento, não depende de Allegro display)
+TEST_CASE("Ship movement directions") {
+    FixedShip player;
+    Vector initial_pos(100, 100);
+    player.set_position(initial_pos);
 
-    SUBCASE("Vector addition") {
-        Vector result = a + b;
-        CHECK(result._x == 3.0f);
-        CHECK(result._y == 8.0f);
+    SUBCASE("Move up") {
+        Vector pos_before = player.get_position();
+        player.moveShip('U');
+        Vector pos_after = player.get_position();
+        CHECK(pos_after._y < pos_before._y);
+        CHECK(pos_after._x == doctest::Approx(pos_before._x));
     }
-
-    SUBCASE("Vector subtraction") {
-        Vector result = a - b;
-        CHECK(result._x == 1.0f);
-        CHECK(result._y == -2.0f);
+    SUBCASE("Move down") {
+        player.set_position(initial_pos);
+        Vector pos_before = player.get_position();
+        player.moveShip('D');
+        Vector pos_after = player.get_position();
+        CHECK(pos_after._y > pos_before._y);
+        CHECK(pos_after._x == doctest::Approx(pos_before._x));
     }
-
-    SUBCASE("Vector multiplication by scalar") {
-        Vector result = a * 3.0f;
-        CHECK(result._x == 6.0f);
-        CHECK(result._y == 9.0f);
+    SUBCASE("Move left") {
+        player.set_position(initial_pos);
+        Vector pos_before = player.get_position();
+        player.moveShip('L');
+        Vector pos_after = player.get_position();
+        CHECK(pos_after._x < pos_before._x);
+        CHECK(pos_after._y == doctest::Approx(pos_before._y));
+    }
+    SUBCASE("Move right") {
+        player.set_position(initial_pos);
+        Vector pos_before = player.get_position();
+        player.moveShip('R');
+        Vector pos_after = player.get_position();
+        CHECK(pos_after._x > pos_before._x);
+        CHECK(pos_after._y == doctest::Approx(pos_before._y));
+    }
+    SUBCASE("Invalid direction") {
+        player.set_position(initial_pos);
+        Vector pos_before = player.get_position();
+        player.moveShip('X'); // Direção inválida
+        Vector pos_after = player.get_position();
+        CHECK(pos_after._x == pos_before._x);
+        CHECK(pos_after._y == pos_before._y);
     }
 }
 
-// ========== TESTES DE PRODUTO ESCALAR ==========
-TEST_CASE("Vector dot product") {
-    Vector a(2.0f, 3.0f);
-    Vector b(4.0f, -1.0f);
-    
-    float dot_product = Vector::dot(a, b);
-    CHECK(dot_product == (2.0f * 4.0f + 3.0f * -1.0f));
-    CHECK(dot_product == 5.0f);
+// Teste básico de lógica de Background (não depende de Allegro, só valores)
+TEST_CASE("Background logic") {
+    Background bg;
+    // Não testa renderBackground() porque requer contexto gráfico
+    // Só testa se construtor não crasha e objeto existe
+    CHECK(true);
 }
 
-// ========== TESTE DE DISTÂNCIA ==========
-TEST_CASE("Vector distance") {
-    Vector a(1.0f, 2.0f);
-    Vector b(4.0f, 6.0f);
-    
-    float dist = Vector::distance(a, b);
-    CHECK(doctest::Approx(dist) == 5.0f);
-}
+// Teste de instanciamento dos níveis
+TEST_CASE("Nível - setLevel cria BrokenShip e FixedShip") {
+    // Só testa se retorna ponteiro válido (não testa lógica gráfica)
+    BrokenShip* b1 = LevelOne::setLevelOne();
+    CHECK(b1 != nullptr);
+    BrokenShip* b2 = LevelTwo::setLevelTwo();
+    CHECK(b2 != nullptr);
+    FixedShip* f3 = LevelThree::setLevelThree();
+    CHECK(f3 != nullptr);
 
-// ========== TESTE DE DISTÂNCIA DE PONTO PARA SEGMENTO ==========
-TEST_CASE("Vector shortest distance point to segment") {
-    SUBCASE("Point projects onto segment") {
-        Vector p(3.0f, 3.0f);
-        Vector a(0.0f, 0.0f);
-        Vector b(6.0f, 0.0f);
-        
-        float dist = Vector::shortestDistancePointToSegment(p, a, b);
-        CHECK(doctest::Approx(dist) == 3.0f);
-    }
-    
-    SUBCASE("Point projects before segment start") {
-        Vector p(-1.0f, 2.0f);
-        Vector a(0.0f, 0.0f);
-        Vector b(5.0f, 0.0f);
-        
-        float dist = Vector::shortestDistancePointToSegment(p, a, b);
-        CHECK(doctest::Approx(dist) == std::sqrt(5.0f));
-    }
-    
-    SUBCASE("Point projects after segment end") {
-        Vector p(7.0f, 2.0f);
-        Vector a(0.0f, 0.0f);
-        Vector b(5.0f, 0.0f);
-        
-        float dist = Vector::shortestDistancePointToSegment(p, a, b);
-        CHECK(doctest::Approx(dist) == std::sqrt(8.0f));
-    }
-}
+    // Testa se posição inicial está dentro da tela (coerente)
+    CHECK(b1->get_position()._x >= 0);
+    CHECK(b1->get_position()._y >= 0);
+    CHECK(b2->get_position()._x >= 0);
+    CHECK(b2->get_position()._y >= 0);
+    CHECK(f3->get_position()._x >= 0);
+    CHECK(f3->get_position()._y >= 0);
 
-// ========== EDGE CASES ==========
-TEST_CASE("Edge cases") {
-    SUBCASE("Zero vector dot product") {
-        Vector zero;
-        Vector nonzero(3.0f, 4.0f);
-        
-        CHECK(Vector::dot(zero, nonzero) == 0.0f);
-    }
-    
-    SUBCASE("Distance to self is zero") {
-        Vector v(5.0f, -3.0f);
-        CHECK(Vector::distance(v, v) == 0.0f);
-    }
-    
-    SUBCASE("Point on segment has zero distance") {
-        Vector p(3.0f, 0.0f);
-        Vector a(0.0f, 0.0f);
-        Vector b(5.0f, 0.0f);
-        
-        float dist = Vector::shortestDistancePointToSegment(p, a, b);
-        CHECK(doctest::Approx(dist) == 0.0f);
-    }
-
-    SUBCASE("Negative values and large floats") {
-        Vector a(-10000.0f, 1e5f);
-        Vector b(1e5f, -10000.0f);
-        float dist = Vector::distance(a, b);
-        CHECK(dist > 0.0f);
-    }
+    // Libera memória
+    delete b1;
+    delete b2;
+    delete f3;
 }
