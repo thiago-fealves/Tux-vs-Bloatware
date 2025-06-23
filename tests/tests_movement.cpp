@@ -1,8 +1,11 @@
-#define TESTS_MOVEMENT
+// Doctest
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 #include "movement.hpp"
-#include <math.h>
+#include <cmath>
+#include <cstdlib>
 
+// ========== TESTES DE CONSTRUTORES ==========
 TEST_CASE("Vector constructors") {
     SUBCASE("Default constructor") {
         Vector v;
@@ -23,6 +26,7 @@ TEST_CASE("Vector constructors") {
     }
 }
 
+// ========== TESTES DE OPERAÇÕES ARITMÉTICAS ==========
 TEST_CASE("Vector arithmetic operations") {
     Vector a(2.0f, 3.0f);
     Vector b(1.0f, 5.0f);
@@ -46,15 +50,17 @@ TEST_CASE("Vector arithmetic operations") {
     }
 }
 
+// ========== TESTES DE PRODUTO ESCALAR ==========
 TEST_CASE("Vector dot product") {
     Vector a(2.0f, 3.0f);
     Vector b(4.0f, -1.0f);
     
     float dot_product = Vector::dot(a, b);
-    CHECK(dot_product == 8.0f - 3.0f);
+    CHECK(dot_product == (2.0f * 4.0f + 3.0f * -1.0f));
     CHECK(dot_product == 5.0f);
 }
 
+// ========== TESTE DE DISTÂNCIA ==========
 TEST_CASE("Vector distance") {
     Vector a(1.0f, 2.0f);
     Vector b(4.0f, 6.0f);
@@ -63,6 +69,7 @@ TEST_CASE("Vector distance") {
     CHECK(doctest::Approx(dist) == 5.0f);
 }
 
+// ========== TESTE DE DISTÂNCIA DE PONTO PARA SEGMENTO ==========
 TEST_CASE("Vector shortest distance point to segment") {
     SUBCASE("Point projects onto segment") {
         Vector p(3.0f, 3.0f);
@@ -79,7 +86,7 @@ TEST_CASE("Vector shortest distance point to segment") {
         Vector b(5.0f, 0.0f);
         
         float dist = Vector::shortestDistancePointToSegment(p, a, b);
-        CHECK(doctest::Approx(dist) == sqrt(5));
+        CHECK(doctest::Approx(dist) == std::sqrt(5.0f));
     }
     
     SUBCASE("Point projects after segment end") {
@@ -88,10 +95,11 @@ TEST_CASE("Vector shortest distance point to segment") {
         Vector b(5.0f, 0.0f);
         
         float dist = Vector::shortestDistancePointToSegment(p, a, b);
-        CHECK(doctest::Approx(dist) == sqrt(8.0f));
+        CHECK(doctest::Approx(dist) == std::sqrt(8.0f));
     }
 }
 
+// ========== EDGE CASES ==========
 TEST_CASE("Edge cases") {
     SUBCASE("Zero vector dot product") {
         Vector zero;
@@ -112,5 +120,12 @@ TEST_CASE("Edge cases") {
         
         float dist = Vector::shortestDistancePointToSegment(p, a, b);
         CHECK(doctest::Approx(dist) == 0.0f);
+    }
+
+    SUBCASE("Negative values and large floats") {
+        Vector a(-10000.0f, 1e5f);
+        Vector b(1e5f, -10000.0f);
+        float dist = Vector::distance(a, b);
+        CHECK(dist > 0.0f);
     }
 }
