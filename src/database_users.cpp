@@ -157,11 +157,11 @@ std::unique_ptr<User> DatabaseUsers:: getUserByUsername(const std::string& usern
 
             std::cout << "Usuario '" << username << "' encontrado." << std::endl;
             // Aloca um objeto User na heap
-            return std::make_unique<User>(
-                R[0]["username"].as<std::string>(),
-                R[0]["score"].as<int>(),
-                R[0]["games"].as<int>()
-            );
+            User user;
+            user.username = R[0]["username"].as<std::string>();
+            user.score = R[0]["score"].as<int>();
+            user.games = R[0]["games"].as<int>();
+            return std::make_unique<User>(user);
         }else {
             std::cout << "Usuario '" << username << "' não encontrado." << std::endl;
             return nullptr; // Retorna nullptr (um unique_ptr vazio) se o usuário não for encontrado

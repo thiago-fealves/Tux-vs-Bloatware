@@ -26,7 +26,7 @@ public:
     bool updateScore(const std::string& username, int new_score);
     bool updateGamesNumber(const std::string& username, int new_games);
     std::unique_ptr<User> getUserByUsername(const std::string& username); 
-    bool DatabaseUsers::authenticateUser(const std::string& username, const std::string& password);
+    bool authenticateUser(const std::string& username, const std::string& password);
 };
 
 #endif
