@@ -83,7 +83,7 @@ std::vector<User> DatabaseUsers::listUsers() {
     std::vector<User> users;
     try {
         pqxx::nontransaction N(*_connect); 
-        pqxx::result R = N.exec("SELECT id, name, username, score, games FROM users ORDER BY score DESC;"); 
+        pqxx::result R = N.exec(pqxx::zview ("SELECT id, name, username, score, games FROM users ORDER BY score DESC;")); 
         for (pqxx::row row : R) {
             users.push_back({
                 row["id"].as<int>(),
@@ -150,7 +150,7 @@ std::unique_ptr<User> DatabaseUsers:: getUserByUsername(const std::string& usern
     try{
 
         pqxx::nontransaction N(*_connect); 
-        pqxx::result R = N.exec("SELECT id, name, username, password, score, games FROM users WHERE username = $1;", 
+        pqxx::result R = N.exec(pqxx::zview ("SELECT id, name, username, password, score, games FROM users WHERE username = $1;"), 
         username);
 
         if(!R.empty()){
