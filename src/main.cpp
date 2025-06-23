@@ -22,7 +22,7 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    //DatabaseUsers db = DatabaseUsers();
+    DatabaseUsers db = DatabaseUsers();
     srand(time(NULL));
 
     RegisterInterface registerScreen(gameFont);
@@ -30,12 +30,11 @@ int main(int argc, char** argv) {
     bool inMenu = true;
     bool playing = true;
 
-    registerScreen.mainLoop(inRegister, playing);
+    registerScreen.mainLoop(inRegister, playing, db);
 
     // instância da tela de Game Over
     gameOverScreen game_over_screen(gameFont); 
 
-    
     //Loop Principal Infinito do Jogo
     while (true) {
     //Estado MENU

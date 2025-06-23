@@ -1,5 +1,6 @@
 #pragma once
 #include "interface.hpp"
+#include "database_users.hpp"
 
 class RegisterInterface {
     ALLEGRO_FONT* _font;
@@ -27,5 +28,5 @@ public:
     std::string getName() const;
     std::string getPassword() const;
     void resetFields();
-    int mainLoop(bool &inRegister,  bool &playing);
+    int mainLoop(bool &inRegister,  bool &playing, DatabaseUsers &db);
 };

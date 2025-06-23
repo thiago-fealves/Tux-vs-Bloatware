@@ -4,6 +4,7 @@
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
 #include <allegro5/allegro.h>
+#include <iostream>
 
 RegisterInterface::RegisterInterface(ALLEGRO_FONT *font) : _font(font), typingUsername(false), typingPassword(false),
                                                    nameBox(SCREEN_W/2 - BUTTON_W/2, 150, BUTTON_W, BUTTON_H),
@@ -112,7 +113,7 @@ void RegisterInterface::resetFields()
     typingPassword = false;
 }
 
-int RegisterInterface::mainLoop(bool &inRegister, bool& playing){
+int RegisterInterface::mainLoop(bool &inRegister, bool& playing, DatabaseUsers &db){
 
     while (inRegister){
 
@@ -146,13 +147,22 @@ int RegisterInterface::mainLoop(bool &inRegister, bool& playing){
                 std::string name = this->getName();
                 std::string password = this->getPassword();
 
-                inRegister = false; // Simplesmente permite o login por enquanto
+                std::unique_ptr<User> user = db.getUserByUsername(username);
+
+                if(user == nullptr){
+
+                    db.registerUser(name, username, password);
+                    inRegister = false; // permite o login
+                }else{
+                    if(db.authenticateUser(username, password)){
+                        inRegister = false;
+                    }
+                }
 
             }else if (this->exitButton.gotClicked(mx, my)){
                 Bootstrap::cleanup_allegro();
                 inRegister = false; 
                 playing = false;
-                return 0;
             }
         }
 

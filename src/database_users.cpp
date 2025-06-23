@@ -39,7 +39,7 @@ DatabaseUsers::~DatabaseUsers() {
     }
 }
 
-void DatabaseUsers::registerUser(const std::string& name, const std::string& username, const std::string& password, int initial_score, int initial_games) {
+bool DatabaseUsers::registerUser(const std::string& name, const std::string& username, const std::string& password, int initial_score, int initial_games) {
     try {
         pqxx::work W(*_connect); 
         W.exec_params(
@@ -47,6 +47,7 @@ void DatabaseUsers::registerUser(const std::string& name, const std::string& use
             name, username, password, initial_score, initial_games
         );
         W.commit(); 
+
     } catch (const pqxx::unique_violation& e) {
         std::cout << "Erro: Usuário com o username '" << username << "' já existe. " << e.what() << std::endl;
     } catch (const pqxx::sql_error& e) {
@@ -57,7 +58,7 @@ void DatabaseUsers::registerUser(const std::string& name, const std::string& use
     }
 }
 
-void DatabaseUsers::deleteUser(const std::string& username) {
+bool DatabaseUsers::deleteUser(const std::string& username) {
     try {
         pqxx::work W(*_connect);
         pqxx::result R = W.exec_params(
@@ -102,7 +103,7 @@ std::vector<User> DatabaseUsers::listUsers() {
     return users;
 }
 
-void DatabaseUsers::updateScore(const std::string& username, int new_score) {
+bool DatabaseUsers::updateScore(const std::string& username, int new_score) {
     try {
         pqxx::work W(*_connect);
         pqxx::result R = W.exec_params(
@@ -123,7 +124,7 @@ void DatabaseUsers::updateScore(const std::string& username, int new_score) {
     }
 }
 
-void DatabaseUsers::updateGamesNumber(const std::string& username, int new_games) {
+bool DatabaseUsers::updateGamesNumber(const std::string& username, int new_games) {
     try {
         pqxx::work W(*_connect);
         pqxx::result R = W.exec_params(
@@ -143,4 +144,69 @@ void DatabaseUsers::updateGamesNumber(const std::string& username, int new_games
         std::cerr << "Erro ao atualizar numero de games: " << e.what() << std::endl;
     }
 }
+
+std::unique_ptr<User> DatabaseUsers:: getUserByUsername(const std::string& username){
+
+    try{
+
+        pqxx::nontransaction N(*_connect); 
+        pqxx::result R = N.exec("SELECT id, name, username, password, score, games FROM users WHERE username = $1;", 
+        username);
+
+        if(!R.empty()){
+
+            std::cout << "Usuario '" << username << "' encontrado." << std::endl;
+            // Aloca um objeto User na heap
+            return std::make_unique<User>(
+                R[0]["username"].as<std::string>(),
+                R[0]["score"].as<int>(),
+                R[0]["games"].as<int>()
+            );
+        }else {
+            std::cout << "Usuario '" << username << "' não encontrado." << std::endl;
+            return nullptr; // Retorna nullptr (um unique_ptr vazio) se o usuário não for encontrado
+        }
+    }
+    catch (const pqxx::sql_error &e){
+        std::cerr << "Erro SQL ao buscar usuario por username: " << e.what() << std::endl;
+        std::cerr << "Query que causou o erro: " << e.query() << std::endl;
+        return nullptr;
+    }
+    catch (const std::exception &e){
+        std::cerr << "Erro ao buscar usuário por username: " << e.what() << std::endl;
+        return nullptr;
+    }
+}
+
+bool DatabaseUsers::authenticateUser(const std::string& username, const std::string& password) {
+   
+    try {
+        pqxx::nontransaction N(*_connect);
+        pqxx::result R = N.exec_params(
+            "SELECT password FROM users WHERE username = $1;",
+            username
+        );
+
+        if (!R.empty()) {
+            std::string dbpassword = R[0]["password"].as<std::string>();
+
+            // Comparação direta de strings (INSEGURO)
+            if (dbpassword == password) {
+                std::cout << "Autenticacao bem-sucedida para o usuario '" << username << "'." << std::endl;
+                return true;
+            } else {
+                std::cout << "Senha incorreta para o usuario '" << username << "'." << std::endl;
+                return false;
+            }
+        } 
+    } catch (const pqxx::sql_error& e) {
+        std::cerr << "Erro SQL durante a autenticacao: " << e.what() << std::endl;
+        std::cerr << "Query que causou o erro: " << e.query() << std::endl;
+        return false;
+    } catch (const std::exception& e) {
+        std::cerr << "Erro durante a autenticacao: " << e.what() << std::endl;
+        return false;
+    }
+}
+
 
