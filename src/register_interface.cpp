@@ -157,9 +157,6 @@ int RegisterInterface::mainLoop(bool &inRegister, bool &playing, DatabaseUsers &
                 std::string username = this->getUsername();
                 std::string password = this->getPassword();
 
-                if (username != "" && password != "")
-                {
-
                     if (db.authenticateUser(username, password))
                     {
 
@@ -171,7 +168,7 @@ int RegisterInterface::mainLoop(bool &inRegister, bool &playing, DatabaseUsers &
                         std::cout << "Erro: Nome de usuario ou senha incorretos." << std::endl;
                         // Informar ao usuário sobre credenciais inválidas
                     }
-                }
+                
             }
             else if (this->exitButton.gotClicked(mx, my))
             {

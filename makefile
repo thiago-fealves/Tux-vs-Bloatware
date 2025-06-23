@@ -9,20 +9,23 @@ TEST_BUILD_DIR = build/tests
 
 # C++ Compiler
 CXX = g++
-CXXFLAGS = -Wall -g -std=c++17 -I$(INC_DIR)
+CXXFLAGS = -Wall -g -std=c++17
 
-# Allegro (pkg-config)
-ALLEGRO_FLAGS := $(shell pkg-config --cflags allegro-5 allegro_main-5 allegro_audio-5 allegro_image-5 allegro_font-5 allegro_primitives-5 allegro_acodec-5 allegro_ttf-5)
-ALLEGRO_LIBS := $(shell pkg-config --libs allegro-5 allegro_main-5 allegro_audio-5 allegro_image-5 allegro_font-5 allegro_primitives-5 allegro_acodec-5 allegro_ttf-5)
+# Allegro e libpqxx via pkg-config
+PKG_FLAGS := $(shell pkg-config --cflags --libs \
+	allegro-5 allegro_main-5 allegro_audio-5 allegro_image-5 \
+	allegro_font-5 allegro_primitives-5 allegro_acodec-5 allegro_ttf-5 \
+	libpqxx)
 
-# PostgreSQL (Homebrew)
-PQXX_INCLUDE_DIR := $(shell brew --prefix libpqxx)/include
-PQXX_LIB_DIR := $(shell brew --prefix libpqxx)/lib
-PQ_INCLUDE_DIR := $(shell brew --prefix libpq)/include
-PQ_LIB_DIR := $(shell brew --prefix libpq)/lib
+CXXFLAGS += $(shell pkg-config --cflags \
+	allegro-5 allegro_main-5 allegro_audio-5 allegro_image-5 \
+	allegro_font-5 allegro_primitives-5 allegro_acodec-5 allegro_ttf-5 \
+	libpqxx)
 
-CXXFLAGS += $(ALLEGRO_FLAGS) -I$(PQXX_INCLUDE_DIR) -I$(PQ_INCLUDE_DIR)
-LDLIBS = $(ALLEGRO_LIBS) -L$(PQXX_LIB_DIR) -L$(PQ_LIB_DIR) -lpqxx -lpq
+LDLIBS = $(shell pkg-config --libs \
+	allegro-5 allegro_main-5 allegro_audio-5 allegro_image-5 \
+	allegro_font-5 allegro_primitives-5 allegro_acodec-5 allegro_ttf-5 \
+	libpqxx)
 
 # Source and Object files
 SRC_FILES := $(filter-out $(SRC_DIR)/main.cpp, $(wildcard $(SRC_DIR)/*.cpp))
@@ -42,11 +45,11 @@ $(TEST_TARGET): $(OBJ_FILES) $(TEST_OBJ_FILES)
 # Build Rules
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(BUILD_DIR)
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -I$(INC_DIR) -c $< -o $@
 
 $(TEST_BUILD_DIR)/%.o: $(TEST_DIR)/%.cpp
 	@mkdir -p $(TEST_BUILD_DIR)
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -I$(INC_DIR) -c $< -o $@
 
 # Convenience Targets
 all: $(TARGET)

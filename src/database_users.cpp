@@ -39,9 +39,9 @@ bool DatabaseUsers::authenticateUser(const std::string& username, const std::str
    
     try {
         pqxx::nontransaction N(*_connect);
-        pqxx::result R = N.exec_params(
+        pqxx::result R = N.exec(
             "SELECT password FROM users WHERE username = $1;",
-            username
+            pqxx::params(username)
         );
 
         if (!R.empty()) {
@@ -64,6 +64,8 @@ bool DatabaseUsers::authenticateUser(const std::string& username, const std::str
         std::cerr << "Erro durante a autenticacao: " << e.what() << std::endl;
         return false;
     }
+
+    return false;
 }
 
 DatabaseUsers::~DatabaseUsers() {
@@ -126,13 +128,13 @@ std::vector<User> DatabaseUsers::listUsers() {
     try {
         pqxx::nontransaction N(*_connect); 
         pqxx::result R = N.exec("SELECT id, name, username, score, games FROM users ORDER BY score DESC"); 
-        for (pqxx::row row : R) {
+        for (pqxx::row r : R) {
             users.push_back({
-                row["id"].as<int>(),
-                row["username"].as<std::string>(),
-                row["score"].as<int>(),
-                row["name"].as<std::string>(),
-                row["games"].as<int>()
+                r["id"].as<int>(),
+                r["username"].as<std::string>(),
+                r["score"].as<int>(),
+                r["name"].as<std::string>(),
+                r["games"].as<int>()
             });
         }
         std::cout << "Usuarios listados com sucesso." << std::endl;
