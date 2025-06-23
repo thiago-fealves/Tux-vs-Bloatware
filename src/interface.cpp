@@ -12,6 +12,7 @@
  * @param heigth region heigth
  */
 
+
 Coordinates::Coordinates(double x, double y, double width, double heigth) :
     _x(x), _y(y), _width(width), _heigth(heigth)
 {}

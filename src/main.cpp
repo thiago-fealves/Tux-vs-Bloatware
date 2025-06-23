@@ -7,6 +7,7 @@
 #include "bootstrap.hpp"
 #include "music.hpp"
 #include "database_users.hpp"
+#include "register_interface.hpp"
 
 using namespace std;
 
@@ -17,17 +18,22 @@ extern ALLEGRO_FONT* gameFont;
 
 int main(int argc, char** argv) {
     
-    if (!Bootstrap::initialize_allegro()) {return 1;
+    if (!Bootstrap::initialize_allegro()) {
+        return 1;
     }
 
     //DatabaseUsers db = DatabaseUsers();
     srand(time(NULL));
 
+    RegisterInterface registerScreen(gameFont);
+    bool inRegister = true;
+
+    RegisterInterface::mainLoop(registerScreen, inRegister);
+
     bool inMenu = true;
 
+    // instância da tela de Game Over
     gameOverScreen game_over_screen(gameFont); 
-
- // instância da tela de Game Over
 
     bool playing = true;
     //Loop Principal Infinito do Jogo
