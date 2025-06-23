@@ -5,15 +5,16 @@
 class RegisterInterface {
     ALLEGRO_FONT* _font;
 
-    std::string username;
-    std::string name;
-    std::string password;
-    bool typingUsername;
-    bool typingName;
-    bool typingPassword;
+    std::string username = "";
+    std::string name = "";
+    std::string password = "";
+    bool typingUsername = false;
+    bool typingName = false;
+    bool typingPassword = false;
 
 public:
-    Button loginRegisterButton;
+    Button loginButton;
+    Button registerButton;
     Button exitButton;
     Coordinates usernameBox;
     Coordinates nameBox;
