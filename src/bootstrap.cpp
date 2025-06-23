@@ -110,12 +110,11 @@ bool Bootstrap::init_allegro_libs(){
         return false;
     }
 
-    // add deivid: cria a fonte do jogo 
+    // Creates the game font
     gameFont = al_load_font("./assets/katana.ttf", 30, 0); 
     levelFont = al_load_font("./assets/katana.ttf", 20, 0);
     if (!gameFont || !levelFont) {
         cout << "ERROR: Failed to load font 'katana.ttf' (gameFont/levelFont)" << endl;
-        //se der erro destoi os recusos criados anteriormente
         al_destroy_timer(timer);
         al_destroy_display(display);
         al_destroy_event_queue(event_queue);
@@ -123,7 +122,7 @@ bool Bootstrap::init_allegro_libs(){
     }
 
     
-    //add deivid: imagem do game over
+    //add Creates the game over image
     gameOverBackground = al_load_bitmap("./assets/game_over.png"); 
     if (!gameOverBackground) {
         cout << "ERROR: Failed to load game over background image './assets/game_over.png'!" << endl;

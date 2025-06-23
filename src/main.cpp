@@ -90,4 +90,4 @@ start:
 
 final:
     Bootstrap::cleanup_allegro();
-} 
+}
