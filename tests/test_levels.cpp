@@ -1,5 +1,4 @@
 // Doctest
-#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 
 #define private public
@@ -9,15 +8,6 @@
 #undef private
 
 #include <cstdlib>
-
-// Helper (usado só se algum teste precisar de Allegro):
-bool has_display() {
-#ifdef __APPLE__
-    return std::getenv("ALLOW_GRAPHICS_TESTS") != nullptr;
-#else
-    return std::getenv("DISPLAY") != nullptr;
-#endif
-}
 
 // Teste do estado das teclas do LevelThree
 TEST_CASE("LevelThree key state handling") {
