@@ -7,17 +7,29 @@
 #include <iostream>
 
 RegisterInterface::RegisterInterface(ALLEGRO_FONT *font) : _font(font), typingUsername(false), typingPassword(false),
-                                                           nameBox(SCREEN_W / 2 - BUTTON_W / 2, 150, BUTTON_W, BUTTON_H),
-                                                           usernameBox(SCREEN_W / 2 - BUTTON_W / 2, 240, BUTTON_W, BUTTON_H),
-                                                           passwordBox(SCREEN_W / 2 - BUTTON_W / 2, 330, BUTTON_W, BUTTON_H),
-                                                           loginButton(Coordinates(SCREEN_W / 2 - BUTTON_W / 2, 420, BUTTON_W, BUTTON_H), al_map_rgb(50, 50, 50), "Login", font),
-                                                           registerButton(Coordinates(SCREEN_W / 2 - BUTTON_W / 2, 500, BUTTON_W, BUTTON_H), al_map_rgb(50, 50, 50), "Register", font),
+                                                           nameBox(SCREEN_W / 2 - BUTTON_W / 2, 120, BUTTON_W, BUTTON_H),
+                                                           usernameBox(SCREEN_W / 2 - BUTTON_W / 2, 200, BUTTON_W, BUTTON_H),
+                                                           passwordBox(SCREEN_W / 2 - BUTTON_W / 2, 280, BUTTON_W, BUTTON_H),
+                                                           loginButton(Coordinates(SCREEN_W / 2 - BUTTON_W / 2, 360, BUTTON_W, BUTTON_H), al_map_rgb(50, 50, 50), "Login", font),
+                                                           registerButton(Coordinates(SCREEN_W / 2 - BUTTON_W / 2, 440, BUTTON_W, BUTTON_H), al_map_rgb(50, 50, 50), "Register", font),
                                                            exitButton(Coordinates(20, 20, 100, 70), al_map_rgb(50, 50, 50), "Sair", font)
 {
 }
 
 void RegisterInterface::draw()
 {
+    if(!typingUsername && username == ""){
+
+    //Label do username
+    al_draw_text(
+        _font,
+        al_map_rgb(240, 248, 255),
+        usernameBox._x + 15,
+        usernameBox._y + (usernameBox._heigth - al_get_font_line_height(_font)) / 2, // Mesmo centro vertical
+        ALLEGRO_ALIGN_LEFT,
+        "Usuário:");
+    }
+    
     // Caixa de username
     al_draw_rectangle(usernameBox._x, usernameBox._y, usernameBox._x + usernameBox._width, usernameBox._y + usernameBox._heigth, al_map_rgb(255, 255, 255), 1);
     al_draw_text(
@@ -27,7 +39,16 @@ void RegisterInterface::draw()
         usernameBox._y + (usernameBox._heigth - al_get_font_line_height(_font)) / 2, // centro vertical
         ALLEGRO_ALIGN_CENTER,
         username.c_str());
-
+    if(!typingName && name == ""){
+    //Label do name
+    al_draw_text(
+        _font,
+        al_map_rgb(240, 248, 255),
+        nameBox._x + 15, 
+        nameBox._y + (nameBox._heigth - al_get_font_line_height(_font)) / 2, // Mesmo centro vertical
+        ALLEGRO_ALIGN_LEFT,
+        "Nome:");
+    }
     // Caixa do name
     al_draw_rectangle(nameBox._x, nameBox._y, nameBox._x + nameBox._width, nameBox._y + nameBox._heigth, al_map_rgb(255, 255, 255), 1);
     al_draw_text(
@@ -37,7 +58,16 @@ void RegisterInterface::draw()
         nameBox._y + (nameBox._heigth - al_get_font_line_height(_font)) / 2, // centro vertical
         ALLEGRO_ALIGN_CENTER,
         name.c_str());
-
+    if(!typingPassword && password == ""){
+    //Label do password
+    al_draw_text(
+        _font,
+        al_map_rgb(240, 248, 255),
+        passwordBox._x + 15, 
+        passwordBox._y + (passwordBox._heigth - al_get_font_line_height(_font)) / 2, // Mesmo centro vertical
+        ALLEGRO_ALIGN_LEFT, 
+        "Senha:");
+    }
     // Caixa do password
     al_draw_rectangle(passwordBox._x, passwordBox._y, passwordBox._x + passwordBox._width, passwordBox._y + passwordBox._heigth, al_map_rgb(255, 255, 255), 1);
     std::string hidden(password.length(), '*');
