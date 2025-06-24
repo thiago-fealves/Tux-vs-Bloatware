@@ -11,6 +11,7 @@
 #include "obstacles_list.hpp"
 #include "collision.hpp"
 #include "sound.hpp"
+#include <allegro5/timer.h>
 using namespace std;
 
 
@@ -395,6 +396,7 @@ void LevelThree::updatePlayerPosition(FixedShip* player){
 void LevelThree::handleTimerEvents(bool &playing, FixedShip* player, WindowsBoss &windows, bool &isAlive){
     // Update the music
     static int bossPoints = 10000;
+    static bool pointsSummed = false;
     Music::update_fade_in_fade_out();
 
     // Update and redraw the game state
@@ -414,13 +416,18 @@ void LevelThree::handleTimerEvents(bool &playing, FixedShip* player, WindowsBoss
     Shot::drawShots();
     windows.draw();
 
+
     if(windows.isDead()) {
           globalVars::inInterLevel = true;
+          if(!pointsSummed) {
+              globalVars::points += bossPoints;
+              pointsSummed = true;
+          }
           victoryInterface victory(levelFont);
           victory.drawVictoryScreen();
-          globalVars::points += bossPoints;
     } else 
-        bossPoints -= 10;
+        if(al_get_timer_count(timer)%(int)FPS == 0)
+            bossPoints -= 10;
 
     al_flip_display();
 }
