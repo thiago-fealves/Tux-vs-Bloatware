@@ -1,5 +1,4 @@
-![Gemini_Generated_Image_kyccrwkyccrwkycc](https://github.com/user-attachments/assets/2b90571f-9b2a-47cf-b149-f5148fdcba9d)
-
+* [Ferramentas](#ferramentas)![Tux vs Bloatware (1)](https://github.com/user-attachments/assets/7b134df7-14f4-4d79-ad2d-53ab1ca1d28d)
 
 # **Sobre o jogo**
 Em *Tux vs. Bloatware*, você é o querido pinguim Tux — o grande símbolo dos resistentes e resilientes usuários de Linux. 
@@ -18,7 +17,6 @@ Que a força do Kernel esteja com você!
 
 ## **Índice**
 
-* [Ferramentas](#ferramentas)
 * [Allegro](#Allegro)
 * [Instalação do Jogo](#instalacao-do-jogo)
     * [Compilação](#compilacao)
