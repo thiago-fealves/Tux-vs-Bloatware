@@ -6,14 +6,21 @@
 #include <allegro5/allegro.h>
 #include <iostream>
 
-RegisterInterface::RegisterInterface(ALLEGRO_FONT *font) : _font(font), typingUsername(false), typingPassword(false),
-                                                           _titleImage(nullptr), 
-                                                           nameBox(SCREEN_W / 2 - BUTTON_W / 2, 190, BUTTON_W, BUTTON_H),
-                                                           usernameBox(SCREEN_W / 2 - BUTTON_W / 2, 260, BUTTON_W, BUTTON_H),
-                                                           passwordBox(SCREEN_W / 2 - BUTTON_W / 2, 330, BUTTON_W, BUTTON_H),
-                                                           loginButton(Coordinates(SCREEN_W / 2 - BUTTON_W / 2, 400, BUTTON_W, BUTTON_H), al_map_rgb(50, 50, 50), "Login", font),
-                                                           registerButton(Coordinates(SCREEN_W / 2 - BUTTON_W / 2, 470, BUTTON_W, BUTTON_H), al_map_rgb(50, 50, 50), "Register", font),
-                                                           exitButton(Coordinates(20, 20, 80, 60), al_map_rgb(50, 50, 50), "Sair", font)
+RegisterInterface::RegisterInterface(ALLEGRO_FONT *font) : 
+    _font(font), 
+    _titleImage(nullptr),
+    typingUsername(false), 
+    typingName(false),
+    typingPassword(false),
+    username(""),
+    name(""),
+    password(""),
+    nameBox(SCREEN_W / 2 - BUTTON_W / 2, 190, BUTTON_W, BUTTON_H),
+    usernameBox(SCREEN_W / 2 - BUTTON_W / 2, 260, BUTTON_W, BUTTON_H),
+    passwordBox(SCREEN_W / 2 - BUTTON_W / 2, 330, BUTTON_W, BUTTON_H),
+    loginButton(Coordinates(SCREEN_W / 2 - BUTTON_W / 2, 400, BUTTON_W, BUTTON_H), al_map_rgb(50, 50, 50), "Login", font),
+    registerButton(Coordinates(SCREEN_W / 2 - BUTTON_W / 2, 470, BUTTON_W, BUTTON_H), al_map_rgb(50, 50, 50), "Register", font),
+    exitButton(Coordinates(20, 20, 80, 60), al_map_rgb(50, 50, 50), "Sair", font)
 {
     _titleImage = al_load_bitmap("./assets/TitleGame.png"); 
     if (!_titleImage) {

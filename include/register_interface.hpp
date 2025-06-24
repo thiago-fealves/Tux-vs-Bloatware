@@ -11,23 +11,25 @@
 */
 
 class RegisterInterface {
+
+    private:
+
     ALLEGRO_FONT* _font;
     ALLEGRO_BITMAP* _titleImage;
-
-    std::string username = "";
-    std::string name = "";
-    std::string password = "";
-    bool typingUsername = false;
-    bool typingName = false;
-    bool typingPassword = false;
-
-public:
+    bool typingUsername;
+    bool typingName;
+    bool typingPassword;
+    std::string username;
+    std::string name;
+    std::string password;
+    Coordinates nameBox;
+    Coordinates usernameBox;
+    Coordinates passwordBox;
     Button loginButton;
     Button registerButton;
     Button exitButton;
-    Coordinates usernameBox;
-    Coordinates nameBox;
-    Coordinates passwordBox;
+
+    public:
 
     /**
  * @brief Construtor da classe RegisterInterface.

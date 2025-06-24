@@ -38,7 +38,7 @@ int main(int argc, char** argv) {
     //Loop Principal Infinito do Jogo
     while (true) {
     //Estado MENU
-menu:
+    
     if (inMenu) {
         StartMenu::mainLoopMenu(playing); //menu, musica e cliques sao feitos e processados
         if (!playing) break;
