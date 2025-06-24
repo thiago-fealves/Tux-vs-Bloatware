@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['set_5fbitmap_0',['set_bitmap',['../classGameObject.html#a0d7b25073bbe03a5bf19c9fd0814e56a',1,'GameObject']]],
+  ['set_5fposition_1',['set_position',['../classGameObject.html#ac39b48b4d12f59bc1dbc969e49f1afa9',1,'GameObject']]],
+  ['set_5fradius_2',['set_radius',['../classFixedShip.html#a7682f0a36290fe4664673d0d0a5683ef',1,'FixedShip::set_radius()'],['../classBrokenShip.html#a31096e8608cd3fb8dc5803476d1319be',1,'BrokenShip::set_radius()']]],
+  ['setbestscore_3',['setbestScore',['../classgameOverScreen.html#a966230f288f35a2f4e801a2125bca3fa',1,'gameOverScreen']]],
+  ['setcantakedamage_4',['setCanTakeDamage',['../classFixedShip.html#ae2b3e82feff7aedf677b4b8f84d8bb16',1,'FixedShip']]],
+  ['setcircleobstacleslist_5',['setCircleObstaclesList',['../classObstaclesList.html#a0caed9e26ccd7847ab833f27a0d2c1c6',1,'ObstaclesList']]],
+  ['setcurrentscore_6',['setCurrentScore',['../classgameOverScreen.html#a15f3b7fb20f804052da4a0767cab61f9',1,'gameOverScreen']]],
+  ['sethighscore_7',['setHighScore',['../classgameOverScreen.html#a02a38dfe54fd15a85c465640eb9ad7d2',1,'gameOverScreen']]],
+  ['setlevelone_8',['setLevelOne',['../classLevelOne.html#a1e2458dfe8b0dbaf9cef61eadee80585',1,'LevelOne']]],
+  ['setlevelthree_9',['setLevelThree',['../classLevelThree.html#a0d13294fe6fc71632fbe4ce6aec31353',1,'LevelThree']]],
+  ['setleveltwo_10',['setLevelTwo',['../classLevelTwo.html#a51ed80100762ce49c1443de93bee2f85',1,'LevelTwo']]],
+  ['setnumgames_11',['setnumGames',['../classgameOverScreen.html#a7592fb55edfb0e851d6d066420f505a9',1,'gameOverScreen']]],
+  ['setpolygonsobstacleslist_12',['setPolygonsObstaclesList',['../classObstaclesList.html#ab570889e35b042592751f18ee7a526bb',1,'ObstaclesList']]],
+  ['setspeed_13',['setSpeed',['../classAbstractObstacle.html#a89de638167d93d6255631e7815be1db4',1,'AbstractObstacle']]],
+  ['settext_14',['setText',['../classButton.html#a67e9d14aa4f10202f20c0613b307711d',1,'Button']]],
+  ['shortestdistancepointtosegment_15',['shortestDistancePointToSegment',['../structVector.html#aa8a81ddbe60e81ff5a90be928898025a',1,'Vector']]],
+  ['shot_16',['Shot',['../classShot.html#add50611c469a1592ba8eed84775d0b2b',1,'Shot']]],
+  ['shotcollidedwithboss_17',['shotCollidedWithBoss',['../classShot.html#ac9d81a7e984783ca9bfaeb58b67b5d52',1,'Shot::shotCollidedWithBoss()'],['../classBallShot.html#acb6e1f9ee53f731f67d9d06a8a6621e9',1,'BallShot::shotCollidedWithBoss()'],['../classLineShot.html#ae5140740141905f015b0a05f5c8bef94',1,'LineShot::shotCollidedWithBoss()']]],
+  ['shotcollidedwithplayer_18',['shotCollidedWithPlayer',['../classShot.html#af3f49c25856cd87d6a44c6fe9a5bab39',1,'Shot::shotCollidedWithPlayer()'],['../classBallShot.html#a0dd3178d717f4cff04cb1fb48de9a7e3',1,'BallShot::shotCollidedWithPlayer()'],['../classLineShot.html#a740580ac9d2d0ce7ec80ec04f832a160',1,'LineShot::shotCollidedWithPlayer()']]],
+  ['sound_19',['Sound',['../classSound.html#a61f8caf4f40d22e8bfbc7efcf09b930b',1,'Sound']]],
+  ['start_5ffont_20',['start_font',['../classBootstrap.html#aba4e04fc9e194f8bb0254de7c3dee527',1,'Bootstrap']]],
+  ['start_5fsprite_21',['start_sprite',['../classBootstrap.html#a09cbc4eeb7215613c1a0637fb285b870',1,'Bootstrap']]]
+];

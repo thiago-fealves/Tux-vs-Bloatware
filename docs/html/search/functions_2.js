@@ -1,0 +1,13 @@
+var searchData=
+[
+  ['checkcirclecollision_0',['checkCircleCollision',['../collision_8hpp.html#ae5a6b8d991bba1f48dc89524b1e34bb3',1,'collision.hpp']]],
+  ['checkcollisionwithplayer_1',['checkCollisionWithPlayer',['../classAbstractObstacle.html#a34255f2be703d1b7d61f6c48ee853270',1,'AbstractObstacle::checkCollisionWithPlayer()'],['../classCircleObstacle.html#aa4b9f4ec16147a79ec124260024147df',1,'CircleObstacle::checkCollisionWithPlayer()'],['../classPipe.html#ac9abaf461c3c91733f9387555683bc17',1,'Pipe::checkCollisionWithPlayer()'],['../classPolygonObstacle.html#a4f7591a4aba1c4e6226bbd54dd294ee9',1,'PolygonObstacle::checkCollisionWithPlayer()'],['../collision_8hpp.html#a3895a67463d5f702335b5f21911b4248',1,'checkCollisionWithPlayer(PolygonObstacle &amp;polygon, BrokenShip &amp;player):&#160;collision.hpp']]],
+  ['circlecirclecollision_2',['circleCircleCollision',['../collision_8cpp.html#ad4975316b03b61ac4f48e0d47c5cd376',1,'circleCircleCollision(Vector circleA, float radiusA, Vector circleB, float radiusB):&#160;collision.cpp'],['../collision_8hpp.html#ad4975316b03b61ac4f48e0d47c5cd376',1,'circleCircleCollision(Vector circleA, float radiusA, Vector circleB, float radiusB):&#160;collision.cpp']]],
+  ['circleobstacle_3',['CircleObstacle',['../classCircleObstacle.html#a5e80793c1ba788a5f9240e6d55034364',1,'CircleObstacle']]],
+  ['circlesquarecollision_4',['circleSquareCollision',['../collision_8cpp.html#a333a4116c4aa13e932a714d07550db78',1,'circleSquareCollision(Vector circlePoint, float radius, Vector squarePoint, float halfSide):&#160;collision.cpp'],['../collision_8hpp.html#a333a4116c4aa13e932a714d07550db78',1,'circleSquareCollision(Vector circlePoint, float radius, Vector squarePoint, float halfSide):&#160;collision.cpp']]],
+  ['cleanlevel_5',['cleanLevel',['../classLevelOne.html#a56e77f328fc52287b9b39753c5fbbc15',1,'LevelOne::cleanLevel()'],['../classLevelTwo.html#a04e46f1d74047dbb2af2df72497b54b1',1,'LevelTwo::cleanLevel()'],['../classLevelThree.html#a2a0459986bb44cfbbf22d7742474f523',1,'LevelThree::cleanLevel()']]],
+  ['cleanshots_6',['cleanShots',['../classShot.html#a89099d8decbb022ef7e72e7d42fcdd75',1,'Shot']]],
+  ['cleanup_5fallegro_7',['cleanup_allegro',['../classBootstrap.html#ae8ea39dc3ef599210a2434021f2a9e7f',1,'Bootstrap']]],
+  ['clear_8',['clear',['../classObstaclesList.html#aac7e1a5e415c7e82e35491dd48122beb',1,'ObstaclesList::clear()'],['../classPipeList.html#a196ecb4ad1760e3dd2724eee542d2e36',1,'PipeList::clear()']]],
+  ['coordinates_9',['Coordinates',['../structCoordinates.html#a7de8c8e869f198f285a2644c95fe51f5',1,'Coordinates::Coordinates(double x, double y, double width, double heigth)'],['../structCoordinates.html#a89dd10af87d803fd51dfd9987f32e8cd',1,'Coordinates::Coordinates()']]]
+];
