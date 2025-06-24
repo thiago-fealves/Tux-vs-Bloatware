@@ -199,10 +199,8 @@ int RegisterInterface::mainLoop(bool &inRegister, bool &playing, DatabaseUsers &
             al_clear_to_color(al_map_rgb(0, 0, 0));
             this->draw();
             al_flip_display();
-            redraw = false;
-        }
-
-        
+            redraw = false;       
+        }    
     }
 
     return 0;
