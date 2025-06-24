@@ -1,6 +1,6 @@
 # **Sobre o jogo**
 Em *Tux vs. Bloatware*, você é o querido pinguim Tux — o grande símbolo dos resistentes e resilientes usuários de Linux. 
-Em uma missão no espaço cibernético, com a nave danificada após uma tentativa errônea(erro de intenção) de instalar o Windows 11, você enfrentará fases desafiadoras em busca de um objetivo vital: **recuperar o pen drive de instalação do Linux** para consertar sua nave!
+Em uma missão no espaço cibernético, com a nave danificada após uma tentativa errônea de instalar o Windows 11, você enfrentará fases desafiadoras em busca de um objetivo vital: **recuperar o pen drive de instalação do Linux** para consertar sua nave!
 Desvie dos obstáculos e não hesite em disparar contra o chefe final. 
 Mas cuidado: quanto mais próximo do objetivo, maior o risco da **temida tela azul**...
 
@@ -58,7 +58,7 @@ Requisitos:
 - libpqxx
 - make
 
-Primeiro clone o repositorio e entre em sua pasta raiz:
+Primeiro, clone o repositório e entre em sua pasta raiz:
 
 ```bash
 git clone https://github.com/thiago-fealves/Tux-vs-Bloatware.git
@@ -86,7 +86,7 @@ make && ./main
 Pressione o botão PLAY com o botão do mouse esquerdo para começar o jogo.
 
 ### **Pause:**
-Não há botão de pausa! Ao pressionar ESC você é direcionado à tela de Game Over.
+Não há botão de pausa! Ao pressionar ESC, você é direcionado à tela de Game Over.
 
 ### **Menu principal:**
 Para retornar ao menu principal, pressione o botão RETURN MENU.
@@ -106,7 +106,7 @@ Para sair do jogo, pressione o botão EXIT GAME ou o X no canto inferior esquerd
 - Pressione D para se mover para a direita ou use seta para a direita.
 - Pressione W para se mover para cima ou use seta para cima.
 - Pressione S para se mover para baixo ou use seta para baixo.
-- Pressione a barra de espaço do teclado para atirar os projéteis (combate fase 3)  . 
+- Pressione a barra de espaço do teclado para atirar os projéteis (combate fase 3). 
 
 **Observação:** Você terá 3 vidas. Caso seja acertado por 3 projéteis inimigos ou encostar no chefe final… Game Over!
 
@@ -117,7 +117,7 @@ Para compilar e executar os testes, use o comando:
 make test
 ```
 ## **Documentação:**
-O projeto já acompanha os arquivos Doxyfile devidamente configurados mas voce pode compilar manualmente tambem com:
+O projeto já acompanha os arquivos Doxyfile devidamente configurados mas você pode compilar manualmente também com:
 ```bash
 doxygen Doxyfile
 ```
