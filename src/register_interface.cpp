@@ -59,7 +59,7 @@ void RegisterInterface::handleKeyInput(int keycode, unsigned char unicode){
 
     if (typingUsername || typingPassword || typingName){
         
-        std::string *input = nullptr;
+    std::string* input = nullptr;
 
         if (typingUsername)
             input = &username;
