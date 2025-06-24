@@ -33,10 +33,10 @@ void CircleObstacle::update() {
 
     Vector pos = get_position() + this->getSpeed();
 
-    if (pos._y > 600 + _radius) { 
+    if (pos._y > SCREEN_H + _radius) { 
        
         pos._y = -_radius;
-        pos._x = rand() % 800; 
+        pos._x = rand() % SCREEN_W; 
     }
 
     set_position(pos);

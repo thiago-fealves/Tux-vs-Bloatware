@@ -21,9 +21,9 @@ void PolygonObstacle::draw() {
 
         Vector pos = get_position();
         pos._y += this->getSpeed()._y;
-        if (pos._y > 650) {
+        if (pos._y > SCREEN_H + 50) {
             pos._y = -50;
-            pos._x = std::rand() % 800;
+            pos._x = std::rand() % SCREEN_W;
         }
         set_position(pos);
 }
