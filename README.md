@@ -1,4 +1,4 @@
-![4](https://github.com/user-attachments/assets/233420a2-5476-41e2-8d49-dc13fc635aa0)
+![3](https://github.com/user-attachments/assets/ded9f834-7cca-4df0-889c-ad167dbdb1a0)
 
 # **Sobre o jogo**
 Em *Tux vs. Bloatware*, você é o querido pinguim Tux — o grande símbolo dos resistentes e resilientes usuários de Linux. 
