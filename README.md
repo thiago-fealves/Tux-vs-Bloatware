@@ -1,5 +1,3 @@
-* [Ferramentas](#ferramentas)![Tux vs Bloatware (1)](https://github.com/user-attachments/assets/7b134df7-14f4-4d79-ad2d-53ab1ca1d28d)
-
 # **Sobre o jogo**
 Em *Tux vs. Bloatware*, você é o querido pinguim Tux — o grande símbolo dos resistentes e resilientes usuários de Linux. 
 Em uma missão no espaço cibernético, com a nave danificada após uma tentativa errônea de instalar o Windows 11, você enfrentará fases desafiadoras em busca de um objetivo vital: **recuperar o pen drive de instalação do Linux** para consertar sua nave!
