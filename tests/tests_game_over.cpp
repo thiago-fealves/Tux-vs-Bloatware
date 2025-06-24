@@ -23,7 +23,7 @@ struct AllegroFixture {
                 std::cerr << "Erro ao criar display de teste." << std::endl;
             }
 
-            testFont = al_load_font("./assets/Katana.ttf", 10, 0); 
+            testFont = al_load_font("./assets/katana.ttf", 10, 0); 
             if (!testFont) {
                 std::cerr << "Erro: TestFont nao carregada." << std::endl;
             } else {

@@ -11,6 +11,9 @@
 ALLEGRO_FONT* dummyFont = nullptr;
 ALLEGRO_DISPLAY* dummyDisplay = nullptr;
 
+extern ALLEGRO_DISPLAY* display;
+extern ALLEGRO_FONT* levelFont;
+
 // Simple fixture to setup Allegro system for font/drawing logic
 struct AllegroInitFixture {
     AllegroInitFixture() {
@@ -19,8 +22,10 @@ struct AllegroInitFixture {
             al_init_font_addon();
             al_init_ttf_addon();
             dummyDisplay = al_create_display(10, 10); // Small dummy display
+            dummyFont = al_create_builtin_font();
+            display = dummyDisplay;
+            levelFont = dummyFont;
         }
-        dummyFont = al_create_builtin_font();
     }
     ~AllegroInitFixture() {
         if (dummyFont) al_destroy_font(dummyFont);
