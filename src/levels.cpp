@@ -127,7 +127,6 @@ BrokenShip* LevelTwo::setLevelTwo() {
  * @return Pointer to the player object, in this case FixedShip
 */
 FixedShip* LevelThree::setLevelThree() {
-
   // Setting Player
   _player = new FixedShip;
   FixedShip* Player = dynamic_cast<FixedShip*>(_player);
@@ -395,6 +394,7 @@ void LevelThree::updatePlayerPosition(FixedShip* player){
 
 void LevelThree::handleTimerEvents(bool &playing, FixedShip* player, WindowsBoss &windows, bool &isAlive){
     // Update the music
+    static int bossPoints = 10000;
     Music::update_fade_in_fade_out();
 
     // Update and redraw the game state
@@ -418,7 +418,9 @@ void LevelThree::handleTimerEvents(bool &playing, FixedShip* player, WindowsBoss
           globalVars::inInterLevel = true;
           victoryInterface victory(levelFont);
           victory.drawVictoryScreen();
-    }
+          globalVars::points += bossPoints;
+    } else 
+        bossPoints -= 10;
 
     al_flip_display();
 }
