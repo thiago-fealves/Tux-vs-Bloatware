@@ -63,7 +63,7 @@ public:
   * @brief Gerencia a exibição da mensagem de Game Over, scores, botões de ação e a interação do jogador.
   * _currentScore: pontuação na partida
   *_highScore: maior pontuação (recorde pessoal)
-  *_bastScore: Melhor pontuação (recorde geral)
+  *_bestScore: Melhor pontuação (recorde geral)
   * ALLEGRO_FONT* _font: fonte dos textos da tela
   *_playAgainButton: botão jogar novamente
   *_returnToMenuButton: botão para retornar para a tela inicial
@@ -76,7 +76,7 @@ private:
 
     int _currentScore;
     int _highScore; 
-    int _bastScore;  
+    int _bestScore;  
     
     Button _playAgainButton;
     Button _returnToMenuButton;
@@ -94,7 +94,7 @@ public:
  */
     void setCurrentScore(int score);
     void setHighScore(int score);
-    void setbastScore(int score); 
+    void setbestScore(int score); 
     void draw();
     
     
