@@ -58,7 +58,7 @@ void Button::drawButton() {
  * @param my mouse y coordinates
  */
 bool Button::gotClicked(int mx, int my) {
-    return(mx >= _coords._x && mx <=_coords._x+_coords._width && my >= _coords._y && my <= _coords._y+_coords._heigth);
+    return(mx >= _coords._x && mx <_coords._x+_coords._width && my >= _coords._y && my < _coords._y+_coords._heigth);
 
 }
 

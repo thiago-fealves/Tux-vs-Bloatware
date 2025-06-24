@@ -102,4 +102,4 @@ gameOver:
 } // Fecha while(true)
 
     Bootstrap::cleanup_allegro();
-} 
+}
