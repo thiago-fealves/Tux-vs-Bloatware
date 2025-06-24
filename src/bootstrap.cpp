@@ -61,6 +61,12 @@ Music* victory_music = nullptr;
 bool Bootstrap::file_exists(const char* path) {
     return (access(path, F_OK) == 0);
 }
+
+/**
+ * @brief utility member function to check if the sprite is loadable
+ * @param bitm reference to a ALLEGRO_BITMAP pointer that will be loaded
+ * @param path path to the image file
+*/
 void Bootstrap::start_sprite(ALLEGRO_BITMAP *&bitm, const char *path) {
 
     bitm = al_load_bitmap(path);
@@ -74,6 +80,11 @@ void Bootstrap::start_sprite(ALLEGRO_BITMAP *&bitm, const char *path) {
     }
 
 }
+/**
+ * @brief utility member function to check if the font is loadable
+ * @param font reference to a ALLEGRO_FONT pointer that will be loaded
+ * @param path path to the ttf font file
+*/
 void Bootstrap::start_font(ALLEGRO_FONT *&font, const char *path, int size) {
 
     font = al_load_font(path, size, 0);
@@ -152,17 +163,6 @@ bool Bootstrap::init_allegro_libs(){
         return false;
     }
 
-    // Creates the game font
-   // gameFont = al_load_font("./assets/katana.ttf", 30, 0); 
-   // levelFont = al_load_font("./assets/katana.ttf", 20, 0);
-   // if (!gameFont || !levelFont) {
-   //     cout << "ERROR: Failed to load font 'katana.ttf' (gameFont/levelFont)" << endl;
-   //     al_destroy_timer(timer);
-   //     al_destroy_display(display);
-   //     al_destroy_event_queue(event_queue);
-   //     return false;
-   // }
-
     try {
         start_font(gameFont, "./assets/katana.ttf", 30);
         start_font(levelFont, "./assets/katana.ttf", 20);
@@ -171,8 +171,6 @@ bool Bootstrap::init_allegro_libs(){
         cout << e.what() << endl;
     }
 
-    
-    
     try {
         start_sprite(gameOverBackground, "./assets/game_over.png");
         start_sprite(pinguimBandido, "./assets/pinguim_bandido.png");

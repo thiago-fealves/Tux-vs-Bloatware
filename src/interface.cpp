@@ -91,15 +91,21 @@ void Interface::drawOffGameInterface() {
     exitGameButton.drawButton();
 }
 
+/**
+ * @brief victoryInterface constructor
+ * @param font pointer to an ALLEGRO_FONT variable for the text to be drawn
+*/
+
 victoryInterface::victoryInterface(ALLEGRO_FONT* font) : _font(font)
 {}
 
+
+/**
+ * @brief draws the victory screen
+*/
 void victoryInterface::drawVictoryScreen() {
     al_draw_multiline_text(levelFont, al_map_rgb(200, 200, 200),
         static_cast<float>(al_get_display_width(display))/2,
         100, 400, 20, ALLEGRO_ALIGN_CENTRE, "PARABÉNS VOCÊ DESINSTALOU O WINDOWS !! APERTE ENTER PARA VOLTAR AO MENU PRINCIPAL ! TUX ESTÁ MUITO FELIZ PELA SUA AJUDA!");
-
-
-
 };
 

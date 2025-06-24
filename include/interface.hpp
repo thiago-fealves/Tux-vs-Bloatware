@@ -61,8 +61,6 @@ class Button {
  * @brief Base game start interface using
  * button class
  */
-
-
 class Interface {
     
     ALLEGRO_FONT* _font;
@@ -78,6 +76,13 @@ class Interface {
 
 };
 
+
+/**
+ * @class victoryInterface
+ * 
+ * @brief interface to the "victory screen" after
+ * defeating the final boss (windows)
+ */
 class victoryInterface {
     ALLEGRO_FONT* _font;
     public:
