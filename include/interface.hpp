@@ -22,6 +22,7 @@ struct Coordinates {
     double _x, _y, _width, _heigth;
 
     Coordinates(double x, double y, double width, double heigth);
+    Coordinates() : _x(0), _y(0), _width(0), _heigth(0) {}
 };
 
 /**

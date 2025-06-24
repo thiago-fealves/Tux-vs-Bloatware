@@ -83,7 +83,7 @@ void Background::renderBackground() {
 
 /**
  * @brief Set the level's music
- * @param pointer to a .ogg file with the level's music
+ * @param music pointer to a .ogg file with the level's music
 */
 void Level::setMusic(Music* music){
     _music = music;

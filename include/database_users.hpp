@@ -20,12 +20,13 @@ public:
 
     DatabaseUsers();
     ~DatabaseUsers();
-    void registerUser(const std::string& name, const std::string& username, const std::string& password, int initialScore = 0, int initialGames = 0);
-    void deleteUser(const std::string& username);
+    bool registerUser(const std::string& name, const std::string& username, const std::string& password, int initialScore = 0, int initialGames = 0);
+    bool deleteUser(const std::string& username);
     std::vector<User> listUsers();
-    void updateScore(const std::string& username, int new_score);
-    void updateGamesNumber(const std::string& username, int new_games);
-    User getUserByUsername(const std::string& username); 
+    bool updateScore(const std::string& username, int new_score);
+    bool updateGamesNumber(const std::string& username, int new_games);
+    std::unique_ptr<User> getUserByUsername(const std::string& username); 
+    bool authenticateUser(const std::string& username, const std::string& password);
 };
 
 #endif
