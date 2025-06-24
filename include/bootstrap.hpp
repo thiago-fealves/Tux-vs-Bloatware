@@ -41,6 +41,12 @@ extern ALLEGRO_TIMER* timer;
 extern ALLEGRO_FONT* gameFont; 
 extern ALLEGRO_FONT* levelFont;
 
+namespace globalVars {
+  extern bool inInterLevel;
+  extern int points;
+  extern std::string usernameGlobal;
+}
+
 /* Assets */
 extern ALLEGRO_BITMAP* gameOverBackground; 
 extern ALLEGRO_BITMAP* pinguimBandido;

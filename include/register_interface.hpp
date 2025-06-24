@@ -29,5 +29,5 @@ public:
     std::string getName() const;
     std::string getPassword() const;
     void resetFields();
-    int mainLoop(bool &inRegister,  bool &playing, DatabaseUsers &db);
+    int  mainLoop(bool &inRegister,  bool &playing, DatabaseUsers &db);
 };

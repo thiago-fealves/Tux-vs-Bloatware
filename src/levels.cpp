@@ -13,13 +13,6 @@
 #include "sound.hpp"
 using namespace std;
 
-// Inter Level Logic
- namespace globalVars {
-    bool inInterLevel = false;
-    int points = 0;
-
-}
-
 
 void interLevelHandling(vector<AbstractObstacle*>& obstacles, ALLEGRO_BITMAP* sprite, const char* message, float bitmapScale) {
 

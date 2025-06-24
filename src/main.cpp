@@ -61,6 +61,8 @@ start:
         LevelThree::mainLoop(playing, isAlive);
         LevelThree::cleanLevel();
 
+        db.addGame(globalVars::usernameGlobal);
+
         std::cout << globalVars::points << std::endl;
 
 

@@ -21,11 +21,6 @@
 #define LEVEL_DURATION 15
 
 
-namespace globalVars {
-    extern bool inInterLevel;
-    extern int points;
-}
-
 /**
  * @brief Clears the obstacles, draw a selected sprite with a
  * user controlled scale and a message

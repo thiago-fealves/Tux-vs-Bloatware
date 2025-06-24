@@ -30,6 +30,14 @@ Sound* gunshot_sound2 = nullptr;
 Sound* gunshot_sound3 = nullptr;
 Sound* gunshot_sound4 = nullptr;
 
+// Inter Level Logic
+namespace globalVars {
+    bool inInterLevel = false;
+    int points = 0;
+    std::string usernameGlobal = "";
+
+}
+
 /* Initialize Game Music */
 Music* menu_music = nullptr;
 Music* pause_game_music = nullptr;

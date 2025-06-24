@@ -122,8 +122,7 @@ int RegisterInterface::mainLoop(bool &inRegister, bool &playing, DatabaseUsers &
 
     bool redraw = true;
 
-    while (inRegister)
-    {
+    while (inRegister){
 
         ALLEGRO_EVENT ev;
         al_wait_for_event(event_queue, &ev);
@@ -163,6 +162,7 @@ int RegisterInterface::mainLoop(bool &inRegister, bool &playing, DatabaseUsers &
 
                         std::cout << "Login bem-sucedido!" << std::endl;
                         inRegister = false; // Garantir que o login funcionou
+                        globalVars::usernameGlobal = username;             
                     }
                     else
                     {
