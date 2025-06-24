@@ -41,8 +41,9 @@ gameOverScreen::gameOverScreen(ALLEGRO_FONT* font): _font(font),// Inicializa o 
 
 //Inicializa as pontuaçoes com 0
 _currentScore(0),
- _highScore(0),
-  _bestScore (0),
+_highScore(0),
+_bestScore (0),
+_numGames(0),
 
 //cores dos botões, localização e texto 
 //O 'false' como último parâmetro indica que NÃO desenha o retângulo de fundo.
@@ -81,6 +82,12 @@ void gameOverScreen::setbestScore(int score) {
     _bestScore = score; 
 }
 
+/**
+ * @brief Define o numero de games jogados pelo usuario.
+ */
+void gameOverScreen::setnumGames(int games) {
+    _numGames = games; 
+}
 
 /**
  * @brief Desenha todos os elementos visuais na tela de Game Over.
@@ -98,6 +105,7 @@ void gameOverScreen::draw() {
     al_draw_text(_font, textColor, 750, 20, ALLEGRO_ALIGN_RIGHT, ("SCORE: " + std::to_string(_currentScore)).c_str());
     al_draw_text(_font, textColor, 750, 50, ALLEGRO_ALIGN_RIGHT, ("HIGH SCORE: " + std::to_string(_highScore)).c_str());
     al_draw_text(_font, textColor, 750, 80, ALLEGRO_ALIGN_RIGHT, ("BEST SCORE: " + std::to_string(_bestScore)).c_str());
+    al_draw_text(_font, textColor, 750, 110, ALLEGRO_ALIGN_RIGHT, ("NUM GAMES: " + std::to_string(_numGames)).c_str());
    
     // 3. Desenha os botões.
     _playAgainButton.drawButton();

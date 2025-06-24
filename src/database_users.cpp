@@ -1,4 +1,5 @@
 #include "database_users.hpp"
+#include "bootstrap.hpp"
 #include "dotenv.h"
 #include <iostream>
 #include <memory>
@@ -234,8 +235,20 @@ std::unique_ptr<User> DatabaseUsers::getUserByUsername(const std::string& userna
     }
 }
 
-void DatabaseUsers::addGame(std::string& username) {
+void DatabaseUsers::addValuesGameOverScreen(std::string& username, gameOverScreen &game_over_screen){
     std::unique_ptr<User> user = getUserByUsername(username);
     user->games+=1;
+    if(globalVars::points > user->score){
+        game_over_screen.setHighScore(globalVars::points);
+        updateScore(user->username, globalVars::points);
+    }else{
+        game_over_screen.setHighScore(user->score);
+    }
+    game_over_screen.setCurrentScore(globalVars::points);
+    globalVars::points = 0;
+    std::vector<User> list_users = listUsers();
+    int bestStore = list_users[0].score;
+    game_over_screen.setbestScore(bestStore);
+    game_over_screen.setnumGames(user->games);
     updateGamesNumber(username, user->games);
 }

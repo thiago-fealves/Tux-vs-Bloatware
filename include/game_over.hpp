@@ -76,7 +76,8 @@ private:
 
     int _currentScore;
     int _highScore; 
-    int _bestScore;  
+    int _bestScore; 
+    int _numGames;   
     
     Button _playAgainButton;
     Button _returnToMenuButton;
@@ -95,6 +96,7 @@ public:
     void setCurrentScore(int score);
     void setHighScore(int score);
     void setbestScore(int score); 
+    void setnumGames(int games); 
     void draw();
     
     

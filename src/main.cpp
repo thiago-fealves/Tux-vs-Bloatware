@@ -33,7 +33,7 @@ int main(int argc, char** argv) {
     registerScreen.mainLoop(inRegister, playing, db);
 
     // instância da tela de Game Over
-    gameOverScreen game_over_screen(gameFont); 
+    gameOverScreen game_over_screen(gameFont);
 
     //Loop Principal Infinito do Jogo
     while (true) {
@@ -61,10 +61,7 @@ start:
         LevelThree::mainLoop(playing, isAlive);
         LevelThree::cleanLevel();
 
-        db.addGame(globalVars::usernameGlobal);
-
-        std::cout << globalVars::points << std::endl;
-
+        db.addValuesGameOverScreen(globalVars::usernameGlobal, game_over_screen);
 
     //Transicao para GAME OVER
        if (playing) continue;
