@@ -11,6 +11,7 @@ Que a força do Kernel esteja com você!
 - Gabriel Alves (369gabriel, 369wn)
 - Pedro Borsatto (sraverage)
 - Arthur Cordeiro (CORDEIRIN)
+- Deivid Rafael (Deivid-rafael)
 
 ## **Índice**
 
