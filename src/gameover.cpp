@@ -97,7 +97,7 @@ void gameOverScreen::draw() {
     al_draw_text(_font, textColor, 400, 150, ALLEGRO_ALIGN_CENTER, "GAME OVER");
     al_draw_text(_font, textColor, 750, 20, ALLEGRO_ALIGN_RIGHT, ("SCORE: " + std::to_string(_currentScore)).c_str());
     al_draw_text(_font, textColor, 750, 50, ALLEGRO_ALIGN_RIGHT, ("HIGH SCORE: " + std::to_string(_highScore)).c_str());
-    al_draw_text(_font, textColor, 750, 80, ALLEGRO_ALIGN_RIGHT, ("BAST SCORE: " + std::to_string(_bastScore)).c_str());
+    al_draw_text(_font, textColor, 750, 80, ALLEGRO_ALIGN_RIGHT, ("BEST SCORE: " + std::to_string(_bastScore)).c_str());
    
     // 3. Desenha os botões.
     _playAgainButton.drawButton();
