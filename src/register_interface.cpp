@@ -196,11 +196,22 @@ int RegisterInterface::mainLoop(bool &inRegister, bool &playing, DatabaseUsers &
 
         if(redraw){
 
-            al_clear_to_color(al_map_rgb(0, 0, 0));
-            this->draw();
-            al_flip_display();
             redraw = false;   
         }    
+        static int bgY = 0;
+        float scrollSpeed = 5.0f;
+
+        bgY += scrollSpeed;
+        if(bgY >= al_get_bitmap_height(backgroundImage)) {
+            bgY=0;
+        }
+
+        al_draw_bitmap(backgroundImage, 0, bgY, 0);
+        al_draw_bitmap(backgroundImage, 0, bgY - al_get_bitmap_height(backgroundImage), 0);
+
+
+        this->draw();
+        al_flip_display();
     }
 
     return 0;
