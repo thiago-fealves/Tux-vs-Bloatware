@@ -15,6 +15,9 @@ ALLEGRO_EVENT Menu::event;
 ALLEGRO_FONT* Menu::font = nullptr;
 Interface* Menu::interface = nullptr;
 
+/**
+ * @brief drawBackground function to the main menu
+*/
 void StartMenu::drawBackground() {
 
     static float bgY{0};
@@ -45,6 +48,10 @@ void StartMenu::drawBackground() {
 
 }
 
+/**
+ * @brief utility function to handle all the timer-typed events
+*/
+
 void StartMenu::handleTimerEvents() {
 
     // Update and redraw the game state
@@ -63,6 +70,9 @@ void StartMenu::handleTimerEvents() {
                
     al_flip_display();  // Update the display
 }
+/**
+ * @brief utility function to handle mouse clicks
+*/
 
 void StartMenu::handleMouseEvents(bool &playing, bool &displayInterface) {
     static bool musicIsPlaying = true;
@@ -89,11 +99,18 @@ void StartMenu::handleMouseEvents(bool &playing, bool &displayInterface) {
     }
 }
 
+/**
+ * @brief function to clean memory allocated to pointers related to menu
+*/
+
 void StartMenu::cleanMenu() {
     delete interface;
     al_destroy_font(font);
 }
 
+/**
+ * @brief starts needed variables and handles needed events
+*/
 void StartMenu::mainLoopMenu(bool &playing) {
     font = al_load_font("./assets/fira.ttf", 20, 0);
     interface = new Interface(font);

@@ -3,6 +3,11 @@
 #include "interface.hpp"
 #include "music.hpp"
 
+/**
+ * @class Menu 
+ *
+ * @brief base menu class
+*/
 class Menu { 
 protected:
     static ALLEGRO_EVENT event;
@@ -10,6 +15,11 @@ protected:
     static Interface* interface;
 };
 
+/**
+ * @class StartMenu
+ *
+ * @brief main menu that inherits from the base menu class
+*/
 class StartMenu : public Menu {
 private:
     static void handleTimerEvents();
