@@ -13,12 +13,12 @@ protected:
 class StartMenu : public Menu {
 private:
     static void handleTimerEvents();
-    static void handleMouseEvents(bool &playing, bool &displayInterface, Music* &menu_music);
+    static void handleMouseEvents(bool &playing, bool &displayInterface);
     static void cleanMenu();
     static void drawBackground();
 
 public:
-    static void mainLoopMenu(bool &playing, Music* &menu_music);
+    static void mainLoopMenu(bool &playing);
 };
 
 

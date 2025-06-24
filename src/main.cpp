@@ -40,7 +40,7 @@ int main(int argc, char** argv) {
     //Estado MENU
 menu:
     if (inMenu) {
-        StartMenu::mainLoopMenu(playing, menu_music); //menu, musica e cliques sao feitos e processados
+        StartMenu::mainLoopMenu(playing); //menu, musica e cliques sao feitos e processados
         if (!playing) break;
         inMenu = false; //se o jogador clicar em play InMenu vira falso
     }
