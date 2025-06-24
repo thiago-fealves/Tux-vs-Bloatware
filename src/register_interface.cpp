@@ -118,8 +118,9 @@ void RegisterInterface::resetFields()
     typingPassword = false;
 }
 
-int RegisterInterface::mainLoop(bool &inRegister, bool &playing, DatabaseUsers &db)
-{
+int RegisterInterface::mainLoop(bool &inRegister, bool &playing, DatabaseUsers &db){
+
+    bool redraw = true;
 
     while (inRegister)
     {
@@ -144,6 +145,7 @@ int RegisterInterface::mainLoop(bool &inRegister, bool &playing, DatabaseUsers &
             {
                 this->handleKeyInput(ev.keyboard.keycode, ev.keyboard.unichar);
             }
+            redraw = true;
         }
         else if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN)
         {
@@ -188,11 +190,19 @@ int RegisterInterface::mainLoop(bool &inRegister, bool &playing, DatabaseUsers &
                     std::cout << "Erro de Registro: O nome de usuário '" << username << "' ja existe. Por favor, tente um diferente." << std::endl;
                 }
             }
+
+            redraw = true;
         }
 
-        al_clear_to_color(al_map_rgb(0, 0, 0));
-        this->draw();
-        al_flip_display();
+        if(redraw){
+
+            al_clear_to_color(al_map_rgb(0, 0, 0));
+            this->draw();
+            al_flip_display();
+            redraw = false;
+        }
+
+        
     }
 
     return 0;
