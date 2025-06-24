@@ -121,6 +121,14 @@ void RegisterInterface::resetFields()
 int RegisterInterface::mainLoop(bool &inRegister, bool &playing, DatabaseUsers &db){
 
     bool redraw = true;
+    static int bgY = 0;
+    float scrollSpeed = 5.0f;
+
+    bgY += scrollSpeed;
+    if (bgY >= al_get_bitmap_height(backgroundImage))
+    {
+        bgY = 0;
+    }
 
     while (inRegister){
 
@@ -192,26 +200,25 @@ int RegisterInterface::mainLoop(bool &inRegister, bool &playing, DatabaseUsers &
             }
 
             redraw = true;
+        }else if (ev.type == ALLEGRO_EVENT_TIMER) {
+            // Atualiza a posição do background
+            bgY += scrollSpeed;
+            if (bgY >= al_get_bitmap_height(backgroundImage)) {
+                bgY = 0;
+            }
+            redraw = true;
         }
 
         if(redraw){
 
-            redraw = false;   
+            redraw = false;
+            this->draw();
+            al_flip_display();   
+            al_draw_bitmap(backgroundImage, 0, bgY, 0);
+            al_draw_bitmap(backgroundImage, 0, bgY - al_get_bitmap_height(backgroundImage), 0);
         }    
-        static int bgY = 0;
-        float scrollSpeed = 5.0f;
-
-        bgY += scrollSpeed;
-        if(bgY >= al_get_bitmap_height(backgroundImage)) {
-            bgY=0;
-        }
-
-        al_draw_bitmap(backgroundImage, 0, bgY, 0);
-        al_draw_bitmap(backgroundImage, 0, bgY - al_get_bitmap_height(backgroundImage), 0);
 
 
-        this->draw();
-        al_flip_display();
     }
 
     return 0;
