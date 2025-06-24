@@ -2,9 +2,26 @@
 #include <cmath>
 
 
+/**
+ * @brief Verifica se o jogador está colidindo com a borda direita da tela.
+ * @details Testa se a coordenada X da posição futura do jogador, somada ao seu raio,
+ * ultrapassa a largura da tela (SCREEN_W).
+ * @param new_position A posição futura do jogador a ser testada.
+ * @param player Um ponteiro para o objeto do jogador, usado para obter seu raio.
+ * @return true se estiver colidindo com a borda direita, false caso contrário.
+*/
+
 bool isCollidingEdge(Vector& new_position, BrokenShip* player){
     return (new_position._x + player->get_radius() > SCREEN_W);
 }
+
+/**
+ * @brief Corrige a posição do jogador após uma colisão com a borda direita da tela.
+ * @details Reposiciona o jogador de forma que sua borda direita fique exatamente
+ * alinhada com a borda direita da tela SCREEN_W, impedindo que ele saia da área visível.
+ * @param new_position A posição do jogador, que será modificada por referência.
+ * @param player Um ponteiro para o objeto do jogador, usado para obter seu raio.
+*/
 
 void newPositionAfterCollisionEdge(Vector& new_position, BrokenShip* player){
     new_position._x = SCREEN_W - player->get_radius();

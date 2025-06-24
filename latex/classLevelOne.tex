@@ -1,0 +1,129 @@
+\doxysection{Level\+One Class Reference}
+\hypertarget{classLevelOne}{}\label{classLevelOne}\index{LevelOne@{LevelOne}}
+
+
+First phase of the game, basic vertically-\/oriented flappy bird with satellites as pipes.  
+
+
+
+
+{\ttfamily \#include $<$levels.\+hpp$>$}
+
+Inheritance diagram for Level\+One\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classLevelOne}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classBrokenShip}{Broken\+Ship}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classLevelOne_a1e2458dfe8b0dbaf9cef61eadee80585}{set\+Level\+One}} ()
+\begin{DoxyCompactList}\small\item\em Initializes \doxylink{classLevel}{Level} One. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classLevelOne_a56e77f328fc52287b9b39753c5fbbc15}{clean\+Level}} ()
+\begin{DoxyCompactList}\small\item\em Frees memory used on \doxylink{classLevel}{Level} Two. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classLevelOne_a54f1874a542e43c5aca0ddfc288367c7}{main\+Loop}} (bool \&playing, bool \&is\+Alive)
+\begin{DoxyCompactList}\small\item\em Main\+Loop of game\textquotesingle{}s second phase. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classLevelOne_aacbcde7f80a798f395f118dbd7e69337}{handle\+Timer\+Events}} (bool \&playing, \mbox{\hyperlink{classBrokenShip}{Broken\+Ship}} \texorpdfstring{$\ast$}{*}player, std\+::vector$<$ \mbox{\hyperlink{classAbstractObstacle}{Abstract\+Obstacle}} \texorpdfstring{$\ast$}{*} $>$ \&obstacles, bool \&is\+Alive)
+\begin{DoxyCompactList}\small\item\em Controls automatic events and events trigerred by time, implements Delta\+Time. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classLevelOne_a8731593431733151fdd69e78c27e402c}{handle\+Key\+Press\+Events}} (bool \&playing, \mbox{\hyperlink{classBrokenShip}{Broken\+Ship}} \texorpdfstring{$\ast$}{*}player, bool \&is\+Alive)
+\item 
+static void \mbox{\hyperlink{classLevelOne_aa437fccd4a8a6a9320f3406ee683a7d6}{handle\+Key\+Release\+Events}} ()
+\begin{DoxyCompactList}\small\item\em Simple method for debug and logging. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Protected Attributes inherited from \mbox{\hyperlink{classLevel}{Level}}}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classGameObject}{Game\+Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classLevel_a001b27733015d3a4e782f21b9b762ef2}{\+\_\+player}} = nullptr
+\item 
+static \mbox{\hyperlink{classBackground}{Background}} \mbox{\hyperlink{classLevel_ab845da410833affbb83f207ce69fc3a8}{\+\_\+bg}}
+\item 
+static ALLEGRO\+\_\+\+EVENT \mbox{\hyperlink{classLevel_a2dda77d62b1b6527609fd8c271da6770}{\+\_\+event}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+First phase of the game, basic vertically-\/oriented flappy bird with satellites as pipes. 
+
+\label{doc-func-members}
+\Hypertarget{classLevelOne_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classLevelOne_a56e77f328fc52287b9b39753c5fbbc15}\index{LevelOne@{LevelOne}!cleanLevel@{cleanLevel}}
+\index{cleanLevel@{cleanLevel}!LevelOne@{LevelOne}}
+\doxysubsubsection{\texorpdfstring{cleanLevel()}{cleanLevel()}}
+{\footnotesize\ttfamily \label{classLevelOne_a56e77f328fc52287b9b39753c5fbbc15} 
+void Level\+One\+::clean\+Level (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Frees memory used on \doxylink{classLevel}{Level} Two. 
+
+\Hypertarget{classLevelOne_a8731593431733151fdd69e78c27e402c}\index{LevelOne@{LevelOne}!handleKeyPressEvents@{handleKeyPressEvents}}
+\index{handleKeyPressEvents@{handleKeyPressEvents}!LevelOne@{LevelOne}}
+\doxysubsubsection{\texorpdfstring{handleKeyPressEvents()}{handleKeyPressEvents()}}
+{\footnotesize\ttfamily \label{classLevelOne_a8731593431733151fdd69e78c27e402c} 
+void Level\+One\+::handle\+Key\+Press\+Events (\begin{DoxyParamCaption}\item[{bool \&}]{playing}{, }\item[{\mbox{\hyperlink{classBrokenShip}{Broken\+Ship}} \texorpdfstring{$\ast$}{*}}]{player}{, }\item[{bool \&}]{is\+Alive}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classLevelOne_aa437fccd4a8a6a9320f3406ee683a7d6}\index{LevelOne@{LevelOne}!handleKeyReleaseEvents@{handleKeyReleaseEvents}}
+\index{handleKeyReleaseEvents@{handleKeyReleaseEvents}!LevelOne@{LevelOne}}
+\doxysubsubsection{\texorpdfstring{handleKeyReleaseEvents()}{handleKeyReleaseEvents()}}
+{\footnotesize\ttfamily \label{classLevelOne_aa437fccd4a8a6a9320f3406ee683a7d6} 
+void Level\+One\+::handle\+Key\+Release\+Events (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Simple method for debug and logging. 
+
+\Hypertarget{classLevelOne_aacbcde7f80a798f395f118dbd7e69337}\index{LevelOne@{LevelOne}!handleTimerEvents@{handleTimerEvents}}
+\index{handleTimerEvents@{handleTimerEvents}!LevelOne@{LevelOne}}
+\doxysubsubsection{\texorpdfstring{handleTimerEvents()}{handleTimerEvents()}}
+{\footnotesize\ttfamily \label{classLevelOne_aacbcde7f80a798f395f118dbd7e69337} 
+void Level\+One\+::handle\+Timer\+Events (\begin{DoxyParamCaption}\item[{bool \&}]{playing}{, }\item[{\mbox{\hyperlink{classBrokenShip}{Broken\+Ship}} \texorpdfstring{$\ast$}{*}}]{player}{, }\item[{std\+::vector$<$ \mbox{\hyperlink{classAbstractObstacle}{Abstract\+Obstacle}} \texorpdfstring{$\ast$}{*} $>$ \&}]{obstacles}{, }\item[{bool \&}]{is\+Alive}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Controls automatic events and events trigerred by time, implements Delta\+Time. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em playing} & loop control variable to close the game on collision \\
+\hline
+{\em player} & the player object of this phase (Brokenship class) \\
+\hline
+{\em obstacles} & Reference to vector of Abstract\+Obstacles of this phase \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classLevelOne_a54f1874a542e43c5aca0ddfc288367c7}\index{LevelOne@{LevelOne}!mainLoop@{mainLoop}}
+\index{mainLoop@{mainLoop}!LevelOne@{LevelOne}}
+\doxysubsubsection{\texorpdfstring{mainLoop()}{mainLoop()}}
+{\footnotesize\ttfamily \label{classLevelOne_a54f1874a542e43c5aca0ddfc288367c7} 
+void Level\+One\+::main\+Loop (\begin{DoxyParamCaption}\item[{bool \&}]{playing}{, }\item[{bool \&}]{is\+Alive}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Main\+Loop of game\textquotesingle{}s second phase. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em playing} & Loop control variable to finish the level on collision or quit \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classLevelOne_a1e2458dfe8b0dbaf9cef61eadee80585}\index{LevelOne@{LevelOne}!setLevelOne@{setLevelOne}}
+\index{setLevelOne@{setLevelOne}!LevelOne@{LevelOne}}
+\doxysubsubsection{\texorpdfstring{setLevelOne()}{setLevelOne()}}
+{\footnotesize\ttfamily \label{classLevelOne_a1e2458dfe8b0dbaf9cef61eadee80585} 
+\mbox{\hyperlink{classBrokenShip}{Broken\+Ship}} \texorpdfstring{$\ast$}{*} Level\+One\+::set\+Level\+One (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Initializes \doxylink{classLevel}{Level} One. 
+
+\begin{DoxyReturn}{Returns}
+Pointer to the player object, in this case \doxylink{classBrokenShip}{Broken\+Ship} 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{levels_8hpp}{levels.\+hpp}}\item 
+src/\mbox{\hyperlink{levels_8cpp}{levels.\+cpp}}\end{DoxyCompactItemize}

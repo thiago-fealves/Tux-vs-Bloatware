@@ -1,0 +1,195 @@
+\doxysection{Register\+Interface Class Reference}
+\hypertarget{classRegisterInterface}{}\label{classRegisterInterface}\index{RegisterInterface@{RegisterInterface}}
+
+
+Gerencia a interface gráfica e a lógica para registro e login de usuários.  
+
+
+
+
+{\ttfamily \#include $<$register\+\_\+interface.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classRegisterInterface_ac4f3b457130c8597c56fb4831e5b2c9a}{Register\+Interface}} (ALLEGRO\+\_\+\+FONT \texorpdfstring{$\ast$}{*}font)
+\begin{DoxyCompactList}\small\item\em Construtor da classe \doxylink{classRegisterInterface}{Register\+Interface}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classRegisterInterface_a32ca09f622ea879efde9ee422c01d7df}{\texorpdfstring{$\sim$}{\string~}\+Register\+Interface}} ()
+\begin{DoxyCompactList}\small\item\em Destrutor da classe \doxylink{classRegisterInterface}{Register\+Interface}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRegisterInterface_aa05c6fbe1d5b23fb0268902f36103a43}{draw}} ()
+\begin{DoxyCompactList}\small\item\em Desenha todos os elementos da interface na tela. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRegisterInterface_a5a21d4cd71d677b4a8c15b332ad65103}{handle\+Key\+Input}} (int keycode, unsigned char unicode)
+\begin{DoxyCompactList}\small\item\em Processa a entrada de teclado para os campos de texto. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRegisterInterface_a21061748ef1754338afcc1ff169bc77e}{handle\+Mouse\+Click}} (int mx, int my)
+\begin{DoxyCompactList}\small\item\em Gerencia cliques do mouse para ativar os campos de texto. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classRegisterInterface_a6d043dba365c192db1f08ff5b9d065d5}{get\+Username}} () const
+\begin{DoxyCompactList}\small\item\em Obtém o nome de usuário inserido. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classRegisterInterface_a607d44da7edcca6a45677384f92b9df0}{get\+Name}} () const
+\begin{DoxyCompactList}\small\item\em Obtém o nome inserido. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classRegisterInterface_aa04afa8eec47b69406973ff4f77b720d}{get\+Password}} () const
+\begin{DoxyCompactList}\small\item\em Obtém a senha inserida. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRegisterInterface_a418357068333236a1c35931958f286a0}{reset\+Fields}} ()
+\begin{DoxyCompactList}\small\item\em Limpa todos os campos de texto e redefine o estado de digitação. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classRegisterInterface_a4fb4a2b902799cf3ef5f85033814f62a}{main\+Loop}} (bool \&in\+Register, bool \&playing, \mbox{\hyperlink{classDatabaseUsers}{Database\+Users}} \&db)
+\begin{DoxyCompactList}\small\item\em Executa o loop principal da interface de registro e login. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Gerencia a interface gráfica e a lógica para registro e login de usuários. 
+
+Esta classe encapsula todos os elementos da interface (campos de texto, botões), processa a entrada do usuário (teclado e mouse) e interage com o banco de dados para autenticar ou criar novos usuários. 
+
+\label{doc-constructors}
+\Hypertarget{classRegisterInterface_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classRegisterInterface_ac4f3b457130c8597c56fb4831e5b2c9a}\index{RegisterInterface@{RegisterInterface}!RegisterInterface@{RegisterInterface}}
+\index{RegisterInterface@{RegisterInterface}!RegisterInterface@{RegisterInterface}}
+\doxysubsubsection{\texorpdfstring{RegisterInterface()}{RegisterInterface()}}
+{\footnotesize\ttfamily \label{classRegisterInterface_ac4f3b457130c8597c56fb4831e5b2c9a} 
+Register\+Interface\+::\+Register\+Interface (\begin{DoxyParamCaption}\item[{ALLEGRO\+\_\+\+FONT \texorpdfstring{$\ast$}{*}}]{font}{}\end{DoxyParamCaption})}
+
+
+
+Construtor da classe \doxylink{classRegisterInterface}{Register\+Interface}. 
+
+Inicializa a interface de registro e login, definindo a fonte, as áreas dos campos de texto (nome, username, senha) e os botões de interação (Login, Register, Sair). 
+\begin{DoxyParams}{Parameters}
+{\em font} & Um ponteiro para o ALLEGRO\+\_\+\+FONT que será usado para renderizar os textos na interface. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classRegisterInterface_a32ca09f622ea879efde9ee422c01d7df}\index{RegisterInterface@{RegisterInterface}!````~RegisterInterface@{\texorpdfstring{$\sim$}{\string~}RegisterInterface}}
+\index{````~RegisterInterface@{\texorpdfstring{$\sim$}{\string~}RegisterInterface}!RegisterInterface@{RegisterInterface}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}RegisterInterface()}{\string~RegisterInterface()}}
+{\footnotesize\ttfamily \label{classRegisterInterface_a32ca09f622ea879efde9ee422c01d7df} 
+Register\+Interface\+::\texorpdfstring{$\sim$}{\string~}\+Register\+Interface (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destrutor da classe \doxylink{classRegisterInterface}{Register\+Interface}. 
+
+Libera a memoria alocada para o Bit\+Map da Imagem 
+
+\label{doc-func-members}
+\Hypertarget{classRegisterInterface_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classRegisterInterface_aa05c6fbe1d5b23fb0268902f36103a43}\index{RegisterInterface@{RegisterInterface}!draw@{draw}}
+\index{draw@{draw}!RegisterInterface@{RegisterInterface}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily \label{classRegisterInterface_aa05c6fbe1d5b23fb0268902f36103a43} 
+void Register\+Interface\+::draw (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Desenha todos os elementos da interface na tela. 
+
+Renderiza as caixas de texto para nome, username e senha, e cada botão da interface. \Hypertarget{classRegisterInterface_a607d44da7edcca6a45677384f92b9df0}\index{RegisterInterface@{RegisterInterface}!getName@{getName}}
+\index{getName@{getName}!RegisterInterface@{RegisterInterface}}
+\doxysubsubsection{\texorpdfstring{getName()}{getName()}}
+{\footnotesize\ttfamily \label{classRegisterInterface_a607d44da7edcca6a45677384f92b9df0} 
+std\+::string Register\+Interface\+::get\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Obtém o nome inserido. 
+
+\begin{DoxyReturn}{Returns}
+A string do nome. 
+\end{DoxyReturn}
+\Hypertarget{classRegisterInterface_aa04afa8eec47b69406973ff4f77b720d}\index{RegisterInterface@{RegisterInterface}!getPassword@{getPassword}}
+\index{getPassword@{getPassword}!RegisterInterface@{RegisterInterface}}
+\doxysubsubsection{\texorpdfstring{getPassword()}{getPassword()}}
+{\footnotesize\ttfamily \label{classRegisterInterface_aa04afa8eec47b69406973ff4f77b720d} 
+std\+::string Register\+Interface\+::get\+Password (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Obtém a senha inserida. 
+
+\begin{DoxyReturn}{Returns}
+A string da senha. 
+\end{DoxyReturn}
+\Hypertarget{classRegisterInterface_a6d043dba365c192db1f08ff5b9d065d5}\index{RegisterInterface@{RegisterInterface}!getUsername@{getUsername}}
+\index{getUsername@{getUsername}!RegisterInterface@{RegisterInterface}}
+\doxysubsubsection{\texorpdfstring{getUsername()}{getUsername()}}
+{\footnotesize\ttfamily \label{classRegisterInterface_a6d043dba365c192db1f08ff5b9d065d5} 
+std\+::string Register\+Interface\+::get\+Username (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Obtém o nome de usuário inserido. 
+
+\begin{DoxyReturn}{Returns}
+A string do nome de usuário. 
+\end{DoxyReturn}
+\Hypertarget{classRegisterInterface_a5a21d4cd71d677b4a8c15b332ad65103}\index{RegisterInterface@{RegisterInterface}!handleKeyInput@{handleKeyInput}}
+\index{handleKeyInput@{handleKeyInput}!RegisterInterface@{RegisterInterface}}
+\doxysubsubsection{\texorpdfstring{handleKeyInput()}{handleKeyInput()}}
+{\footnotesize\ttfamily \label{classRegisterInterface_a5a21d4cd71d677b4a8c15b332ad65103} 
+void Register\+Interface\+::handle\+Key\+Input (\begin{DoxyParamCaption}\item[{int}]{keycode}{, }\item[{unsigned char}]{unicode}{}\end{DoxyParamCaption})}
+
+
+
+Processa a entrada de teclado para os campos de texto. 
+
+Verifica qual campo de texto está ativo e modifica a string correspondente. Suporta a adição de caracteres ASCII imprimíveis e a remoção com a tecla Backspace. 
+\begin{DoxyParams}{Parameters}
+{\em keycode} & O código da tecla pressionada, usado para detectar teclas especiais como Backspace. \\
+\hline
+{\em unicode} & O caractere unicode correspondente à tecla, usado para adicionar texto. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classRegisterInterface_a21061748ef1754338afcc1ff169bc77e}\index{RegisterInterface@{RegisterInterface}!handleMouseClick@{handleMouseClick}}
+\index{handleMouseClick@{handleMouseClick}!RegisterInterface@{RegisterInterface}}
+\doxysubsubsection{\texorpdfstring{handleMouseClick()}{handleMouseClick()}}
+{\footnotesize\ttfamily \label{classRegisterInterface_a21061748ef1754338afcc1ff169bc77e} 
+void Register\+Interface\+::handle\+Mouse\+Click (\begin{DoxyParamCaption}\item[{int}]{mx}{, }\item[{int}]{my}{}\end{DoxyParamCaption})}
+
+
+
+Gerencia cliques do mouse para ativar os campos de texto. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mx} & A coordenada X do clique do mouse. \\
+\hline
+{\em my} & A coordenada Y do clique do mouse. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classRegisterInterface_a4fb4a2b902799cf3ef5f85033814f62a}\index{RegisterInterface@{RegisterInterface}!mainLoop@{mainLoop}}
+\index{mainLoop@{mainLoop}!RegisterInterface@{RegisterInterface}}
+\doxysubsubsection{\texorpdfstring{mainLoop()}{mainLoop()}}
+{\footnotesize\ttfamily \label{classRegisterInterface_a4fb4a2b902799cf3ef5f85033814f62a} 
+int Register\+Interface\+::main\+Loop (\begin{DoxyParamCaption}\item[{bool \&}]{in\+Register}{, }\item[{bool \&}]{playing}{, }\item[{\mbox{\hyperlink{classDatabaseUsers}{Database\+Users}} \&}]{db}{}\end{DoxyParamCaption})}
+
+
+
+Executa o loop principal da interface de registro e login. 
+
+Gerencia o fluxo de eventos da tela, como entrada de teclado, cliques de mouse e fechamento da janela. Além disso, interage com a classe de banco de dados para logar ou registrar usuários. Ademais, controla a lógica de redesenho da tela e a animação do plano de fundo. 
+\begin{DoxyParams}{Parameters}
+{\em in\+Register} & controla a permanência neste loop. É setado para false ao logar o usuário. \\
+\hline
+{\em playing} & Referência a um booleano que controla o loop principal do jogo. Ou seja, é false se o usuário fechar o jogo \\
+\hline
+{\em db} & Referência ao objeto \doxylink{classDatabaseUsers}{Database\+Users} para realizar operações de banco de dados. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Retorna 0 na conclusão normal ou ao fechar a janela. 
+\end{DoxyReturn}
+\Hypertarget{classRegisterInterface_a418357068333236a1c35931958f286a0}\index{RegisterInterface@{RegisterInterface}!resetFields@{resetFields}}
+\index{resetFields@{resetFields}!RegisterInterface@{RegisterInterface}}
+\doxysubsubsection{\texorpdfstring{resetFields()}{resetFields()}}
+{\footnotesize\ttfamily \label{classRegisterInterface_a418357068333236a1c35931958f286a0} 
+void Register\+Interface\+::reset\+Fields (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Limpa todos os campos de texto e redefine o estado de digitação. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{register__interface_8hpp}{register\+\_\+interface.\+hpp}}\item 
+src/\mbox{\hyperlink{register__interface_8cpp}{register\+\_\+interface.\+cpp}}\end{DoxyCompactItemize}

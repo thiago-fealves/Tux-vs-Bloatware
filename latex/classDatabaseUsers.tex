@@ -1,0 +1,234 @@
+\doxysection{Database\+Users Class Reference}
+\hypertarget{classDatabaseUsers}{}\label{classDatabaseUsers}\index{DatabaseUsers@{DatabaseUsers}}
+
+
+Gerencia todas as operações de banco de dados relacionadas a usuários.  
+
+
+
+
+{\ttfamily \#include $<$database\+\_\+users.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classDatabaseUsers_acee3d79754ed3dbf3255a3c6c0f69ea3}{Database\+Users}} ()
+\begin{DoxyCompactList}\small\item\em Construtor da classe \doxylink{classDatabaseUsers}{Database\+Users}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classDatabaseUsers_a37d67999a89b31072c7a7615c0a934f9}{\texorpdfstring{$\sim$}{\string~}\+Database\+Users}} ()
+\begin{DoxyCompactList}\small\item\em Destrutor da classe \doxylink{classDatabaseUsers}{Database\+Users}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classDatabaseUsers_a35ac02c3868660bfdbb0da78de47c020}{register\+User}} (const std\+::string \&name, const std\+::string \&username, const std\+::string \&password, int initial\+Score=0, int initial\+Games=0)
+\begin{DoxyCompactList}\small\item\em Registra um novo usuário no banco de dados. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classDatabaseUsers_a625d24f24a60f468d67f2c2b00c0d4e2}{delete\+User}} (const std\+::string \&username)
+\begin{DoxyCompactList}\small\item\em Exclui um usuário do banco de dados com base no nome de usuário. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{structUser}{User}} $>$ \mbox{\hyperlink{classDatabaseUsers_a99c425e76cf9feaff7ea2f89d343722b}{list\+Users}} ()
+\begin{DoxyCompactList}\small\item\em Retorna uma lista de todos os usuários cadastrados. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classDatabaseUsers_afda5d1aaa20c43510c2cd87e1ceaf5d8}{update\+Score}} (const std\+::string \&username, int new\+\_\+score)
+\begin{DoxyCompactList}\small\item\em Atualiza a pontuação de um usuário específico. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classDatabaseUsers_a8073ea61a81516c44834d06821c20995}{update\+Games\+Number}} (const std\+::string \&username, int new\+\_\+games)
+\begin{DoxyCompactList}\small\item\em Atualiza o número total de jogos de um usuário. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{structUser}{User}} $>$ \mbox{\hyperlink{classDatabaseUsers_a51693aa592c61e60f3ba1593a2e2848c}{get\+User\+By\+Username}} (const std\+::string \&username)
+\begin{DoxyCompactList}\small\item\em Busca e retorna os dados completos de um usuário pelo seu nome de usuário. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classDatabaseUsers_a1f91122161a9624d7a6535a798e1d4bd}{authenticate\+User}} (const std\+::string \&username, const std\+::string \&password)
+\begin{DoxyCompactList}\small\item\em Autentica um usuário com base no nome de usuário e senha. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classDatabaseUsers_a72b9ea0d38ca41bdf3d4b621eb23c866}{add\+Values\+Game\+Over\+Screen}} (std\+::string \&username, \mbox{\hyperlink{classgameOverScreen}{game\+Over\+Screen}} \&game\+\_\+over\+\_\+screen)
+\begin{DoxyCompactList}\small\item\em Processa e atualiza os dados de fim de um dos mini-\/jogos para um usuário. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Gerencia todas as operações de banco de dados relacionadas a usuários. 
+
+Encapsula a conexão com o banco de dados Postgre\+SQL (usando pqxx) e implementa uma API para criar, autenticar, atualizar, deletar e listar usuários. 
+
+\label{doc-constructors}
+\Hypertarget{classDatabaseUsers_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classDatabaseUsers_acee3d79754ed3dbf3255a3c6c0f69ea3}\index{DatabaseUsers@{DatabaseUsers}!DatabaseUsers@{DatabaseUsers}}
+\index{DatabaseUsers@{DatabaseUsers}!DatabaseUsers@{DatabaseUsers}}
+\doxysubsubsection{\texorpdfstring{DatabaseUsers()}{DatabaseUsers()}}
+{\footnotesize\ttfamily \label{classDatabaseUsers_acee3d79754ed3dbf3255a3c6c0f69ea3} 
+Database\+Users\+::\+Database\+Users (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Construtor da classe \doxylink{classDatabaseUsers}{Database\+Users}. 
+
+Inicializa a conexão com o banco de dados Postgre\+SQL. Lê a string de conexão a partir de um arquivo .env, estabelece a conexão e lança uma exceção se a conexão não puder ser estabelecida com sucesso. 
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & Se a conexão com o banco de dados falhar por um motivo genérico. \\
+\hline
+{\em pqxx\+::sql\+\_\+error} & Se ocorrer um erro específico do SQL durante a tentativa de conexão. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classDatabaseUsers_a37d67999a89b31072c7a7615c0a934f9}\index{DatabaseUsers@{DatabaseUsers}!````~DatabaseUsers@{\texorpdfstring{$\sim$}{\string~}DatabaseUsers}}
+\index{````~DatabaseUsers@{\texorpdfstring{$\sim$}{\string~}DatabaseUsers}!DatabaseUsers@{DatabaseUsers}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}DatabaseUsers()}{\string~DatabaseUsers()}}
+{\footnotesize\ttfamily \label{classDatabaseUsers_a37d67999a89b31072c7a7615c0a934f9} 
+Database\+Users\+::\texorpdfstring{$\sim$}{\string~}\+Database\+Users (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destrutor da classe \doxylink{classDatabaseUsers}{Database\+Users}. 
+
+Fecha a conexão com o banco de dados, se ela estiver ativa, para liberar os recursos de forma segura. 
+
+\label{doc-func-members}
+\Hypertarget{classDatabaseUsers_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classDatabaseUsers_a72b9ea0d38ca41bdf3d4b621eb23c866}\index{DatabaseUsers@{DatabaseUsers}!addValuesGameOverScreen@{addValuesGameOverScreen}}
+\index{addValuesGameOverScreen@{addValuesGameOverScreen}!DatabaseUsers@{DatabaseUsers}}
+\doxysubsubsection{\texorpdfstring{addValuesGameOverScreen()}{addValuesGameOverScreen()}}
+{\footnotesize\ttfamily \label{classDatabaseUsers_a72b9ea0d38ca41bdf3d4b621eb23c866} 
+void Database\+Users\+::add\+Values\+Game\+Over\+Screen (\begin{DoxyParamCaption}\item[{std\+::string \&}]{username}{, }\item[{\mbox{\hyperlink{classgameOverScreen}{game\+Over\+Screen}} \&}]{game\+\_\+over\+\_\+screen}{}\end{DoxyParamCaption})}
+
+
+
+Processa e atualiza os dados de fim de um dos mini-\/jogos para um usuário. 
+
+Esta função é chamada ao final de uma partida. Ela atualiza o número de jogos do usuário, verifica se a pontuação da partida é um novo recorde pessoal (e atualiza se for), e preenche um objeto de tela de game over com todas as informações relevantes (pontuação obtida nesse exato momento, recorde pessoal, recorde geral do jogo). 
+\begin{DoxyParams}{Parameters}
+{\em username} & O nome de usuário do jogador. \\
+\hline
+{\em game\+\_\+over\+\_\+screen} & Referência ao objeto da tela de "{}\+Game Over"{} que conterá os dados. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classDatabaseUsers_a1f91122161a9624d7a6535a798e1d4bd}\index{DatabaseUsers@{DatabaseUsers}!authenticateUser@{authenticateUser}}
+\index{authenticateUser@{authenticateUser}!DatabaseUsers@{DatabaseUsers}}
+\doxysubsubsection{\texorpdfstring{authenticateUser()}{authenticateUser()}}
+{\footnotesize\ttfamily \label{classDatabaseUsers_a1f91122161a9624d7a6535a798e1d4bd} 
+bool Database\+Users\+::authenticate\+User (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{username}{, }\item[{const std\+::string \&}]{password}{}\end{DoxyParamCaption})}
+
+
+
+Autentica um usuário com base no nome de usuário e senha. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em username} & O nome de usuário para autenticação. \\
+\hline
+{\em password} & A senha fornecida pelo usuário. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\textquotesingle{}true\textquotesingle{} se o nome de usuário e a senha corresponderem, \textquotesingle{}false\textquotesingle{} caso contrário. 
+\end{DoxyReturn}
+\Hypertarget{classDatabaseUsers_a625d24f24a60f468d67f2c2b00c0d4e2}\index{DatabaseUsers@{DatabaseUsers}!deleteUser@{deleteUser}}
+\index{deleteUser@{deleteUser}!DatabaseUsers@{DatabaseUsers}}
+\doxysubsubsection{\texorpdfstring{deleteUser()}{deleteUser()}}
+{\footnotesize\ttfamily \label{classDatabaseUsers_a625d24f24a60f468d67f2c2b00c0d4e2} 
+bool Database\+Users\+::delete\+User (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{username}{}\end{DoxyParamCaption})}
+
+
+
+Exclui um usuário do banco de dados com base no nome de usuário. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em username} & O nome de usuário a ser excluído. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\textquotesingle{}true\textquotesingle{} se o usuário foi encontrado e excluído com sucesso, \textquotesingle{}false\textquotesingle{} caso contrário. 
+\end{DoxyReturn}
+\Hypertarget{classDatabaseUsers_a51693aa592c61e60f3ba1593a2e2848c}\index{DatabaseUsers@{DatabaseUsers}!getUserByUsername@{getUserByUsername}}
+\index{getUserByUsername@{getUserByUsername}!DatabaseUsers@{DatabaseUsers}}
+\doxysubsubsection{\texorpdfstring{getUserByUsername()}{getUserByUsername()}}
+{\footnotesize\ttfamily \label{classDatabaseUsers_a51693aa592c61e60f3ba1593a2e2848c} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{structUser}{User}} $>$ Database\+Users\+::get\+User\+By\+Username (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{username}{}\end{DoxyParamCaption})}
+
+
+
+Busca e retorna os dados completos de um usuário pelo seu nome de usuário. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em username} & O nome de usuário a ser buscado. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Um ponteiro único ({\ttfamily std\+::unique\+\_\+ptr}) para um objeto {\ttfamily \doxylink{structUser}{User}} se o usuário for encontrado. Retorna {\ttfamily nullptr} se o usuário não for encontrado ou em caso de erro. 
+\end{DoxyReturn}
+\Hypertarget{classDatabaseUsers_a99c425e76cf9feaff7ea2f89d343722b}\index{DatabaseUsers@{DatabaseUsers}!listUsers@{listUsers}}
+\index{listUsers@{listUsers}!DatabaseUsers@{DatabaseUsers}}
+\doxysubsubsection{\texorpdfstring{listUsers()}{listUsers()}}
+{\footnotesize\ttfamily \label{classDatabaseUsers_a99c425e76cf9feaff7ea2f89d343722b} 
+std\+::vector$<$ \mbox{\hyperlink{structUser}{User}} $>$ Database\+Users\+::list\+Users (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Retorna uma lista de todos os usuários cadastrados. 
+
+Executa uma consulta para buscar todos os usuários, ordenando o resultado pela pontuação (score) em ordem decrescente, o que facilita a obter a maior pontuação geral depois. \begin{DoxyReturn}{Returns}
+Um vetor de objetos \textquotesingle{}\doxylink{structUser}{User}\textquotesingle{}. Retorna um vetor vazio se não houver usuários ou em caso de erro. 
+\end{DoxyReturn}
+\Hypertarget{classDatabaseUsers_a35ac02c3868660bfdbb0da78de47c020}\index{DatabaseUsers@{DatabaseUsers}!registerUser@{registerUser}}
+\index{registerUser@{registerUser}!DatabaseUsers@{DatabaseUsers}}
+\doxysubsubsection{\texorpdfstring{registerUser()}{registerUser()}}
+{\footnotesize\ttfamily \label{classDatabaseUsers_a35ac02c3868660bfdbb0da78de47c020} 
+bool Database\+Users\+::register\+User (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{const std\+::string \&}]{username}{, }\item[{const std\+::string \&}]{password}{, }\item[{int}]{initial\+Score}{ = {\ttfamily 0}, }\item[{int}]{initial\+Games}{ = {\ttfamily 0}}\end{DoxyParamCaption})}
+
+
+
+Registra um novo usuário no banco de dados. 
+
+Insere um novo registro na tabela \textquotesingle{}users\textquotesingle{}. 
+\begin{DoxyParams}{Parameters}
+{\em name} & O nome do usuário. \\
+\hline
+{\em username} & O nome de login do usuário (deve ser único). \\
+\hline
+{\em password} & A senha do usuário. \\
+\hline
+{\em initial\+\_\+score} & A pontuação inicial a ser definida para o usuário, 0 de default. \\
+\hline
+{\em initial\+\_\+games} & O número inicial de jogos a ser definido para o usuário, 0 de default. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\textquotesingle{}true\textquotesingle{} se o usuário for registrado com sucesso, \textquotesingle{}false\textquotesingle{} se ocorrer um erro (ex\+: username já existe). 
+\end{DoxyReturn}
+\Hypertarget{classDatabaseUsers_a8073ea61a81516c44834d06821c20995}\index{DatabaseUsers@{DatabaseUsers}!updateGamesNumber@{updateGamesNumber}}
+\index{updateGamesNumber@{updateGamesNumber}!DatabaseUsers@{DatabaseUsers}}
+\doxysubsubsection{\texorpdfstring{updateGamesNumber()}{updateGamesNumber()}}
+{\footnotesize\ttfamily \label{classDatabaseUsers_a8073ea61a81516c44834d06821c20995} 
+bool Database\+Users\+::update\+Games\+Number (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{username}{, }\item[{int}]{new\+\_\+games}{}\end{DoxyParamCaption})}
+
+
+
+Atualiza o número total de jogos de um usuário. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em username} & O nome de usuário cujo número de jogos será atualizado. \\
+\hline
+{\em new\+\_\+games} & O novo número total de jogos. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\textquotesingle{}true\textquotesingle{} se a atualização for bem-\/sucedida, \textquotesingle{}false\textquotesingle{} se o usuário não for encontrado ou em caso de erro. 
+\end{DoxyReturn}
+\Hypertarget{classDatabaseUsers_afda5d1aaa20c43510c2cd87e1ceaf5d8}\index{DatabaseUsers@{DatabaseUsers}!updateScore@{updateScore}}
+\index{updateScore@{updateScore}!DatabaseUsers@{DatabaseUsers}}
+\doxysubsubsection{\texorpdfstring{updateScore()}{updateScore()}}
+{\footnotesize\ttfamily \label{classDatabaseUsers_afda5d1aaa20c43510c2cd87e1ceaf5d8} 
+bool Database\+Users\+::update\+Score (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{username}{, }\item[{int}]{new\+\_\+score}{}\end{DoxyParamCaption})}
+
+
+
+Atualiza a pontuação de um usuário específico. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em username} & O nome de usuário cujo score será atualizado. \\
+\hline
+{\em new\+\_\+score} & A nova pontuação a ser registrada. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\textquotesingle{}true\textquotesingle{} se a atualização for bem-\/sucedida, \textquotesingle{}false\textquotesingle{} se o usuário não for encontrado ou em caso de erro. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{database__users_8hpp}{database\+\_\+users.\+hpp}}\item 
+src/\mbox{\hyperlink{database__users_8cpp}{database\+\_\+users.\+cpp}}\end{DoxyCompactItemize}
