@@ -38,13 +38,15 @@ struct Coordinates {
  */
 
 class Button {
+    private:
+    Coordinates _coords;
+    ALLEGRO_COLOR _color;
+    std::string _text;
+    ALLEGRO_FONT* _font;
+
+    bool _drawBackground;
     
     public:
-        Coordinates _coords;
-        ALLEGRO_COLOR _color;
-        bool _drawBackground;
-        ALLEGRO_FONT* _font;
-        std::string _text;
         Button(Coordinates coords, ALLEGRO_COLOR color, std::string text,
                 ALLEGRO_FONT* font, bool drawBackground = true);
         void drawButton();

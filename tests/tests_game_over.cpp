@@ -5,7 +5,7 @@
 
 #define private public 
 #include "interface.hpp" 
-#include "Game_Over.hpp" 
+#include "game_over.hpp" 
 #undef private         
 
 ALLEGRO_FONT* testFont = nullptr; 
