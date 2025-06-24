@@ -57,7 +57,6 @@ Background::Background()
 Background Level::_bg;
 GameObject* Level::_player = nullptr;
 ALLEGRO_EVENT Level::_event;
-Music* Level::_music = nullptr;
 PipeList LevelOne::_pipesList;
 ObstaclesList LevelTwo::_obstaclesList;
 
@@ -81,28 +80,17 @@ void Background::renderBackground() {
 
 /* Starting and cleaning levels */
 
-/**
- * @brief Set the level's music
- * @param music pointer to a .ogg file with the level's music
-*/
-void Level::setMusic(Music* music){
-    _music = music;
-}
 
 /**
  * @brief Initializes Level One
  * @return Pointer to the player object, in this case BrokenShip
 */
-
 BrokenShip* LevelOne::setLevelOne() {
 
     // Setting Player
     _player = new BrokenShip();
     BrokenShip* Player = dynamic_cast<BrokenShip*>(_player);
     Player->set_position(Vector(400, 300));
-
-    // Setting Music
-    setMusic(level_two_music);
 
     std::vector<Vector> shapeLeft = shape_repository["pipe"];
     std::vector<Vector> shapeRight = shapeLeft;
@@ -125,16 +113,12 @@ BrokenShip* LevelOne::setLevelOne() {
  * @brief Initializes Level One
  * @return Pointer to the player object, in this case BrokenShip
 */
-
 BrokenShip* LevelTwo::setLevelTwo() {
 
     // Setting Player
     _player = new BrokenShip();
     BrokenShip* Player = dynamic_cast<BrokenShip*>(_player);
     Player->set_position(Vector(400, 300));
-
-    // Setting Music
-    setMusic(level_two_music);
 
     // Setting Obstacles
     //_obstaclesList.setPolygonsObstaclesList(shape_repository["asteroid2"], "./assets/asteroid2.png");
@@ -143,37 +127,33 @@ BrokenShip* LevelTwo::setLevelTwo() {
     return Player;
 }
 
-
-
 /**
  * @brief Initializes Level Three
  * @return Pointer to the player object, in this case FixedShip
 */
-
 FixedShip* LevelThree::setLevelThree() {
 
   // Setting Player
   _player = new FixedShip;
   FixedShip* Player = dynamic_cast<FixedShip*>(_player);
 
-  // Setting Music
-  setMusic(level_three_music);
-
   return Player;
 }
 
-/* @brief Frees memory used on Level Two
-*/
+/** 
+ * @brief Frees memory used on Level Two
+ */
 void LevelOne::cleanLevel(){
-  delete _player;
-  _music = nullptr;
+  if(_player) delete _player;
   _player = nullptr;
   _pipesList.clear();
 }
 
+/**
+ * @brief Frees memory used on Level two
+ */
 void LevelTwo::cleanLevel(){
-  delete _player;
-  _music = nullptr;
+  if(_player) delete _player;
   _player = nullptr;
   _obstaclesList.clear();
 }
@@ -183,11 +163,14 @@ void LevelTwo::cleanLevel(){
  */
 void LevelThree::cleanLevel(){ 
     // There is no need to clean other things as they are in the stack
-  delete _player;
+  if(_player) delete _player;
   _player = nullptr;
-  for (int i = 0; i < ALLEGRO_KEY_MAX; i++) {
+
+  // Clears the key "cache", so as not to leave these variables filled in for the next game.
+  for (int i = 0; i < ALLEGRO_KEY_MAX; i++) { 
     LevelThree::key_pressed[i] = false;
   }
+
   Shot::cleanShots();
 }
 
@@ -453,7 +436,7 @@ void LevelOne::mainLoop(bool &playing, bool &isAlive){
     playing = true;
     BrokenShip* player = setLevelOne();
     vector<AbstractObstacle*> obstacles = _pipesList.getList();
-    _music->play();
+    level_one_music->play();
 
     while (playing) {
         // Getting new event
@@ -482,7 +465,8 @@ void LevelOne::mainLoop(bool &playing, bool &isAlive){
         }
 
     }
-    cleanLevel(); //Deivid 13/06
+     
+    level_one_music->pause();
 }
 
 void LevelTwo::mainLoop(bool &playing, bool &isAlive){
@@ -492,7 +476,8 @@ void LevelTwo::mainLoop(bool &playing, bool &isAlive){
     playing = true;
     BrokenShip* player = setLevelTwo();
     vector<AbstractObstacle*> obstacles = _obstaclesList.getList();
-    _music->play();
+
+    level_two_music->play();
 
     while (playing) {
         // Getting new event
@@ -521,7 +506,8 @@ void LevelTwo::mainLoop(bool &playing, bool &isAlive){
         }
 
     }
-    cleanLevel();
+    
+    level_two_music->pause();
 }
 
 void LevelThree::mainLoop(bool &playing, bool &isAlive){
@@ -531,7 +517,8 @@ void LevelThree::mainLoop(bool &playing, bool &isAlive){
   FixedShip* player = setLevelThree();
   WindowsBoss windows(180, 150);
 
-  _music->play();
+  level_three_music->play();
+
       while (playing) {
         // Getting new event
         al_wait_for_event(event_queue, &_event);
@@ -559,4 +546,6 @@ void LevelThree::mainLoop(bool &playing, bool &isAlive){
             isAlive = false;
         }
     }
+
+  level_three_music->pause();
 }

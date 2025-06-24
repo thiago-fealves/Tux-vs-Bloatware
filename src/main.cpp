@@ -40,7 +40,7 @@ int main(int argc, char** argv) {
     //Estado MENU
 menu:
     if (inMenu) {
-        StartMenu::mainLoopMenu(playing, menu_music); //menu, musica e cliques sao feitos e processados
+        StartMenu::mainLoopMenu(playing); //menu, musica e cliques sao feitos e processados
         if (!playing) break;
         inMenu = false; //se o jogador clicar em play InMenu vira falso
     }
@@ -56,10 +56,14 @@ start:
        
         LevelOne::mainLoop(playing, isAlive);
         LevelOne::cleanLevel(); 
+
         if(!isAlive) goto gameOver;
+
         LevelTwo::mainLoop(playing, isAlive);
         LevelTwo::cleanLevel(); 
+
         if(!isAlive) goto gameOver;
+        
         LevelThree::mainLoop(playing, isAlive);
         LevelThree::cleanLevel();
 

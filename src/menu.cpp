@@ -64,9 +64,7 @@ void StartMenu::handleTimerEvents() {
     al_flip_display();  // Update the display
 }
 
-
-
-void StartMenu::handleMouseEvents(bool &playing, bool &displayInterface, Music* &menu_music) {
+void StartMenu::handleMouseEvents(bool &playing, bool &displayInterface) {
     static bool musicIsPlaying = true;
     if(interface->stopSongButton.gotClicked(event.mouse.x, event.mouse.y)) {
         if(musicIsPlaying) { 
@@ -91,15 +89,12 @@ void StartMenu::handleMouseEvents(bool &playing, bool &displayInterface, Music* 
     }
 }
 
-
 void StartMenu::cleanMenu() {
-    // preciso limpar o event(gabriel)? acho q nao
-    menu_music->pause();
     delete interface;
     al_destroy_font(font);
 }
 
-void StartMenu::mainLoopMenu(bool &playing, Music* &menu_music) {
+void StartMenu::mainLoopMenu(bool &playing) {
     font = al_load_font("./assets/fira.ttf", 20, 0);
     interface = new Interface(font);
     menu_music->play();
@@ -110,9 +105,10 @@ void StartMenu::mainLoopMenu(bool &playing, Music* &menu_music) {
 
         if(event.type == ALLEGRO_EVENT_TIMER) handleTimerEvents();
 
-        if (event.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) handleMouseEvents(playing, displayInterface, menu_music);
+        if (event.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) handleMouseEvents(playing, displayInterface);
 
     }
 
     cleanMenu();
+    menu_music->pause();
 }

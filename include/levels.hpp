@@ -64,13 +64,11 @@ class Background {
 
 class Level{
   protected:
-    static Music* _music;
     static GameObject* _player; 
     static Background _bg;
     static ALLEGRO_EVENT _event;
 
   public:
-    static void setMusic(Music *music);
     friend void interLevelHandling(std::vector<AbstractObstacle*>& obstacles, ALLEGRO_BITMAP* sprite, const char* message, float bitmapScale);
 };
 

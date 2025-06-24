@@ -4,10 +4,10 @@
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_font.h>
 #include "music.hpp"
+#include "bootstrap.hpp"
 
 //Variáveis globais (definidas no 'bootstrap.cpp')
 extern ALLEGRO_BITMAP* gameOverBackground;
-extern Music* defeat_music; 
 extern ALLEGRO_EVENT_QUEUE* event_queue;
 extern ALLEGRO_TIMER* timer;  
 
@@ -111,13 +111,8 @@ gameOverOption* gameOverScreen::run(ALLEGRO_EVENT_QUEUE* event_queue_param, ALLE
     bool screenActive = true; // Controla a execução do loop da tela de Game Over.
     gameOverOption* chosenOption = nullptr; // Ação que o jogador escolher (será retornado).
 
- /*-- Música de Derrota --*/
-     if (defeat_music) { // Verifica se a música foi carregada com sucesso
     defeat_music->play();// Inicia a reprodução da música de derrota
-    cout << "Música de derrota carregada" << endl;
-    } else {
-     cout << "Música de derrota não funciou" << endl;
-     }
+
 
 /* -- Loop Principal da Tela de Game Over -- */
 //executa enquanto a tela de Game Over está ativa e esperando por uma escolha.
@@ -149,9 +144,10 @@ gameOverOption* gameOverScreen::run(ALLEGRO_EVENT_QUEUE* event_queue_param, ALLE
             screenActive = false; // Sai do loop.
         }
     }
-    // Pausa a musica da saida
-    if (defeat_music) {
-        defeat_music->pause();
-    }
+
+    
+    defeat_music->pause(); // Pausa a musica da saida
+    
+
     return chosenOption; // Retorna o objeto de ação escolhido pelo jogador para o main.cpp.
 }
