@@ -21,8 +21,7 @@ RegisterInterface::RegisterInterface(ALLEGRO_FONT *font) : _font(font), typingUs
     }
 }
 
-RegisterInterface::~RegisterInterface()
-{
+RegisterInterface::~RegisterInterface(){
     if (_titleImage) {
         al_destroy_bitmap(_titleImage);
     }
@@ -247,6 +246,7 @@ int RegisterInterface::mainLoop(bool &inRegister, bool &playing, DatabaseUsers &
                 Bootstrap::cleanup_allegro();
                 inRegister = false;
                 playing = false;
+                return 0;
             }
             else if (this->registerButton.gotClicked(mx, my)){
 
