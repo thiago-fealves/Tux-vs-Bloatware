@@ -7,17 +7,51 @@
 #include <iostream>
 
 RegisterInterface::RegisterInterface(ALLEGRO_FONT *font) : _font(font), typingUsername(false), typingPassword(false),
-                                                           nameBox(SCREEN_W / 2 - BUTTON_W / 2, 120, BUTTON_W, BUTTON_H),
-                                                           usernameBox(SCREEN_W / 2 - BUTTON_W / 2, 200, BUTTON_W, BUTTON_H),
-                                                           passwordBox(SCREEN_W / 2 - BUTTON_W / 2, 280, BUTTON_W, BUTTON_H),
-                                                           loginButton(Coordinates(SCREEN_W / 2 - BUTTON_W / 2, 360, BUTTON_W, BUTTON_H), al_map_rgb(50, 50, 50), "Login", font),
-                                                           registerButton(Coordinates(SCREEN_W / 2 - BUTTON_W / 2, 440, BUTTON_W, BUTTON_H), al_map_rgb(50, 50, 50), "Register", font),
-                                                           exitButton(Coordinates(20, 20, 100, 70), al_map_rgb(50, 50, 50), "Sair", font)
+                                                           _titleImage(nullptr), 
+                                                           nameBox(SCREEN_W / 2 - BUTTON_W / 2, 190, BUTTON_W, BUTTON_H),
+                                                           usernameBox(SCREEN_W / 2 - BUTTON_W / 2, 260, BUTTON_W, BUTTON_H),
+                                                           passwordBox(SCREEN_W / 2 - BUTTON_W / 2, 330, BUTTON_W, BUTTON_H),
+                                                           loginButton(Coordinates(SCREEN_W / 2 - BUTTON_W / 2, 400, BUTTON_W, BUTTON_H), al_map_rgb(50, 50, 50), "Login", font),
+                                                           registerButton(Coordinates(SCREEN_W / 2 - BUTTON_W / 2, 470, BUTTON_W, BUTTON_H), al_map_rgb(50, 50, 50), "Register", font),
+                                                           exitButton(Coordinates(20, 20, 80, 60), al_map_rgb(50, 50, 50), "Sair", font)
 {
+    _titleImage = al_load_bitmap("./assets/TitleGame.png"); 
+    if (!_titleImage) {
+        std::cerr << "Erro: Nao foi possivel carregar a imagem do titulo." << std::endl;
+    }
 }
 
-void RegisterInterface::draw()
+RegisterInterface::~RegisterInterface()
 {
+    if (_titleImage) {
+        al_destroy_bitmap(_titleImage);
+    }
+}
+
+void RegisterInterface::draw(){
+
+     if (_titleImage) {
+
+    const float SCALE_FACTOR = 0.18f;
+
+    float original_width = al_get_bitmap_width(_titleImage);
+    float original_height = al_get_bitmap_height(_titleImage);
+
+    // Calcula as novas dimensões baseadas no fator de escala
+    float scaled_width = original_width * SCALE_FACTOR;
+    float scaled_height = original_height * SCALE_FACTOR;
+
+    // Calcula a posição para centralizar a imagem com o novo tamanho
+    float image_x = SCREEN_W / 2.0f - scaled_width / 2.0f;
+    float image_y = 20; // Espaço do topo
+
+    al_draw_scaled_bitmap(
+        _titleImage,
+        0, 0, original_width, original_height, 
+        image_x, image_y, scaled_width, scaled_height,
+        0
+    );
+    }
     if(!typingUsername && username == ""){
 
     //Label do username
@@ -242,10 +276,11 @@ int RegisterInterface::mainLoop(bool &inRegister, bool &playing, DatabaseUsers &
         if(redraw){
 
             redraw = false;
-            this->draw();
-            al_flip_display();   
             al_draw_bitmap(backgroundImage, 0, bgY, 0);
             al_draw_bitmap(backgroundImage, 0, bgY - al_get_bitmap_height(backgroundImage), 0);
+            this->draw();
+            al_flip_display();   
+            
         }    
 
 

@@ -12,6 +12,7 @@
 
 class RegisterInterface {
     ALLEGRO_FONT* _font;
+    ALLEGRO_BITMAP* _titleImage;
 
     std::string username = "";
     std::string name = "";
@@ -36,6 +37,12 @@ public:
 */
 
     RegisterInterface(ALLEGRO_FONT* font);
+
+    /**
+ * @brief Destrutor da classe RegisterInterface.
+ * @details Libera a memoria alocada para o BitMap da Imagem
+*/
+    ~RegisterInterface();
 
 /**
  * @brief Desenha todos os elementos da interface na tela.

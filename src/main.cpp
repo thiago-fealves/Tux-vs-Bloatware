@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
     DatabaseUsers db = DatabaseUsers();
     srand(time(NULL));
 
-    RegisterInterface registerScreen(gameFont);
+    RegisterInterface registerScreen(levelFont);
     bool inRegister = true;
     bool inMenu = true;
     bool playing = true;
