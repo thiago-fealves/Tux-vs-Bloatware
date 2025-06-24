@@ -56,16 +56,15 @@ start:
        
         LevelOne::mainLoop(playing, isAlive);
         LevelOne::cleanLevel(); 
-        if(!isAlive) goto gameOver;
         LevelTwo::mainLoop(playing, isAlive);
         LevelTwo::cleanLevel(); 
-        if(!isAlive) goto gameOver;
         LevelThree::mainLoop(playing, isAlive);
         LevelThree::cleanLevel();
 
+        std::cout << globalVars::points << std::endl;
+
 
     //Transicao para GAME OVER
-gameOver:
        if (playing) continue;
             else { //se o jogador perdeu para a musica
                 if (level_three_music) { 

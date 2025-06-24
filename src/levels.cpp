@@ -14,8 +14,10 @@
 using namespace std;
 
 // Inter Level Logic
-namespace globalVars {
-    bool inInterLevel=false;
+ namespace globalVars {
+    bool inInterLevel = false;
+    int points = 0;
+
 }
 
 
@@ -276,15 +278,15 @@ void LevelOne::handleTimerEvents(bool &playing, BrokenShip* player, vector<Abstr
             break;
         }
     }
+    
+    if(!globalVars::inInterLevel)
+        globalVars::points += 10;
+
     if (collision_this_frame){
       obstacles.clear();
     }
 
     interLevelHandling(obstacles, pinguimBandido, "PARABENS, APERTE ENTER PARA IR PARA O PRÓXIMO NÍVEL", 300);
-    //interLevelHandling(obstacles, pendrive, "PARABENS, VOCÊ É DIGNO DE INSTALAR O LINUX, APERTE ENTER PARA PEGAR O PENDRIVE E DESTRUA O WINDOWS!!", 250);
-    // Essa linha deve ser movida para o final do handleTimerEvents do nível dois e a linha superior à esta deve ser movida para o handleTimerEvents do nível 1 quando estiver pronto
-    // TODO: fazer ajustes sobre o interLevel quando o nível 1 ficar pronto;
-    // alguém lembra o Gabriel de fazer isso por favor ^
     al_flip_display();
 }
 
@@ -357,6 +359,11 @@ void LevelTwo::handleTimerEvents(bool &playing, BrokenShip* player, vector<Abstr
             break;
         }
     }
+
+
+    if(!globalVars::inInterLevel)
+        globalVars::points += 10;
+
     if (collision_this_frame){
       obstacles.clear();
     }
@@ -487,6 +494,7 @@ void LevelOne::mainLoop(bool &playing, bool &isAlive){
 
 void LevelTwo::mainLoop(bool &playing, bool &isAlive){
     // Initializing level
+    if(!isAlive) return;
     al_set_timer_count(timer, 0);
     globalVars::inInterLevel = false;
     playing = true;
@@ -526,6 +534,7 @@ void LevelTwo::mainLoop(bool &playing, bool &isAlive){
 
 void LevelThree::mainLoop(bool &playing, bool &isAlive){
   // Initializing level
+  if(!isAlive) return;
   al_set_timer_count(timer, 0);
   playing = true;
   FixedShip* player = setLevelThree();

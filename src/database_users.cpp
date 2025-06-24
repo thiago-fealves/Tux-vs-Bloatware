@@ -233,3 +233,9 @@ std::unique_ptr<User> DatabaseUsers::getUserByUsername(const std::string& userna
         return nullptr;
     }
 }
+
+void DatabaseUsers::addGame(std::string& username) {
+    std::unique_ptr<User> user = getUserByUsername(username);
+    user->games+=1;
+    updateGamesNumber(username, user->games);
+}
