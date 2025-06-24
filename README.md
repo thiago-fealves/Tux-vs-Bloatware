@@ -13,7 +13,6 @@ Que a força do Kernel esteja com você!
 - Arthur Cordeiro (CORDEIRIN)
 
 ## **Índice**
-___
 
 * [Ferramentas](#ferramentas)
 * [Allegro](#Allegro)
@@ -34,9 +33,13 @@ ___
 ### **Ferramentas:**
 ___
 **Linguagem:** C++17
+
 **Biblioteca:** Allegro 5
+
 **Compilação:** make
+
 **Documentação:** Doxygen
+
 **Testes Unitários:** Doctest
 
 ### **Allegro**
@@ -49,7 +52,6 @@ Desenvolvida com foco em desempenho e portabilidade, a Allegro é utilizada prin
 🔗 [https://en.wikipedia.org/wiki/Allegro_(software_library)](https://en.wikipedia.org/wiki/Allegro_(software_library))
 
 # **Instalação do jogo:**
-___
 Requisitos:
 - Allegro5
 - libpqxx
@@ -69,7 +71,6 @@ make
 ```
 Ou, para compilar e executar:
 
-* Windows:
 ```bash
 make && ./main
 ```
@@ -80,7 +81,6 @@ make && ./main
 ```
 
 ## **Como jogar:**
-___
 ### **Start:**
 Pressione o botão PLAY com o botão do mouse esquerdo para começar o jogo.
 
@@ -110,14 +110,12 @@ Para sair do jogo, pressione o botão EXIT GAME ou o X no canto inferior esquerd
 **Observação:** Você terá 3 vidas. Caso seja acertado por 3 projéteis inimigos ou encostar no chefe final… Game Over!
 
 ## **Testes**
-___
 Para compilar e executar os testes, use o comando:
 
 ```bash
 make test
 ```
 ## **Documentação:**
-___
 O projeto já acompanha os arquivos Doxyfile devidamente configurados mas voce pode compilar manualmente tambem com:
 ```bash
 doxygen Doxyfile
