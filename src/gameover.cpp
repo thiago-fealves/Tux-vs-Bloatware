@@ -39,11 +39,12 @@ void exitGame::execute() {
 
 gameOverScreen::gameOverScreen(ALLEGRO_FONT* font): _font(font),// Inicializa o membro '_font'.
 
+//Inicializa as pontuaçoes com 0
+_currentScore(0),
+ _highScore(0),
+  _bastScore (0),
 
-_currentScore(0),//Inicializa a pontuação da partida atual como 0
- _highScore(0), // Inicializa o recorde como 0
-
- //cores dos botões, localização e texto 
+//cores dos botões, localização e texto 
 //O 'false' como último parâmetro indica que NÃO desenha o retângulo de fundo.
     _playAgainButton(Coordinates(10, 200, 350, 90), al_map_rgb(25, 255, 255), "PLAY AGAIN", _font, false),
     _returnToMenuButton(Coordinates(10, 270, 350, 90), al_map_rgb(25, 255, 255), "RETURN MENU", _font, false),
@@ -73,6 +74,13 @@ void gameOverScreen::setHighScore(int score) {
     _highScore = score; 
 }
 
+/**
+ * @brief Define o recorde global a ser exibido na tela.
+ */
+void gameOverScreen::setbastScore(int score) {
+    _bastScore = score; 
+}
+
 
 /**
  * @brief Desenha todos os elementos visuais na tela de Game Over.
@@ -89,6 +97,7 @@ void gameOverScreen::draw() {
     al_draw_text(_font, textColor, 400, 150, ALLEGRO_ALIGN_CENTER, "GAME OVER");
     al_draw_text(_font, textColor, 750, 20, ALLEGRO_ALIGN_RIGHT, ("SCORE: " + std::to_string(_currentScore)).c_str());
     al_draw_text(_font, textColor, 750, 50, ALLEGRO_ALIGN_RIGHT, ("HIGH SCORE: " + std::to_string(_highScore)).c_str());
+    al_draw_text(_font, textColor, 750, 80, ALLEGRO_ALIGN_RIGHT, ("BAST SCORE: " + std::to_string(_bastScore)).c_str());
    
     // 3. Desenha os botões.
     _playAgainButton.drawButton();
@@ -101,7 +110,6 @@ void gameOverScreen::draw() {
 /**
  * @brief Gerencia o loop de eventos da tela de Game Over e a interação do jogador.
  * @details A tela permanece ativa, desenhando e capturando cliques, até que o jogador
- * escolha uma opção (Play Again, Return Menu, Exit) ou feche a janela.
  * @param event_queue Fila de eventos Allegro para capturar input.
  * @param timer Timer Allegro para controlar o redesenho da tela.
  * @return Um ponteiro para o objeto 'gameOverOption' que representa a ação escolhida pelo jogador.
