@@ -1,4 +1,10 @@
+#include <allegro5/allegro_font.h>
+#include <allegro5/bitmap_io.h>
+#include <allegro5/display.h>
+#include <allegro5/events.h>
+#include <exception>
 #include <iostream>
+#include <stdexcept>
 #include "bootstrap.hpp"
 #include "sound.hpp"
 #include "music.hpp"
@@ -54,6 +60,32 @@ Music* victory_music = nullptr;
 */
 bool Bootstrap::file_exists(const char* path) {
     return (access(path, F_OK) == 0);
+}
+void Bootstrap::start_sprite(ALLEGRO_BITMAP *&bitm, const char *path) {
+
+    bitm = al_load_bitmap(path);
+
+    if(!bitm) {
+        cout << "ERROR: Failed to load image '" << path << "'!" << endl;
+        al_destroy_timer(timer);
+        al_destroy_display(display);
+        al_destroy_event_queue(event_queue);
+        throw runtime_error("unable to load sprite");
+    }
+
+}
+void Bootstrap::start_font(ALLEGRO_FONT *&font, const char *path, int size) {
+
+    font = al_load_font(path, size, 0);
+
+    if(!font) {
+        cout << "ERROR: Failed to load image '" << path << "'!" << endl;
+        al_destroy_timer(timer);
+        al_destroy_display(display);
+        al_destroy_event_queue(event_queue);
+        throw runtime_error("unable to load font");
+    }
+
 }
 
 /**
@@ -121,68 +153,40 @@ bool Bootstrap::init_allegro_libs(){
     }
 
     // Creates the game font
-    gameFont = al_load_font("./assets/katana.ttf", 30, 0); 
-    levelFont = al_load_font("./assets/katana.ttf", 20, 0);
-    if (!gameFont || !levelFont) {
-        cout << "ERROR: Failed to load font 'katana.ttf' (gameFont/levelFont)" << endl;
-        al_destroy_timer(timer);
-        al_destroy_display(display);
-        al_destroy_event_queue(event_queue);
-        return false;
+   // gameFont = al_load_font("./assets/katana.ttf", 30, 0); 
+   // levelFont = al_load_font("./assets/katana.ttf", 20, 0);
+   // if (!gameFont || !levelFont) {
+   //     cout << "ERROR: Failed to load font 'katana.ttf' (gameFont/levelFont)" << endl;
+   //     al_destroy_timer(timer);
+   //     al_destroy_display(display);
+   //     al_destroy_event_queue(event_queue);
+   //     return false;
+   // }
+
+    try {
+        start_font(gameFont, "./assets/katana.ttf", 30);
+        start_font(levelFont, "./assets/katana.ttf", 20);
+    }
+    catch(runtime_error &e) {
+        cout << e.what() << endl;
     }
 
     
-    //add Creates the game over image
-    gameOverBackground = al_load_bitmap("./assets/game_over.png"); 
-    if (!gameOverBackground) {
-        cout << "ERROR: Failed to load game over background image './assets/game_over.png'!" << endl;
-        al_destroy_timer(timer);
-        al_destroy_display(display);
-        al_destroy_event_queue(event_queue);
-        return false;
-    }
     
-    // Load player sprite
-    pinguimBandido = al_load_bitmap("./assets/pinguim_bandido.png"); 
-    if (!pinguimBandido) {
-        cout << "ERROR: Failed to load image './assets/pinguim_bandido.png'!" << endl;
-        al_destroy_timer(timer);
-        al_destroy_display(display);
-        al_destroy_event_queue(event_queue);
-        return false;
+    try {
+        start_sprite(gameOverBackground, "./assets/game_over.png");
+        start_sprite(pinguimBandido, "./assets/pinguim_bandido.png");
+        start_sprite(pendrive, "./assets/pendrive.png");
+        start_sprite(backgroundImage, "./assets/background.png");
+        start_sprite(ballShotSprite, "./assets/ballShot.png");
     }
-
-    // Load pendrive sprite
-    pendrive = al_load_bitmap("./assets/pendrive.png"); 
-    if (!pendrive) {
-        cout << "ERROR: Failed to load image './assets/pendrive.png'!" << endl;
-        al_destroy_timer(timer);
-        al_destroy_display(display);
-        al_destroy_event_queue(event_queue);
-        return false;
+    catch(runtime_error &e) {
+        cout << e.what() << endl;
     }
-
-    // Load background sprite
-    backgroundImage = al_load_bitmap("./assets/background.png"); 
-    if (!backgroundImage) {
-        cout << "ERROR: Failed to load image './assets/background.png'!" << endl;
-        al_destroy_timer(timer);
-        al_destroy_display(display);
-        al_destroy_event_queue(event_queue);
-        return false;
-    }
-
-    ballShotSprite = al_load_bitmap("./assets/ballShot.png"); 
-    if (!ballShotSprite) {
-        cout << "ERROR: Failed to load image './assets/ballShot.png'!" << endl;
-        al_destroy_timer(timer);
-        al_destroy_display(display);
-        al_destroy_event_queue(event_queue);
-        return false;
-    }
-
     return true;
 }
+
+
 
 /**
  * @brief Starts and checks the allegro audio systems and reserves an audio channel.

@@ -85,6 +85,8 @@ class Bootstrap {
     static void register_allegro_events();
     static void cleanup_allegro();
     static bool file_exists(const char* path);
+    static void start_sprite(ALLEGRO_BITMAP *&bitm, const char* path);
+    static void start_font(ALLEGRO_FONT *&font, const char* path, int size);
 };
 
 #endif
