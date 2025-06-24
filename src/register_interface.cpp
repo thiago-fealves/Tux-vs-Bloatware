@@ -157,8 +157,7 @@ int RegisterInterface::mainLoop(bool &inRegister, bool &playing, DatabaseUsers &
                 std::string username = this->getUsername();
                 std::string password = this->getPassword();
 
-                    if (db.authenticateUser(username, password))
-                    {
+                    if (db.authenticateUser(username, password)){
 
                         std::cout << "Login bem-sucedido!" << std::endl;
                         inRegister = false; // Garantir que o login funcionou
@@ -170,14 +169,24 @@ int RegisterInterface::mainLoop(bool &inRegister, bool &playing, DatabaseUsers &
                     }
                 
             }
-            else if (this->exitButton.gotClicked(mx, my))
-            {
+            else if (this->exitButton.gotClicked(mx, my)){
                 Bootstrap::cleanup_allegro();
                 inRegister = false;
                 playing = false;
             }
-            else if (this->registerButton.gotClicked(mx, my))
-            {
+            else if (this->registerButton.gotClicked(mx, my)){
+
+                std::unique_ptr<User> user = db.getUserByUsername(username);
+                if (user == nullptr){
+
+                    if (db.registerUser(name, username, password)){
+                        std::cout << "Usuario registrado com sucesso! Agora você pode fazer login." << std::endl;
+                        resetFields();
+                    }
+
+                }else{
+                    std::cout << "Erro de Registro: O nome de usuário '" << username << "' ja existe. Por favor, tente um diferente." << std::endl;
+                }
             }
         }
 

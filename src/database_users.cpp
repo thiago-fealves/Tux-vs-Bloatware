@@ -11,7 +11,7 @@ DatabaseUsers::DatabaseUsers() : _connect(nullptr) {
         if (_connect->is_open()) {
             std::cout << "Conexao com o banco de dados estabelecida com sucesso!" << std::endl;
         } else {
-            throw std::runtime_error("Não foi possível abrir o banco de dados.");
+            throw std::runtime_error("Nao foi possivel abrir o banco de dados.");
         }
     } catch (const pqxx::sql_error& e) {
         std::cout << "Erro SQL ao conectar ou criar tabela: " << e.what() << std::endl;
@@ -77,6 +77,12 @@ DatabaseUsers::~DatabaseUsers() {
 }
 
 bool DatabaseUsers::registerUser(const std::string& name, const std::string& username, const std::string& password, int initial_score, int initial_games) {
+    
+    if (username.empty() || password.empty() || name.empty() ){
+        std::cerr << "Name, Username e/ou password não podem ser vazios" << std::endl;
+        return false;
+    }
+    
     try {
         pqxx::work W(*_connect); 
         W.exec(
