@@ -50,13 +50,8 @@ Sound::~Sound() {
 void Sound::play(float volume) {
 
     // Check if the sound exists
-    if(sound_sample == nullptr) {  
-        std::cout << "The sound was not loaded successfully\n";
-        return;
-    }
-
-    if(Sound::isSoundMuted==true) return;
-
+    if((sound_sample == nullptr) || (Sound::isSoundMuted==true)) return;
+    
     // Create and play a new sound
     al_play_sample(sound_sample, volume*Sound::volumeMester, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, nullptr);
 }

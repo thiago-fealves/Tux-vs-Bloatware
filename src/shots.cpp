@@ -27,7 +27,6 @@ void Shot::cleanShots() {
   }
   ShotsList.clear();
 
-  std::cout << "Lista dos tiros para remover" << "\n";
   for(Shot* &shot : inactiveShotsList) {
     if(shot!=nullptr) {
       delete shot;
@@ -86,7 +85,7 @@ void Shot::updateShots(FixedShip* player, WindowsBoss& boss, bool &playing) {
       inactiveShotsList.push_back(shot);
 
     } else if(shot->shotCollidedWithBoss(boss)) {
-      boss.takeDamage(player);
+      boss.takeDamage();
       inactiveShotsList.push_back(shot);
     }
     

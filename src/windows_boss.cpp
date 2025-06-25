@@ -15,7 +15,7 @@
 /**
  * @brief Build a windows boss and define the variables.
  */
-WindowsBoss::WindowsBoss(float halfSide, float life) : _halfSide(halfSide), _life(life) {
+WindowsBoss::WindowsBoss(float halfSide, int life) : _halfSide(halfSide), _life(life) {
   _position = Vector(400, -_halfSide); // Set the boss's initial pose centered on the X axis and at the top of the screen.
   
   timeBetweenAttacks = FPS*3; // Set the time between attacks to 3 seconds
@@ -28,7 +28,7 @@ WindowsBoss::WindowsBoss(float halfSide, float life) : _halfSide(halfSide), _lif
  * 
  * @return Returns 1 when it has reached the desired Y.
  */  
-bool WindowsBoss::downBoss(float yStop = 300, float speed = 1.3) {
+bool WindowsBoss::downBoss(float yStop, float speed = 1.3) {
   if(_position._y < yStop) { // When current Y is less than stop Y.
     // Add speed value to Y
     _position._y = std::min(yStop, _position._y+speed);
@@ -42,7 +42,7 @@ bool WindowsBoss::downBoss(float yStop = 300, float speed = 1.3) {
  * 
  * @return Returns 1 when it has reached the desired Y.
  */ 
-bool WindowsBoss::upBoss(float yStop = 0, float speed = 1.3) {
+bool WindowsBoss::upBoss(float yStop, float speed = 1.3) {
   if(_position._y > yStop) { // When current Y is bigger than stop Y.
     // Decreases speed value to Y
     _position._y = std::max(yStop, _position._y - speed); 
@@ -108,23 +108,18 @@ float WindowsBoss::getHalfSide() {
   return _halfSide;
 }
 
+int WindowsBoss::getLife() {
+  return _life;
+}
+
 /**
  * @brief Applies damage to the boss.
  * 
  * @param player The player's address, to disable player damage when necessary.
  */
-void WindowsBoss::takeDamage(FixedShip* player) {
-  if(_applyDamage==false) return;
-
+void WindowsBoss::takeDamage() {
+  if(_applyDamage==false || _life<=0) return;
   _life--;
-  std::cout << _life << "\n";
-
-  if(_life==0) { // If life reaches zero, then the boss changes state.
-    _bossState = BossStates::ascending; 
-    _applyDamage = false; 
-    player->setCanTakeDamage(false);
-    
-  }
 }
 
 bool WindowsBoss::isDead() {
@@ -271,6 +266,13 @@ void WindowsBoss::update(FixedShip* player, bool &playing) {
 
     case BossStates::attacking:
       // Here a counter is used to separate one attack from another, the counter is incremented by one every frame.
+      
+      if(this->isDead()) {
+        _bossState = BossStates::ascending; // Next state
+        _applyDamage = false;               // The boss cannot take any more damage
+        player->setCanTakeDamage(false);    // The player can no longer die
+      }
+
       cont+=1;
       if (cont!=timeBetweenAttacks) return;
       // When the counter is equal to the timerBoss, the counter is reset and some attack is made.

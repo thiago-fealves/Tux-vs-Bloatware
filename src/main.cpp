@@ -54,10 +54,10 @@ start:
         playing = true;
        
        
-        LevelOne::mainLoop(playing, isAlive);
-        LevelOne::cleanLevel(); 
-        LevelTwo::mainLoop(playing, isAlive);
-        LevelTwo::cleanLevel(); 
+        //LevelOne::mainLoop(playing, isAlive);
+        //LevelOne::cleanLevel(); 
+        //LevelTwo::mainLoop(playing, isAlive);
+        //LevelTwo::cleanLevel(); 
         LevelThree::mainLoop(playing, isAlive);
         LevelThree::cleanLevel();
 

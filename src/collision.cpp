@@ -1,4 +1,5 @@
 #include "collision.hpp"
+#include "movement.hpp"
 #include <cmath>
 
 
@@ -55,16 +56,6 @@ bool circleSquareCollision(Vector circlePoint, float radius, Vector squarePoint,
 bool circleCircleCollision(Vector circleA, float radiusA, Vector circleB, float radiusB) {
     // Check if the distance between the centers of the 2 circles
     // is less than the sum of their two radii.
-    return (distanceBetweenPoints(circleA, circleB) <= (radiusA+radiusB));
+    return (Vector::distance(circleA, circleB) <= (radiusA+radiusB));   
 }
 
-/**
- * @brief Calculates the distance between two points on the plane.
- * 
- * @return The distance.
- */
-float distanceBetweenPoints(Vector pointA, Vector pointB) {
-    // We do pitagoras.
-    return sqrt(((pointA._x - pointB._x)*(pointA._x - pointB._x)) +
-     ((pointA._y - pointB._y)*(pointA._y - pointB._y)));
-}

@@ -19,7 +19,7 @@ private:
   int timeBetweenAttacks;
 
   float _halfSide; 
-  float _life; 
+  int _life; 
 
   bool upBoss(float yStop, float speed);
   bool downBoss(float yStop, float speed);
@@ -38,13 +38,14 @@ private:
   void calculateMiniSquarePositions(); // Calculates the 2 variables above for draw() to work
 
 public:
-  WindowsBoss(float halfSide, float life);
+  WindowsBoss(float halfSide, int life);
 
   void draw();
   void update(FixedShip* player, bool &playing);
   float getHalfSide();
+  int getLife();
   bool isDead();
-  void takeDamage(FixedShip* player);
+  void takeDamage();
 
 
 };
