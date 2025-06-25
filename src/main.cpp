@@ -54,10 +54,10 @@ start:
         playing = true;
        
        
-        //LevelOne::mainLoop(playing, isAlive);
-        //LevelOne::cleanLevel(); 
-        //LevelTwo::mainLoop(playing, isAlive);
-        //LevelTwo::cleanLevel(); 
+        LevelOne::mainLoop(playing, isAlive);
+        LevelOne::cleanLevel(); 
+        LevelTwo::mainLoop(playing, isAlive);
+        LevelTwo::cleanLevel(); 
         LevelThree::mainLoop(playing, isAlive);
         LevelThree::cleanLevel();
 
@@ -66,10 +66,6 @@ start:
     //Transicao para GAME OVER
        if (playing) continue;
             else { //se o jogador perdeu para a musica
-                if (level_three_music) { 
-                    level_three_music->pause(); 
-                }
-                //gameOverScreen começa a ser executada
                 std::unique_ptr<gameOverOption> chosen_action(game_over_screen.run(event_queue, timer));
 
                 if (!chosen_action) break;
