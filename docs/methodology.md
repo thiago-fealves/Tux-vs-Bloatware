@@ -33,5 +33,7 @@ O uso adaptado da metodologia Scrum contribuiu para uma melhor organização e v
 
 
 LINKS DOS SOFTWARES USADOS:
+
 https://miro.com/app/board/uXjVI-UoW3E=/?share_link_id=435170695235
+
 https://trello.com/invite/b/680ae103b7746ccd916ad908/ATTI1367e775c5b5f17540b11e35f79477384C3924CB/trabalho-final-pds2
