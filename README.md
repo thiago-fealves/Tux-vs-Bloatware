@@ -67,7 +67,6 @@ cd Tux-vs-Bloatware
 ```
 
 Compilação:
-* Linux:
 ```bash
 make
 ```
