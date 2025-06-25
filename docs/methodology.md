@@ -30,3 +30,8 @@ Durante o desenvolvimento do projeto, optamos por aplicar uma versão adaptada d
 ## Considerações Finais
 
 O uso adaptado da metodologia Scrum contribuiu para uma melhor organização e visibilidade do progresso do projeto. A divisão em sprints e o processo de revisão coletiva foram fundamentais para garantir um código coeso e um aprendizado compartilhado entre todos os membros. A adoção das Issues como mecanismo de acompanhamento técnico trouxe maturidade ao processo, ajudando a manter o controle sobre problemas que surgiram durante o desenvolvimento e possibilitando um gerenciamento mais claro das correções.
+
+
+LINKS DOS SOFTWARES USADOS:
+https://miro.com/app/board/uXjVI-UoW3E=/?share_link_id=435170695235
+https://trello.com/invite/b/680ae103b7746ccd916ad908/ATTI1367e775c5b5f17540b11e35f79477384C3924CB/trabalho-final-pds2
