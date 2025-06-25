@@ -18,7 +18,6 @@ void PolygonObstacle::draw() {
 }
 
  void PolygonObstacle::update() {
-
         Vector pos = get_position();
         pos._y += this->getSpeed()._y;
         if (pos._y > SCREEN_H + 50) {

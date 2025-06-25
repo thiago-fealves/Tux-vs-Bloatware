@@ -32,9 +32,8 @@ public:
     */
     PolygonObstacle(const Vector &pos, const std::vector<Vector>& verts, float scale, const char* imagePath)
         : vertices(verts), _scale(scale) {
-
         this->set_position(pos);
-        
+        setSpeed(Vector(0, 5));
         // aplica a escala em todo o vetor
         for (auto& v : vertices) {
             v = v * _scale;
