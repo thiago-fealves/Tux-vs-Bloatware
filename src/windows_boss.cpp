@@ -56,7 +56,7 @@ bool WindowsBoss::upBoss(float yStop = 0, float speed = 1.3) {
  * 
  * @return returns current life
  */ 
-int WindowsBoss::getLife() {
+float WindowsBoss::getLife() {
     return _life;
 }
 
@@ -122,18 +122,9 @@ float WindowsBoss::getHalfSide() {
  * 
  * @param player The player's address, to disable player damage when necessary.
  */
-void WindowsBoss::takeDamage(FixedShip* player) {
-  if(_applyDamage==false) return;
-
+void WindowsBoss::takeDamage() {
+  if(_applyDamage==false || _life==0) return;
   _life--;
-  std::cout << _life << "\n";
-
-  if(_life==0) { // If life reaches zero, then the boss changes state.
-    _bossState = BossStates::ascending; 
-    _applyDamage = false; 
-    player->setCanTakeDamage(false);
-    
-  }
 }
 
 bool WindowsBoss::isDead() {
@@ -279,7 +270,15 @@ void WindowsBoss::update(FixedShip* player, bool &playing) {
       break;
 
     case BossStates::attacking:
-      // Here a counter is used to separate one attack from another, the counter is incremented by one every frame.
+    
+      if(_life==0) { // If life reaches zero, then the boss changes state.
+        _bossState = BossStates::ascending; 
+        _applyDamage = false; 
+        player->setCanTakeDamage(false);
+        
+      }
+    
+    // Here a counter is used to separate one attack from another, the counter is incremented by one every frame.
       cont+=1;
       if (cont!=timeBetweenAttacks) return;
       // When the counter is equal to the timerBoss, the counter is reset and some attack is made.

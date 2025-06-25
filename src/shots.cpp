@@ -86,7 +86,7 @@ void Shot::updateShots(FixedShip* player, WindowsBoss& boss, bool &playing) {
       inactiveShotsList.push_back(shot);
 
     } else if(shot->shotCollidedWithBoss(boss)) {
-      boss.takeDamage(player);
+      boss.takeDamage();
       inactiveShotsList.push_back(shot);
     }
     

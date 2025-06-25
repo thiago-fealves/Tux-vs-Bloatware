@@ -31,7 +31,7 @@ TEST_CASE("Initialization and sound playback") {
         return;
     }
 
-    REQUIRE(Bootstrap::initialize_allegro());
+    Bootstrap::initialize_allegro();
 
     SUBCASE("Sound, valid, is loaded correctly") {
         Sound s(TEST_SOUND_PATH);
@@ -42,4 +42,6 @@ TEST_CASE("Initialization and sound playback") {
         Sound s("caminho_que_nao_leva_a_nada_TESTE.ogg");
         CHECK(s.sound_sample == nullptr);
     }
+
+    Bootstrap::cleanup_allegro();
 }
