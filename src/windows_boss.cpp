@@ -52,6 +52,15 @@ bool WindowsBoss::upBoss(float yStop = 0, float speed = 1.3) {
 }
   
 /**
+ * @brief simple getter to _life attribute
+ * 
+ * @return returns current life
+ */ 
+int WindowsBoss::getLife() {
+    return _life;
+}
+
+/**
  * @brief calculates the side of the small squares and calculates the distance
  *  between the center point of the square and the center points of the small squares
  */

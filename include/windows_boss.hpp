@@ -44,6 +44,7 @@ public:
   void update(FixedShip* player, bool &playing);
   float getHalfSide();
   bool isDead();
+  int getLife();
   void takeDamage(FixedShip* player);
 
 

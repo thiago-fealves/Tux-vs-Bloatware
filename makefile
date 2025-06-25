@@ -58,7 +58,6 @@ TEST_PRJ_OBJ = \
 	$(BUILD_DIR)/circle_obstacle.o \
 	$(BUILD_DIR)/obstacles_list.o \
 	$(BUILD_DIR)/collision.o \
-	$(BUILD_DIR)/windows_boss.o \
 	$(BUILD_DIR)/abstract_obstacle.o \
 	$(BUILD_DIR)/interface.o \
 	$(BUILD_DIR)/gameover.o
