@@ -116,6 +116,8 @@ Para compilar e executar os testes, use o comando:
 ```bash
 make test
 ```
+
+No MacOS, os testes não funcionam corretamente, aparentemente por conta do fato que ele não tem uma variável de display que funciona corretamente para os testes(?) o jogo funciona normalmente, mas para testar será necessário usar um ambiente linux
 ## **Documentação:**
 O projeto já acompanha os arquivos Doxyfile devidamente configurados mas você pode compilar manualmente também com:
 ```bash
